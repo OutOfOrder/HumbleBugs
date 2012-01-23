@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe "users/new" do
   before(:each) do
-    assign(:user, stub_model(User,
-      :email => "MyString",
-      :name => "MyString",
-      :password_digest => "MyString"
-    ).as_new_record)
+    assign(:user, FactoryGirl.build_stubbed(:user))
   end
 
   it "renders new user form" do
@@ -16,7 +12,8 @@ describe "users/new" do
     assert_select "form", :action => users_path, :method => "post" do
       assert_select "input#user_email", :name => "user[email]"
       assert_select "input#user_name", :name => "user[name]"
-      assert_select "input#user_password_digest", :name => "user[password_digest]"
+      assert_select "input#user_password", :name => "user[password]"
+      assert_select "input#user_password_confirmation", :name => "user[password_confirmation]"
     end
   end
 end
