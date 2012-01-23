@@ -34,4 +34,13 @@ HumbleBugs::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.action_mailer.default_url_options = {
+    host: 'localhost:3000'
+  }
+  config.action_mailer.delivery_method = :file
+  config.action_mailer.file_settings = {
+      location: 'log/mails'
+  }
+  config.action_mailer.perform_deliveries = true
 end
