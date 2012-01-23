@@ -5,6 +5,11 @@ HumbleBugs::Application.routes.draw do
   post '/login' => 'sessions#create', :as => :login
   get '/logout' => 'sessions#destroy', :as => :logout
 
+  get '/forgot_password' => 'password_reset#new', :as => :forgot_password
+  post '/forgot_password' => 'password_reset#create', :as => :forgot_password
+  get '/forgot_password/:id' => 'password_reset#edit', :as => :password_reset
+  put '/forgot_password/:id' => 'password_reset#update', :as => :password_reset
+
   get 'signup' => 'users#new', :as => :signup
 
   # The priority is based upon order of creation:
