@@ -1,0 +1,29 @@
+<h1>Listing bundles</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Target date</th>
+    <th>Description</th>
+    <th>State</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bundles.each do |bundle| %>
+  <tr>
+    <td><%= bundle.name %></td>
+    <td><%= bundle.target_date %></td>
+    <td><%= bundle.description %></td>
+    <td><%= bundle.state %></td>
+    <td><%= link_to 'Show', bundle %></td>
+    <td><%= link_to 'Edit', edit_bundle_path(bundle) %></td>
+    <td><%= link_to 'Destroy', bundle, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bundle', new_bundle_path %>

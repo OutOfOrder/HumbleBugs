@@ -8,7 +8,3 @@ Given /^I am logged in as "([^"]+)"$/ do |email|
       httponly: true
   }
 end
-
-When /^I go to the signup page$/ do
-  visit(signup_path)
-end

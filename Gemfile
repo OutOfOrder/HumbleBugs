@@ -41,7 +41,9 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 group :test do
   gem 'database_cleaner'
   gem 'rspec-rails', :group => [:development, :test]
+  gem 'awesome_print', :group => [:development, :test]
   gem 'factory_girl_rails'
   gem 'cucumber-rails'
   gem 'capybara'
+  gem 'launchy'
 end

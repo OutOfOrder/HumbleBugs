@@ -1,4 +1,12 @@
 HumbleBugs::Application.routes.draw do
+  resources :games
+
+  resources :bundles do
+    member do
+      get :games
+    end
+  end
+
   resources :users
 
   get '/login' => 'sessions#new', :as => :login
