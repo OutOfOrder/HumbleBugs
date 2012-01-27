@@ -52,7 +52,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
-    compass (0.11.7)
+    compass (0.12.alpha.4)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
@@ -173,7 +173,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   capybara
   coffee-rails (~> 3.2.1)
-  compass
+  compass (~> 0.12.alpha.4)
   cucumber-rails
   database_cleaner
   factory_girl_rails

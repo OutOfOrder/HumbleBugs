@@ -1,0 +1,41 @@
+@import "blueprint/reset";
+@import "blueprint";
+@import "blueprint/liquid";
+
+@import "blueprint/scaffolding";
+@import "compass/layout/grid-background";
+
+
+@include blueprint-typography;
+
+body {
+  @include container;
+  @include blueprint-scaffolding;
+  @include grid-background($force-fluid: true);
+}
+
+header {
+  @include column($blueprint-grid-columns);
+
+  #nav-bar {
+    @include column($blueprint-grid-columns / 3);
+    @include last;
+  }
+
+  #flash {
+    .info {
+      @include info;
+    }
+    .alert {
+      @include error;
+    }
+  }
+}
+
+footer {
+  @include column($blueprint-grid-columns);
+}
+
+#content {
+  @include column($blueprint-grid-columns);
+}
