@@ -23,6 +23,13 @@
         <% end %>
       </div>
     </div>
+    
+    <div id="app-nav">
+      <ul>
+        <li><%= link_to :bundles, bundles_path %></li>
+        <li><%= link_to :games, games_path %></li>
+      </ul>
+    </div>
 
     <div id="flash">
       <% flash.each do |name, msg| %>

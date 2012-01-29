@@ -43,6 +43,13 @@ header {
     @include box-shadow(rgba(black, 0.5) -1px 1px 3px 0px);
   }
 
+  #app-nav {
+    @include column($blueprint-grid-columns);
+    ul {
+      @include horizontal-list;
+    }
+  }
+
   #flash {
     display: none;
     .info {
