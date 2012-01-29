@@ -1,28 +1,50 @@
 @import "blueprint/reset";
 @import "blueprint";
 @import "blueprint/liquid";
-
-@import "blueprint/scaffolding";
-@import "compass/layout/grid-background";
-
-
-@include blueprint-typography;
+@import "blueprint/fancy-type";
+@import "compass/typography";
+@import "compass/css3";
 
 body {
+  background-color: #ECECEC;
+}
+#container {
   @include container;
-  @include blueprint-scaffolding;
-  @include grid-background($force-fluid: true);
+  @include blueprint-typography-body;
+
+  a {
+    @include hover-link;
+  }
+  width: 100%;
 }
 
 header {
   @include column($blueprint-grid-columns);
+  border-bottom: 4px solid #bbbbbb;
+  @include box-shadow(rgba(black, 0.5) 0 2px 3px 0);
 
-  #nav-bar {
-    @include column($blueprint-grid-columns / 3);
+  #logo {
+    div {
+      padding: 1ex;
+    }
+    font-size: 2em;
+    @include alt;
+    @include column(floor($blueprint-grid-columns / 3 * 2));
+  }
+
+  #user-nav {
+    div {
+      padding: 1ex;
+    }
+    @include column(floor($blueprint-grid-columns / 3));
     @include last;
+    @include background-image(linear-gradient(#eeeeee, #bbbbbb));
+    @include border-bottom-left-radius(1em);
+    @include box-shadow(rgba(black, 0.5) -1px 1px 3px 0px);
   }
 
   #flash {
+    display: none;
     .info {
       @include info;
     }

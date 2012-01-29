@@ -7,32 +7,37 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div id="container">
+  <header>
+    <div id="logo">
+      <div>HumbleBugs</div>
+    </div>
+    <div id="user-nav">
+      <div>
+        <% if current_user %>
+            Logged in as <%= current_user.email %>.
+            <%= link_to "Log out", logout_path %>
+        <% else %>
+            <%= link_to "Sign up", signup_path %> or
+            <%= link_to "log in", login_path %>
+        <% end %>
+      </div>
+    </div>
 
-<header>
-  <div id="user_nav">
-    <% if current_user %>
-        Logged in as <%= current_user.email %>.
-        <%= link_to "Log out", logout_path %>
-    <% else %>
-        <%= link_to "Sign up", signup_path %> or
-        <%= link_to "log in", login_path %>
-    <% end %>
-  </div>
+    <div id="flash">
+      <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :class => "flash #{name}" %>
+      <% end %>
+    </div>
+  </header>
 
-  <div id="flash">
-    <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :class => "flash #{name}" %>
-    <% end %>
-  </div>
-</header>
+  <section id="content">
+    <%= yield %>
+  </section>
 
-<section id="content">
-  <%= yield %>
-</section>
+  <footer>
 
-<footer>
-
-</footer>
-
+  </footer>
+</div>
 </body>
 </html>
