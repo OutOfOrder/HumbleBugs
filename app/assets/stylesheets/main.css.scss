@@ -6,7 +6,10 @@
 @import "compass/css3";
 
 $bg-color: hsl(0,0%,93%);
-$tab-color: adjust-lightness($bg-color,-20);
+$tab-color: adjust-lightness($bg-color,-20%);
+$legend-color: hsl(0, 0%, 80%);
+//$legend-color: hsl(240, 70%, 70%);
+
 
 body {
   background-color: $bg-color;
@@ -70,6 +73,14 @@ header {
           rgba(black, 0.3) 0px -3px 2px 0px,
           rgba(black, 0.3) 3px 0px 2px 0px
         );
+        &.selected {
+          $tab-select-color: hsl(0,80%,50%);
+          @include box-shadow(
+            rgba($tab-select-color, 0.3) -3px 0px 2px 0px,
+            rgba($tab-select-color, 0.3) 0px -3px 2px 0px,
+            rgba($tab-select-color, 0.3) 3px 0px 2px 0px
+          );
+        }
       }
     }
   }
@@ -101,8 +112,6 @@ footer {
 form {
   @include blueprint-form;
   fieldset {
-    $legend-color: hsl(0, 0%, 80%);
-    //$legend-color: hsl(240, 70%, 70%);
     legend {
       position: absolute;
       left: 1ex;

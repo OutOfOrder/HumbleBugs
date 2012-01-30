@@ -26,8 +26,9 @@
     
     <div id="app-nav">
       <ul>
-        <li><%= link_to :bundles, bundles_path %></li>
-        <li><%= link_to :games, games_path %></li>
+        <li class="<%= select_if :controller => :dashboard %>"><%= link_to 'Dashboard', root_path %></li>
+        <li class="<%= select_if :controller => :bundles %>"><%= link_to 'Bundles', bundles_path %></li>
+        <li class="<%= select_if :controller => :games %>"><%= link_to 'Games', games_path %></li>
       </ul>
     </div>
 
