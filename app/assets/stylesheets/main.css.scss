@@ -27,11 +27,16 @@ header {
   @include box-shadow(rgba(black, 0.5) 0 2px 3px 0);
 
   #logo {
-    div {
+    h1 {
+      $header-color: #222222;
+      @include alt;
       padding: 1ex;
+      font-size: 3em;
+      margin-bottom: 0px;
+      font-weight: bold;
+      color: $header-color;
+      @include text-shadow(rgba($header-color, 0.3) 4px 4px 2px);
     }
-    font-size: 2em;
-    @include alt;
     @include column(floor($blueprint-grid-columns / 3 * 2));
   }
 
