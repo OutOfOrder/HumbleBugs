@@ -8,13 +8,16 @@
 body {
   background-color: #ECECEC;
 }
+
+@include blueprint-typography;
+
+a {
+  @include hover-link;
+}
+
 #container {
   @include container;
-  @include blueprint-typography-body;
 
-  a {
-    @include hover-link;
-  }
   width: 100%;
 }
 
@@ -38,7 +41,7 @@ header {
     }
     @include column(floor($blueprint-grid-columns / 3));
     @include last;
-    @include background-image(linear-gradient(#eeeeee, #bbbbbb));
+    @include background(linear-gradient(#eeeeee, #bbbbbb));
     @include border-bottom-left-radius(1em);
     @include box-shadow(rgba(black, 0.5) -1px 1px 3px 0px);
   }
@@ -63,8 +66,38 @@ header {
 
 footer {
   @include column($blueprint-grid-columns);
+
 }
 
 #content {
   @include column($blueprint-grid-columns);
+  .login_form {
+    @include column($blueprint-grid-columns / 3);
+    @include prepend($blueprint-grid-columns / 3);
+  }
+}
+
+form {
+  @include blueprint-form;
+  fieldset {
+    $legend-color: hsl(0, 0%, 80%);
+    //$legend-color: hsl(240, 70%, 70%);
+    legend {
+      position: absolute;
+      left: 1ex;
+      top: -0.8em;
+      background-color: $legend-color;
+      @include background(linear-gradient(adjust-lightness($legend-color,15%), $legend-color));
+      padding: 0 1ex;
+      @include border-radius(0.5ex);
+      @include box-shadow($legend-color 2px 2px 4px 0px);
+    }
+    position: relative;
+    margin-top: 1.5em;
+    @include border-radius(1ex);
+    @include box-shadow(black -5px 5px 4px -4px);
+  }
+}
+form.inline {
+  @include blueprint-inline-form;
 }
