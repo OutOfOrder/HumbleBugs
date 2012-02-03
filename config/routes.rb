@@ -2,9 +2,7 @@ HumbleBugs::Application.routes.draw do
   resources :games
 
   resources :bundles do
-    member do
-      get :games
-    end
+    resources :games
   end
 
   resources :users

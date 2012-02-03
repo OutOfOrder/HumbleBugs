@@ -37,11 +37,6 @@ class BundlesController < ApplicationController
     @bundle = Bundle.find(params[:id])
   end
 
-  # GET /bundles/1/games
-  def games
-    @bundle = Bundle.find(params[:id])
-  end
-
   # POST /bundles
   # POST /bundles.json
   def create

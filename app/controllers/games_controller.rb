@@ -2,7 +2,12 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    ap params
+    if params[:bundle_id]
+      @games = Bundle.find(params[:bundle_id]).games
+    else
+      @games = Game.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
