@@ -2,7 +2,6 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    ap params
     if params[:bundle_id]
       @games = Bundle.find(params[:bundle_id]).games
     else
