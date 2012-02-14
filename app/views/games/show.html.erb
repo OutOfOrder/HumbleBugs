@@ -1,25 +1,26 @@
-<p id="notice"><%= notice %></p>
+<fieldset>
+  <legend>Game details</legend>
+  <p>
+    <b>Name:</b>
+    <%= @game.name %>
+  </p>
 
-<p>
-  <b>Name:</b>
-  <%= @game.name %>
-</p>
+  <p>
+    <b>Description:</b>
+    <%= @game.description %>
+  </p>
 
-<p>
-  <b>Description:</b>
-  <%= @game.description %>
-</p>
+  <p>
+    <b>Bundle:</b>
+    <%= @game.bundle %>
+  </p>
 
-<p>
-  <b>Bundle:</b>
-  <%= @game.bundle %>
-</p>
-
-<p>
-  <b>State:</b>
-  <%= @game.state %>
-</p>
+  <p>
+    <b>State:</b>
+    <%= @game.state %>
+  </p>
 
 
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+  <%= link_to 'Edit', edit_game_path(@game) %> |
+  <%= link_to 'Back', games_path %>
+</fieldset>
