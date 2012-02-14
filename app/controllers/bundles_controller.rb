@@ -14,6 +14,7 @@ class BundlesController < ApplicationController
   # GET /bundles/1.json
   def show
     @bundle = Bundle.find(params[:id])
+    @games = @bundle.games
 
     respond_to do |format|
       format.html # show.html.erb
