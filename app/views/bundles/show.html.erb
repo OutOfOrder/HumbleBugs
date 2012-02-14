@@ -1,25 +1,28 @@
-<p id="notice"><%= notice %></p>
+<fieldset>
+  <legend>Bundle details</legend>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @bundle.name %>
-</p>
+  <p>
+    <b>Name:</b>
+    <%= @bundle.name %>
+  </p>
 
-<p>
-  <b>Target date:</b>
-  <%= @bundle.target_date %>
-</p>
+  <p>
+    <b>Target date:</b>
+    <%= @bundle.target_date %>
+  </p>
 
-<p>
-  <b>Description:</b>
-  <%= @bundle.description %>
-</p>
+  <p>
+    <b>Description:</b>
+    <%= @bundle.description %>
+  </p>
 
-<p>
-  <b>State:</b>
-  <%= @bundle.state %>
-</p>
+  <p>
+    <b>State:</b>
+    <%= @bundle.state %>
+  </p>
 
 
-<%= link_to 'Edit', edit_bundle_path(@bundle) %> |
-<%= link_to 'Back', bundles_path %>
+  <%= link_to 'Edit', edit_bundle_path(@bundle) %> |
+  <%= link_to 'Back', bundles_path %>
+</fieldset>
