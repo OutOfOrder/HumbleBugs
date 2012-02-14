@@ -5,6 +5,6 @@ FactoryGirl.define do
     name "MyString"
     target_date "2012-01-25 10:12:56"
     description "MyText"
-    state "MyString"
+    state "planned"
   end
 end
