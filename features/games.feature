@@ -9,7 +9,7 @@ Feature: Games
       |Pong   |
       |Pacman |
       |Doom   |
-    When I go to the Games bundle page for the Bundle named "Cucumber"
+    When I go to the Bundle games page for the Bundle named "Cucumber"
     Then I should see 3 games in a list
 
   Scenario: Add a game
