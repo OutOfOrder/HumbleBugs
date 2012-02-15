@@ -1,5 +1,6 @@
 class Game < ActiveRecord::Base
   belongs_to :bundle
+  has_many :issues
 
   STATES = [
       ['Prospective', :prospective],

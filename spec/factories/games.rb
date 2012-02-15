@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :game do
+    association :bundle
     name "Pong"
     description "Awesome Pong Game of the Future"
     state "prospective"
