@@ -1,4 +1,10 @@
 HumbleBugs::Application.routes.draw do
+  resources :releases
+
+  resources :notes
+
+  resources :ports
+
   resources :bundles do
     resources :games
   end

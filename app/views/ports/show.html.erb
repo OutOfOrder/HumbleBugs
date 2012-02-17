@@ -1,0 +1,21 @@
+<fieldset>
+  <legend>Port details</legend>
+    <p>
+    <b>Game:</b>
+    <%= @port.game %>
+  </p>
+
+    <p>
+    <b>Porter:</b>
+    <%= @port.porter %>
+  </p>
+
+    <p>
+    <b>State:</b>
+    <%= @port.state %>
+  </p>
+
+  
+  <%= link_to 'Edit', edit_port_path(@port) %> |
+  <%= link_to 'Back', ports_path %>
+</fieldset>

@@ -1,0 +1,32 @@
+<%= form_for(@port) do |f| %>
+  <fieldset>
+    <legend><%= title %></legend>
+    <% if @port.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@port.errors.count, "error") %> prohibited this port from being saved:</h2>
+
+        <ul>
+        <% @port.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+      <div class="field">
+      <%= f.label :game %><br />
+      <%= f.text_field :game %>
+    </div>
+      <div class="field">
+      <%= f.label :porter %><br />
+      <%= f.text_field :porter %>
+    </div>
+      <div class="field">
+      <%= f.label :state %><br />
+      <%= f.text_field :state %>
+    </div>
+      <div class="actions">
+      <%= f.submit %>
+    </div>
+  </fieldset>
+<% end %>

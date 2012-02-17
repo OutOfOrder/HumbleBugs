@@ -5,5 +5,7 @@ FactoryGirl.define do
     association :game
     description "MyText"
     status "new"
+    reported_against nil
+    fixed_in nil
   end
 end

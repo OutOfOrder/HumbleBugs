@@ -1,5 +1,5 @@
 class Bundle < ActiveRecord::Base
-  has_many :games
+  has_many :games, :inverse_of => :bundle
 
   STATES = [
       ['Planned', :planned],

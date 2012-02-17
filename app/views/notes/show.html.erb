@@ -1,0 +1,21 @@
+<fieldset>
+  <legend>Note details</legend>
+    <p>
+    <b>Note:</b>
+    <%= @note.note %>
+  </p>
+
+    <p>
+    <b>Owner:</b>
+    <%= @note.owner %>
+  </p>
+
+    <p>
+    <b>Noteable:</b>
+    <%= @note.noteable %>
+  </p>
+
+  
+  <%= link_to 'Edit', edit_note_path(@note) %> |
+  <%= link_to 'Back', notes_path %>
+</fieldset>

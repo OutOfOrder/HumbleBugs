@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214230109) do
+ActiveRecord::Schema.define(:version => 20120217025333) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -39,11 +39,50 @@ ActiveRecord::Schema.define(:version => 20120214230109) do
     t.integer  "game_id"
     t.text     "description"
     t.string   "status"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "reported_against_id"
+    t.integer  "fixed_in_id"
   end
 
+  add_index "issues", ["fixed_in_id"], :name => "index_issues_on_fixed_in_id"
   add_index "issues", ["game_id"], :name => "index_issues_on_game_id"
+  add_index "issues", ["reported_against_id"], :name => "index_issues_on_reported_against_id"
+
+  create_table "notes", :force => true do |t|
+    t.text     "note"
+    t.integer  "owner_id"
+    t.integer  "noteable_id"
+    t.string   "noteable_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "notes", ["noteable_id", "noteable_type"], :name => "index_notes_on_noteable_id_and_noteable_type"
+  add_index "notes", ["owner_id"], :name => "index_notes_on_owner_id"
+
+  create_table "ports", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "porter_id"
+    t.string   "state"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "ports", ["game_id"], :name => "index_ports_on_game_id"
+  add_index "ports", ["porter_id"], :name => "index_ports_on_porter_id"
+
+  create_table "releases", :force => true do |t|
+    t.integer  "game_id"
+    t.text     "notes"
+    t.integer  "owner_id"
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "releases", ["game_id"], :name => "index_releases_on_game_id"
+  add_index "releases", ["owner_id"], :name => "index_releases_on_owner_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

@@ -1,0 +1,21 @@
+<fieldset>
+  <legend>Release details</legend>
+    <p>
+    <b>Notes:</b>
+    <%= @release.notes %>
+  </p>
+
+    <p>
+    <b>Owner:</b>
+    <%= @release.owner %>
+  </p>
+
+    <p>
+    <b>Url:</b>
+    <%= @release.url %>
+  </p>
+
+  
+  <%= link_to 'Edit', edit_release_path(@release) %> |
+  <%= link_to 'Back', releases_path %>
+</fieldset>
