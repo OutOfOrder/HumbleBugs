@@ -41,7 +41,7 @@ group :test do
   gem 'rspec-rails', :group => [:development, :test]
   gem 'awesome_print', :group => [:development, :test]
   gem 'factory_girl_rails'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'capybara'
   gem 'launchy'
 end
