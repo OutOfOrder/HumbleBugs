@@ -20,13 +20,6 @@ require 'spec_helper'
 
 describe BundlesController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Bundle. As you add validations to Bundle, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
-  
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # BundlesController. Be sure to keep this updated too.
@@ -36,7 +29,7 @@ describe BundlesController do
 
   describe "GET index" do
     it "assigns all bundles as @bundles" do
-      bundle = Bundle.create! valid_attributes
+      bundle = FactoryGirl.create(:bundle)
       get :index, {}, valid_session
       assigns(:bundles).should eq([bundle])
     end
@@ -44,7 +37,7 @@ describe BundlesController do
 
   describe "GET show" do
     it "assigns the requested bundle as @bundle" do
-      bundle = Bundle.create! valid_attributes
+      bundle = FactoryGirl.create(:bundle)
       get :show, {:id => bundle.to_param}, valid_session
       assigns(:bundle).should eq(bundle)
     end
@@ -59,7 +52,7 @@ describe BundlesController do
 
   describe "GET edit" do
     it "assigns the requested bundle as @bundle" do
-      bundle = Bundle.create! valid_attributes
+      bundle = FactoryGirl.create(:bundle)
       get :edit, {:id => bundle.to_param}, valid_session
       assigns(:bundle).should eq(bundle)
     end
@@ -69,18 +62,18 @@ describe BundlesController do
     describe "with valid params" do
       it "creates a new Bundle" do
         expect {
-          post :create, {:bundle => valid_attributes}, valid_session
+          post :create, {:bundle => FactoryGirl.attributes_for(:bundle)}, valid_session
         }.to change(Bundle, :count).by(1)
       end
 
       it "assigns a newly created bundle as @bundle" do
-        post :create, {:bundle => valid_attributes}, valid_session
+        post :create, {:bundle => FactoryGirl.attributes_for(:bundle)}, valid_session
         assigns(:bundle).should be_a(Bundle)
         assigns(:bundle).should be_persisted
       end
 
       it "redirects to the created bundle" do
-        post :create, {:bundle => valid_attributes}, valid_session
+        post :create, {:bundle => FactoryGirl.attributes_for(:bundle)}, valid_session
         response.should redirect_to(Bundle.last)
       end
     end
@@ -105,7 +98,7 @@ describe BundlesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested bundle" do
-        bundle = Bundle.create! valid_attributes
+        bundle = FactoryGirl.create(:bundle)
         # Assuming there are no other bundles in the database, this
         # specifies that the Bundle created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,21 +108,21 @@ describe BundlesController do
       end
 
       it "assigns the requested bundle as @bundle" do
-        bundle = Bundle.create! valid_attributes
-        put :update, {:id => bundle.to_param, :bundle => valid_attributes}, valid_session
+        bundle = FactoryGirl.create(:bundle)
+        put :update, {:id => bundle.to_param, :bundle => FactoryGirl.attributes_for(:bundle)}, valid_session
         assigns(:bundle).should eq(bundle)
       end
 
       it "redirects to the bundle" do
-        bundle = Bundle.create! valid_attributes
-        put :update, {:id => bundle.to_param, :bundle => valid_attributes}, valid_session
+        bundle = FactoryGirl.create(:bundle)
+        put :update, {:id => bundle.to_param, :bundle => FactoryGirl.attributes_for(:bundle)}, valid_session
         response.should redirect_to(bundle)
       end
     end
 
     describe "with invalid params" do
       it "assigns the bundle as @bundle" do
-        bundle = Bundle.create! valid_attributes
+        bundle = FactoryGirl.create(:bundle)
         # Trigger the behavior that occurs when invalid params are submitted
         Bundle.any_instance.stub(:save).and_return(false)
         put :update, {:id => bundle.to_param, :bundle => {}}, valid_session
@@ -137,7 +130,7 @@ describe BundlesController do
       end
 
       it "re-renders the 'edit' template" do
-        bundle = Bundle.create! valid_attributes
+        bundle = FactoryGirl.create(:bundle)
         # Trigger the behavior that occurs when invalid params are submitted
         Bundle.any_instance.stub(:save).and_return(false)
         put :update, {:id => bundle.to_param, :bundle => {}}, valid_session
@@ -148,14 +141,14 @@ describe BundlesController do
 
   describe "DELETE destroy" do
     it "destroys the requested bundle" do
-      bundle = Bundle.create! valid_attributes
+      bundle = FactoryGirl.create(:bundle)
       expect {
         delete :destroy, {:id => bundle.to_param}, valid_session
       }.to change(Bundle, :count).by(-1)
     end
 
     it "redirects to the bundles list" do
-      bundle = Bundle.create! valid_attributes
+      bundle = FactoryGirl.create(:bundle)
       delete :destroy, {:id => bundle.to_param}, valid_session
       response.should redirect_to(bundles_url)
     end

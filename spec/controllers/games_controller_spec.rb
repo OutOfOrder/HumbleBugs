@@ -20,13 +20,6 @@ require 'spec_helper'
 
 describe GamesController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Game. As you add validations to Game, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
-  
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # GamesController. Be sure to keep this updated too.
@@ -36,7 +29,7 @@ describe GamesController do
 
   describe "GET index" do
     it "assigns all games as @games" do
-      game = Game.create! valid_attributes
+      game = FactoryGirl.create(:game)
       get :index, {}, valid_session
       assigns(:games).should eq([game])
     end
@@ -44,7 +37,7 @@ describe GamesController do
 
   describe "GET show" do
     it "assigns the requested game as @game" do
-      game = Game.create! valid_attributes
+      game = FactoryGirl.create(:game)
       get :show, {:id => game.to_param}, valid_session
       assigns(:game).should eq(game)
     end
@@ -59,7 +52,7 @@ describe GamesController do
 
   describe "GET edit" do
     it "assigns the requested game as @game" do
-      game = Game.create! valid_attributes
+      game = FactoryGirl.create(:game)
       get :edit, {:id => game.to_param}, valid_session
       assigns(:game).should eq(game)
     end
@@ -69,18 +62,18 @@ describe GamesController do
     describe "with valid params" do
       it "creates a new Game" do
         expect {
-          post :create, {:game => valid_attributes}, valid_session
+          post :create, {:game => FactoryGirl.attributes_for(:game)}, valid_session
         }.to change(Game, :count).by(1)
       end
 
       it "assigns a newly created game as @game" do
-        post :create, {:game => valid_attributes}, valid_session
+        post :create, {:game => FactoryGirl.attributes_for(:game)}, valid_session
         assigns(:game).should be_a(Game)
         assigns(:game).should be_persisted
       end
 
       it "redirects to the created game" do
-        post :create, {:game => valid_attributes}, valid_session
+        post :create, {:game => FactoryGirl.attributes_for(:game)}, valid_session
         response.should redirect_to(Game.last)
       end
     end
@@ -105,7 +98,7 @@ describe GamesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested game" do
-        game = Game.create! valid_attributes
+        game = FactoryGirl.create(:game)
         # Assuming there are no other games in the database, this
         # specifies that the Game created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,21 +108,21 @@ describe GamesController do
       end
 
       it "assigns the requested game as @game" do
-        game = Game.create! valid_attributes
-        put :update, {:id => game.to_param, :game => valid_attributes}, valid_session
+        game = FactoryGirl.create(:game)
+        put :update, {:id => game.to_param, :game => FactoryGirl.attributes_for(:game)}, valid_session
         assigns(:game).should eq(game)
       end
 
       it "redirects to the game" do
-        game = Game.create! valid_attributes
-        put :update, {:id => game.to_param, :game => valid_attributes}, valid_session
+        game = FactoryGirl.create(:game)
+        put :update, {:id => game.to_param, :game => FactoryGirl.attributes_for(:game)}, valid_session
         response.should redirect_to(game)
       end
     end
 
     describe "with invalid params" do
       it "assigns the game as @game" do
-        game = Game.create! valid_attributes
+        game = FactoryGirl.create(:game)
         # Trigger the behavior that occurs when invalid params are submitted
         Game.any_instance.stub(:save).and_return(false)
         put :update, {:id => game.to_param, :game => {}}, valid_session
@@ -137,7 +130,7 @@ describe GamesController do
       end
 
       it "re-renders the 'edit' template" do
-        game = Game.create! valid_attributes
+        game = FactoryGirl.create(:game)
         # Trigger the behavior that occurs when invalid params are submitted
         Game.any_instance.stub(:save).and_return(false)
         put :update, {:id => game.to_param, :game => {}}, valid_session
@@ -148,14 +141,14 @@ describe GamesController do
 
   describe "DELETE destroy" do
     it "destroys the requested game" do
-      game = Game.create! valid_attributes
+      game = FactoryGirl.create(:game)
       expect {
         delete :destroy, {:id => game.to_param}, valid_session
       }.to change(Game, :count).by(-1)
     end
 
     it "redirects to the games list" do
-      game = Game.create! valid_attributes
+      game = FactoryGirl.create(:game)
       delete :destroy, {:id => game.to_param}, valid_session
       response.should redirect_to(games_url)
     end

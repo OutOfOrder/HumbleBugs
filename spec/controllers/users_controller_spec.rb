@@ -73,9 +73,9 @@ describe UsersController do
         assigns(:user).should be_persisted
       end
 
-      it "redirects to the created user" do
+      it "redirects to the login screen" do
         post :create, {:user => FactoryGirl.attributes_for(:user)}, valid_session
-        response.should redirect_to(User.last)
+        response.should redirect_to(login_url)
       end
     end
 
