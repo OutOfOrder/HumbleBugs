@@ -1,8 +1,9 @@
 class IssuesController < ApplicationController
-  # GET /issues
-  # GET /issues.json
+  # GET /games/1/issues
+  # GET /games/1/issues.json
   def index
-    @issues = Issue.all
+    @game = Game.find(params[:game_id])
+    @issues = @game.issues
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,10 +11,11 @@ class IssuesController < ApplicationController
     end
   end
 
-  # GET /issues/1
-  # GET /issues/1.json
+  # GET /games/1/issues/1
+  # GET /games/1/issues/1.json
   def show
-    @issue = Issue.find(params[:id])
+    @game = Game.find(params[:game_id])
+    @issue = @game.issues.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,10 +23,11 @@ class IssuesController < ApplicationController
     end
   end
 
-  # GET /issues/new
-  # GET /issues/new.json
+  # GET /games/1/issues/new
+  # GET /games/1/issues/new.json
   def new
-    @issue = Issue.new
+    @game = Game.find(params[:game_id])
+    @issue = @game.issues.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,20 +35,22 @@ class IssuesController < ApplicationController
     end
   end
 
-  # GET /issues/1/edit
+  # GET /games/1/issues/1/edit
   def edit
-    @issue = Issue.find(params[:id])
+    @game = Game.find(params[:game_id])
+    @issue = @game.issues.find(params[:id])
   end
 
-  # POST /issues
-  # POST /issues.json
+  # POST /games/1/issues
+  # POST /games/1/issues.json
   def create
-    @issue = Issue.new(params[:issue])
+    @game = Game.find(params[:game_id])
+    @issue = @game.issues.build(params[:issue])
 
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to @issue, notice: 'Issue was successfully created.' }
-        format.json { render json: @issue, status: :created, location: @issue }
+        format.html { redirect_to [@game, @issue], notice: 'Issue was successfully created.' }
+        format.json { render json: @issue, status: :created, location: [@game,@issue] }
       else
         format.html { render action: "new" }
         format.json { render json: @issue.errors, status: :unprocessable_entity }
@@ -53,14 +58,15 @@ class IssuesController < ApplicationController
     end
   end
 
-  # PUT /issues/1
-  # PUT /issues/1.json
+  # PUT /games/1/issues/1
+  # PUT /games/1/issues/1.json
   def update
-    @issue = Issue.find(params[:id])
+    @game = Game.find(params[:game_id])
+    @issue = @game.issues.find(params[:id])
 
     respond_to do |format|
       if @issue.update_attributes(params[:issue])
-        format.html { redirect_to @issue, notice: 'Issue was successfully updated.' }
+        format.html { redirect_to [@game, @issue], notice: 'Issue was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,14 +75,15 @@ class IssuesController < ApplicationController
     end
   end
 
-  # DELETE /issues/1
-  # DELETE /issues/1.json
+  # DELETE /games/1/issues/1
+  # DELETE /games/1/issues/1.json
   def destroy
+    @game = Game.find(params[:game_id])
     @issue = Issue.find(params[:id])
     @issue.destroy
 
     respond_to do |format|
-      format.html { redirect_to issues_url }
+      format.html { redirect_to game_issues_url(@game) }
       format.json { head :no_content }
     end
   end

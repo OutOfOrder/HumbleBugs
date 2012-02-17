@@ -20,13 +20,6 @@ require 'spec_helper'
 
 describe IssuesController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Issue. As you add validations to Issue, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
-  
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # IssuesController. Be sure to keep this updated too.
@@ -34,54 +27,61 @@ describe IssuesController do
     {}
   end
 
+  before do
+    @game = FactoryGirl.create(:game)
+  end
+
   describe "GET index" do
     it "assigns all issues as @issues" do
-      issue = Issue.create! valid_attributes
-      get :index, {}, valid_session
+      issue = FactoryGirl.create(:issue, :game => @game)
+      get :index, {:game_id => @game.to_param}, valid_session
       assigns(:issues).should eq([issue])
     end
   end
 
   describe "GET show" do
     it "assigns the requested issue as @issue" do
-      issue = Issue.create! valid_attributes
-      get :show, {:id => issue.to_param}, valid_session
+      issue = FactoryGirl.create(:issue, :game => @game)
+      get :show, {:game_id => @game.to_param, :id => issue.to_param}, valid_session
       assigns(:issue).should eq(issue)
     end
   end
 
   describe "GET new" do
     it "assigns a new issue as @issue" do
-      get :new, {}, valid_session
+      get :new, {:game_id => @game.to_param}, valid_session
       assigns(:issue).should be_a_new(Issue)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested issue as @issue" do
-      issue = Issue.create! valid_attributes
-      get :edit, {:id => issue.to_param}, valid_session
+      issue = FactoryGirl.create(:issue, :game => @game)
+      get :edit, {:game_id => @game.to_param, :id => issue.to_param}, valid_session
       assigns(:issue).should eq(issue)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
+      before do
+        @issue = FactoryGirl.attributes_for(:issue, :game => @game)
+      end
       it "creates a new Issue" do
         expect {
-          post :create, {:issue => valid_attributes}, valid_session
+          post :create, {:game_id => @game.to_param, :issue => @issue}, valid_session
         }.to change(Issue, :count).by(1)
       end
 
       it "assigns a newly created issue as @issue" do
-        post :create, {:issue => valid_attributes}, valid_session
+        post :create, {:game_id => @game.to_param, :issue => @issue}, valid_session
         assigns(:issue).should be_a(Issue)
         assigns(:issue).should be_persisted
       end
 
       it "redirects to the created issue" do
-        post :create, {:issue => valid_attributes}, valid_session
-        response.should redirect_to(Issue.last)
+        post :create, {:game_id => @game.to_param, :issue => @issue}, valid_session
+        response.should redirect_to([@game, Issue.last])
       end
     end
 
@@ -89,14 +89,14 @@ describe IssuesController do
       it "assigns a newly created but unsaved issue as @issue" do
         # Trigger the behavior that occurs when invalid params are submitted
         Issue.any_instance.stub(:save).and_return(false)
-        post :create, {:issue => {}}, valid_session
+        post :create, {:game_id => @game.to_param, :issue => {}}, valid_session
         assigns(:issue).should be_a_new(Issue)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Issue.any_instance.stub(:save).and_return(false)
-        post :create, {:issue => {}}, valid_session
+        post :create, {:game_id => @game.to_param, :issue => {}}, valid_session
         response.should render_template("new")
       end
     end
@@ -105,42 +105,42 @@ describe IssuesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested issue" do
-        issue = Issue.create! valid_attributes
+        issue = FactoryGirl.create(:issue, :game => @game)
         # Assuming there are no other issues in the database, this
         # specifies that the Issue created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Issue.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => issue.to_param, :issue => {'these' => 'params'}}, valid_session
+        put :update, {:game_id => @game.to_param, :id => issue.to_param, :issue => {'these' => 'params'}}, valid_session
       end
 
       it "assigns the requested issue as @issue" do
-        issue = Issue.create! valid_attributes
-        put :update, {:id => issue.to_param, :issue => valid_attributes}, valid_session
+        issue = FactoryGirl.create(:issue, :game => @game)
+        put :update, {:game_id => @game.to_param, :id => issue.to_param, :issue => FactoryGirl.attributes_for(:issue, :game => @game)}, valid_session
         assigns(:issue).should eq(issue)
       end
 
       it "redirects to the issue" do
-        issue = Issue.create! valid_attributes
-        put :update, {:id => issue.to_param, :issue => valid_attributes}, valid_session
-        response.should redirect_to(issue)
+        issue = FactoryGirl.create(:issue, :game => @game)
+        put :update, {:game_id => @game.to_param, :id => issue.to_param, :issue => FactoryGirl.attributes_for(:issue, :game => @game)}, valid_session
+        response.should redirect_to([@game,issue])
       end
     end
 
     describe "with invalid params" do
       it "assigns the issue as @issue" do
-        issue = Issue.create! valid_attributes
+        issue = FactoryGirl.create(:issue, :game => @game)
         # Trigger the behavior that occurs when invalid params are submitted
         Issue.any_instance.stub(:save).and_return(false)
-        put :update, {:id => issue.to_param, :issue => {}}, valid_session
+        put :update, {:game_id => @game.to_param, :id => issue.to_param, :issue => {}}, valid_session
         assigns(:issue).should eq(issue)
       end
 
       it "re-renders the 'edit' template" do
-        issue = Issue.create! valid_attributes
+        issue = FactoryGirl.create(:issue, :game => @game)
         # Trigger the behavior that occurs when invalid params are submitted
         Issue.any_instance.stub(:save).and_return(false)
-        put :update, {:id => issue.to_param, :issue => {}}, valid_session
+        put :update, {:game_id => @game.to_param, :id => issue.to_param, :issue => {}}, valid_session
         response.should render_template("edit")
       end
     end
@@ -148,16 +148,16 @@ describe IssuesController do
 
   describe "DELETE destroy" do
     it "destroys the requested issue" do
-      issue = Issue.create! valid_attributes
+      issue = FactoryGirl.create(:issue, :game => @game)
       expect {
-        delete :destroy, {:id => issue.to_param}, valid_session
+        delete :destroy, {:game_id => @game.to_param, :id => issue.to_param}, valid_session
       }.to change(Issue, :count).by(-1)
     end
 
     it "redirects to the issues list" do
-      issue = Issue.create! valid_attributes
-      delete :destroy, {:id => issue.to_param}, valid_session
-      response.should redirect_to(issues_url)
+      issue = FactoryGirl.create(:issue, :game => @game)
+      delete :destroy, {:game_id => @game.to_param, :id => issue.to_param}, valid_session
+      response.should redirect_to(game_issues_url(@game))
     end
   end
 
