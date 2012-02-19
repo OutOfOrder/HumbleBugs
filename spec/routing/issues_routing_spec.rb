@@ -4,31 +4,31 @@ describe IssuesController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/issues").should route_to("issues#index")
+      get("/games/1/issues").should route_to("issues#index", :game_id => "1")
     end
 
     it "routes to #new" do
-      get("/issues/new").should route_to("issues#new")
+      get("/games/1/issues/new").should route_to("issues#new", :game_id => "1")
     end
 
     it "routes to #show" do
-      get("/issues/1").should route_to("issues#show", :id => "1")
+      get("/games/1/issues/1").should route_to("issues#show", :game_id => "1", :id => "1")
     end
 
     it "routes to #edit" do
-      get("/issues/1/edit").should route_to("issues#edit", :id => "1")
+      get("/games/1/issues/1/edit").should route_to("issues#edit", :game_id => "1", :id => "1")
     end
 
     it "routes to #create" do
-      post("/issues").should route_to("issues#create")
+      post("/games/1/issues").should route_to("issues#create", :game_id => "1")
     end
 
     it "routes to #update" do
-      put("/issues/1").should route_to("issues#update", :id => "1")
+      put("/games/1/issues/1").should route_to("issues#update", :game_id => "1", :id => "1")
     end
 
     it "routes to #destroy" do
-      delete("/issues/1").should route_to("issues#destroy", :id => "1")
+      delete("/games/1/issues/1").should route_to("issues#destroy", :game_id => "1", :id => "1")
     end
 
   end

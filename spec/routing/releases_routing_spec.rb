@@ -4,31 +4,31 @@ describe ReleasesController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/releases").should route_to("releases#index")
+      get("/games/1/releases").should route_to("releases#index", :game_id => "1")
     end
 
     it "routes to #new" do
-      get("/releases/new").should route_to("releases#new")
+      get("/games/1/releases/new").should route_to("releases#new", :game_id => "1")
     end
 
     it "routes to #show" do
-      get("/releases/1").should route_to("releases#show", :id => "1")
+      get("/games/1/releases/1").should route_to("releases#show", :game_id => "1", :id => "1")
     end
 
     it "routes to #edit" do
-      get("/releases/1/edit").should route_to("releases#edit", :id => "1")
+      get("/games/1/releases/1/edit").should route_to("releases#edit", :game_id => "1", :id => "1")
     end
 
     it "routes to #create" do
-      post("/releases").should route_to("releases#create")
+      post("/games/1/releases").should route_to("releases#create", :game_id => "1")
     end
 
     it "routes to #update" do
-      put("/releases/1").should route_to("releases#update", :id => "1")
+      put("/games/1/releases/1").should route_to("releases#update", :game_id => "1", :id => "1")
     end
 
     it "routes to #destroy" do
-      delete("/releases/1").should route_to("releases#destroy", :id => "1")
+      delete("/games/1/releases/1").should route_to("releases#destroy", :game_id => "1", :id => "1")
     end
 
   end

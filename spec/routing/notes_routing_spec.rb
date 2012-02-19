@@ -4,31 +4,31 @@ describe NotesController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/notes").should route_to("notes#index")
+      get("/issues/1/notes").should route_to("notes#index", :issue_id => "1")
     end
 
     it "routes to #new" do
-      get("/notes/new").should route_to("notes#new")
+      get("/issues/1/notes/new").should route_to("notes#new", :issue_id => "1")
     end
 
     it "routes to #show" do
-      get("/notes/1").should route_to("notes#show", :id => "1")
+      get("/issues/1/notes/1").should route_to("notes#show", :issue_id => "1", :id => "1")
     end
 
     it "routes to #edit" do
-      get("/notes/1/edit").should route_to("notes#edit", :id => "1")
+      get("/issues/1/notes/1/edit").should route_to("notes#edit", :issue_id => "1", :id => "1")
     end
 
     it "routes to #create" do
-      post("/notes").should route_to("notes#create")
+      post("/issues/1/notes").should route_to("notes#create", :issue_id => "1")
     end
 
     it "routes to #update" do
-      put("/notes/1").should route_to("notes#update", :id => "1")
+      put("/issues/1/notes/1").should route_to("notes#update", :issue_id => "1", :id => "1")
     end
 
     it "routes to #destroy" do
-      delete("/notes/1").should route_to("notes#destroy", :id => "1")
+      delete("/issues/1/notes/1").should route_to("notes#destroy", :issue_id => "1", :id => "1")
     end
 
   end

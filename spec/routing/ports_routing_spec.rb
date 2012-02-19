@@ -4,31 +4,31 @@ describe PortsController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/ports").should route_to("ports#index")
+      get("/games/1/ports").should route_to("ports#index", :game_id => "1")
     end
 
     it "routes to #new" do
-      get("/ports/new").should route_to("ports#new")
+      get("/games/1/ports/new").should route_to("ports#new", :game_id => "1")
     end
 
     it "routes to #show" do
-      get("/ports/1").should route_to("ports#show", :id => "1")
+      get("/games/1/ports/1").should route_to("ports#show", :game_id => "1", :id => "1")
     end
 
     it "routes to #edit" do
-      get("/ports/1/edit").should route_to("ports#edit", :id => "1")
+      get("/games/1/ports/1/edit").should route_to("ports#edit", :game_id => "1", :id => "1")
     end
 
     it "routes to #create" do
-      post("/ports").should route_to("ports#create")
+      post("/games/1/ports").should route_to("ports#create", :game_id => "1")
     end
 
     it "routes to #update" do
-      put("/ports/1").should route_to("ports#update", :id => "1")
+      put("/games/1/ports/1").should route_to("ports#update", :game_id => "1", :id => "1")
     end
 
     it "routes to #destroy" do
-      delete("/ports/1").should route_to("ports#destroy", :id => "1")
+      delete("/games/1/ports/1").should route_to("ports#destroy", :game_id => "1", :id => "1")
     end
 
   end
