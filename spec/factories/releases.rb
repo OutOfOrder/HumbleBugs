@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :release do
     notes "MyText"
-    owner nil
-    game nil
+    association :owner, :factory => :user
+    association :game
     url "MyString"
   end
 end

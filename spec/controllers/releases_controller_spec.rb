@@ -19,14 +19,6 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ReleasesController do
-
-  # This should return the minimal set of attributes required to create a valid
-  # Release. As you add validations to Release, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
-  
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ReleasesController. Be sure to keep this updated too.
@@ -34,54 +26,63 @@ describe ReleasesController do
     {}
   end
 
+  before do
+    @game = FactoryGirl.create(:game)
+    @base_params = { :game_id => @game.to_param }
+  end
+
   describe "GET index" do
     it "assigns all releases as @releases" do
-      release = Release.create! valid_attributes
-      get :index, {}, valid_session
+      FactoryGirl.create(:release)
+      release = FactoryGirl.create(:release, :game => @game)
+      get :index, @base_params.merge({:game_id => @game.to_param}), valid_session
       assigns(:releases).should eq([release])
     end
   end
 
   describe "GET show" do
     it "assigns the requested release as @release" do
-      release = Release.create! valid_attributes
-      get :show, {:id => release.to_param}, valid_session
+      release = FactoryGirl.create(:release, :game => @game)
+      get :show, @base_params.merge({:game_id => @game.to_param, :id => release.to_param}), valid_session
       assigns(:release).should eq(release)
     end
   end
 
   describe "GET new" do
     it "assigns a new release as @release" do
-      get :new, {}, valid_session
+      get :new, @base_params.merge({:game_id => @game.to_param}), valid_session
       assigns(:release).should be_a_new(Release)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested release as @release" do
-      release = Release.create! valid_attributes
-      get :edit, {:id => release.to_param}, valid_session
+      release = FactoryGirl.create(:release, :game => @game)
+      get :edit, @base_params.merge({:game_id => @game.to_param, :id => release.to_param}), valid_session
       assigns(:release).should eq(release)
     end
   end
 
   describe "POST create" do
+    before do
+      @release = FactoryGirl.attributes_for(:release, :game => @game)
+    end
     describe "with valid params" do
       it "creates a new Release" do
         expect {
-          post :create, {:release => valid_attributes}, valid_session
+          post :create, @base_params.merge({:game_id => @game.to_param, :release => @release}), valid_session
         }.to change(Release, :count).by(1)
       end
 
       it "assigns a newly created release as @release" do
-        post :create, {:release => valid_attributes}, valid_session
+        post :create, @base_params.merge({:game_id => @game.to_param, :release => @release}), valid_session
         assigns(:release).should be_a(Release)
         assigns(:release).should be_persisted
       end
 
       it "redirects to the created release" do
-        post :create, {:release => valid_attributes}, valid_session
-        response.should redirect_to(Release.last)
+        post :create, @base_params.merge({:game_id => @game.to_param, :release => @release}), valid_session
+        response.should redirect_to([@game, Release.last])
       end
     end
 
@@ -89,14 +90,14 @@ describe ReleasesController do
       it "assigns a newly created but unsaved release as @release" do
         # Trigger the behavior that occurs when invalid params are submitted
         Release.any_instance.stub(:save).and_return(false)
-        post :create, {:release => {}}, valid_session
+        post :create, @base_params.merge({:game_id => @game.to_param, :release => {}}), valid_session
         assigns(:release).should be_a_new(Release)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Release.any_instance.stub(:save).and_return(false)
-        post :create, {:release => {}}, valid_session
+        post :create, @base_params.merge({:game_id => @game.to_param, :release => {}}), valid_session
         response.should render_template("new")
       end
     end
@@ -105,42 +106,42 @@ describe ReleasesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested release" do
-        release = Release.create! valid_attributes
+        release = FactoryGirl.create(:release, :game => @game)
         # Assuming there are no other releases in the database, this
         # specifies that the Release created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Release.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => release.to_param, :release => {'these' => 'params'}}, valid_session
+        put :update, @base_params.merge({:game_id => @game.to_param, :id => release.to_param, :release => {'these' => 'params'}}), valid_session
       end
 
       it "assigns the requested release as @release" do
-        release = Release.create! valid_attributes
-        put :update, {:id => release.to_param, :release => valid_attributes}, valid_session
+        release = FactoryGirl.create(:release, :game => @game)
+        put :update, @base_params.merge({:game_id => @game.to_param, :id => release.to_param, :release => FactoryGirl.attributes_for(:release, :game => @game)}), valid_session
         assigns(:release).should eq(release)
       end
 
       it "redirects to the release" do
-        release = Release.create! valid_attributes
-        put :update, {:id => release.to_param, :release => valid_attributes}, valid_session
-        response.should redirect_to(release)
+        release = FactoryGirl.create(:release, :game => @game)
+        put :update, @base_params.merge({:game_id => @game.to_param, :id => release.to_param, :release => FactoryGirl.attributes_for(:release, :game => @game)}), valid_session
+        response.should redirect_to([@game, release])
       end
     end
 
     describe "with invalid params" do
       it "assigns the release as @release" do
-        release = Release.create! valid_attributes
+        release = FactoryGirl.create(:release, :game => @game)
         # Trigger the behavior that occurs when invalid params are submitted
         Release.any_instance.stub(:save).and_return(false)
-        put :update, {:id => release.to_param, :release => {}}, valid_session
+        put :update, @base_params.merge({:game_id => @game.to_param, :id => release.to_param, :release => {}}), valid_session
         assigns(:release).should eq(release)
       end
 
       it "re-renders the 'edit' template" do
-        release = Release.create! valid_attributes
+        release = FactoryGirl.create(:release, :game => @game)
         # Trigger the behavior that occurs when invalid params are submitted
         Release.any_instance.stub(:save).and_return(false)
-        put :update, {:id => release.to_param, :release => {}}, valid_session
+        put :update, @base_params.merge({:game_id => @game.to_param, :id => release.to_param, :release => {}}), valid_session
         response.should render_template("edit")
       end
     end
@@ -148,16 +149,16 @@ describe ReleasesController do
 
   describe "DELETE destroy" do
     it "destroys the requested release" do
-      release = Release.create! valid_attributes
+      release = FactoryGirl.create(:release, :game => @game)
       expect {
-        delete :destroy, {:id => release.to_param}, valid_session
+        delete :destroy, @base_params.merge({:game_id => @game.to_param, :id => release.to_param}), valid_session
       }.to change(Release, :count).by(-1)
     end
 
     it "redirects to the releases list" do
-      release = Release.create! valid_attributes
-      delete :destroy, {:id => release.to_param}, valid_session
-      response.should redirect_to(releases_url)
+      release = FactoryGirl.create(:release, :game => @game)
+      delete :destroy, @base_params.merge({:game_id => @game.to_param, :id => release.to_param}), valid_session
+      response.should redirect_to(game_releases_url(@game))
     end
   end
 

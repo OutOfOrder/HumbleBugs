@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :port do
-    game nil
-    porter nil
+    association :game
+    association :porter, :factory => :user
     state "MyString"
   end
 end

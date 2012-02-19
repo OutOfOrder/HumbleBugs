@@ -1,8 +1,10 @@
 class ReleasesController < ApplicationController
-  # GET /releases
-  # GET /releases.json
+  before_filter :load_game
+
+  # GET /games/1/releases
+  # GET /games/1/releases.json
   def index
-    @releases = Release.all
+    @releases = @game.releases
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,10 +12,10 @@ class ReleasesController < ApplicationController
     end
   end
 
-  # GET /releases/1
-  # GET /releases/1.json
+  # GET /games/1/releases/1
+  # GET /games/1/releases/1.json
   def show
-    @release = Release.find(params[:id])
+    @release = @game.releases.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,10 +23,10 @@ class ReleasesController < ApplicationController
     end
   end
 
-  # GET /releases/new
-  # GET /releases/new.json
+  # GET /games/1/releases/new
+  # GET /games/1/releases/new.json
   def new
-    @release = Release.new
+    @release = @game.releases.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,19 +34,19 @@ class ReleasesController < ApplicationController
     end
   end
 
-  # GET /releases/1/edit
+  # GET /games/1/releases/1/edit
   def edit
-    @release = Release.find(params[:id])
+    @release = @game.releases.find(params[:id])
   end
 
-  # POST /releases
-  # POST /releases.json
+  # POST /games/1/releases
+  # POST /games/1/releases.json
   def create
-    @release = Release.new(params[:release])
+    @release = @game.releases.build(params[:release])
 
     respond_to do |format|
       if @release.save
-        format.html { redirect_to @release, notice: 'Release was successfully created.' }
+        format.html { redirect_to [@game, @release], notice: 'Release was successfully created.' }
         format.json { render json: @release, status: :created, location: @release }
       else
         format.html { render action: "new" }
@@ -53,14 +55,14 @@ class ReleasesController < ApplicationController
     end
   end
 
-  # PUT /releases/1
-  # PUT /releases/1.json
+  # PUT /games/1/releases/1
+  # PUT /games/1/releases/1.json
   def update
-    @release = Release.find(params[:id])
+    @release = @game.releases.find(params[:id])
 
     respond_to do |format|
       if @release.update_attributes(params[:release])
-        format.html { redirect_to @release, notice: 'Release was successfully updated.' }
+        format.html { redirect_to [@game, @release], notice: 'Release was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,15 +71,20 @@ class ReleasesController < ApplicationController
     end
   end
 
-  # DELETE /releases/1
-  # DELETE /releases/1.json
+  # DELETE /games/1/releases/1
+  # DELETE /games/1/releases/1.json
   def destroy
     @release = Release.find(params[:id])
     @release.destroy
 
     respond_to do |format|
-      format.html { redirect_to releases_url }
+      format.html { redirect_to game_releases_url(@game) }
       format.json { head :no_content }
     end
   end
+
+  private
+    def load_game
+      @game = Game.find(params[:game_id])
+    end
 end

@@ -1,8 +1,10 @@
 class PortsController < ApplicationController
-  # GET /ports
-  # GET /ports.json
+  before_filter :load_game
+
+  # GET /games/1/ports
+  # GET /games/1/ports.json
   def index
-    @ports = Port.all
+    @ports = @game.ports.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,10 +12,10 @@ class PortsController < ApplicationController
     end
   end
 
-  # GET /ports/1
-  # GET /ports/1.json
+  # GET /games/1/ports/1
+  # GET /games/1/ports/1.json
   def show
-    @port = Port.find(params[:id])
+    @port = @game.ports.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,10 +23,10 @@ class PortsController < ApplicationController
     end
   end
 
-  # GET /ports/new
-  # GET /ports/new.json
+  # GET /games/1/ports/new
+  # GET /games/1/ports/new.json
   def new
-    @port = Port.new
+    @port = @game.ports.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,19 +34,19 @@ class PortsController < ApplicationController
     end
   end
 
-  # GET /ports/1/edit
+  # GET /games/1/ports/1/edit
   def edit
-    @port = Port.find(params[:id])
+    @port = @game.ports.find(params[:id])
   end
 
-  # POST /ports
-  # POST /ports.json
+  # POST /games/1/ports
+  # POST /games/1/ports.json
   def create
-    @port = Port.new(params[:port])
+    @port = @game.ports.new(params[:port])
 
     respond_to do |format|
       if @port.save
-        format.html { redirect_to @port, notice: 'Port was successfully created.' }
+        format.html { redirect_to [@game, @port], notice: 'Port was successfully created.' }
         format.json { render json: @port, status: :created, location: @port }
       else
         format.html { render action: "new" }
@@ -53,14 +55,14 @@ class PortsController < ApplicationController
     end
   end
 
-  # PUT /ports/1
-  # PUT /ports/1.json
+  # PUT /games/1/ports/1
+  # PUT /games/1/ports/1.json
   def update
-    @port = Port.find(params[:id])
+    @port = @game.ports.find(params[:id])
 
     respond_to do |format|
       if @port.update_attributes(params[:port])
-        format.html { redirect_to @port, notice: 'Port was successfully updated.' }
+        format.html { redirect_to [@game, @port], notice: 'Port was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,15 +71,20 @@ class PortsController < ApplicationController
     end
   end
 
-  # DELETE /ports/1
-  # DELETE /ports/1.json
+  # DELETE /games/1/ports/1
+  # DELETE /games/1/ports/1.json
   def destroy
-    @port = Port.find(params[:id])
+    @port = @game.ports.find(params[:id])
     @port.destroy
 
     respond_to do |format|
-      format.html { redirect_to ports_url }
+      format.html { redirect_to game_ports_url(@game) }
       format.json { head :no_content }
     end
   end
+
+  private
+    def load_game
+      @game = Game.find(params[:game_id])
+    end
 end

@@ -1,8 +1,10 @@
 class IssuesController < ApplicationController
+
+  before_filter :load_game
+
   # GET /games/1/issues
   # GET /games/1/issues.json
   def index
-    @game = Game.find(params[:game_id])
     @issues = @game.issues
 
     respond_to do |format|
@@ -14,7 +16,6 @@ class IssuesController < ApplicationController
   # GET /games/1/issues/1
   # GET /games/1/issues/1.json
   def show
-    @game = Game.find(params[:game_id])
     @issue = @game.issues.find(params[:id])
 
     respond_to do |format|
@@ -26,7 +27,6 @@ class IssuesController < ApplicationController
   # GET /games/1/issues/new
   # GET /games/1/issues/new.json
   def new
-    @game = Game.find(params[:game_id])
     @issue = @game.issues.build
 
     respond_to do |format|
@@ -37,14 +37,12 @@ class IssuesController < ApplicationController
 
   # GET /games/1/issues/1/edit
   def edit
-    @game = Game.find(params[:game_id])
     @issue = @game.issues.find(params[:id])
   end
 
   # POST /games/1/issues
   # POST /games/1/issues.json
   def create
-    @game = Game.find(params[:game_id])
     @issue = @game.issues.build(params[:issue])
 
     respond_to do |format|
@@ -61,7 +59,6 @@ class IssuesController < ApplicationController
   # PUT /games/1/issues/1
   # PUT /games/1/issues/1.json
   def update
-    @game = Game.find(params[:game_id])
     @issue = @game.issues.find(params[:id])
 
     respond_to do |format|
@@ -78,7 +75,6 @@ class IssuesController < ApplicationController
   # DELETE /games/1/issues/1
   # DELETE /games/1/issues/1.json
   def destroy
-    @game = Game.find(params[:game_id])
     @issue = Issue.find(params[:id])
     @issue.destroy
 
@@ -86,5 +82,10 @@ class IssuesController < ApplicationController
       format.html { redirect_to game_issues_url(@game) }
       format.json { head :no_content }
     end
+  end
+
+private
+  def load_game
+    @game = Game.find(params[:game_id])
   end
 end

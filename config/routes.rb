@@ -1,9 +1,5 @@
 HumbleBugs::Application.routes.draw do
-  resources :releases
-
   resources :notes
-
-  resources :ports
 
   resources :bundles do
     resources :games
@@ -11,6 +7,8 @@ HumbleBugs::Application.routes.draw do
 
   resources :games do
     resources :issues
+    resources :releases
+    resources :ports
   end
 
   resources :users

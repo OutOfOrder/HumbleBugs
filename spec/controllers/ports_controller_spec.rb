@@ -19,14 +19,6 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe PortsController do
-
-  # This should return the minimal set of attributes required to create a valid
-  # Port. As you add validations to Port, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
-  
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # PortsController. Be sure to keep this updated too.
@@ -34,54 +26,62 @@ describe PortsController do
     {}
   end
 
+  before do
+    @game = Factory.create(:game)
+    @base_params = { :game_id => @game.to_param}
+  end
+
   describe "GET index" do
     it "assigns all ports as @ports" do
-      port = Port.create! valid_attributes
-      get :index, {}, valid_session
+      port = FactoryGirl.create(:port, :game => @game)
+      get :index, @base_params.merge({}), valid_session
       assigns(:ports).should eq([port])
     end
   end
 
   describe "GET show" do
     it "assigns the requested port as @port" do
-      port = Port.create! valid_attributes
-      get :show, {:id => port.to_param}, valid_session
+      port = FactoryGirl.create(:port, :game => @game)
+      get :show, @base_params.merge({:id => port.to_param}), valid_session
       assigns(:port).should eq(port)
     end
   end
 
   describe "GET new" do
     it "assigns a new port as @port" do
-      get :new, {}, valid_session
+      get :new, @base_params.merge({}), valid_session
       assigns(:port).should be_a_new(Port)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested port as @port" do
-      port = Port.create! valid_attributes
-      get :edit, {:id => port.to_param}, valid_session
+      port = FactoryGirl.create(:port, :game => @game)
+      get :edit, @base_params.merge({:id => port.to_param}), valid_session
       assigns(:port).should eq(port)
     end
   end
 
   describe "POST create" do
+    before do
+      @port = FactoryGirl.attributes_for(:port, :game => @game)
+    end
     describe "with valid params" do
       it "creates a new Port" do
         expect {
-          post :create, {:port => valid_attributes}, valid_session
+          post :create, @base_params.merge({:port => @port}), valid_session
         }.to change(Port, :count).by(1)
       end
 
       it "assigns a newly created port as @port" do
-        post :create, {:port => valid_attributes}, valid_session
+        post :create, @base_params.merge({:port => @port}), valid_session
         assigns(:port).should be_a(Port)
         assigns(:port).should be_persisted
       end
 
       it "redirects to the created port" do
-        post :create, {:port => valid_attributes}, valid_session
-        response.should redirect_to(Port.last)
+        post :create, @base_params.merge({:port => @port}), valid_session
+        response.should redirect_to([@game,Port.last])
       end
     end
 
@@ -89,14 +89,14 @@ describe PortsController do
       it "assigns a newly created but unsaved port as @port" do
         # Trigger the behavior that occurs when invalid params are submitted
         Port.any_instance.stub(:save).and_return(false)
-        post :create, {:port => {}}, valid_session
+        post :create, @base_params.merge({:port => {}}), valid_session
         assigns(:port).should be_a_new(Port)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Port.any_instance.stub(:save).and_return(false)
-        post :create, {:port => {}}, valid_session
+        post :create, @base_params.merge({:port => {}}), valid_session
         response.should render_template("new")
       end
     end
@@ -105,42 +105,42 @@ describe PortsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested port" do
-        port = Port.create! valid_attributes
+        port = FactoryGirl.create(:port, :game => @game)
         # Assuming there are no other ports in the database, this
         # specifies that the Port created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Port.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => port.to_param, :port => {'these' => 'params'}}, valid_session
+        put :update, @base_params.merge({:id => port.to_param, :port => {'these' => 'params'}}), valid_session
       end
 
       it "assigns the requested port as @port" do
-        port = Port.create! valid_attributes
-        put :update, {:id => port.to_param, :port => valid_attributes}, valid_session
+        port = FactoryGirl.create(:port, :game => @game)
+        put :update, @base_params.merge({:id => port.to_param, :port => FactoryGirl.attributes_for(:port, :game => @game)}), valid_session
         assigns(:port).should eq(port)
       end
 
       it "redirects to the port" do
-        port = Port.create! valid_attributes
-        put :update, {:id => port.to_param, :port => valid_attributes}, valid_session
-        response.should redirect_to(port)
+        port = FactoryGirl.create(:port, :game => @game)
+        put :update, @base_params.merge({:id => port.to_param, :port => FactoryGirl.attributes_for(:port, :game => @game)}), valid_session
+        response.should redirect_to([@game, port])
       end
     end
 
     describe "with invalid params" do
       it "assigns the port as @port" do
-        port = Port.create! valid_attributes
+        port = FactoryGirl.create(:port, :game => @game)
         # Trigger the behavior that occurs when invalid params are submitted
         Port.any_instance.stub(:save).and_return(false)
-        put :update, {:id => port.to_param, :port => {}}, valid_session
+        put :update, @base_params.merge({:id => port.to_param, :port => {}}), valid_session
         assigns(:port).should eq(port)
       end
 
       it "re-renders the 'edit' template" do
-        port = Port.create! valid_attributes
+        port = FactoryGirl.create(:port, :game => @game)
         # Trigger the behavior that occurs when invalid params are submitted
         Port.any_instance.stub(:save).and_return(false)
-        put :update, {:id => port.to_param, :port => {}}, valid_session
+        put :update, @base_params.merge({:id => port.to_param, :port => {}}), valid_session
         response.should render_template("edit")
       end
     end
@@ -148,16 +148,16 @@ describe PortsController do
 
   describe "DELETE destroy" do
     it "destroys the requested port" do
-      port = Port.create! valid_attributes
+      port = FactoryGirl.create(:port, :game => @game)
       expect {
-        delete :destroy, {:id => port.to_param}, valid_session
+        delete :destroy, @base_params.merge({:id => port.to_param}), valid_session
       }.to change(Port, :count).by(-1)
     end
 
     it "redirects to the ports list" do
-      port = Port.create! valid_attributes
-      delete :destroy, {:id => port.to_param}, valid_session
-      response.should redirect_to(ports_url)
+      port = FactoryGirl.create(:port, :game => @game)
+      delete :destroy, @base_params.merge({:id => port.to_param}), valid_session
+      response.should redirect_to(game_ports_url(@game))
     end
   end
 
