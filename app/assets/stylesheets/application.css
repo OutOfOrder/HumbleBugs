@@ -10,5 +10,6 @@
  *
  *= require_self
  *= require main
+ *= require flash
  *= require_tree ./controllers
 */

@@ -1,0 +1,26 @@
+@import "blueprint/interaction";
+@import "compass/css3";
+
+#flash {
+  display: none;
+  position: absolute;
+  right: 1ex;
+  top: 1ex;
+  @include border-radius(1ex);
+  padding: 1ex;
+  background: lightgray;
+  border: 1px solid gray;
+
+  .info {
+    @include info;
+    margin-bottom: 0;
+  }
+  .notice {
+    @include notice;
+    margin-bottom: 0;
+  }
+  .alert {
+    @include error;
+    margin-bottom: 0;
+  }
+}
