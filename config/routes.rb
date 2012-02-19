@@ -1,6 +1,4 @@
 HumbleBugs::Application.routes.draw do
-  resources :notes
-
   resources :bundles do
     resources :games
   end
@@ -9,6 +7,10 @@ HumbleBugs::Application.routes.draw do
     resources :issues
     resources :releases
     resources :ports
+  end
+
+  resources :issues, :only => [] do
+    resources :notes
   end
 
   resources :users

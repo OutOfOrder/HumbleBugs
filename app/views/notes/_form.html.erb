@@ -1,4 +1,4 @@
-<%= form_for(@note) do |f| %>
+<%= form_for([@noteable, @note]) do |f| %>
   <fieldset>
     <legend><%= title %></legend>
     <% if @note.errors.any? %>
@@ -6,26 +6,24 @@
         <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
 
         <ul>
-        <% @note.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+          <% @note.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
         </ul>
       </div>
     <% end %>
 
-      <div class="field">
-      <%= f.label :note %><br />
+    <div class="field">
+      <%= f.label :note %>
+      <br/>
       <%= f.text_area :note %>
     </div>
-      <div class="field">
-      <%= f.label :owner %><br />
-      <%= f.text_field :owner %>
+    <div class="field">
+      <%= f.label :owner %>
+      <br/>
+      <%= f.collection_select :owner_id, User.all, :id, :name, :prompt => true %>
     </div>
-      <div class="field">
-      <%= f.label :noteable %><br />
-      <%= f.text_field :noteable %>
-    </div>
-      <div class="actions">
+    <div class="actions">
       <%= f.submit %>
     </div>
   </fieldset>

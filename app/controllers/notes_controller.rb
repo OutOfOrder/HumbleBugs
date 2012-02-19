@@ -1,8 +1,10 @@
 class NotesController < ApplicationController
-  # GET /notes
-  # GET /notes.json
+  before_filter :load_noteable
+
+  # GET /:polymorphic/1/notes
+  # GET /:polymorphic/1/notes.json
   def index
-    @notes = Note.all
+    @notes = @noteable.notes
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,10 +12,10 @@ class NotesController < ApplicationController
     end
   end
 
-  # GET /notes/1
-  # GET /notes/1.json
+  # GET /:polymorphic/1/notes/1
+  # GET /:polymorphic/1/notes/1.json
   def show
-    @note = Note.find(params[:id])
+    @note = @noteable.notes.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,10 +23,10 @@ class NotesController < ApplicationController
     end
   end
 
-  # GET /notes/new
-  # GET /notes/new.json
+  # GET /:polymorphic/1/notes/new
+  # GET /:polymorphic/1/notes/new.json
   def new
-    @note = Note.new
+    @note = @noteable.notes.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,19 +34,19 @@ class NotesController < ApplicationController
     end
   end
 
-  # GET /notes/1/edit
+  # GET /:polymorphic/1/notes/1/edit
   def edit
-    @note = Note.find(params[:id])
+    @note = @noteable.notes.find(params[:id])
   end
 
-  # POST /notes
-  # POST /notes.json
+  # POST /:polymorphic/1/notes
+  # POST /:polymorphic/1/notes.json
   def create
-    @note = Note.new(params[:note])
+    @note = @noteable.notes.build(params[:note])
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.html { redirect_to [@noteable, @note], notice: 'Note was successfully created.' }
         format.json { render json: @note, status: :created, location: @note }
       else
         format.html { render action: "new" }
@@ -53,14 +55,14 @@ class NotesController < ApplicationController
     end
   end
 
-  # PUT /notes/1
-  # PUT /notes/1.json
+  # PUT /:polymorphic/1/notes/1
+  # PUT /:polymorphic/1/notes/1.json
   def update
-    @note = Note.find(params[:id])
+    @note = @noteable.notes.find(params[:id])
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
+        format.html { redirect_to [@noteable, @note], notice: 'Note was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,15 +71,28 @@ class NotesController < ApplicationController
     end
   end
 
-  # DELETE /notes/1
-  # DELETE /notes/1.json
+  # DELETE /:polymorphic/1/notes/1
+  # DELETE /:polymorphic/1/notes/1.json
   def destroy
-    @note = Note.find(params[:id])
+    @note = @noteable.notes.find(params[:id])
     @note.destroy
 
     respond_to do |format|
-      format.html { redirect_to notes_url }
+      format.html { redirect_to [@noteable, Note] }
       format.json { head :no_content }
     end
+  end
+
+private
+  def load_noteable
+    @noteable = find_polymorphic
+  end
+  def find_polymorphic
+    params.each do |name, value|
+      if name.ends_with?("_id")
+        return name[0..-4].classify.constantize.find(value)
+      end
+    end
+    nil
   end
 end

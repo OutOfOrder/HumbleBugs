@@ -19,13 +19,6 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe NotesController do
-
-  # This should return the minimal set of attributes required to create a valid
-  # Note. As you add validations to Note, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
   
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -34,54 +27,64 @@ describe NotesController do
     {}
   end
 
+  before do
+    # probably should be a MOCK
+    @noteable = FactoryGirl.create(:issue)
+    @base_params = {:issue_id => @noteable.to_param}
+  end
+
   describe "GET index" do
     it "assigns all notes as @notes" do
-      note = Note.create! valid_attributes
-      get :index, {}, valid_session
+      FactoryGirl.create(:note)
+      note = FactoryGirl.create(:note, :noteable => @noteable)
+      get :index, @base_params.merge({}), valid_session
       assigns(:notes).should eq([note])
     end
   end
 
   describe "GET show" do
     it "assigns the requested note as @note" do
-      note = Note.create! valid_attributes
-      get :show, {:id => note.to_param}, valid_session
+      note = FactoryGirl.create(:note, :noteable => @noteable)
+      get :show, @base_params.merge({:id => note.to_param}), valid_session
       assigns(:note).should eq(note)
     end
   end
 
   describe "GET new" do
     it "assigns a new note as @note" do
-      get :new, {}, valid_session
+      get :new, @base_params.merge({}), valid_session
       assigns(:note).should be_a_new(Note)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested note as @note" do
-      note = Note.create! valid_attributes
-      get :edit, {:id => note.to_param}, valid_session
+      note = FactoryGirl.create(:note, :noteable => @noteable)
+      get :edit, @base_params.merge({:id => note.to_param}), valid_session
       assigns(:note).should eq(note)
     end
   end
 
   describe "POST create" do
+    before do
+      @note = FactoryGirl.build(:note, :noteable => @noteable).attributes.symbolize_keys
+    end
     describe "with valid params" do
       it "creates a new Note" do
         expect {
-          post :create, {:note => valid_attributes}, valid_session
+          post :create, @base_params.merge({:note => @note}), valid_session
         }.to change(Note, :count).by(1)
       end
 
       it "assigns a newly created note as @note" do
-        post :create, {:note => valid_attributes}, valid_session
+        post :create, @base_params.merge({:note => @note}), valid_session
         assigns(:note).should be_a(Note)
         assigns(:note).should be_persisted
       end
 
       it "redirects to the created note" do
-        post :create, {:note => valid_attributes}, valid_session
-        response.should redirect_to(Note.last)
+        post :create, @base_params.merge({:note => @note}), valid_session
+        response.should redirect_to([@noteable, Note.last])
       end
     end
 
@@ -89,14 +92,14 @@ describe NotesController do
       it "assigns a newly created but unsaved note as @note" do
         # Trigger the behavior that occurs when invalid params are submitted
         Note.any_instance.stub(:save).and_return(false)
-        post :create, {:note => {}}, valid_session
+        post :create, @base_params.merge({:note => {}}), valid_session
         assigns(:note).should be_a_new(Note)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Note.any_instance.stub(:save).and_return(false)
-        post :create, {:note => {}}, valid_session
+        post :create, @base_params.merge({:note => {}}), valid_session
         response.should render_template("new")
       end
     end
@@ -105,42 +108,42 @@ describe NotesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested note" do
-        note = Note.create! valid_attributes
+        note = FactoryGirl.create(:note, :noteable => @noteable)
         # Assuming there are no other notes in the database, this
         # specifies that the Note created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Note.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => note.to_param, :note => {'these' => 'params'}}, valid_session
+        put :update, @base_params.merge({:id => note.to_param, :note => {'these' => 'params'}}), valid_session
       end
 
       it "assigns the requested note as @note" do
-        note = Note.create! valid_attributes
-        put :update, {:id => note.to_param, :note => valid_attributes}, valid_session
+        note = FactoryGirl.create(:note, :noteable => @noteable)
+        put :update, @base_params.merge({:id => note.to_param, :note => FactoryGirl.attributes_for(:note, :noteable => @noteable)}), valid_session
         assigns(:note).should eq(note)
       end
 
       it "redirects to the note" do
-        note = Note.create! valid_attributes
-        put :update, {:id => note.to_param, :note => valid_attributes}, valid_session
-        response.should redirect_to(note)
+        note = FactoryGirl.create(:note, :noteable => @noteable)
+        put :update, @base_params.merge({:id => note.to_param, :note => FactoryGirl.attributes_for(:note, :noteable => @noteable)}), valid_session
+        response.should redirect_to([@noteable, note])
       end
     end
 
     describe "with invalid params" do
       it "assigns the note as @note" do
-        note = Note.create! valid_attributes
+        note = FactoryGirl.create(:note, :noteable => @noteable)
         # Trigger the behavior that occurs when invalid params are submitted
         Note.any_instance.stub(:save).and_return(false)
-        put :update, {:id => note.to_param, :note => {}}, valid_session
+        put :update, @base_params.merge({:id => note.to_param, :note => {}}), valid_session
         assigns(:note).should eq(note)
       end
 
       it "re-renders the 'edit' template" do
-        note = Note.create! valid_attributes
+        note = FactoryGirl.create(:note, :noteable => @noteable)
         # Trigger the behavior that occurs when invalid params are submitted
         Note.any_instance.stub(:save).and_return(false)
-        put :update, {:id => note.to_param, :note => {}}, valid_session
+        put :update, @base_params.merge({:id => note.to_param, :note => {}}), valid_session
         response.should render_template("edit")
       end
     end
@@ -148,16 +151,16 @@ describe NotesController do
 
   describe "DELETE destroy" do
     it "destroys the requested note" do
-      note = Note.create! valid_attributes
+      note = FactoryGirl.create(:note, :noteable => @noteable)
       expect {
-        delete :destroy, {:id => note.to_param}, valid_session
+        delete :destroy, @base_params.merge({:id => note.to_param}), valid_session
       }.to change(Note, :count).by(-1)
     end
 
     it "redirects to the notes list" do
-      note = Note.create! valid_attributes
-      delete :destroy, {:id => note.to_param}, valid_session
-      response.should redirect_to(notes_url)
+      note = FactoryGirl.create(:note, :noteable => @noteable)
+      delete :destroy, @base_params.merge({:id => note.to_param}), valid_session
+      response.should redirect_to([@noteable, Note])
     end
   end
 

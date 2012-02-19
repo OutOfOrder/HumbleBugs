@@ -15,13 +15,13 @@
     <td><%= note.note %></td>
     <td><%= note.owner %></td>
     <td><%= note.noteable %></td>
-    <td><%= link_to 'Show', note %></td>
-    <td><%= link_to 'Edit', edit_note_path(note) %></td>
-    <td><%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', [@noteable, note] %></td>
+    <td><%= link_to 'Edit', edit_polymorphic_path([@noteable, note]) %></td>
+    <td><%= link_to 'Destroy', [@noteable, note], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Note', new_note_path %>
+<%= link_to 'New Note', new_polymorphic_path([@noteable, Note]) %>
