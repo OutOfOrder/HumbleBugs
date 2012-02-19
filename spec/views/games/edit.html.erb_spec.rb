@@ -2,12 +2,7 @@ require 'spec_helper'
 
 describe "games/edit" do
   before(:each) do
-    @game = assign(:game, stub_model(Game,
-      :name => "MyString",
-      :description => "MyText",
-      :bundle => nil,
-      :state => "MyString"
-    ))
+    @game = assign(:game, FactoryGirl.create(:game))
   end
 
   it "renders the edit game form" do
@@ -18,7 +13,7 @@ describe "games/edit" do
       assert_select "input#game_name", :name => "game[name]"
       assert_select "textarea#game_description", :name => "game[description]"
       assert_select "select#game_bundle_id", :name => "game[bundle_id]"
-      assert_select "input#game_state", :name => "game[state]"
+      assert_select "select#game_state", :name => "game[state]"
     end
   end
 end

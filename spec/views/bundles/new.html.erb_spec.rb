@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe "bundles/new" do
   before(:each) do
-    assign(:bundle, stub_model(Bundle,
-      :name => "MyString",
-      :description => "MyText",
-      :state => "MyString"
-    ).as_new_record)
+    assign(:bundle, FactoryGirl.build(:bundle))
   end
 
   it "renders new bundle form" do
@@ -16,7 +12,7 @@ describe "bundles/new" do
     assert_select "form", :action => bundles_path, :method => "post" do
       assert_select "input#bundle_name", :name => "bundle[name]"
       assert_select "textarea#bundle_description", :name => "bundle[description]"
-      assert_select "input#bundle_state", :name => "bundle[state]"
+      assert_select "select#bundle_state", :name => "bundle[state]"
     end
   end
 end

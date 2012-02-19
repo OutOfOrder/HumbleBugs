@@ -1,4 +1,4 @@
-<%= form_for(@release) do |f| %>
+<%= form_for([@game, @release]) do |f| %>
   <fieldset>
     <legend><%= title %></legend>
     <% if @release.errors.any? %>
@@ -19,7 +19,7 @@
     </div>
       <div class="field">
       <%= f.label :owner %><br />
-      <%= f.text_field :owner %>
+      <%= f.collection_select :owner_id, User.all, :id, :name, :prompt => true %>
     </div>
       <div class="field">
       <%= f.label :url %><br />

@@ -15,13 +15,13 @@
     <td><%= release.notes %></td>
     <td><%= release.owner %></td>
     <td><%= release.url %></td>
-    <td><%= link_to 'Show', release %></td>
-    <td><%= link_to 'Edit', edit_release_path(release) %></td>
-    <td><%= link_to 'Destroy', release, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', [@game, release] %></td>
+    <td><%= link_to 'Edit', edit_game_release_path([@game, release]) %></td>
+    <td><%= link_to 'Destroy', [@game, release], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Release', new_release_path %>
+<%= link_to 'New Release', new_game_release_path(@game) %>

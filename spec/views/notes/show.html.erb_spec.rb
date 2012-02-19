@@ -2,11 +2,8 @@ require 'spec_helper'
 
 describe "notes/show" do
   before(:each) do
-    @note = assign(:note, stub_model(Note,
-      :note => "MyText",
-      :owner => nil,
-      :noteable => nil
-    ))
+    @noteable = FactoryGirl.create(:issue)
+    @note = assign(:note, FactoryGirl.create(:note, :noteable => @noteable))
   end
 
   it "renders attributes in <p>" do

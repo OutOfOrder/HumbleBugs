@@ -2,21 +2,17 @@ require 'spec_helper'
 
 describe "notes/edit" do
   before(:each) do
-    @note = assign(:note, stub_model(Note,
-      :note => "MyText",
-      :owner => nil,
-      :noteable => nil
-    ))
+    @noteable = assign(:noteable, FactoryGirl.create(:issue))
+    @note = assign(:note, FactoryGirl.create(:note, :noteable => @noteable))
   end
 
   it "renders the edit note form" do
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "form", :action => notes_path(@note), :method => "post" do
+    assert_select "form", :action => polymorphic_path([@noteable, @note]), :method => "post" do
       assert_select "textarea#note_note", :name => "note[note]"
-      assert_select "input#note_owner", :name => "note[owner]"
-      assert_select "input#note_noteable", :name => "note[noteable]"
+      assert_select "select#note_owner_id", :name => "note[owner_id]"
     end
   end
 end

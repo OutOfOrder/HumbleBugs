@@ -15,13 +15,13 @@
     <td><%= port.game %></td>
     <td><%= port.porter %></td>
     <td><%= port.state %></td>
-    <td><%= link_to 'Show', port %></td>
-    <td><%= link_to 'Edit', edit_port_path(port) %></td>
-    <td><%= link_to 'Destroy', port, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', [@game, port] %></td>
+    <td><%= link_to 'Edit', edit_game_port_path(@game, port) %></td>
+    <td><%= link_to 'Destroy', [@game, port], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Port', new_port_path %>
+<%= link_to 'New Port', new_game_port_path(@game) %>
