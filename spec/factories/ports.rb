@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :port do
     association :game
     association :porter, :factory => :user
-    state "MyString"
+    state "planned"
   end
 end
