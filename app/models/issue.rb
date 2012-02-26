@@ -4,6 +4,8 @@ class Issue < ActiveRecord::Base
   belongs_to :fixed_in, :class_name => 'Release', :inverse_of => :fixed_issues
   has_many :notes, :as => :noteable
 
+  acts_as_taggable_on :platforms
+
   STATUSES = [
       ['New', :new],
       ['Waiting Feedback', :feedback],

@@ -4,6 +4,8 @@ class Game < ActiveRecord::Base
   has_many :issues, :inverse_of => :game
   has_many :releases, :inverse_of => :game
 
+  acts_as_taggable_on :platforms
+
   STATES = [
       ['Prospective', :prospective],
       ['Planned', :planned],

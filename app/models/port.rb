@@ -2,6 +2,8 @@ class Port < ActiveRecord::Base
   belongs_to :game, :inverse_of => :ports
   belongs_to :porter, :class_name => 'User'
 
+  acts_as_taggable_on :platforms
+
   STATES = [
       ['Planned', :planned],
       ['In Development', :development],
