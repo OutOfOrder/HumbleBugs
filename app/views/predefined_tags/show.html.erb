@@ -1,0 +1,16 @@
+<fieldset>
+  <legend>Predefined tag details</legend>
+    <p>
+    <b>Name:</b>
+    <%= @predefined_tag.name %>
+  </p>
+
+    <p>
+    <b>Context:</b>
+    <%= @predefined_tag.context %>
+  </p>
+
+  
+  <%= link_to 'Edit', edit_predefined_tag_path(@predefined_tag) %> |
+  <%= link_to 'Back', predefined_tags_path %>
+</fieldset>

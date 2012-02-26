@@ -1,0 +1,28 @@
+<%= form_for(@predefined_tag) do |f| %>
+  <fieldset>
+    <legend><%= title %></legend>
+    <% if @predefined_tag.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@predefined_tag.errors.count, "error") %> prohibited this predefined_tag from being saved:</h2>
+
+        <ul>
+        <% @predefined_tag.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+      <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
+      <div class="field">
+      <%= f.label :context %><br />
+      <%= f.select :context, PredefinedTag::CONTEXTS %>
+    </div>
+      <div class="actions">
+      <%= f.submit %>
+    </div>
+  </fieldset>
+<% end %>

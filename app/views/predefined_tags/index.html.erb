@@ -1,0 +1,25 @@
+<h1>Listing predefined_tags</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Context</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @predefined_tags.each do |predefined_tag| %>
+  <tr>
+    <td><%= predefined_tag.name %></td>
+    <td><%= predefined_tag.context %></td>
+    <td><%= link_to 'Show', predefined_tag %></td>
+    <td><%= link_to 'Edit', edit_predefined_tag_path(predefined_tag) %></td>
+    <td><%= link_to 'Destroy', predefined_tag, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Predefined tag', new_predefined_tag_path %>

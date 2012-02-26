@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+PredefinedTag.create([
+    {context:'platforms', name:'Windows'},
+    {context:'platforms', name:'Mac OS X'},
+    {context:'platforms', name:'Linux x86'},
+    {context:'platforms', name:'Linux x86_64'},
+    {context:'platforms', name:'Android'}
+]);

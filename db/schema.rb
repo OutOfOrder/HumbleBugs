@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120217025333) do
+ActiveRecord::Schema.define(:version => 20120226165907) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -71,6 +71,15 @@ ActiveRecord::Schema.define(:version => 20120217025333) do
 
   add_index "ports", ["game_id"], :name => "index_ports_on_game_id"
   add_index "ports", ["porter_id"], :name => "index_ports_on_porter_id"
+
+  create_table "predefined_tags", :force => true do |t|
+    t.string   "name"
+    t.string   "context",    :limit => 128
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "predefined_tags", ["context", "name"], :name => "index_predefined_tags_on_context_and_name"
 
   create_table "releases", :force => true do |t|
     t.integer  "game_id"

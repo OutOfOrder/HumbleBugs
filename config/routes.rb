@@ -15,6 +15,8 @@ HumbleBugs::Application.routes.draw do
 
   resources :users
 
+  resources :predefined_tags
+
   get '/login' => 'sessions#new', :as => :login
   post '/login' => 'sessions#create', :as => :login
   get '/logout' => 'sessions#destroy', :as => :logout
