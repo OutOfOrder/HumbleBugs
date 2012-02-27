@@ -20,6 +20,11 @@
     <%= label_for Game::STATES, @game.state %>
   </p>
 
+  <fieldset>
+    <legend>Issues</legend>
+    <%= render 'issues/issues', :issues => @game.issues %>
+    <%= link_to 'New issue', new_game_issue_path(@game) %>
+  </fieldset>
 
   <%= link_to 'Edit', edit_game_path(@game) %> |
   <%= link_to 'Back', games_path %>
