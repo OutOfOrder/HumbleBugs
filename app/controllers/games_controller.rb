@@ -29,6 +29,9 @@ class GamesController < ApplicationController
   # GET /games/new.json
   def new
     @game = Game.new
+    if params[:bundle_id]
+      @game.bundle_id = params[:bundle_id]
+    end
 
     respond_to do |format|
       format.html # new.html.erb
