@@ -17,7 +17,7 @@
 
   <p>
     <b>State:</b>
-    <%= @bundle.state %>
+    <%= label_for Bundle::STATES, @bundle.state %>
   </p>
 
   <%= render'games/games' %>

@@ -16,7 +16,7 @@
     <td><%= bundle.name %></td>
     <td><%= bundle.target_date %></td>
     <td><%= bundle.description %></td>
-    <td><%= bundle.state %></td>
+    <td><%= label_for Bundle::STATES ,bundle.state %></td>
     <td><%= link_to 'Show', bundle %></td>
     <td><%= link_to 'Edit', edit_bundle_path(bundle) %></td>
     <td><%= link_to 'Destroy', bundle, confirm: 'Are you sure?', method: :delete %></td>

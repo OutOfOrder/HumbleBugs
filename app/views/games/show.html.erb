@@ -12,12 +12,12 @@
 
   <p>
     <b>Bundle:</b>
-    <%= @game.bundle %>
+    <%= @game.bundle.name %>
   </p>
 
   <p>
     <b>State:</b>
-    <%= @game.state %>
+    <%= label_for Game::STATES, @game.state %>
   </p>
 
 

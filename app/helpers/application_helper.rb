@@ -4,4 +4,8 @@ module ApplicationHelper
       "selected"
     end
   end
+
+  def label_for options, value
+    options.rassoc(value.to_sym).first
+  end
 end

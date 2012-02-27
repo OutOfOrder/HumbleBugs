@@ -2,17 +2,17 @@
   <legend>Port details</legend>
     <p>
     <b>Game:</b>
-    <%= @port.game %>
+    <%= @port.game.name %>
   </p>
 
     <p>
     <b>Porter:</b>
-    <%= @port.porter %>
+    <%= @port.porter.name %>
   </p>
 
     <p>
     <b>State:</b>
-    <%= @port.state %>
+    <%= label_for Port::STATES, @port.state %>
   </p>
 
   

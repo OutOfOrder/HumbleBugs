@@ -13,7 +13,7 @@
 <% @releases.each do |release| %>
   <tr>
     <td><%= release.notes %></td>
-    <td><%= release.owner %></td>
+    <td><%= release.owner.name %></td>
     <td><%= release.url %></td>
     <td><%= link_to 'Show', [@game, release] %></td>
     <td><%= link_to 'Edit', edit_game_release_path([@game, release]) %></td>

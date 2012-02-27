@@ -14,7 +14,7 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :porter %>
+      <%= f.label :porter_id %>
       <br/>
       <%= f.collection_select :porter_id, User.all, :id, :name, :prompt => true %>
     </div>

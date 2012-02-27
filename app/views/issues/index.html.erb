@@ -12,7 +12,7 @@
 <% @issues.each do |issue| %>
   <tr>
     <td><%= issue.description %></td>
-    <td><%= issue.status %></td>
+    <td><%= label_for Issue::STATUSES, issue.status %></td>
     <td><%= link_to 'Show', [@game, issue] %></td>
     <td><%= link_to 'Edit', edit_game_issue_path(@game,issue) %></td>
     <td><%= link_to 'Destroy', [@game, issue], confirm: 'Are you sure?', method: :delete %></td>

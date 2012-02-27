@@ -13,8 +13,8 @@
 <% @ports.each do |port| %>
   <tr>
     <td><%= port.game %></td>
-    <td><%= port.porter %></td>
-    <td><%= port.state %></td>
+    <td><%= port.porter.name %></td>
+    <td><%= label_for Port::STATES, port.state %></td>
     <td><%= link_to 'Show', [@game, port] %></td>
     <td><%= link_to 'Edit', edit_game_port_path(@game, port) %></td>
     <td><%= link_to 'Destroy', [@game, port], confirm: 'Are you sure?', method: :delete %></td>
