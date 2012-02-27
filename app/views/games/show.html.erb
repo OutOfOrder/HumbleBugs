@@ -12,7 +12,7 @@
 
   <p>
     <b>Bundle:</b>
-    <%= @game.bundle.name %>
+    <%= @game.bundle.try(:name) %>
   </p>
 
   <p>

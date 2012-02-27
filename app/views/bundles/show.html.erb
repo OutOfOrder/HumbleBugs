@@ -23,6 +23,7 @@
   <fieldset>
     <legend>Games</legend>
     <%= render'games/games', :games => @bundle.games %>
+    <%= link_to 'New game', new_bundle_game_path(@bundle) %>
   </fieldset>
 
   <fieldset>

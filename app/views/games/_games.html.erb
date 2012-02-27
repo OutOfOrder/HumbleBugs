@@ -13,7 +13,7 @@
     <tr class="game">
       <td><%= game.name %></td>
       <td><%= game.description %></td>
-      <td><%= game.bundle.name %></td>
+      <td><%= game.bundle.try(:name) %></td>
       <td><%= label_for Game::STATES, game.state %></td>
       <td><%= link_to 'Show', game %></td>
       <td><%= link_to 'Edit', edit_game_path(game) %></td>
