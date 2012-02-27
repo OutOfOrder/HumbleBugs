@@ -9,7 +9,7 @@ HumbleBugs::Application.routes.draw do
     resources :ports
   end
 
-  resources :issues, :only => [] do
+  resources :issues, :only => [:new, :create] do
     resources :notes
   end
 

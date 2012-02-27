@@ -1,6 +1,6 @@
 class IssuesController < ApplicationController
 
-  before_filter :load_game
+  before_filter :load_game, :except => [:new, :create]
 
   # GET /games/1/issues
   # GET /games/1/issues.json
@@ -27,7 +27,13 @@ class IssuesController < ApplicationController
   # GET /games/1/issues/new
   # GET /games/1/issues/new.json
   def new
-    @issue = @game.issues.build
+    if params[:game_id]
+      @game = Game.find(params[:game_id])
+      @issue = @game.issues.build
+    else
+      @issue = Issue.new
+    end
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,12 +49,18 @@ class IssuesController < ApplicationController
   # POST /games/1/issues
   # POST /games/1/issues.json
   def create
-    @issue = @game.issues.build(params[:issue])
+    if params[:game_id]
+      @game = Game.find(params[:game_id])
+      @issue = @game.issues.build(params[:issue])
+    else
+      @issue = Issue.new(params[:issue])
+    end
+
 
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to [@game, @issue], notice: 'Issue was successfully created.' }
-        format.json { render json: @issue, status: :created, location: [@game,@issue] }
+        format.html { redirect_to [@issue.game, @issue], notice: 'Issue was successfully created.' }
+        format.json { render json: @issue, status: :created, location: [@issue.game, @issue] }
       else
         format.html { render action: "new" }
         format.json { render json: @issue.errors, status: :unprocessable_entity }

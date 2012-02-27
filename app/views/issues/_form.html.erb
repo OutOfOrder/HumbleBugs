@@ -13,7 +13,13 @@
       </div>
     <% end %>
 
+    <% if !defined? @game %>
       <div class="field">
+        <%= f.label :game_id %><br/>
+        <%= f.collection_select :game_id, Game.all, :id, :name, :prompt => true %>
+      </div>
+    <% end %>
+    <div class="field">
       <%= f.label :description %><br />
       <%= f.text_area :description %>
     </div>
