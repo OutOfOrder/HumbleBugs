@@ -20,7 +20,15 @@
     <%= label_for Bundle::STATES, @bundle.state %>
   </p>
 
-  <%= render'games/games' %>
+  <fieldset>
+    <legend>Games</legend>
+    <%= render'games/games', :games => @bundle.games %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Issues</legend>
+    <%= render'issues/issues', :issues => @bundle.issues %>
+  </fieldset>
 
   <%= link_to 'Edit', edit_bundle_path(@bundle) %> |
   <%= link_to 'Back', bundles_path %>

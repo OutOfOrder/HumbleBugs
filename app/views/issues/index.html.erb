@@ -1,24 +1,6 @@
 <h1>Listing issues</h1>
 
-<table>
-  <tr>
-    <th>Description</th>
-    <th>Status</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @issues.each do |issue| %>
-  <tr>
-    <td><%= issue.description %></td>
-    <td><%= label_for Issue::STATUSES, issue.status %></td>
-    <td><%= link_to 'Show', [@game, issue] %></td>
-    <td><%= link_to 'Edit', edit_game_issue_path(@game,issue) %></td>
-    <td><%= link_to 'Destroy', [@game, issue], confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => 'issues', :locals => { :issues => @issues } %>
 
 <br />
 

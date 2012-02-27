@@ -1,0 +1,19 @@
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% issues.each do |issue| %>
+    <tr class="issue">
+      <td><%= issue.description %></td>
+      <td><%= label_for Issue::STATUSES, issue.status %></td>
+      <td><%= link_to 'Show', [issue.game, issue] %></td>
+      <td><%= link_to 'Edit', edit_game_issue_path(issue.game, issue) %></td>
+      <td><%= link_to 'Destroy', [issue.game, issue], confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
+</table>
