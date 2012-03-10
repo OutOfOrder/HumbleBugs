@@ -5,6 +5,6 @@ FactoryGirl.define do
     notes "MyText"
     association :owner, :factory => :user
     association :game
-    url "MyString"
+    url "http://www.example.com/awesomeGame.zip"
   end
 end

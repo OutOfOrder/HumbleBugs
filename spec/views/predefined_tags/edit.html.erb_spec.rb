@@ -2,10 +2,7 @@ require 'spec_helper'
 
 describe "predefined_tags/edit" do
   before(:each) do
-    @predefined_tag = assign(:predefined_tag, stub_model(PredefinedTag,
-      :name => "MyString",
-      :context => "MyString"
-    ))
+    @predefined_tag = assign(:predefined_tag, FactoryGirl.build_stubbed(:predefined_tag))
   end
 
   it "renders the edit predefined_tag form" do

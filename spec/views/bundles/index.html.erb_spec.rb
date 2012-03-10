@@ -9,6 +9,5 @@ describe "bundles/index" do
     render
     assert_select "tr>td", :text => @bundles.first.name, :count => 2
     assert_select "tr>td", :text => @bundles.first.description, :count => 2
-    assert_select "tr>td", :text => @bundles.first.state, :count => 2
   end
 end

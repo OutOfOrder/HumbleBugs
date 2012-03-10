@@ -11,6 +11,6 @@ describe "bundles/show" do
     render
     rendered.should match(/Name/)
     rendered.should match(/MyText/)
-    rendered.should match(/planned/)
+    rendered.should match(/Planned/)
   end
 end

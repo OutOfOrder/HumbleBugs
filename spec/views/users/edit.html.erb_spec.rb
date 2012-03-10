@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe "users/edit" do
   before(:each) do
-    @user = assign(:user, stub_model(User,
-      :email => "MyString",
-      :name => "MyString",
-      :password_digest => "MyString"
-    ))
+    @user = assign(:user, FactoryGirl.build_stubbed(:user))
   end
 
   it "renders the edit user form" do

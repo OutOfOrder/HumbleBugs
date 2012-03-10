@@ -2,10 +2,7 @@ require 'spec_helper'
 
 describe "predefined_tags/new" do
   before(:each) do
-    assign(:predefined_tag, stub_model(PredefinedTag,
-      :name => "MyString",
-      :context => "MyString"
-    ).as_new_record)
+    assign(:predefined_tag, FactoryGirl.build_stubbed(:predefined_tag))
   end
 
   it "renders new predefined_tag form" do
