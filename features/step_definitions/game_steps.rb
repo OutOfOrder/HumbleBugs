@@ -6,7 +6,11 @@ When /^I submit a new game for bundle "([^"]+)"$/ do |bundle_name|
   bundle = Bundle.find_by_name bundle_name
   attrs = FactoryGirl.attributes_for :game
   attrs.each do |field, value|
-    fill_in 'game_'+field.to_s, :with => value
+    if field == :state
+      select value.camelize, :from => 'game_'+field.to_s
+    else
+      fill_in 'game_'+field.to_s, :with => value
+    end
   end
   page.select bundle.name, :from => 'game_bundle_id'
   click_button 'submit_game'
