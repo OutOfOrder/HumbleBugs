@@ -5,8 +5,8 @@
     <% if show_game %>
       <th>Game</th>
     <% end %>
-    <th>Description</th>
     <th>Status</th>
+    <th>Description</th>
   </tr>
 
   <% issues.each do |issue| %>
@@ -15,8 +15,8 @@
       <% if show_game %>
         <td><%= issue.game.name %></td>
       <% end %>
-      <td><%= issue.description %></td>
       <td><%= label_for Issue::STATUSES, issue.status %></td>
+      <td><%= issue.description %></td>
     </tr>
   <% end %>
 </table>

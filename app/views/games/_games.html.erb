@@ -16,6 +16,7 @@
       <td><%= game.bundle.try(:name) %></td>
       <% end %>
       <td><%= label_for Game::STATES, game.state %></td>
+      <td><%= link_to "Report Issue", new_game_issue_path(game) %></td>
     </tr>
   <% end %>
 </table>
