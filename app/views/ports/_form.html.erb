@@ -23,6 +23,10 @@
       <br/>
       <%= f.select :state, Port::STATES %>
     </div>
+    <div class="field">
+      <%= f.label :platform_list, 'Platforms' %><br/>
+      <%= f.text_field :platform_list %>
+    </div>
     <div class="actions">
       <%= f.submit %>
     </div>

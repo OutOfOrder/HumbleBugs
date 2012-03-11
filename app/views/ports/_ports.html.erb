@@ -1,0 +1,23 @@
+<% if !defined? show_game then show_game = false end %>
+<table>
+  <tr>
+    <% if show_game %>
+      <th>Game</th>
+    <% end %>
+    <th>Porter</th>
+    <th>State</th>
+    <th>Platforms</th>
+  </tr>
+
+  <% ports.each do |port| %>
+    <tr>
+      <% if show_game %>
+        <td><%= port.game.name %></td>
+      <% end %>
+      <td><%= port.porter.name %></td>
+      <td><%= label_for Port::STATES, port.state %></td>
+      <td><%= platform_list port.platforms %></td>
+      <td><%= link_to 'Edit', edit_game_port_path(port.game, port) %></td>
+    </tr>
+  <% end %>
+</table>

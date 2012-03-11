@@ -6,28 +6,36 @@
         <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
 
         <ul>
-        <% @issue.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+          <% @issue.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
         </ul>
       </div>
     <% end %>
 
     <% if !defined? @game %>
       <div class="field">
-        <%= f.label :game_id %><br/>
+        <%= f.label :game_id %>
+        <br/>
         <%= f.collection_select :game_id, Game.all, :id, :name, :prompt => true %>
       </div>
     <% end %>
     <div class="field">
-      <%= f.label :description %><br />
+      <%= f.label :description %>
+      <br/>
       <%= f.text_area :description %>
     </div>
-      <div class="field">
-      <%= f.label :status %><br />
+    <div class="field">
+      <%= f.label :status %>
+      <br/>
       <%= f.select :status, Issue::STATUSES %>
     </div>
-      <div class="actions">
+    <div class="field">
+      <%= f.label :platform_list, 'Platforms' %>
+      <br/>
+      <%= f.text_field :platform_list %>
+    </div>
+    <div class="actions">
       <%= f.submit %>
     </div>
   </fieldset>

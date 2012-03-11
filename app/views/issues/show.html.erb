@@ -1,16 +1,21 @@
 <fieldset>
   <legend>Issue details</legend>
-    <p>
+  <p>
     <b>Description:</b>
     <%= @issue.description %>
   </p>
 
-    <p>
+  <p>
     <b>Status:</b>
     <%= label_for Issue::STATUSES, @issue.status %>
   </p>
-
   
-  <%= link_to 'Edit', edit_game_issue_path(@game,@issue) %> |
+  <p>
+    <b>Platforms:</b>
+    <%= platform_list @issue.platforms %>
+  </p>
+
+
+  <%= link_to 'Edit', edit_game_issue_path(@game, @issue) %> |
   <%= link_to 'Back', game_issues_path(@game) %>
 </fieldset>

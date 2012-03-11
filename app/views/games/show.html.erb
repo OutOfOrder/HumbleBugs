@@ -19,6 +19,18 @@
     <b>State:</b>
     <%= label_for Game::STATES, @game.state %>
   </p>
+  
+  <p>
+    <b>Current Platforms:</b>
+    <%= platform_list @game.platforms %>
+  </p>
+  <p>
+    <fieldset>
+      <legend>Ports</legend>
+      <%= render 'ports/ports', :ports => @game.ports %>
+      <%= link_to 'New Port', new_game_port_path(@game) %>
+    </fieldset>
+  </p>
 
   <%= link_to 'Edit', edit_game_path(@game) %> |
   <%= link_to 'Back', games_path %>

@@ -1,21 +1,26 @@
 <fieldset>
   <legend>Port details</legend>
-    <p>
+  <p>
     <b>Game:</b>
-    <%= @port.game.name %>
+    <%= link_to @port.game.name, @port.game %>
   </p>
 
-    <p>
+  <p>
     <b>Porter:</b>
     <%= @port.porter.name %>
   </p>
 
-    <p>
+  <p>
     <b>State:</b>
     <%= label_for Port::STATES, @port.state %>
   </p>
 
-  
+  <p>
+    <b>Platforms:</b>
+    <%= platform_list @port.platforms %>
+  </p>
+
+
   <%= link_to 'Edit', edit_game_port_path(@game, @port) %> |
   <%= link_to 'Back', game_ports_path(@game) %>
 </fieldset>

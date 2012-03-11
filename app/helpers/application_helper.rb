@@ -8,4 +8,8 @@ module ApplicationHelper
   def label_for options, value
     options.rassoc(value.to_sym).first
   end
+
+  def platform_list platforms, separator = ", "
+    platforms.map(&:name).join(separator)
+  end
 end
