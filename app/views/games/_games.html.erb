@@ -1,23 +1,21 @@
+<% if !defined? show_bundle then show_bundle = false end %>
 <table>
   <tr>
     <th>Name</th>
-    <th>Description</th>
-    <th>Bundle</th>
+    <% if show_bundle %>
+      <th>Bundle</th>
+    <% end %>
     <th>State</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
   <% games.each do |game| %>
     <tr class="game">
-      <td><%= game.name %></td>
-      <td><%= game.description %></td>
+      <td><%= link_to game.name, game %></td>
+      <% if show_bundle %>
       <td><%= game.bundle.try(:name) %></td>
+      <% end %>
       <td><%= label_for Game::STATES, game.state %></td>
-      <td><%= link_to 'Show', game %></td>
-      <td><%= link_to 'Edit', edit_game_path(game) %></td>
-      <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>
     </tr>
   <% end %>
 </table>

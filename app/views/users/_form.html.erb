@@ -20,8 +20,7 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :password_digest %><br />
-    <%= f.text_field :password_digest %>
+    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
   </div>
   <div class="actions">
     <%= f.submit %>

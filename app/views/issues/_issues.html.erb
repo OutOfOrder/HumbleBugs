@@ -1,19 +1,22 @@
+<% if !defined? show_game then show_game = false end %>
 <table>
   <tr>
+    <th>ID</th>
+    <% if show_game %>
+      <th>Game</th>
+    <% end %>
     <th>Description</th>
     <th>Status</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
   <% issues.each do |issue| %>
     <tr class="issue">
+      <td><%= link_to "##{issue.id}", [issue.game, issue] %></td>
+      <% if show_game %>
+        <td><%= issue.game.name %></td>
+      <% end %>
       <td><%= issue.description %></td>
       <td><%= label_for Issue::STATUSES, issue.status %></td>
-      <td><%= link_to 'Show', [issue.game, issue] %></td>
-      <td><%= link_to 'Edit', edit_game_issue_path(issue.game, issue) %></td>
-      <td><%= link_to 'Destroy', [issue.game, issue], confirm: 'Are you sure?', method: :delete %></td>
     </tr>
   <% end %>
 </table>

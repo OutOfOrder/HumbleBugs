@@ -7,7 +7,7 @@
 
   <p>
     <b>Target date:</b>
-    <%= @bundle.target_date %>
+    <%= @bundle.target_date.strftime("%B %d, %Y %I:%M %P %z") %>
   </p>
 
   <p>
@@ -20,17 +20,16 @@
     <%= label_for Bundle::STATES, @bundle.state %>
   </p>
 
-  <fieldset>
-    <legend>Games</legend>
-    <%= render'games/games', :games => @bundle.games %>
-    <%= link_to 'New game', new_bundle_game_path(@bundle) %>
-  </fieldset>
-
-  <fieldset>
-    <legend>Issues</legend>
-    <%= render'issues/issues', :issues => @bundle.issues %>
-  </fieldset>
-
   <%= link_to 'Edit', edit_bundle_path(@bundle) %> |
   <%= link_to 'Back', bundles_path %>
+</fieldset>
+<fieldset>
+  <legend>Games</legend>
+  <%= render'games/games', :games => @bundle.games %>
+  <%= link_to 'New game', new_bundle_game_path(@bundle) %>
+</fieldset>
+
+<fieldset>
+  <legend>Issues</legend>
+  <%= render'issues/issues', :issues => @bundle.issues, :show_game => true %>
 </fieldset>
