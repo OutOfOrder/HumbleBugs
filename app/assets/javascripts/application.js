@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require flash
+//= require detect_timezone
 //= require_tree ./controllers

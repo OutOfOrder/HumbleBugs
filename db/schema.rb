@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120226165907) do
+ActiveRecord::Schema.define(:version => 20120311014456) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20120226165907) do
     t.string   "auth_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string   "time_zone"
   end
 
   add_index "users", ["auth_token"], :name => "index_users_on_auth_token", :unique => true

@@ -16,6 +16,12 @@ class SessionsController < ApplicationController
             httponly: true
         }
       end
+      if user.time_zone.nil?
+        tz = ActiveSupport::TimeZone[params[:time_zone]]
+        if !tz.nil?
+          user.update_attribute :time_zone, tz.name
+        end
+      end
       redirect_to root_url, :notice => "Logged in!"
     else
       flash[:alert] = "Invalid email or password"

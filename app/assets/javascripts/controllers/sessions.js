@@ -1,2 +1,7 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+$(function() {
+  var tz_form =$('.login_form #time_zone');
+  if (tz_form.length) {
+    tz = jstz.determine_timezone();
+    tz_form.val(tz.name());
+  }
+});
