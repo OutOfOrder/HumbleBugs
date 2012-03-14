@@ -1,0 +1,25 @@
+@import "blueprint";
+@import "blueprint/liquid";
+
+@import "config";
+
+
+fieldset.game_controller {
+  div.details {
+    @include container;
+    > p {
+      @include column($blueprint-grid-columns / 4);
+      &.bundle {
+        @include prepend($blueprint-grid-columns / 4 - 2);
+        @include column($blueprint-grid-columns / 4 + 2);
+        @include last;
+      }
+      &.description {
+        @include column($blueprint-grid-columns / 4 * 3 - 2);
+      }
+      &.platforms {
+        @include column($blueprint-grid-columns / 4 + 2, true);
+      }
+    }
+  }
+}

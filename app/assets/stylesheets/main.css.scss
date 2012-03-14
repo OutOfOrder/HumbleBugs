@@ -24,7 +24,7 @@ a {
 }
 
 header {
-  @include column($blueprint-grid-columns);
+  @include column($blueprint-grid-columns, true);
   border-bottom: 2px solid $tab-color;
   @include box-shadow(rgba(black, 0.5) 0 5px 3px -3px);
 

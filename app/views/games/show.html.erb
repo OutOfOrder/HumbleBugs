@@ -1,29 +1,33 @@
-<fieldset>
+<fieldset class="game_controller">
   <legend>Game details</legend>
-  <p>
-    <b>Name:</b>
-    <%= @game.name %>
-  </p>
 
-  <p>
-    <b>Description:</b>
-    <%= @game.description %>
-  </p>
+  <div class="details">
+    <p>
+      <b>Name:</b>
+      <%= @game.name %>
+    </p>
 
-  <p>
-    <b>Bundle:</b>
-    <%= @game.bundle.try(:name) %>
-  </p>
+    <p>
+      <b>State:</b>
+      <%= label_for Game::STATES, @game.state %>
+    </p>
 
-  <p>
-    <b>State:</b>
-    <%= label_for Game::STATES, @game.state %>
-  </p>
-  
-  <p>
-    <b>Current Platforms:</b>
-    <%= platform_list @game.platforms %>
-  </p>
+    <p class="bundle">
+      <b>Bundle:</b>
+      <%= @game.bundle.try(:name) %>
+    </p>
+
+    <p class="description">
+      <b>Description:</b>
+      <%= @game.description %>
+    </p>
+
+    <p class="platforms">
+      <b>Current Platforms:</b>
+      <%= platform_list @game.platforms %>
+    </p>
+
+  </div>
   <p>
     <fieldset>
       <legend>Ports</legend>
