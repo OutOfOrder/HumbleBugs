@@ -4,9 +4,9 @@
     <% if show_game %>
       <th>Game</th>
     <% end %>
-    <th>Porter</th>
-    <th>State</th>
     <th>Platforms</th>
+    <th>State</th>
+    <th>Porter</th>
   </tr>
 
   <% ports.each do |port| %>
@@ -14,9 +14,9 @@
       <% if show_game %>
         <td><%= port.game.name %></td>
       <% end %>
-      <td><%= port.porter.name %></td>
-      <td><%= label_for Port::STATES, port.state %></td>
       <td><%= platform_list port.platforms %></td>
+      <td><%= label_for Port::STATES, port.state %></td>
+      <td><%= port.porter.name %></td>
       <td><%= link_to 'Edit', edit_game_port_path(port.game, port) %></td>
     </tr>
   <% end %>

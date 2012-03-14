@@ -24,7 +24,7 @@ fieldset.game_controller {
     }
   }
   fieldset.ports {
-
+    width: 70%;
     @include fieldset-tint($secondary-form-color, $secondary-legend-color);
   }
 }
