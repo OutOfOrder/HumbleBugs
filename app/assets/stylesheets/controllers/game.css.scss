@@ -1,6 +1,7 @@
 @import "blueprint";
 @import "blueprint/liquid";
 
+@import "library";
 @import "config";
 
 
@@ -21,5 +22,9 @@ fieldset.game_controller {
         @include column($blueprint-grid-columns / 4 + 2, true);
       }
     }
+  }
+  fieldset.ports {
+
+    @include fieldset-tint($secondary-form-color, $secondary-legend-color);
   }
 }

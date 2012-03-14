@@ -1,0 +1,11 @@
+@import "compass/css3";
+
+@mixin fieldset-tint($main-color, $legend-color) {
+  legend {
+    background-color: $legend-color;
+    @include background(linear-gradient(adjust-lightness($legend-color,15%), $legend-color));
+    @include box-shadow($legend-color 0px 0px 4px 2px);
+  }
+  background-color: $main-color;
+  @include background(linear-gradient(adjust-lightness($main-color,15%), $main-color));
+}

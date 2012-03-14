@@ -5,6 +5,7 @@
 @import "compass/typography";
 @import "compass/css3";
 
+@import "library";
 @import "config";
 
 body {
@@ -86,25 +87,21 @@ footer {
 
 
 fieldset {
+  @include fieldset-tint($form-color, $legend-color);
   legend {
     position: absolute;
     left: 1em;
     top: -0.8em;
     font-weight: bold;
     font-size: 1.2em;
-    background-color: $legend-color;
-    @include background(linear-gradient(adjust-lightness($legend-color,15%), $legend-color));
     padding: 0 1ex;
     @include border-radius(1ex);
-    @include box-shadow($legend-color 0px 0px 4px 2px);
   }
   padding: 1.4em;
   margin: 1.5em 1em 1em 1em;
   position: relative;
   @include border-radius(1em);
   @include box-shadow(rgba(black,0.5) 0px 0px 1em);
-  background-color: $form-color;
-  @include background(linear-gradient(adjust-lightness($form-color,15%), $form-color));
 }
 
 form {

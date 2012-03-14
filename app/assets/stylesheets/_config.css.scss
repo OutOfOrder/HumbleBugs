@@ -4,4 +4,9 @@ $bg-color: hsl(0,0%,93%);
 $tab-color: adjust-lightness($bg-color,-20%);
 $legend-color: adjust-lightness($bg-color, -15%);
 $form-color: adjust-lightness($bg-color, -10%);
+
+$secondary-bg-color: hsl(90, 20%, 93%);
+$secondary-legend-color: adjust-lightness($secondary-bg-color, -15%);
+$secondary-form-color: adjust-lightness($secondary-bg-color, -10%);
+
 $error-color: #cc0000;

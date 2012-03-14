@@ -29,7 +29,7 @@
 
   </div>
   <p>
-    <fieldset>
+    <fieldset class="ports">
       <legend>Ports</legend>
       <%= render 'ports/ports', :ports => @game.ports %>
       <%= link_to 'New Port', new_game_port_path(@game) %>
