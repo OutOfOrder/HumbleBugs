@@ -1,34 +1,38 @@
-<fieldset>
+<fieldset class="bundle_controller">
   <legend>Bundle details</legend>
-  <p>
-    <b>Name:</b>
-    <%= @bundle.name %>
-  </p>
+  <div class="details">
+    <p>
+      <b>Name:</b>
+      <%= @bundle.name %>
+    </p>
 
-  <p>
-    <b>Target date:</b>
-    <%= l @bundle.target_date %>
-  </p>
+    <p>
+      <b>State:</b>
+      <%= label_for Bundle::STATES, @bundle.state %>
+    </p>
 
-  <p>
-    <b>Description:</b>
-    <%= @bundle.description %>
-  </p>
+    <p class="target">
+      <b>Target date:</b>
+      <%= l @bundle.target_date %>
+    </p>
 
-  <p>
-    <b>State:</b>
-    <%= label_for Bundle::STATES, @bundle.state %>
-  </p>
+    <p class="description">
+      <b>Description:</b>
+      <%= @bundle.description %>
+    </p>
+  </div>
 
-  <%= link_to 'Edit', edit_bundle_path(@bundle) %> |
-  <%= link_to 'Back', bundles_path %>
+  <p class="actions">
+    <%= link_to 'Edit', edit_bundle_path(@bundle) %> |
+    <%= link_to 'Back', bundles_path %>
+  </p>
 </fieldset>
 <fieldset>
   <legend>Games</legend>
-  <%= render'games/games', :games => @bundle.games %>
+  <%= render 'games/games', :games => @bundle.games %>
   <%= link_to 'New game', new_bundle_game_path(@bundle) %>
 </fieldset>
 <fieldset>
   <legend>Issues</legend>
-  <%= render'issues/issues', :issues => @bundle.issues, :show_game => true %>
+  <%= render 'issues/issues', :issues => @bundle.issues, :show_game => true %>
 </fieldset>
