@@ -37,7 +37,11 @@
 
   <p class="actions">
     <%= link_to 'Edit', edit_game_path(@game) %> |
-    <%= link_to 'Back', games_path %>
+    <% if @game.bundle %>
+      <%= link_to 'Back', bundle_path(@game.bundle) %>
+    <% else %>
+      <%= link_to 'Back', games_path %>
+    <% end %>
   </p>
 </fieldset>
 <fieldset>
