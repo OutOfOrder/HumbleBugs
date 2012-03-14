@@ -1,26 +1,6 @@
 <h1>Listing releases</h1>
 
-<table>
-  <tr>
-    <th>Notes</th>
-    <th>Owner</th>
-    <th>Url</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @releases.each do |release| %>
-  <tr>
-    <td><%= release.notes %></td>
-    <td><%= release.owner.name %></td>
-    <td><%= release.url %></td>
-    <td><%= link_to 'Show', [@game, release] %></td>
-    <td><%= link_to 'Edit', edit_game_release_path([@game, release]) %></td>
-    <td><%= link_to 'Destroy', [@game, release], confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => 'releases', :locals => { :releases => @game.releases } %>
 
 <br />
 

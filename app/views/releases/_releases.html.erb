@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <th>Link</th>
+    <th>Notes</th>
+    <th>Uploaded</th>
+    <th></th>
+  </tr>
+
+  <% releases.each do |release| %>
+    <tr>
+      <td><%= link_to 'Download', release.url %></td>
+      <td><%= release.notes %></td>
+      <td><%= release.owner.name %> on <%= l release.created_at %></td>
+      <td><%= link_to 'Edit', edit_game_release_path([release.game, release]) %></td>
+    </tr>
+  <% end %>
+</table>

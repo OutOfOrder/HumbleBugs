@@ -45,6 +45,11 @@
   </p>
 </fieldset>
 <fieldset>
+  <legend>Releases</legend>
+  <%= render 'releases/releases', :releases => @game.releases %>
+  <%= link_to 'New release', new_game_release_path(@game) %>
+</fieldset>
+<fieldset>
   <legend>Issues</legend>
   <%= render 'issues/issues', :issues => @game.issues %>
   <%= link_to 'New issue', new_game_issue_path(@game) %>
