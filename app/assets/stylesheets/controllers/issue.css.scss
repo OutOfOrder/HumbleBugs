@@ -1,0 +1,21 @@
+@import "blueprint";
+@import "blueprint/liquid";
+
+@import "library";
+@import "config";
+
+fieldset.issue_controller {
+  div.details {
+    @include container;
+    > p {
+      @include column($blueprint-grid-columns / 4);
+      &.platforms {
+        @include column($blueprint-grid-columns / 4 * 2);
+        @include last;
+      }
+      &.description {
+        @include column($blueprint-grid-columns / 4 * 3 - 2);
+      }
+    }
+  }
+}

@@ -1,21 +1,29 @@
-<fieldset>
+<fieldset class="issue_controller">
   <legend>Issue details</legend>
-  <p>
-    <b>Description:</b>
-    <%= @issue.description %>
-  </p>
+  <div class="details">
+    <p>
+      <b>Game:</b>
+      <%= @issue.game.name %>
+    </p>
 
-  <p>
-    <b>Status:</b>
-    <%= label_for Issue::STATUSES, @issue.status %>
-  </p>
-  
-  <p>
-    <b>Platforms:</b>
-    <%= platform_list @issue.platforms %>
-  </p>
+    <p>
+      <b>Status:</b>
+      <%= label_for Issue::STATUSES, @issue.status %>
+    </p>
 
+    <p class="platforms">
+      <b>Platforms:</b>
+      <%= platform_list @issue.platforms %>
+    </p>
 
-  <%= link_to 'Edit', edit_game_issue_path(@game, @issue) %> |
-  <%= link_to 'Back', game_issues_path(@game) %>
+    <p>
+      <b>Description:</b>
+      <%= @issue.description %>
+    </p>
+  </div>
+
+  <p class="actions">
+    <%= link_to 'Edit', edit_game_issue_path(@game, @issue) %> |
+    <%= link_to 'Back', game_issues_path(@game) %>
+  </p>
 </fieldset>
