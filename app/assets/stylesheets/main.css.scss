@@ -104,6 +104,10 @@ fieldset {
   @include box-shadow(rgba(black,0.5) 0px 0px 1em);
 }
 
+p.actions {
+  margin-bottom: 0;
+}
+
 form {
   @include blueprint-form;
   fieldset {
