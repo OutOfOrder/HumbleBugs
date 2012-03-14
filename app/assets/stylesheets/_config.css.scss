@@ -1,0 +1,7 @@
+$blueprint-liquid-container-width: 99%;
+
+$bg-color: hsl(0,0%,93%);
+$tab-color: adjust-lightness($bg-color,-20%);
+$legend-color: adjust-lightness($bg-color, -15%);
+$form-color: adjust-lightness($bg-color, -10%);
+$error-color: #cc0000;
