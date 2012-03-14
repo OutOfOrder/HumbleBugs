@@ -11,7 +11,7 @@
 <% @bundles.each do |bundle| %>
   <tr class="bundle">
     <td><%= link_to bundle.name, bundle %></td>
-    <td><%= bundle.target_date %></td>
+    <td><%= l bundle.target_date %></td>
     <td><%= bundle.description %></td>
     <td><%= label_for Bundle::STATES ,bundle.state %></td>
   </tr>

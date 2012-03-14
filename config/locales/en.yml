@@ -2,6 +2,11 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  time:
+    formats:
+      default: ! '%B %d, %Y %l:%M %p %Z'
+#      long: ! '%B %d, %Y %l:%M %p %Z'
+
   user_mailer:
     password_reset:
       subject: "Password Reset"
