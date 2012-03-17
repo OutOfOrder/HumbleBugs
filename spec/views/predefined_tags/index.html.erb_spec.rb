@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "predefined_tags/index" do
   before(:each) do
-    assign(:predefined_tags, FactoryGirl.build_list(:predefined_tag, 2))
+    assign(:predefined_tags, FactoryGirl.create_list(:predefined_tag, 2))
   end
 
   it "renders a list of predefined_tags" do

@@ -11,7 +11,7 @@
       <td><%= link_to 'Download', release.url %></td>
       <td><%= release.notes %></td>
       <td><%= release.owner.name %> on <%= l release.created_at %></td>
-      <td><%= link_to 'Edit', edit_game_release_path([release.game, release]) %></td>
+      <td><%= link_to 'Edit', edit_game_release_path(release.game, release) %></td>
     </tr>
   <% end %>
 </table>

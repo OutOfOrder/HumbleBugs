@@ -7,9 +7,7 @@ describe "issues/show" do
 
   it "renders attributes in <p>" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/MyText/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Status/)
+    rendered.should match(/New/)
+    rendered.should match(/Issue Description/)
   end
 end

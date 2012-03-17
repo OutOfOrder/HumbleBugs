@@ -9,6 +9,8 @@ describe "releases/index" do
   it "renders a list of releases" do
     render
     assert_select "tr>td", :text => @releases.first.notes, :count => 2
-    assert_select "tr>td", :text => @releases.first.url, :count => 2
+    assert_select "tr>td", :text => "Download", :count => 2 do
+      assert_select "a", :href => @releases.first.url, :count => 2
+    end
   end
 end

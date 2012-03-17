@@ -8,7 +8,6 @@ describe "games/index" do
   it "renders a list of games" do
     render
     assert_select "tr>td", :text => @games.first.name, :count => 2
-    assert_select "tr>td", :text => @games.first.description, :count => 2
     assert_select "tr>td", :text => 'Prospective', :count => 2
   end
 end

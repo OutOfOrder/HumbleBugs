@@ -64,7 +64,7 @@ describe PortsController do
 
   describe "POST create" do
     before do
-      @port = FactoryGirl.attributes_for(:port, :game => @game)
+      @port = FactoryGirl.build(:port, :game => @game).attributes.symbolize_keys
     end
     describe "with valid params" do
       it "creates a new Port" do
