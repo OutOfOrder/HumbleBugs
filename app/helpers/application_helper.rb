@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def label_for options, value
-    options.rassoc(value.to_sym).first
+    options.rassoc(value.to_sym).try(:first)
   end
 
   def platform_list platforms, separator = ", "
