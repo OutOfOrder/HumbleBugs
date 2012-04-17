@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.tagsinput.js
 //= require flash
 //= require detect_timezone
 //= require_tree ./controllers

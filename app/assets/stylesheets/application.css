@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require main
+ *= require jquery.tagsinput.css
  *= require flash
  *= require_tree ./controllers
 */
