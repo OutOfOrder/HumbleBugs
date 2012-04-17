@@ -15,7 +15,11 @@ HumbleBugs::Application.routes.draw do
 
   resources :users
 
-  resources :predefined_tags
+  resources :predefined_tags do
+    collection do
+      get ':context', :action => 'complete', :as => :complete
+    end
+  end
 
   get '/login' => 'sessions#new', :as => :login
   post '/login' => 'sessions#create', :as => :login

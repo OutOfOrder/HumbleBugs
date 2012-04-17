@@ -10,6 +10,21 @@ class PredefinedTagsController < ApplicationController
     end
   end
 
+  # GET /predefined_tags/platforms.json
+  def complete
+    t = PredefinedTag.arel_table
+    @predefined_tags = PredefinedTag.
+        where(context: params[:context]).
+        where(t[:name].matches("#{params[:term]}%"))
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @predefined_tags.map { |m|
+        m.name
+      } }
+    end
+  end
+
   # GET /predefined_tags/1
   # GET /predefined_tags/1.json
   def show
