@@ -27,7 +27,7 @@ describe PortsController do
   end
 
   before do
-    @game = Factory.create(:game)
+    @game = FactoryGirl.create(:game)
     @base_params = { :game_id => @game.to_param}
   end
 
