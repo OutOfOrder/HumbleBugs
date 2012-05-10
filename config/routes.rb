@@ -17,7 +17,9 @@ HumbleBugs::Application.routes.draw do
 
   resources :predefined_tags do
     collection do
-      get ':context', :action => 'complete', :as => :complete
+      get ':context', :action => 'complete', :as => :complete, :constraints => {
+          context: /(new[a-z]+|(?!new)[a-z]+)/
+      }
     end
   end
 
