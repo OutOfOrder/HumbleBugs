@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/stffn/declarative_authorization.git
+  revision: 4819d0ca3c23feae84e141e9b2510b265a7c776a
+  specs:
+    declarative_authorization (0.5.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -172,6 +178,7 @@ DEPENDENCIES
   compass-rails
   cucumber-rails
   database_cleaner
+  declarative_authorization!
   factory_girl_rails
   jquery-rails
   launchy

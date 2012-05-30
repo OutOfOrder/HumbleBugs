@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  has_many :roles, :class_name => 'UserRole', :inverse_of => :user, :dependent => :delete_all
+
   validates_presence_of :password, :on => :create
   validates_uniqueness_of :email, :case_sensitive => false
 
@@ -19,5 +21,13 @@ class User < ActiveRecord::Base
     self.password_reset_sent_at = Time.zone.now
     save!
     UserMailer.password_reset(self).deliver
+  end
+
+  def role_symbols
+    if roles.present? then
+      roles.map { |m| m.role.to_sym }
+    else
+      [:nonvalidated]
+    end
   end
 end

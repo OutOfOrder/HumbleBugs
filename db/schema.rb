@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120311014456) do
+ActiveRecord::Schema.define(:version => 20120510144239) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -109,6 +109,16 @@ ActiveRecord::Schema.define(:version => 20120311014456) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "user_roles", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.string   "role",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_roles", ["role"], :name => "index_user_roles_on_role"
+  add_index "user_roles", ["user_id", "role"], :name => "index_user_roles_on_user_id_and_role", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"

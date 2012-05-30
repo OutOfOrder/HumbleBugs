@@ -1,4 +1,6 @@
 class BundlesController < ApplicationController
+  filter_resource_access
+
   # GET /bundles
   # GET /bundles.json
   def index
