@@ -1,11 +1,13 @@
 class GamesController < ApplicationController
+  filter_resource_access :nested_in => :bundles
+
   # GET /games
   # GET /games.json
   def index
-    if params[:bundle_id]
-      @games = Bundle.find(params[:bundle_id]).games
+    if @bundle.nil?
+      @games = Game.with_permissions_to
     else
-      @games = Game.all
+      @games = @bundle.games.with_permissions_to
     end
 
     respond_to do |format|
@@ -17,8 +19,6 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
-    @game = Game.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @game }
@@ -28,11 +28,6 @@ class GamesController < ApplicationController
   # GET /games/new
   # GET /games/new.json
   def new
-    @game = Game.new
-    if params[:bundle_id]
-      @game.bundle_id = params[:bundle_id]
-    end
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @game }
@@ -41,14 +36,11 @@ class GamesController < ApplicationController
 
   # GET /games/1/edit
   def edit
-    @game = Game.find(params[:id])
   end
 
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(params[:game])
-
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
@@ -63,8 +55,6 @@ class GamesController < ApplicationController
   # PUT /games/1
   # PUT /games/1.json
   def update
-    @game = Game.find(params[:id])
-
     respond_to do |format|
       if @game.update_attributes(params[:game])
         format.html { redirect_to @game, notice: 'Game was successfully updated.' }
@@ -79,12 +69,36 @@ class GamesController < ApplicationController
   # DELETE /games/1
   # DELETE /games/1.json
   def destroy
-    @game = Game.find(params[:id])
     @game.destroy
 
     respond_to do |format|
       format.html { redirect_to games_url }
       format.json { head :no_content }
+    end
+  end
+
+protected
+  def load_bundle
+    if params[:bundle_id]
+      @bundle = Bundle.find(params[:bundle_id])
+    else
+      @bundle = nil
+    end
+  end
+
+  def new_game_for_collection
+    if @bundle.nil?
+      @game = Game.new
+    else
+      @game = @bundle.games.new
+    end
+  end
+
+  def new_game_from_params
+    if @bundle.nil?
+      @game = Game.new params[:game]
+    else
+      @game = @bundle.games.new params[:game]
     end
   end
 end

@@ -26,7 +26,7 @@
     <div class="field">
       <%= f.label :bundle %>
       <br/>
-      <%= f.collection_select :bundle_id, Bundle.all, :id, :name, :include_blank => '- No Bundle -' %>
+      <%= f.collection_select :bundle_id, Bundle.with_permissions_to, :id, :name, :include_blank => '- No Bundle -' %>
     </div>
     <div class="field">
       <%= f.label :state %>
