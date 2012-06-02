@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :predefined_tag do
-    name "My Platform"
+    sequence(:name) { |n| "platform #{n}"}
     context "platforms"
   end
 end

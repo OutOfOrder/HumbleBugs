@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510144239) do
+ActiveRecord::Schema.define(:version => 20120602172421) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(:version => 20120510144239) do
     t.datetime "updated_at",                :null => false
   end
 
-  add_index "predefined_tags", ["context", "name"], :name => "index_predefined_tags_on_context_and_name"
+  add_index "predefined_tags", ["context", "name"], :name => "index_predefined_tags_on_context_and_name", :unique => true
 
   create_table "releases", :force => true do |t|
     t.integer  "game_id"

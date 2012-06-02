@@ -7,7 +7,7 @@ describe "predefined_tags/index" do
 
   it "renders a list of predefined_tags" do
     render
-    assert_select "tr>td", :text => "My Platform", :count => 2
+    assert_select "tr>td", :text => /platform \d+/, :count => 2
     assert_select "tr>td", :text => "Platforms", :count => 2
   end
 end
