@@ -1,3 +1,7 @@
+Given /^an (.*?) "(.*?)" Bundle exists$/ do |state, name|
+  FactoryGirl.create :bundle, state.to_sym, :name => name
+end
+
 Given /^the Bundle "([^"]*)" has the following games$/ do |bundle_name, table|
   bundle = Bundle.find_by_name bundle_name
 

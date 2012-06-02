@@ -6,5 +6,9 @@ FactoryGirl.define do
     target_date "2012-01-25 10:12:56"
     description "MyText"
     state "planned"
+
+    trait :active do
+      state "active"
+    end
   end
 end

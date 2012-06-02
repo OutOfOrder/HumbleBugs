@@ -3,7 +3,7 @@ Feature: Games
   We need to track each game for a bundle
 
   Scenario: List Games
-    Given a Bundle exists with a Name of "Cucumber"
+    Given an active "Cucumber" Bundle exists
     And the Bundle "Cucumber" has the following games
       |name   |
       |Pong   |
@@ -13,6 +13,7 @@ Feature: Games
     Then I should see 3 games in a list
 
   Scenario: Add a game
+    Given I am logged in as admin User
     Given a Bundle exists with a Name of "Cucumber"
     When I go to the new Game page
     And I submit a new game for bundle "Cucumber"

@@ -24,6 +24,9 @@ HumbleBugs::Application.routes.draw do
   end
 
   get '/login' => 'sessions#new', :as => :login
+  if Rails.env.test?
+    get '/secret_login/:id' => 'sessions#secret_login', :as => :secret_login
+  end
   post '/login' => 'sessions#create', :as => :login
   get '/logout' => 'sessions#destroy', :as => :logout
 

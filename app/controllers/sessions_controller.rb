@@ -29,6 +29,19 @@ class SessionsController < ApplicationController
     end
   end
 
+if Rails.env.test?
+  def secret_login
+    user = User.find(params[:id])
+    session[:user] = user
+    #session[:user_id] = user.id
+    #cookies[:auth_token] = {
+    #    value: user.auth_token,
+    #    httponly: true
+    #}
+    render :json => {:result => 'ok'}
+  end
+end
+
   def destroy
     cookies.delete :auth_token
     redirect_to root_url, :notice => "Logged out!"
