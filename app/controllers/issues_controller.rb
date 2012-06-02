@@ -1,11 +1,10 @@
 class IssuesController < ApplicationController
-
-  before_filter :load_game, :except => [:new, :create]
+  filter_resource_access :nested_in => :games
 
   # GET /games/1/issues
   # GET /games/1/issues.json
   def index
-    @issues = @game.issues
+    @issues = @game.issues.with_permissions_to
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,8 +15,6 @@ class IssuesController < ApplicationController
   # GET /games/1/issues/1
   # GET /games/1/issues/1.json
   def show
-    @issue = @game.issues.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @issue }
@@ -43,7 +40,6 @@ class IssuesController < ApplicationController
 
   # GET /games/1/issues/1/edit
   def edit
-    @issue = @game.issues.find(params[:id])
   end
 
   # POST /games/1/issues
@@ -71,8 +67,6 @@ class IssuesController < ApplicationController
   # PUT /games/1/issues/1
   # PUT /games/1/issues/1.json
   def update
-    @issue = @game.issues.find(params[:id])
-
     respond_to do |format|
       if @issue.update_attributes(params[:issue])
         format.html { redirect_to [@game, @issue], notice: 'Issue was successfully updated.' }
@@ -87,7 +81,6 @@ class IssuesController < ApplicationController
   # DELETE /games/1/issues/1
   # DELETE /games/1/issues/1.json
   def destroy
-    @issue = Issue.find(params[:id])
     @issue.destroy
 
     respond_to do |format|
@@ -96,8 +89,20 @@ class IssuesController < ApplicationController
     end
   end
 
-private
+protected
   def load_game
-    @game = Game.find(params[:game_id])
+    if params[:game_id]
+      @game = Game.find(params[:game_id])
+    else
+      @game = nil
+    end
+  end
+
+  def new_issue_from_params
+    if @game.nil?
+      @issue = Issue.new params[:issue]
+    else
+      @issue = @game.issues.new params[:issue]
+    end
   end
 end

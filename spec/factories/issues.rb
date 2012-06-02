@@ -5,7 +5,5 @@ FactoryGirl.define do
     association :game
     description "Issue Description"
     status "new"
-    reported_against nil
-    fixed_in nil
   end
 end
