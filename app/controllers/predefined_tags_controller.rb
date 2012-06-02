@@ -1,8 +1,10 @@
 class PredefinedTagsController < ApplicationController
+  filter_resource_access :additional_collection => :complete
+
   # GET /predefined_tags
   # GET /predefined_tags.json
   def index
-    @predefined_tags = PredefinedTag.all
+    @predefined_tags = PredefinedTag.with_permissions_to
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,7 @@ class PredefinedTagsController < ApplicationController
   # GET /predefined_tags/platforms.json
   def complete
     t = PredefinedTag.arel_table
-    @predefined_tags = PredefinedTag.
+    @predefined_tags = PredefinedTag.with_permissions_to.
         where(context: params[:context]).
         where(t[:name].matches("#{params[:term]}%"))
 
@@ -28,8 +30,6 @@ class PredefinedTagsController < ApplicationController
   # GET /predefined_tags/1
   # GET /predefined_tags/1.json
   def show
-    @predefined_tag = PredefinedTag.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @predefined_tag }
@@ -39,8 +39,6 @@ class PredefinedTagsController < ApplicationController
   # GET /predefined_tags/new
   # GET /predefined_tags/new.json
   def new
-    @predefined_tag = PredefinedTag.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @predefined_tag }
@@ -49,14 +47,11 @@ class PredefinedTagsController < ApplicationController
 
   # GET /predefined_tags/1/edit
   def edit
-    @predefined_tag = PredefinedTag.find(params[:id])
   end
 
   # POST /predefined_tags
   # POST /predefined_tags.json
   def create
-    @predefined_tag = PredefinedTag.new(params[:predefined_tag])
-
     respond_to do |format|
       if @predefined_tag.save
         format.html { redirect_to @predefined_tag, notice: 'Predefined tag was successfully created.' }
@@ -71,8 +66,6 @@ class PredefinedTagsController < ApplicationController
   # PUT /predefined_tags/1
   # PUT /predefined_tags/1.json
   def update
-    @predefined_tag = PredefinedTag.find(params[:id])
-
     respond_to do |format|
       if @predefined_tag.update_attributes(params[:predefined_tag])
         format.html { redirect_to @predefined_tag, notice: 'Predefined tag was successfully updated.' }
@@ -87,7 +80,6 @@ class PredefinedTagsController < ApplicationController
   # DELETE /predefined_tags/1
   # DELETE /predefined_tags/1.json
   def destroy
-    @predefined_tag = PredefinedTag.find(params[:id])
     @predefined_tag.destroy
 
     respond_to do |format|
