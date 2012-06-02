@@ -1,10 +1,10 @@
 class ReleasesController < ApplicationController
-  before_filter :load_game
+  filter_resource_access :nested_in => :games
 
   # GET /games/1/releases
   # GET /games/1/releases.json
   def index
-    @releases = @game.releases
+    @releases = @game.releases.with_permissions_to
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,8 +15,6 @@ class ReleasesController < ApplicationController
   # GET /games/1/releases/1
   # GET /games/1/releases/1.json
   def show
-    @release = @game.releases.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @release }
@@ -26,8 +24,6 @@ class ReleasesController < ApplicationController
   # GET /games/1/releases/new
   # GET /games/1/releases/new.json
   def new
-    @release = @game.releases.build
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @release }
@@ -36,14 +32,11 @@ class ReleasesController < ApplicationController
 
   # GET /games/1/releases/1/edit
   def edit
-    @release = @game.releases.find(params[:id])
   end
 
   # POST /games/1/releases
   # POST /games/1/releases.json
   def create
-    @release = @game.releases.build(params[:release])
-
     respond_to do |format|
       if @release.save
         format.html { redirect_to [@game, @release], notice: 'Release was successfully created.' }
@@ -58,8 +51,6 @@ class ReleasesController < ApplicationController
   # PUT /games/1/releases/1
   # PUT /games/1/releases/1.json
   def update
-    @release = @game.releases.find(params[:id])
-
     respond_to do |format|
       if @release.update_attributes(params[:release])
         format.html { redirect_to [@game, @release], notice: 'Release was successfully updated.' }
@@ -74,7 +65,6 @@ class ReleasesController < ApplicationController
   # DELETE /games/1/releases/1
   # DELETE /games/1/releases/1.json
   def destroy
-    @release = Release.find(params[:id])
     @release.destroy
 
     respond_to do |format|
@@ -82,9 +72,4 @@ class ReleasesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  private
-    def load_game
-      @game = Game.find(params[:game_id])
-    end
 end
