@@ -1,10 +1,10 @@
 class PortsController < ApplicationController
-  before_filter :load_game
+  filter_resource_access :nested_in => :games
 
   # GET /games/1/ports
   # GET /games/1/ports.json
   def index
-    @ports = @game.ports.all
+    @ports = @game.ports.with_permissions_to
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,8 +15,6 @@ class PortsController < ApplicationController
   # GET /games/1/ports/1
   # GET /games/1/ports/1.json
   def show
-    @port = @game.ports.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @port }
@@ -26,8 +24,6 @@ class PortsController < ApplicationController
   # GET /games/1/ports/new
   # GET /games/1/ports/new.json
   def new
-    @port = @game.ports.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @port }
@@ -82,9 +78,4 @@ class PortsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  private
-    def load_game
-      @game = Game.find(params[:game_id])
-    end
 end

@@ -10,6 +10,6 @@ class Port < ActiveRecord::Base
       ['Completed', :completed]
   ]
 
-  validates_presence_of :game, :state, :porter
+  validates_presence_of :game_id, :state, :porter_id
   validates_inclusion_of :state, :in => STATES.map { |m| m.second.to_s }, :message => "state %{value} is not a valid state"
 end
