@@ -1,6 +1,21 @@
 authorization do
   role :guest do
-    has_permission_on :bundles, :to => [:read]
+    includes :nonvalidated
+
+    has_permission_on :users, :to => :create
+  end
+
+  role :nonvalidated do
+    has_permission_on :bundles, :to => :read do
+      if_attribute :state => is { 'active' }
+    end
+    has_permission_on :games, :to => :read do
+      if_permitted_to :read, :bundle
+    end
+  end
+
+  role :admin do
+    has_omnipotence
   end
 
   role :dev do
