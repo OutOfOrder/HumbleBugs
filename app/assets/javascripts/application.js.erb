@@ -18,3 +18,17 @@
 //= require flash
 //= require detect_timezone
 //= require_tree ./controllers
+<% if Rails.env.development?
+# require_asset 'development' %>
+function SwitchUser(id) {
+    $.post('/secret_login', {id: id})
+            .success(function() {
+                window.location.reload();
+            });
+}
+$(function() {
+    $('#switch_user_id').change(function() {
+        SwitchUser($(this).val());
+    });
+});
+<% end %>

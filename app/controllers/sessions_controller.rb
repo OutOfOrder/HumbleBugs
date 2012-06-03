@@ -29,15 +29,15 @@ class SessionsController < ApplicationController
     end
   end
 
-if Rails.env.test?
+if Rails.env.test? || Rails.env.development?
   def secret_login
     user = User.find(params[:id])
     session[:user] = user
     #session[:user_id] = user.id
-    #cookies[:auth_token] = {
-    #    value: user.auth_token,
-    #    httponly: true
-    #}
+    cookies[:auth_token] = {
+        value: user.auth_token,
+        httponly: true
+    }
     render :json => {:result => 'ok'}
   end
 end
