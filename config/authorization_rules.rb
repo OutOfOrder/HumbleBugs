@@ -1,17 +1,48 @@
 authorization do
-  role :guest do
-    includes :nonvalidated
-
-    has_permission_on :users, :to => :create
-  end
-
-  role :nonvalidated do
+  role :active_bundles do
     has_permission_on :bundles, :to => :read do
       if_attribute :state => is { 'active' }
     end
     has_permission_on :games, :to => :read do
       if_permitted_to :read, :bundle
     end
+  end
+
+  role :base_reporter do
+    has_permission_on :issues, :to => [:read,:create] do
+      if_permitted_to :read, :game
+    end
+    has_permission_on :notes, :to => :create do
+      if_permitted_to :read, :noteable
+    end
+  end
+
+  role :guest do
+    includes :active_bundles
+
+    has_permission_on :users, :to => :create
+  end
+
+  role :nonvalidated do
+    includes :active_bundles
+  end
+
+  role :user do
+    includes :active_bundles
+    includes :base_reporter
+  end
+
+  role :tester do
+    includes :user
+    has_permission_on :games, :to => :read do
+      if_attribute :state => is_in { [ 'testing', 'completed' ] }
+    end
+  end
+
+  role :bundle_admin do
+    has_permission_on :bundles, :to => :manage
+    has_permission_on :games, :to => :manage
+    has_permission_on :issues, :to => :manage
   end
 
   role :admin do
