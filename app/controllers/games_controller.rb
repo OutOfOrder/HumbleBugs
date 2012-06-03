@@ -1,5 +1,8 @@
 class GamesController < ApplicationController
-  filter_resource_access :nested_in => :bundles
+  filter_resource_access :nested_in => :bundles, :no_attribute_check => [:index]
+  before_filter :only => :index do
+    nested_index_check_with_attrs unless @bundle.nil?
+  end
 
   # GET /games
   # GET /games.json

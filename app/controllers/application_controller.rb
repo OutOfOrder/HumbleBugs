@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_time_zone, :set_auth_user
 
-  private
+private
 
   def current_user
     if Rails.env.test?
@@ -22,4 +22,25 @@ class ApplicationController < ActionController::Base
     Time.zone = current_user.time_zone if current_user
   end
 
+protected
+  def nested_index_check_with_attrs
+    model = instance_variable_get(:"@#{controller_name.to_s.singularize}")
+    allowed = false
+    begin
+      allowed = permitted_to! :index, model, :attribute_check => true
+    rescue Authorization::NotAuthorized => e
+      auth_exception = e
+    end
+
+    unless allowed
+      logger.info "Permission denied: #{auth_exception}"
+      if respond_to?(:permission_denied)
+        # permission_denied needs to render or redirect
+        send(:permission_denied)
+      else
+        send(:render, :text => "You are not allowed to access this action.",
+          :status => :forbidden)
+      end
+    end
+  end
 end
