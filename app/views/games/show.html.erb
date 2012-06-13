@@ -36,7 +36,7 @@
   </fieldset>
 
   <p class="actions">
-    <%= link_to 'Edit', edit_game_path(@game) %> |
+    <%= link_to 'Edit', edit_game_path(@game) if permitted_to? :edit %> |
     <% if @game.bundle %>
       <%= link_to 'Back', bundle_path(@game.bundle) %>
     <% else %>

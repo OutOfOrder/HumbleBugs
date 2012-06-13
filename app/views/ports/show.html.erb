@@ -21,6 +21,6 @@
   </p>
 
 
-  <%= link_to 'Edit', edit_game_port_path(@port.game, @port) %> |
+  <%= link_to 'Edit', edit_game_port_path(@port.game, @port) if permitted_to? :edit %> |
   <%= link_to 'Back', game_ports_path(@port.game) %>
 </fieldset>

@@ -11,6 +11,6 @@
   </p>
 
   
-  <%= link_to 'Edit', edit_predefined_tag_path(@predefined_tag) %> |
+  <%= link_to 'Edit', edit_predefined_tag_path(@predefined_tag) if permitted_to? :edit %> |
   <%= link_to 'Back', predefined_tags_path %>
 </fieldset>

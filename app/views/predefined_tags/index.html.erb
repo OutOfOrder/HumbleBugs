@@ -14,7 +14,7 @@
     <td><%= predefined_tag.name %></td>
     <td><%= label_for PredefinedTag::CONTEXTS, predefined_tag.context %></td>
     <td><%= link_to 'Show', predefined_tag %></td>
-    <td><%= link_to 'Edit', edit_predefined_tag_path(predefined_tag) %></td>
+    <td><%= link_to 'Edit', edit_predefined_tag_path(predefined_tag) if permitted_to? :edit, predefined_tag %></td>
     <% permitted_to? :delete, predefined_tag do %>
         <td><%= link_to 'Destroy', predefined_tag, confirm: 'Are you sure?', method: :delete %></td>
     <% end %>

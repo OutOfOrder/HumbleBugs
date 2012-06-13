@@ -16,7 +16,7 @@
     <td><%= note.owner %></td>
     <td><%= note.noteable %></td>
     <td><%= link_to 'Show', [@noteable, note] %></td>
-    <td><%= link_to 'Edit', edit_polymorphic_path([@noteable, note]) %></td>
+    <td><%= link_to 'Edit', edit_polymorphic_path([@noteable, note]) if permitted_to? :edit, note %></td>
     <% permitted_to? :delete, note do %>
         <td><%= link_to 'Destroy', [@noteable, note], confirm: 'Are you sure?', method: :delete %></td>
     <% end %>

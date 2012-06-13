@@ -16,6 +16,6 @@
   </p>
 
   
-  <%= link_to 'Edit', edit_polymorphic_path([@noteable, @note]) %> |
+  <%= link_to 'Edit', edit_polymorphic_path([@noteable, @note]) if permitted_to? :edit %> |
   <%= link_to 'Back', [@noteable, Note] %>
 </fieldset>
