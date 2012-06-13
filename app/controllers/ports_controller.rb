@@ -42,7 +42,7 @@ class PortsController < ApplicationController
 
     respond_to do |format|
       if @port.save
-        format.html { redirect_to [@game, @port], notice: 'Port was successfully created.' }
+        format.html { redirect_to @game, notice: 'Port was successfully created.' }
         format.json { render json: @port, status: :created, location: @port }
       else
         format.html { render action: "new" }
@@ -58,7 +58,7 @@ class PortsController < ApplicationController
 
     respond_to do |format|
       if @port.update_attributes(params[:port])
-        format.html { redirect_to [@game, @port], notice: 'Port was successfully updated.' }
+        format.html { redirect_to @game, notice: 'Port was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

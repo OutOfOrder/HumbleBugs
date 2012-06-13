@@ -56,9 +56,9 @@ describe PortsController do
         assigns(:port).should be_persisted
       end
 
-      it "redirects to the created port" do
+      it "redirects to the parent game" do
         post_with @user, :create, @base_params.merge({:port => @port})
-        response.should redirect_to([@game,Port.last])
+        response.should redirect_to(@game)
       end
     end
 
@@ -97,10 +97,10 @@ describe PortsController do
         assigns(:port).should eq(port)
       end
 
-      it "redirects to the port" do
+      it "redirects to the parent game" do
         port = FactoryGirl.create(:port, :game => @game)
         put_with @user, :update, @base_params.merge({:id => port.to_param, :port => FactoryGirl.attributes_for(:port, :game => @game)})
-        response.should redirect_to([@game, port])
+        response.should redirect_to(@game)
       end
     end
 
