@@ -39,10 +39,25 @@ authorization do
     end
   end
 
+  role :porter do
+    includes :user
+    has_permission_on :games, :to => :read do
+      if_attribute :ports => { :porter => is { user } }
+    end
+    has_permission_on :releases, :to => :manage do
+      if_permitted_to :read, :game
+    end
+    has_permission_on :issues, :to => :update do
+      if_permitted_to :read, :game
+    end
+  end
+
   role :bundle_admin do
     has_permission_on :bundles, :to => :manage
     has_permission_on :games, :to => :manage
-    has_permission_on :issues, :to => :manage
+    has_permission_on [:ports, :releases, :issues], :to => :manage do
+      if_permitted_to :manage, :game
+    end
   end
 
   role :admin do
