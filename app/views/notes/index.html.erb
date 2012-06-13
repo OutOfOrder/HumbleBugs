@@ -24,4 +24,4 @@
 
 <br />
 
-<%= link_to 'New Note', new_polymorphic_path([@noteable, Note]) %>
+<%= link_to 'New Note', new_polymorphic_path([@noteable, Note]) if permitted_to? :create, @noteable.notes %>

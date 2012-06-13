@@ -20,4 +20,4 @@
 
 <br />
 
-<%= link_to 'New Bundle', new_bundle_path %>
+<%= link_to 'New Bundle', new_bundle_path if permitted_to? :create %>

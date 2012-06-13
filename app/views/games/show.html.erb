@@ -32,7 +32,7 @@
   <fieldset class="ports">
     <legend>Ports</legend>
     <%= render 'ports/ports', :ports => @game.ports %>
-    <%= link_to 'New Port', new_game_port_path(@game) %>
+    <%= link_to 'New Port', new_game_port_path(@game) if permitted_to? :create, @game.ports %>
   </fieldset>
 
   <p class="actions">
@@ -47,10 +47,10 @@
 <fieldset>
   <legend>Releases</legend>
   <%= render 'releases/releases', :releases => @game.releases %>
-  <%= link_to 'New release', new_game_release_path(@game) %>
+  <%= link_to 'New release', new_game_release_path(@game) if permitted_to? :create, @game.releases %>
 </fieldset>
 <fieldset>
   <legend>Issues</legend>
   <%= render 'issues/issues', :issues => @game.issues %>
-  <%= link_to 'New issue', new_game_issue_path(@game) %>
+  <%= link_to 'New issue', new_game_issue_path(@game) if permitted_to? :create, @game.issues %>
 </fieldset>

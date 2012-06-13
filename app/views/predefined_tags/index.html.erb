@@ -22,4 +22,4 @@
 
 <br />
 
-<%= link_to 'New Predefined tag', new_predefined_tag_path %>
+<%= link_to 'New Predefined tag', new_predefined_tag_path if permitted_to? :create %>

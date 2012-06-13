@@ -4,4 +4,4 @@
 
 <br />
 
-<%= link_to 'New Release', new_game_release_path(@game) %>
+<%= link_to 'New Release', new_game_release_path(@game) if permitted_to? :create, @game.releases %>

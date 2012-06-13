@@ -4,4 +4,4 @@
 
 <br />
 
-<%= link_to 'New Issue', new_game_issue_path(@game) %>
+<%= link_to 'New Issue', new_issue_path if permitted_to? :create %>
