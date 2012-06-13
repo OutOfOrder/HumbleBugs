@@ -56,9 +56,9 @@ describe ReleasesController do
         assigns(:release).should be_persisted
       end
 
-      it "redirects to the created release" do
+      it "redirects to the parent game" do
         post_with @user, :create, @base_params.merge({:release => @release})
-        response.should redirect_to([@game, Release.last])
+        response.should redirect_to(@game)
       end
     end
 
@@ -97,10 +97,10 @@ describe ReleasesController do
         assigns(:release).should eq(release)
       end
 
-      it "redirects to the release" do
+      it "redirects to the parent game" do
         release = FactoryGirl.create(:release, :game => @game)
         put_with @user, :update, @base_params.merge({:id => release.to_param, :release => FactoryGirl.attributes_for(:release)})
-        response.should redirect_to([@game, release])
+        response.should redirect_to(@game)
       end
     end
 
