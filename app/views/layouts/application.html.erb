@@ -29,7 +29,7 @@
             <%= link_to "log in", login_path %>
         <% end %>
         <% if Rails.env.development? %>
-            <%= collection_select 'switch_user', 'id', User.where("email like '%@example.com'"), :id, :email, prompt: '- Switch Users -' %>
+            <%= collection_select 'switch_user', 'id', User.where("email like '%@example.com'").order('email'), :id, :email, prompt: '- Switch Users -' %>
         <% end %>
       </div>
     </div>
