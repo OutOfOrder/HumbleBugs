@@ -10,7 +10,7 @@ FactoryGirl.define do
     password "test password"
     password_confirmation "test password"
 
-    after_build do |user, evaluator|
+    after(:build) do |user, evaluator|
       evaluator.roles.each { |m| user.roles.build(:role => m.to_s) }
     end
   end
