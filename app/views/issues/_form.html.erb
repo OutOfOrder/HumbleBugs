@@ -33,7 +33,10 @@
     <div class="field">
       <%= f.label :platform_list, 'Platforms' %>
       <br/>
-      <%= f.text_field :platform_list %>
+      <%= f.text_field :platform_list, :class => 'tags', :data => { :tags_input => {
+              onlyautocomplete: true,
+              autocomplete: { source: complete_predefined_tags_path(:platforms, :json), minLength: 0, autoFocus: true }
+      } } %>
     </div>
     <div class="actions">
       <%= f.submit %>
