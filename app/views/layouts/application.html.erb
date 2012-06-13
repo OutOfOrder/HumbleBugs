@@ -5,6 +5,13 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <script>
+      $(function () {
+          <% flash.each do |name, msg| %>
+          $.jGrowl('<%= msg %>', {header:'<%= name.to_s.humanize %>', life:5000});
+          <% end %>
+      });
+  </script>
 </head>
 <body>
 <div id="container">
@@ -33,12 +40,6 @@
         <li class="<%= select_if :controller => :bundles %>"><%= link_to 'Bundles', bundles_path %></li>
         <li class="<%= select_if :controller => :games %>"><%= link_to 'Games', games_path %></li>
       </ul>
-    </div>
-
-    <div id="flash">
-      <% flash.each do |name, msg| %>
-          <%= content_tag :div, msg, :class => "flash #{name}" %>
-      <% end %>
     </div>
   </header>
 

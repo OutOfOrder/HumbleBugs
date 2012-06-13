@@ -11,7 +11,7 @@
  *= require_self
  *= require main
  *= require jquery.ui.autocomplete
- *= require jquery.tagsinput.css
- *= require flash
+ *= require jquery.tagsinput
+ *= require jquery.jgrowl
  *= require_tree ./controllers
 */
