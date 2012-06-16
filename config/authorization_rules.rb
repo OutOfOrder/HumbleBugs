@@ -27,6 +27,9 @@ authorization do
   # new user signups before they verify their email address
   role :unverified do
     includes :active_bundles
+    has_permission_on :users, :to => [:read, :update] do
+      if_attribute :id => is { user.id }
+    end
   end
 
   # after a new user verifies their email they gain user

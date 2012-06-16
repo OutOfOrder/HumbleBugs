@@ -56,7 +56,30 @@ describe :guest do
     include_examples 'can not X to any', :create, :update, :delete
   end
 
+  context :issues do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
+  context :notes do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
+  context :ports do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
   context :predefined_tags do
     include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
+  context :releases do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
+  context :users do
+    it 'can signup as a new user' do
+      should be_allowed_to :create
+    end
+    include_examples 'can not X to any', :read, :update, :delete
   end
 end

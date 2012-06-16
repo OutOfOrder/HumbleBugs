@@ -60,7 +60,27 @@ describe :unverified do
     include_examples 'can not X to any', :create, :update, :delete
   end
 
+  context :issues do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
+  context :notes do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
+  context :ports do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
   context :predefined_tags do
     include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
+  context :releases do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
+  context :users do
+    include_examples 'edit my own user record'
   end
 end
