@@ -15,5 +15,5 @@ class Issue < ActiveRecord::Base
   ]
 
   validates_presence_of :status, :description, :game_id
-  validates_inclusion_of :status, :in => STATUSES.map { |m| m.second.to_s }, :message => "status %{value} is not a valid status"
+  validates_inclusion_of :status, :in => STATUSES.map { |m| m.second.to_s }, :message => "%{value} is not a valid status"
 end
