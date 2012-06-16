@@ -74,3 +74,14 @@ shared_examples 'basic issues on' do
     issue.should_not be_allowed_to :update
   end
 end
+
+shared_examples 'basic notes on' do
+  it_behaves_like 'can X to this', :read, :create do
+    let(:this) { FactoryGirl.create :note, noteable: noteable }
+  end
+  context 'for an note I created' do
+    it_behaves_like 'can X to this', :read, :update do
+      let(:this) { FactoryGirl.create :note, author: Authorization.current_user, noteable: noteable }
+    end
+  end
+end

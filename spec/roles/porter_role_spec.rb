@@ -89,6 +89,23 @@ describe :porter do
     include_examples 'can not X to any', :delete
   end
 
+  context :notes do
+    context 'for an issue on a game in an active bundle' do
+      it_behaves_like 'basic notes on' do
+        let(:noteable) { FactoryGirl.create :issue, game: FactoryGirl.create(:game, :with_active_bundle) }
+      end
+    end
+    context 'for an issue ona game I am porting' do
+      it_behaves_like 'basic notes on' do
+        let(:noteable) {
+          port = FactoryGirl.create :port, porter: @user
+          FactoryGirl.create :issue, game: port.game
+        }
+      end
+    end
+    include_examples 'can not X to any', :delete
+  end
+
   context :ports do
     context 'for a game on an active bundle' do
       it_behaves_like 'can not X to this', :read, :update do
