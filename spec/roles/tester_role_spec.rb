@@ -118,4 +118,8 @@ describe :tester do
     end
     include_examples 'can not X to any', :create, :update, :delete
   end
+
+  context :users do
+    include_examples 'edit my own user record'
+  end
 end

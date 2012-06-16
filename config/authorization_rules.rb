@@ -43,6 +43,10 @@ authorization do
   role :user do
     includes :active_bundles
     includes :base_reporter
+
+    has_permission_on :users, :to => [:read, :update] do
+      if_attribute :id => is { user.id }
+    end
   end
 
   role :tester do
