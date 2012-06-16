@@ -1,24 +1,27 @@
 require 'spec_helper'
 
-describe :porter do
+describe :bundle_admin do
   before :all do
-    @user = FactoryGirl.create :user, :roles => [:porter]
+    @user = FactoryGirl.create :user, :roles => [:bundle_admin]
     Authorization.current_user = @user
   end
   after :all do
     Authorization.current_user = nil
   end
 
-  it 'should be able to read predefined tags' do
-    should_be_allowed_to :read, :predefined_tags
+  it 'should have the bundle_admin role' do
+    Authorization.current_user.role_symbols.should == [:bundle_admin]
   end
 
-  it 'should be able to read games where I am the porter' do
-    port = FactoryGirl.create :port, :porter => @user
-    port2 = FactoryGirl.create :port
-    game = FactoryGirl.create :game
-    should_be_allowed_to :read, port.game
-    should_not_be_allowed_to :read, port2.game
-    should_not_be_allowed_to :read, game
+  context :bundles do
+    include_examples 'can X to all', :create, :read, :update, :delete, :manage
+  end
+
+  context :games do
+    include_examples 'can X to all', :create, :read, :update, :delete, :manage
+  end
+
+  context :predefined_tags do
+    include_examples 'can X to all', :create, :read, :update, :delete, :manage
   end
 end

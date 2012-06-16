@@ -9,6 +9,7 @@ authorization do
   end
 
   role :base_reporter do
+    has_permission_on :predefined_tags, :to => :read
     has_permission_on :issues, :to => [:read,:create] do
       if_permitted_to :read, :game
     end
@@ -43,7 +44,6 @@ authorization do
 
   role :porter do
     includes :user
-    has_permission_on :predefined_tags, :to => :read
     has_permission_on :games, :to => :read do
       if_attribute :ports => { :porter => is { user } }
     end
@@ -56,6 +56,7 @@ authorization do
   end
 
   role :bundle_admin do
+    has_permission_on :predefined_tags, :to => :manage
     has_permission_on :bundles, :to => :manage
     has_permission_on :games, :to => :manage
     has_permission_on [:ports, :releases, :issues], :to => :manage do
@@ -67,8 +68,11 @@ authorization do
     has_omnipotence
   end
 
-  role :dev do
-    has_omnipotence
+  if Rails.env.test?
+    # this is used by tests which aren't specifically testing authorization
+    role :dev do
+      has_omnipotence
+    end
   end
 end
 

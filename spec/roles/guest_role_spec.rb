@@ -1,24 +1,62 @@
 require 'spec_helper'
 
-describe :porter do
-  before :all do
-    @user = FactoryGirl.create :user, :roles => [:porter]
-    Authorization.current_user = @user
-  end
-  after :all do
-    Authorization.current_user = nil
+describe :guest do
+  it 'ensure test has no user logged in' do
+    Authorization.current_user.should be_a(Authorization::AnonymousUser)
   end
 
-  it 'should be able to read predefined tags' do
-    should_be_allowed_to :read, :predefined_tags
+  it 'should have the guest role' do
+    Authorization.current_user.role_symbols.should == [:guest]
   end
 
-  it 'should be able to read games where I am the porter' do
-    port = FactoryGirl.create :port, :porter => @user
-    port2 = FactoryGirl.create :port
-    game = FactoryGirl.create :game
-    should_be_allowed_to :read, port.game
-    should_not_be_allowed_to :read, port2.game
-    should_not_be_allowed_to :read, game
+  context :bundles do
+    it 'should be able to get a list of permissible bundles' do
+      should be_allowed_to :index, true
+    end
+
+    it 'should be able to read active bundles' do
+      bundle = FactoryGirl.create :bundle, :active
+      bundle.should be_allowed_to :read
+    end
+
+    Bundle::STATES.each do |s|
+      next if s.last == :active
+      it "should not be able to read bundles in the #{s.last} state" do
+        bundle = FactoryGirl.create :bundle, state: s.last.to_s
+        bundle.should_not be_allowed_to :read
+      end
+    end
+
+    include_examples 'can not X to any', :create, :update, :delete
+  end
+
+  context :games do
+    it 'should be able to get a list of permissible games' do
+      should be_allowed_to :index, true
+    end
+    it 'should be able to read those that are in an active bundle' do
+      bundle = FactoryGirl.create :bundle, :active
+      game = FactoryGirl.create :game, bundle: bundle
+      game.should be_allowed_to :read
+    end
+    Bundle::STATES.each do |s|
+      next if s.last == :active
+      it 'should not be able to read those that are in an #{s.last} bundle' do
+        bundle = FactoryGirl.create :bundle, state: s.last.to_s
+        game = FactoryGirl.create :game, bundle: bundle
+        game.should_not be_allowed_to :read
+      end
+    end
+
+    it 'can not read games in testing state' do
+      game = FactoryGirl.create :game, :testing
+      game.should_not be_allowed_to :read
+    end
+
+    include_examples 'can not X to any', :create, :update, :delete
+  end
+
+  context :predefined_tags do
+    include_examples 'can not X to any', :create, :read, :update, :delete
   end
 end

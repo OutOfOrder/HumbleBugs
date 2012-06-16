@@ -6,5 +6,9 @@ FactoryGirl.define do
     name "Pong"
     description "Awesome Pong Game of the Future"
     state "prospective"
+
+    trait :testing do
+      state "testing"
+    end
   end
 end
