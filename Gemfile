@@ -46,4 +46,5 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'capybara'
   gem 'launchy'
+  gem 'simplecov', :require => false
 end
