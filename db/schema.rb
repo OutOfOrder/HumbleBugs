@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602172421) do
+ActiveRecord::Schema.define(:version => 20120616205010) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20120602172421) do
     t.datetime "updated_at",          :null => false
     t.integer  "reported_against_id"
     t.integer  "fixed_in_id"
+    t.integer  "author_id"
   end
 
   add_index "issues", ["fixed_in_id"], :name => "index_issues_on_fixed_in_id"
