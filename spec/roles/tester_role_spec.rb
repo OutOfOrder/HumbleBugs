@@ -119,6 +119,20 @@ describe :tester do
     include_examples 'can not X to any', :create, :update, :delete
   end
 
+  context :releases do
+    context 'for a game on an active bundle' do
+      it_behaves_like 'can X to this', :read do
+        let(:this) { FactoryGirl.create :release, game: FactoryGirl.create(:game, :with_active_bundle) }
+      end
+    end
+    context 'for a game in testing' do
+      it_behaves_like 'can X to this', :read do
+        let(:this) { FactoryGirl.create :release, game: FactoryGirl.create(:game, :testing) }
+      end
+    end
+    include_examples 'can not X to any', :create, :update, :delete
+  end
+
   context :users do
     include_examples 'edit my own user record'
   end

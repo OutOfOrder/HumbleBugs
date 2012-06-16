@@ -57,6 +57,9 @@ authorization do
     has_permission_on :ports, :to => :read do
       if_permitted_to :read_testing, :game
     end
+    has_permission_on :releases, :to => :read do
+      if_permitted_to :read, :game
+    end
   end
 
   role :porter do
@@ -71,7 +74,7 @@ authorization do
       if_attribute :porter => is { user }
     end
     has_permission_on :releases, :to => :manage do
-      if_permitted_to :read, :game
+      if_permitted_to :read_port, :game
     end
     has_permission_on :issues, :to => :update do
       if_permitted_to :read_port, :game

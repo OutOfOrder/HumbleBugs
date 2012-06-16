@@ -144,6 +144,29 @@ describe :porter do
     include_examples 'can not X to any', :create, :update, :delete
   end
 
+  context :releases do
+    context 'for a game on an active bundle' do
+      it_behaves_like 'can not X to this', :read, :create, :update, :delete do
+        let(:this) { FactoryGirl.create :release, game: FactoryGirl.create(:game, :with_active_bundle) }
+      end
+    end
+    context 'for a game in testing' do
+      it_behaves_like 'can not X to this', :read, :create, :update, :delete do
+        let(:this) { FactoryGirl.create :release, game: FactoryGirl.create(:game, :testing) }
+      end
+    end
+
+    context 'for a game on I am porting' do
+      before do
+        @port = FactoryGirl.create :port, porter: @user
+        @game = @port.game
+      end
+      it_behaves_like 'can X to this', :read, :create, :update, :delete do
+        let(:this) { FactoryGirl.create :release, game: @game }
+      end
+    end
+  end
+
   context :users do
     include_examples 'edit my own user record'
   end
