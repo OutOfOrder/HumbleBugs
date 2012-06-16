@@ -1,6 +1,6 @@
 module UserStepHelpers
   def login_user user
-    post secret_login_path, id: user.id
+    page.driver.post secret_login_path, :id => user.id
     page.status_code.should == 200
   end
 end
