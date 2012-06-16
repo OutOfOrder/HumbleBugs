@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :user do
     ignore do
-      roles ['guest']
+      roles []
     end
     sequence(:email) { |n| "user#{n}@example.com" }
     name "user name"
