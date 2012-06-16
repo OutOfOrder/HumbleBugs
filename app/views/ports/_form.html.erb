@@ -16,7 +16,7 @@
     <div class="field">
       <%= f.label :porter_id %>
       <br/>
-      <%= f.collection_select :porter_id, User.all, :id, :name, :prompt => true %>
+      <%= f.collection_select :porter_id, User.with_role(:porter), :id, :name, :prompt => true %>
     </div>
     <div class="field">
       <%= f.label :state %>
