@@ -76,6 +76,16 @@ describe :porter do
       end
     end
 
+    context 'for a game I am porting' do
+      before do
+        @port = FactoryGirl.create :port, porter: @user
+        @game = @port.game
+      end
+      include_examples 'can X to this', :create, :read, :update do
+        let(:this) { FactoryGirl.create :issue, game: @game }
+      end
+    end
+
     include_examples 'can not X to any', :delete
   end
 
