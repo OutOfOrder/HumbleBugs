@@ -50,14 +50,14 @@ authorization do
 
   role :porter do
     includes :user
-    has_permission_on :games, :to => :read do
+    has_permission_on :games, :to => [:read, :read_port] do
       if_attribute :ports => { :porter => is { user } }
     end
     has_permission_on :releases, :to => :manage do
       if_permitted_to :read, :game
     end
     has_permission_on :issues, :to => :update do
-      if_permitted_to :read, :game
+      if_permitted_to :read_port, :game
     end
   end
 
