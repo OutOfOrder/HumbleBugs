@@ -14,6 +14,22 @@ shared_examples "can X to all" do |*privileges|
   end
 end
 
+shared_examples "can not X to this" do |*privileges|
+  privileges.each do |privilege|
+    it "should not be able to #{privilege}" do
+      this.should_not be_allowed_to privilege
+    end
+  end
+end
+
+shared_examples "can X to this" do |*privileges|
+  privileges.each do |privilege|
+    it "should be able to #{privilege}" do
+      this.should be_allowed_to privilege
+    end
+  end
+end
+
 shared_examples "edit my own user record" do
   context 'my user record' do
     subject { Authorization.current_user }
