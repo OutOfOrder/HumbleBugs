@@ -5,5 +5,9 @@ FactoryGirl.define do
     association :game
     description "Issue Description"
     status "new"
+
+    trait :with_author do
+      association :author
+    end
   end
 end

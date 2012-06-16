@@ -60,6 +60,22 @@ describe :tester do
     include_examples 'can not X to any', :create, :update, :delete
   end
 
+  context :issues do
+    context 'for a game on an active bundle' do
+      include_examples 'basic issues on' do
+        let(:game) { FactoryGirl.create :game, :with_active_bundle }
+      end
+    end
+
+    context 'for a game in testing' do
+      include_examples 'create issues on' do
+        let(:game) { FactoryGirl.create :game, :testing }
+      end
+    end
+
+    include_examples 'can not X to any', :delete
+  end
+
   context :predefined_tags do
     it 'should be able to read' do
       should be_allowed_to :read

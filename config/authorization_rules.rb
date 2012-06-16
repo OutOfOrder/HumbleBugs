@@ -13,6 +13,9 @@ authorization do
     has_permission_on :issues, :to => [:read,:create] do
       if_permitted_to :read, :game
     end
+    has_permission_on :issues, :to => :update do
+      if_attribute :author => is { user }
+    end
     has_permission_on :notes, :to => :create do
       if_permitted_to :read, :noteable
     end

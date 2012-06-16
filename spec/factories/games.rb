@@ -2,13 +2,17 @@
 
 FactoryGirl.define do
   factory :game do
-    association :bundle
+    bundle
     name "Pong"
     description "Awesome Pong Game of the Future"
     state "prospective"
 
     trait :testing do
       state "testing"
+    end
+
+    trait :with_active_bundle do
+      bundle { FactoryGirl.build :bundle, :active }
     end
   end
 end
