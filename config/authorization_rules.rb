@@ -23,10 +23,12 @@ authorization do
     has_permission_on :users, :to => :create
   end
 
-  role :nonvalidated do
+  # new user signups before they verify their email address
+  role :unverified do
     includes :active_bundles
   end
 
+  # after a new user verifies their email they gain user
   role :user do
     includes :active_bundles
     includes :base_reporter

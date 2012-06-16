@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
     if roles.present? then
       roles.map { |m| m.role.to_sym }
     else
-      [:nonvalidated]
+      [:unverified]
     end
   end
 end
