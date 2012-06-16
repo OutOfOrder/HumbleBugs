@@ -76,6 +76,28 @@ describe :tester do
     include_examples 'can not X to any', :delete
   end
 
+  context :ports do
+    context 'for a game on an active bundle' do
+      before do
+        @game = FactoryGirl.create(:game, :with_active_bundle)
+      end
+      it 'can not read' do
+        port = FactoryGirl.create :port, game: @game
+        port.should_not be_allowed_to :read
+      end
+    end
+    context 'for a game in testing' do
+      before do
+        @game = FactoryGirl.create :game, :testing
+      end
+      it 'can read' do
+        port =FactoryGirl.create :port, game: @game
+        port.should be_allowed_to :read
+      end
+    end
+    include_examples 'can not X to any', :create, :update, :delete
+  end
+
   context :predefined_tags do
     it 'should be able to read' do
       should be_allowed_to :read

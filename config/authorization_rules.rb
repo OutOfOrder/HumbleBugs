@@ -43,8 +43,11 @@ authorization do
 
   role :tester do
     includes :user
-    has_permission_on :games, :to => :read do
+    has_permission_on :games, :to => [:read, :read_testing] do
       if_attribute :state => is_in { [ 'testing', 'completed' ] }
+    end
+    has_permission_on :ports, :to => :read do
+      if_permitted_to :read_testing, :game
     end
   end
 
@@ -52,6 +55,12 @@ authorization do
     includes :user
     has_permission_on :games, :to => [:read, :read_port] do
       if_attribute :ports => { :porter => is { user } }
+    end
+    has_permission_on :ports, :to => :read do
+      if_permitted_to :read_port, :game
+    end
+    has_permission_on :ports, :to => :update do
+      if_attribute :porter => is { user }
     end
     has_permission_on :releases, :to => :manage do
       if_permitted_to :read, :game

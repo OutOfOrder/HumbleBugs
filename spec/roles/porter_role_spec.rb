@@ -89,6 +89,37 @@ describe :porter do
     include_examples 'can not X to any', :delete
   end
 
+  context :ports do
+    context 'for a game on an active bundle' do
+      it_behaves_like 'can not X to this', :read, :update do
+        let(:this) { FactoryGirl.create :port, game: FactoryGirl.create(:game, :with_active_bundle) }
+      end
+    end
+    context 'for a game on I am porting' do
+      before do
+        @port = FactoryGirl.create :port, porter: @user
+        @game = @port.game
+      end
+      it 'can read other ports' do
+        port = FactoryGirl.create :port, game: @game
+        port.should be_allowed_to :read
+      end
+      it 'can update my own port' do
+        @port.should be_allowed_to :update
+      end
+      it 'can not update other ports' do
+        port = FactoryGirl.create :port, game: @game
+        port.should_not be_allowed_to :update
+      end
+    end
+    context 'a bundle I am not porting nor in an active bundle' do
+      it_behaves_like 'can not X to this', :read, :update do
+          let(:this) { FactoryGirl.create :port }
+      end
+    end
+    include_examples 'can not X to any', :create, :delete
+  end
+
   context :predefined_tags do
     it 'should be able to read' do
       should be_allowed_to :read

@@ -70,6 +70,10 @@ describe :user do
     include_examples 'can not X to any', :delete
   end
 
+  context :ports do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
   context :predefined_tags do
     it 'should be able to read' do
       should be_allowed_to :read
