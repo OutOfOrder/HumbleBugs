@@ -62,13 +62,13 @@ describe :tester do
 
   context :issues do
     context 'for a game on an active bundle' do
-      include_examples 'basic issues on' do
+      it_behaves_like 'basic issues on' do
         let(:game) { FactoryGirl.create :game, :with_active_bundle }
       end
     end
 
     context 'for a game in testing' do
-      include_examples 'create issues on' do
+      it_behaves_like 'basic issues on' do
         let(:game) { FactoryGirl.create :game, :testing }
       end
     end

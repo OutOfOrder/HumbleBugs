@@ -71,7 +71,7 @@ describe :porter do
 
   context :issues do
     context 'for a game on an active bundle' do
-      include_examples 'basic issues on' do
+      it_behaves_like 'basic issues on' do
         let(:game) { FactoryGirl.create :game, :with_active_bundle }
       end
     end
@@ -81,7 +81,7 @@ describe :porter do
         @port = FactoryGirl.create :port, porter: @user
         @game = @port.game
       end
-      include_examples 'can X to this', :create, :read, :update do
+      it_behaves_like 'can X to this', :create, :read, :update do
         let(:this) { FactoryGirl.create :issue, game: @game }
       end
     end

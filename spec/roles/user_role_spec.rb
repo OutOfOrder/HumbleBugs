@@ -62,7 +62,7 @@ describe :user do
 
   context :issues do
     context 'for a game on an active bundle' do
-      include_examples 'basic issues on' do
+      it_behaves_like 'basic issues on' do
         let(:game) { FactoryGirl.create :game, :with_active_bundle }
       end
     end
