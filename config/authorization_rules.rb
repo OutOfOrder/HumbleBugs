@@ -41,6 +41,7 @@ authorization do
 
   role :porter do
     includes :user
+    has_permission_on :predefined_tags, :to => :read
     has_permission_on :games, :to => :read do
       if_attribute :ports => { :porter => is { user } }
     end
