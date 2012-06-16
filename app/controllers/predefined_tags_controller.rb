@@ -1,5 +1,5 @@
 class PredefinedTagsController < ApplicationController
-  filter_resource_access :additional_collection => :complete
+  filter_resource_access :additional_collection => {:complete => :read}
 
   # GET /predefined_tags
   # GET /predefined_tags.json
