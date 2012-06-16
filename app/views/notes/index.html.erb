@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Note</th>
-    <th>Owner</th>
+    <th>Author</th>
     <th>Noteable</th>
     <th></th>
     <th></th>
@@ -13,7 +13,7 @@
 <% @notes.each do |note| %>
   <tr>
     <td><%= note.note %></td>
-    <td><%= note.owner %></td>
+    <td><%= note.author %></td>
     <td><%= note.noteable %></td>
     <td><%= link_to 'Show', [@noteable, note] %></td>
     <td><%= link_to 'Edit', edit_polymorphic_path([@noteable, note]) if permitted_to? :edit, note %></td>

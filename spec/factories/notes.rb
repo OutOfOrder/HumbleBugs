@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :note do
     note "MyText"
-    association :owner, :factory => :user
+    association :author, :factory => :user
     association :noteable, :factory => :issue
   end
 end

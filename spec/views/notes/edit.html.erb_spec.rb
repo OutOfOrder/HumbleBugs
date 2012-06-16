@@ -12,7 +12,7 @@ describe "notes/edit" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => polymorphic_path([@noteable, @note]), :method => "post" do
       assert_select "textarea#note_note", :name => "note[note]"
-      assert_select "select#note_owner_id", :name => "note[owner_id]"
+      assert_select "select#note_author_id", :name => "note[author_id]"
     end
   end
 end

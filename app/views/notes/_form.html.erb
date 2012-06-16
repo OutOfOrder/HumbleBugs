@@ -19,9 +19,9 @@
       <%= f.text_area :note %>
     </div>
     <div class="field">
-      <%= f.label :owner %>
+      <%= f.label :author %>
       <br/>
-      <%= f.collection_select :owner_id, User.all, :id, :name, :prompt => true %>
+      <%= f.collection_select :author_id, User.all, :id, :name, :prompt => true %>
     </div>
     <div class="actions">
       <%= f.submit %>

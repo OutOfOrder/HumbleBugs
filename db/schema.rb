@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120616205010) do
+ActiveRecord::Schema.define(:version => 20120616222944) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -52,15 +52,15 @@ ActiveRecord::Schema.define(:version => 20120616205010) do
 
   create_table "notes", :force => true do |t|
     t.text     "note"
-    t.integer  "owner_id"
+    t.integer  "author_id"
     t.integer  "noteable_id"
     t.string   "noteable_type"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
+  add_index "notes", ["author_id"], :name => "index_notes_on_owner_id"
   add_index "notes", ["noteable_id", "noteable_type"], :name => "index_notes_on_noteable_id_and_noteable_type"
-  add_index "notes", ["owner_id"], :name => "index_notes_on_owner_id"
 
   create_table "ports", :force => true do |t|
     t.integer  "game_id"
