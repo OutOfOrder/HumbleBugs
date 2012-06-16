@@ -68,6 +68,10 @@ authorization do
     has_permission_on [:ports, :releases, :issues], :to => :manage do
       if_permitted_to :manage, :game
     end
+    has_permission_on :notes, :to => :manage do
+      if_permitted_to :manage, :noteable
+    end
+    has_permission_on :users, :to => :manage
   end
 
   role :admin do
