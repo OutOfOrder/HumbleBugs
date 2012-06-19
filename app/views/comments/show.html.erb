@@ -1,0 +1,21 @@
+<fieldset>
+  <legend>Note details</legend>
+    <p>
+    <b>Comment:</b>
+    <%= @comment.comment %>
+  </p>
+
+    <p>
+    <b>Author:</b>
+    <%= @comment.author %>
+  </p>
+
+    <p>
+    <b>Commentable:</b>
+    <%= @comment.commentable %>
+  </p>
+
+  
+  <%= link_to 'Edit', edit_polymorphic_path([@commentable, @comment]) if permitted_to? :edit %> |
+  <%= link_to 'Back', [@commentable, Comment] %>
+</fieldset>

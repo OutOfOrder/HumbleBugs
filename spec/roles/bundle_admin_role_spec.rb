@@ -27,9 +27,9 @@ describe :bundle_admin do
     end
   end
 
-  context :notes do
+  context :comments do
     it_behaves_like 'can X to this', :create, :read, :update, :delete do
-      let(:this) { FactoryGirl.create :note }
+      let(:this) { FactoryGirl.create :comment }
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120616222944) do
+ActiveRecord::Schema.define(:version => 20120619200645) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(:version => 20120616222944) do
   end
 
   add_index "bundles", ["state"], :name => "index_bundles_on_state"
+
+  create_table "comments", :force => true do |t|
+    t.text     "comment"
+    t.integer  "author_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "comments", ["author_id"], :name => "index_notes_on_owner_id"
+  add_index "comments", ["commentable_id", "commentable_type"], :name => "index_notes_on_noteable_id_and_noteable_type"
 
   create_table "games", :force => true do |t|
     t.string   "name"
@@ -49,18 +61,6 @@ ActiveRecord::Schema.define(:version => 20120616222944) do
   add_index "issues", ["fixed_in_id"], :name => "index_issues_on_fixed_in_id"
   add_index "issues", ["game_id"], :name => "index_issues_on_game_id"
   add_index "issues", ["reported_against_id"], :name => "index_issues_on_reported_against_id"
-
-  create_table "notes", :force => true do |t|
-    t.text     "note"
-    t.integer  "author_id"
-    t.integer  "noteable_id"
-    t.string   "noteable_type"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "notes", ["author_id"], :name => "index_notes_on_owner_id"
-  add_index "notes", ["noteable_id", "noteable_type"], :name => "index_notes_on_noteable_id_and_noteable_type"
 
   create_table "ports", :force => true do |t|
     t.integer  "game_id"

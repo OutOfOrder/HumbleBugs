@@ -16,11 +16,11 @@ authorization do
     has_permission_on :issues, :to => :update do
       if_attribute :author => is { user }
     end
-    has_permission_on :notes, :to => [:read,:create] do
-      if_permitted_to :read, :noteable
+    has_permission_on :comments, :to => [:read,:create] do
+      if_permitted_to :read, :commentable
     end
-    has_permission_on :notes, :to => :update, :join_by => :and do
-      if_permitted_to :read, :noteable
+    has_permission_on :comments, :to => :update, :join_by => :and do
+      if_permitted_to :read, :commentable
       if_attribute :author => is { user }
     end
   end
@@ -88,8 +88,8 @@ authorization do
     has_permission_on [:ports, :releases, :issues], :to => :manage do
       if_permitted_to :manage, :game
     end
-    has_permission_on :notes, :to => :manage do
-      if_permitted_to :manage, :noteable
+    has_permission_on :comments, :to => :manage do
+      if_permitted_to :manage, :commentable
     end
     has_permission_on :users, :to => :manage
   end

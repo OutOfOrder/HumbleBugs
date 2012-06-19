@@ -10,7 +10,7 @@ HumbleBugs::Application.routes.draw do
   end
 
   resources :issues, :only => [:new, :create] do
-    resources :notes
+    resources :comments
   end
 
   resources :users

@@ -64,7 +64,7 @@ describe :unverified do
     include_examples 'can not X to any', :create, :read, :update, :delete
   end
 
-  context :notes do
+  context :comments do
     include_examples 'can not X to any', :create, :read, :update, :delete
   end
 

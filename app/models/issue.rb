@@ -3,7 +3,7 @@ class Issue < ActiveRecord::Base
   belongs_to :game, :inverse_of => :issues
   belongs_to :reported_against, :class_name => 'Release', :inverse_of => :reported_issues
   belongs_to :fixed_in, :class_name => 'Release', :inverse_of => :fixed_issues
-  has_many :notes, :as => :noteable
+  has_many :comments, :as => :commentable
 
   acts_as_taggable_on :platforms
 

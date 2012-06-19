@@ -1,12 +1,12 @@
-<%= form_for([@noteable, @note]) do |f| %>
+<%= form_for([@commentable, @comment]) do |f| %>
   <fieldset>
     <legend><%= title %></legend>
-    <% if @note.errors.any? %>
+    <% if @comment.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
         <ul>
-          <% @note.errors.full_messages.each do |msg| %>
+          <% @comment.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>
         </ul>
@@ -14,9 +14,9 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :note %>
+      <%= f.label :comment %>
       <br/>
-      <%= f.text_area :note %>
+      <%= f.text_area :comment %>
     </div>
     <div class="field">
       <%= f.label :author %>

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe "notes/show" do
+describe "comments/show" do
   before(:each) do
-    @noteable = FactoryGirl.create(:issue)
-    @note = assign(:note, FactoryGirl.create(:note, :noteable => @noteable))
+    @commentable = FactoryGirl.create(:issue)
+    @comment = assign(:comment, FactoryGirl.create(:comment, :commentable => @commentable))
   end
 
   it "renders attributes in <p>" do

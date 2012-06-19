@@ -75,13 +75,13 @@ shared_examples 'basic issues on' do
   end
 end
 
-shared_examples 'basic notes on' do
+shared_examples 'basic comments on' do
   it_behaves_like 'can X to this', :read, :create do
-    let(:this) { FactoryGirl.create :note, noteable: noteable }
+    let(:this) { FactoryGirl.create :comment, commentable: commentable }
   end
-  context 'for an note I created' do
+  context 'for an comment I created' do
     it_behaves_like 'can X to this', :read, :update do
-      let(:this) { FactoryGirl.create :note, author: Authorization.current_user, noteable: noteable }
+      let(:this) { FactoryGirl.create :comment, author: Authorization.current_user, commentable: commentable }
     end
   end
 end
