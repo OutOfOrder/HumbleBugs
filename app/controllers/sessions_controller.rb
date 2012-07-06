@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email params[:email]
+    user = User.where("lower(email) = ?", params[:email].downcase).first
     if user && user.authenticate(params[:password])
       if params[:remember_me]
         cookies.permanent[:auth_token] = {
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
             httponly: true
         }
       end
-      if user.time_zone.nil?
+      if user.time_zone.nil? && params[:time_zone].present?
         tz = ActiveSupport::TimeZone[params[:time_zone]]
         if !tz.nil?
           user.update_attribute :time_zone, tz.name
