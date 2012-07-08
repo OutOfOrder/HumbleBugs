@@ -76,11 +76,11 @@ shared_examples 'basic issues on' do
 end
 
 shared_examples 'basic comments on' do
-  it_behaves_like 'can X to this', :read, :create do
+  include_examples 'can X to this', :read, :create do
     let(:this) { FactoryGirl.create :comment, commentable: commentable }
   end
-  context 'for an comment I created' do
-    it_behaves_like 'can X to this', :read, :update do
+  context 'for a comment I created' do
+    include_examples 'can X to this', :read, :update do
       let(:this) { FactoryGirl.create :comment, author: Authorization.current_user, commentable: commentable }
     end
   end

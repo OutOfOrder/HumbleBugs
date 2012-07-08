@@ -71,7 +71,7 @@ describe :porter do
 
   context :issues do
     context 'for a game on an active bundle' do
-      it_behaves_like 'basic issues on' do
+      include_examples 'basic issues on' do
         let(:game) { FactoryGirl.create :game, :with_active_bundle }
       end
     end
@@ -81,7 +81,7 @@ describe :porter do
         @port = FactoryGirl.create :port, porter: @user
         @game = @port.game
       end
-      it_behaves_like 'can X to this', :create, :read, :update do
+      include_examples 'can X to this', :create, :read, :update do
         let(:this) { FactoryGirl.create :issue, game: @game }
       end
     end
@@ -91,12 +91,12 @@ describe :porter do
 
   context :comments do
     context 'for an issue on a game in an active bundle' do
-      it_behaves_like 'basic comments on' do
+      include_examples 'basic comments on' do
         let(:commentable) { FactoryGirl.create :issue, game: FactoryGirl.create(:game, :with_active_bundle) }
       end
     end
     context 'for an issue ona game I am porting' do
-      it_behaves_like 'basic comments on' do
+      include_examples 'basic comments on' do
         let(:commentable) {
           port = FactoryGirl.create :port, porter: @user
           FactoryGirl.create :issue, game: port.game
@@ -108,7 +108,7 @@ describe :porter do
 
   context :ports do
     context 'for a game on an active bundle' do
-      it_behaves_like 'can not X to this', :read, :update do
+      include_examples 'can not X to this', :read, :update do
         let(:this) { FactoryGirl.create :port, game: FactoryGirl.create(:game, :with_active_bundle) }
       end
     end
@@ -130,7 +130,7 @@ describe :porter do
       end
     end
     context 'a bundle I am not porting nor in an active bundle' do
-      it_behaves_like 'can not X to this', :read, :update do
+      include_examples 'can not X to this', :read, :update do
           let(:this) { FactoryGirl.create :port }
       end
     end
@@ -146,12 +146,12 @@ describe :porter do
 
   context :releases do
     context 'for a game on an active bundle' do
-      it_behaves_like 'can not X to this', :read, :create, :update, :delete do
+      include_examples 'can not X to this', :read, :create, :update, :delete do
         let(:this) { FactoryGirl.create :release, game: FactoryGirl.create(:game, :with_active_bundle) }
       end
     end
     context 'for a game in testing' do
-      it_behaves_like 'can not X to this', :read, :create, :update, :delete do
+      include_examples 'can not X to this', :read, :create, :update, :delete do
         let(:this) { FactoryGirl.create :release, game: FactoryGirl.create(:game, :testing) }
       end
     end
@@ -161,7 +161,7 @@ describe :porter do
         @port = FactoryGirl.create :port, porter: @user
         @game = @port.game
       end
-      it_behaves_like 'can X to this', :read, :create, :update, :delete do
+      include_examples 'can X to this', :read, :create, :update, :delete do
         let(:this) { FactoryGirl.create :release, game: @game }
       end
     end

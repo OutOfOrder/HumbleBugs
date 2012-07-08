@@ -62,7 +62,7 @@ describe :user do
 
   context :issues do
     context 'for a game on an active bundle' do
-      it_behaves_like 'basic issues on' do
+      include_examples 'basic issues on' do
         let(:game) { FactoryGirl.create :game, :with_active_bundle }
       end
     end
@@ -72,7 +72,7 @@ describe :user do
 
   context :comments do
     context 'for an issue on a game in an active bundle' do
-      it_behaves_like 'basic comments on' do
+      include_examples 'basic comments on' do
         let(:commentable) { FactoryGirl.create :issue, game: FactoryGirl.create(:game, :with_active_bundle) }
       end
     end

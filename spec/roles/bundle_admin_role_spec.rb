@@ -22,19 +22,19 @@ describe :bundle_admin do
   end
 
   context :issues do
-    it_behaves_like 'can X to this', :create, :read, :update, :delete do
+    include_examples 'can X to this', :create, :read, :update, :delete do
       let(:this) { FactoryGirl.create :issue }
     end
   end
 
   context :comments do
-    it_behaves_like 'can X to this', :create, :read, :update, :delete do
+    include_examples 'can X to this', :create, :read, :update, :delete do
       let(:this) { FactoryGirl.create :comment }
     end
   end
 
   context :ports do
-    it_behaves_like 'can X to this', :create, :read, :update, :delete do
+    include_examples 'can X to this', :create, :read, :update, :delete do
       let(:this) { FactoryGirl.create :port }
     end
   end
@@ -44,7 +44,7 @@ describe :bundle_admin do
   end
 
   context :releases do
-    it_behaves_like 'can X to this', :create, :read, :update, :delete do
+    include_examples 'can X to this', :create, :read, :update, :delete do
       let(:this) { FactoryGirl.create :release }
     end
   end
