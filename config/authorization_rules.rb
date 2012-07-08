@@ -33,6 +33,7 @@ authorization do
 
   # new user signups before they verify their email address
   role :unverified do
+    title 'Unverified user'
     includes :active_bundles
     has_permission_on :users, :to => [:read, :update] do
       if_attribute :id => is { user.id }
@@ -41,6 +42,7 @@ authorization do
 
   # after a new user verifies their email they gain user
   role :user do
+    title 'User'
     includes :active_bundles
     includes :base_reporter
 
@@ -50,6 +52,7 @@ authorization do
   end
 
   role :tester do
+    title 'Game tester'
     includes :user
     has_permission_on :games, :to => [:read, :read_testing] do
       if_attribute :state => is_in { [ 'testing', 'completed' ] }
@@ -63,6 +66,7 @@ authorization do
   end
 
   role :porter do
+    title 'Game porter'
     includes :user
     has_permission_on :games, :to => [:read, :read_port] do
       if_attribute :ports => { :porter => is { user } }
@@ -82,6 +86,7 @@ authorization do
   end
 
   role :bundle_admin do
+    title 'Bundle admin'
     has_permission_on :predefined_tags, :to => :manage
     has_permission_on :bundles, :to => :manage
     has_permission_on :games, :to => :manage
@@ -95,6 +100,7 @@ authorization do
   end
 
   role :admin do
+    title 'Administrator'
     has_omnipotence
   end
 
