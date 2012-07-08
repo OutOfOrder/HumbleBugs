@@ -12,10 +12,12 @@
       <%= label_for Game::STATES, @game.state %>
     </p>
 
+    <% @game.bundle.present? && permitted_to?(:read, @game.bundle) do %>
     <p class="bundle">
       <b>Bundle:</b>
-      <%= @game.bundle.try(:name) %>
+      <%= link_to @game.bundle.name, @game.bundle %>
     </p>
+    <% end %>
 
     <p class="description">
       <b>Description:</b>
@@ -37,11 +39,6 @@
 
   <p class="actions">
     <%= link_to 'Edit', edit_game_path(@game) if permitted_to? :edit %> |
-    <% if @game.bundle %>
-      <%= link_to 'Back', bundle_path(@game.bundle) %>
-    <% else %>
-      <%= link_to 'Back', games_path %>
-    <% end %>
   </p>
 </fieldset>
 <fieldset>
