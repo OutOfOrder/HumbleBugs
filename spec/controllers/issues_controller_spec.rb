@@ -9,7 +9,7 @@ describe IssuesController do
   end
 
   describe "GET index" do
-    it "assigns all issues as @issues" do
+    it "assigns all issues for the game as @issues" do
       FactoryGirl.create(:issue)
       issue = FactoryGirl.create(:issue, :game => @game)
       get_with @user, :index, @base_params
@@ -31,7 +31,7 @@ describe IssuesController do
       assigns(:issue).should be_a_new(Issue)
     end
     context "with a shallow scope" do
-      it "assignes a new issue as @issue" do
+      it "assigns a new issue as @issue" do
         get_with @user, :new
         assigns(:issue).tap do |t|
           t.should be_a_new(Issue)
@@ -52,7 +52,7 @@ describe IssuesController do
   describe "POST create" do
     describe "with valid params" do
       before do
-        @issue = FactoryGirl.attributes_for(:issue, :game => nil)
+        @issue = FactoryGirl.attributes_for(:issue, :new)
       end
       it '@issue attributes should not have game' do
         @issue[:game_id].should be_nil
@@ -75,13 +75,19 @@ describe IssuesController do
       end
 
       context "with a shallow scope" do
-        it "assignes a newly created issue as @issue" do
-          get_with @user, :create, {:issue => @issue.merge({:game_id => @game.to_param})}
+        it "assigns a newly created issue as @issue" do
+          post_with @user, :create, {:issue => @issue.merge({:game_id => @game.to_param})}
           assigns(:issue).tap do |t|
             t.should be_a(Issue)
             t.should be_persisted
           end
         end
+      end
+
+      it "should set the author to the logged in user" do
+        post_with @user, :create, @base_params.merge({:issue => @issue})
+
+        assigns(:issue).author.should == @user
       end
     end
 
@@ -116,13 +122,13 @@ describe IssuesController do
 
       it "assigns the requested issue as @issue" do
         issue = FactoryGirl.create(:issue, :game => @game)
-        put_with @user, :update, @base_params.merge({:id => issue.to_param, :issue => FactoryGirl.attributes_for(:issue, :game => @game)})
+        put_with @user, :update, @base_params.merge({:id => issue.to_param, :issue => FactoryGirl.attributes_for(:issue)})
         assigns(:issue).should eq(issue)
       end
 
       it "redirects to the issue" do
         issue = FactoryGirl.create(:issue, :game => @game)
-        put_with @user, :update, @base_params.merge({:id => issue.to_param, :issue => FactoryGirl.attributes_for(:issue, :game => @game)})
+        put_with @user, :update, @base_params.merge({:id => issue.to_param, :issue => FactoryGirl.attributes_for(:issue)})
         response.should redirect_to([@game,issue])
       end
     end

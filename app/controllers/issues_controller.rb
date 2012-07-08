@@ -24,14 +24,6 @@ class IssuesController < ApplicationController
   # GET /games/1/issues/new
   # GET /games/1/issues/new.json
   def new
-    if params[:game_id]
-      @game = Game.find(params[:game_id])
-      @issue = @game.issues.build
-    else
-      @issue = Issue.new
-    end
-
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @issue }
@@ -45,14 +37,6 @@ class IssuesController < ApplicationController
   # POST /games/1/issues
   # POST /games/1/issues.json
   def create
-    if params[:game_id]
-      @game = Game.find(params[:game_id])
-      @issue = @game.issues.build(params[:issue])
-    else
-      @issue = Issue.new(params[:issue])
-    end
-
-
     respond_to do |format|
       if @issue.save
         format.html { redirect_to [@issue.game, @issue], notice: 'Issue was successfully created.' }
@@ -100,9 +84,9 @@ protected
 
   def new_issue_from_params
     if @game.nil?
-      @issue = Issue.new params[:issue]
+      @issue = Issue.new (params[:issue] || {}).merge(:author => current_user)
     else
-      @issue = @game.issues.new params[:issue]
+      @issue = @game.issues.new (params[:issue] || {}).merge(:author => current_user)
     end
   end
 end

@@ -3,11 +3,13 @@
 FactoryGirl.define do
   factory :issue do
     association :game
+    association :author, :factory => :user
     description "Issue Description"
     status "new"
 
-    trait :with_author do
-      association :author
+    trait :new do
+      author nil
+      game nil
     end
   end
 end
