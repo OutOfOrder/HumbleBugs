@@ -2,22 +2,18 @@
 
 <table>
   <tr>
-    <th>Email</th>
     <th>Name</th>
-    <th></th>
+    <th>Email</th>
+    <th>Roles</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
+    <td><%= link_to user.name, user %></td>
     <td><%= user.email %></td>
-    <td><%= user.name %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) if permitted_to? :edit, user %></td>
-    <% permitted_to? :delete, user do %>
-        <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
-    <% end %>
+    <td><%= role_titles(user.role_symbols).join(', ') %></td>
   </tr>
 <% end %>
 </table>

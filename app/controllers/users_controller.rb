@@ -51,6 +51,20 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    if @user.permitted_to? :update_roles
+      roles = params[:roles].keys.map(&:to_sym)
+      cur_roles = @user.role_symbols
+      added = roles - cur_roles
+      removed = cur_roles - roles
+
+      @user.roles.each do |r|
+        r.mark_for_destruction if removed.include?(r.role.to_sym)
+      end
+      added.each do |r|
+        @user.roles.build :role => r.to_s
+      end
+    end
+
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to @user, notice: 'User was successfully updated.' }

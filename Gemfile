@@ -25,6 +25,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'acts-as-taggable-on'
 gem 'declarative_authorization', :git => "https://github.com/stffn/declarative_authorization.git"
+gem 'valid_email'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

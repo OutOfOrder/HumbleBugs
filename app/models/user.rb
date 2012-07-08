@@ -1,10 +1,12 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  has_many :roles, :class_name => 'UserRole', :inverse_of => :user, :dependent => :delete_all
+  has_many :roles, :class_name => 'UserRole', :inverse_of => :user, :dependent => :delete_all, :autosave => true
 
   validates_presence_of :password, :on => :create
   validates_uniqueness_of :email, :case_sensitive => false
+  validates :email, :presence => true, :email => true
+  validates_presence_of :name
 
   attr_accessible :email, :name, :password, :password_confirmation, :time_zone
 

@@ -110,6 +110,12 @@ p.actions {
 
 form {
   @include blueprint-form;
+  select {
+    border-color: #bbbbbb;
+    &:focus {
+      border-color: #666666;
+    }
+  }
   fieldset {
     margin: 1.5em 1em 1em 1em;
   }

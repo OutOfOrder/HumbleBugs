@@ -1,6 +1,48 @@
-<h1>Editing user</h1>
+<%= form_for(@user) do |f| %>
+    <fieldset class="user_controller">
+      <legend>Editing user</legend>
+      <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-<%= render 'form' %>
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+      <div class="field">
+        <%= f.label :email %>
+        <br/>
+        <%= f.text_field :email %>
+      </div>
+      <div class="field">
+        <%= f.label :name %>
+        <br/>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
+      </div>
+      <% permitted_to? :update_roles, @user do %>
+          <div class="field">
+            <fieldset class="role_editor">
+              <legend>Roles</legend>
+              <ul>
+                <% system_roles.each do |r, v| %>
+                    <li>
+                      <%= check_box_tag "roles[#{r}]", "1", @user.role_symbols.include?(r) %>
+                      <%= label_tag "roles[#{r}]", v %>
+                    </li>
+                <% end %>
+              </ul>
+            </fieldset>
+          </div>
+      <% end %>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </fieldset>
+<% end %>

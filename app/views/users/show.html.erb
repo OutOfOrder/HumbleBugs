@@ -10,6 +10,18 @@
     <%= @user.name %>
   </p>
 
-  <%= link_to 'Edit', edit_user_path(@user) if permitted_to? :edit %> |
-  <%= link_to 'Back', users_path %>
+  <p>
+    <b>Timezone:</b>
+    <%= @user.time_zone %>
+  </p>
+
+  <p>
+    <b>Roles:</b>
+    <%= role_titles(@user.role_symbols).join(', ') %>
+  </p>
+
+  <%= link_to 'Edit', edit_user_path(@user) if permitted_to? :edit %>
+  <% permitted_to? :delete, @user do %>
+      | <%= link_to 'Delete', @user, confirm: 'Are you sure?', method: :delete %>
+  <% end %>
 </fieldset>
