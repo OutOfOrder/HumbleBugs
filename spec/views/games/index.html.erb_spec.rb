@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "games/index" do
   before(:each) do
+    assign(:bundles, [])
     @games = assign(:games, FactoryGirl.create_list(:game, 2))
   end
 

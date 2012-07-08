@@ -9,8 +9,13 @@ class GamesController < ApplicationController
   def index
     if @bundle.nil?
       @games = Game.with_permissions_to
+      @bundles = Bundle.with_permissions_to
+      @bundles.each do |bundle|
+        @games -= bundle.games
+      end
     else
       @games = @bundle.games.with_permissions_to
+      @bundles = []
     end
 
     respond_to do |format|

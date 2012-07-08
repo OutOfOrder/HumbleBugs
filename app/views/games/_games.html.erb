@@ -1,10 +1,6 @@
-<% if !defined? show_bundle then show_bundle = false end %>
 <table>
   <tr>
     <th>Name</th>
-    <% if show_bundle %>
-      <th>Bundle</th>
-    <% end %>
     <th>State</th>
     <th></th>
   </tr>
@@ -12,9 +8,6 @@
   <% games.each do |game| %>
     <tr class="game">
       <td><%= link_to game.name, game %></td>
-      <% if show_bundle %>
-      <td><%= game.bundle.try(:name) %></td>
-      <% end %>
       <td><%= label_for Game::STATES, game.state %></td>
       <td><%= link_to "Report Issue", new_game_issue_path(game) if permitted_to? :create, game.issues %></td>
     </tr>

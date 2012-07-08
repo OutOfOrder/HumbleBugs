@@ -1,6 +1,13 @@
 <h1>Listing games</h1>
 
-<%= render :partial => 'games', :locals => { :games => @games, :show_bundle => true } %>
+<% @bundles.each do |bundle| %>
+    <fieldset><legend><%= bundle.name %></legend>
+      <%= render :partial => 'games', :locals => { :games => bundle.games } %>
+    </fieldset>
+<% end %>
+<fieldset><legend>Unassigned</legend>
+    <%= render :partial => 'games', :locals => { :games => @games } %>
+</fieldset>
 
 <br />
 
