@@ -22,14 +22,14 @@
     <div id="user-nav">
       <div>
         <% if current_user %>
-            Logged in as <%= current_user.email %>.
-            <%= link_to "Log out", logout_path %>
+            <%= link_to "My Account", current_user, :title => "Logged in as #{current_user.name} - #{current_user.email}" %>
+            | <%= link_to "Log out", logout_path %>
         <% else %>
             <%= link_to "Sign up", signup_path %> or
-            <%= link_to "log in", login_path %>
+            | <%= link_to "log in", login_path %>
         <% end %>
         <% if Rails.env.development? %>
-            <%= collection_select 'switch_user', 'id', User.where("email like '%@example.com'").order('email'), :id, :email, prompt: '- Switch Users -' %>
+            <%= collection_select 'switch_user', 'id', User.where("email like '%@example.com'").order('email'), :id, :email, {prompt: '- Switch Users -'}, { style: 'float: right'} %>
         <% end %>
       </div>
     </div>
