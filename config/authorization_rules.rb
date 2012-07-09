@@ -13,7 +13,7 @@ authorization do
     has_permission_on :issues, :to => [:read,:create] do
       if_permitted_to :read, :game
     end
-    has_permission_on :issues, :to => :update do
+    has_permission_on :issues, :to => [:read, :update] do
       if_attribute :author => is { user }
     end
     has_permission_on :comments, :to => [:read,:create] do
