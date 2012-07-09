@@ -80,6 +80,6 @@ describe :guest do
     it 'can signup as a new user' do
       should be_allowed_to :create
     end
-    include_examples 'can not X to any', :read, :update, :delete
+    include_examples 'can not X to any', :read, :update, :delete, :update_roles
   end
 end

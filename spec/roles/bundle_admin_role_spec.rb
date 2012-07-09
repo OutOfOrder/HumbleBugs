@@ -50,6 +50,6 @@ describe :bundle_admin do
   end
 
   context :users do
-    include_examples 'can X to all', :create, :read, :update, :delete
+    include_examples 'can X to all', :create, :read, :update, :delete, :update_roles
   end
 end

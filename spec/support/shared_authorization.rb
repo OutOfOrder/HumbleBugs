@@ -51,7 +51,7 @@ shared_examples "edit my own user record" do
       end
     end
   end
-  include_examples 'can not X to any', :create, :delete
+  include_examples 'can not X to any', :create, :delete, :update_roles
 end
 
 shared_examples 'basic issues on' do

@@ -96,7 +96,7 @@ authorization do
     has_permission_on :comments, :to => :manage do
       if_permitted_to :manage, :commentable
     end
-    has_permission_on :users, :to => :manage
+    has_permission_on :users, :to => [:manage, :update_roles]
   end
 
   role :admin do

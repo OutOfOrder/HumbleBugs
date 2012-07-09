@@ -15,10 +15,12 @@
     <%= @user.time_zone %>
   </p>
 
-  <p>
-    <b>Roles:</b>
-    <%= role_titles(@user.role_symbols).join(', ') %>
-  </p>
+  <% permitted_to? :update_roles, @user do %>
+      <p>
+        <b>Roles:</b>
+        <%= role_titles(@user.role_symbols).join(', ') %>
+      </p>
+  <% end %>
 
   <%= link_to 'Edit', edit_user_path(@user) if permitted_to? :edit %>
   <% permitted_to? :delete, @user do %>
