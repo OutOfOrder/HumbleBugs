@@ -13,6 +13,11 @@ module ApplicationHelper
     platforms.map(&:name).join(separator)
   end
 
+  def timeago(time, options = {})
+    options[:class] ||= "timeago"
+    content_tag(:time, l(time), options.merge(:datetime => time.getutc.iso8601)) if time
+  end
+
   def multi_checkbox model, name, value, checked = false, options = {}
     html_options = {
       "type" => "checkbox",

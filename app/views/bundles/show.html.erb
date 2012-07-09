@@ -13,7 +13,7 @@
 
     <p class="target">
       <b>Target date:</b>
-      <%= l @bundle.target_date if @bundle.target_date.present?%>
+      <%= timeago @bundle.target_date if @bundle.target_date.present?%>
     </p>
 
     <p class="description">
