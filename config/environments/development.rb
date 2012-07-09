@@ -36,7 +36,7 @@ HumbleBugs::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = {
-    host: 'localhost:3000'
+    host: 'humblebugs.dev'
   }
   config.action_mailer.delivery_method = :file
   config.action_mailer.file_settings = {
