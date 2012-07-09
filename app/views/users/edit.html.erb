@@ -24,7 +24,9 @@
         <%= f.text_field :name %>
       </div>
       <div class="field">
-        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
+        <%= f.label :time_zone %>
+        <br/>
+        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, :prompt => '- Select Timezone -' %>
       </div>
       <% permitted_to? :update_roles, @user do %>
           <div class="field">

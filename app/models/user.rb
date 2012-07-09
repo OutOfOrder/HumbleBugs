@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation, :time_zone
 
   before_create { generate_token(:auth_token) }
+  before_save :set_null_fields
 
   scope :with_role, -> role do
     joins(:roles).where(:user_roles => {role: role.to_s})
@@ -35,5 +36,10 @@ class User < ActiveRecord::Base
     else
       [:unverified]
     end
+  end
+
+private
+  def set_null_fields
+    self.time_zone = nil if self.time_zone.blank?
   end
 end
