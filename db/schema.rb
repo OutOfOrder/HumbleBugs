@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120619200645) do
+ActiveRecord::Schema.define(:version => 20120710013644) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -125,15 +125,18 @@ ActiveRecord::Schema.define(:version => 20120619200645) do
     t.string   "email"
     t.string   "name"
     t.string   "password_digest"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.string   "auth_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.string   "time_zone"
+    t.string   "confirm_account_token"
+    t.datetime "confirm_account_sent_at"
   end
 
   add_index "users", ["auth_token"], :name => "index_users_on_auth_token", :unique => true
+  add_index "users", ["confirm_account_token"], :name => "index_users_on_confirm_account_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["password_reset_token"], :name => "index_users_on_password_reset_token", :unique => true
 

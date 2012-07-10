@@ -41,6 +41,7 @@ class UsersController < ApplicationController
       if @user.save
         format.html { redirect_to login_path, notice: 'Signed Up!' }
         format.json { render json: @user, status: :created, location: @user }
+        @user.send_confirm_account
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }

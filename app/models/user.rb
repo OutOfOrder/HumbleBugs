@@ -30,6 +30,13 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
+  def send_confirm_account
+    generate_token :confirm_account_token
+    self.confirm_account_sent_at = Time.zone.now
+    save!
+    UserMailer.confirm_account(self).deliver
+  end
+
   def role_symbols
     if roles.present? then
       roles.map { |m| m.role.to_sym }

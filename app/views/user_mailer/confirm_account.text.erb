@@ -1,0 +1,9 @@
+Welcome <%= @user.name %>,
+
+Before you can use your new HumbleBugs account to report issues I need you to confirm your account's email address.
+
+Simply click on the following link and you can start using HumbleBugs.
+
+<%= confirm_account_url(@user.confirm_account_token) %>
+
+If you did not create an account at <%= root_url %>, simply ignore this email.

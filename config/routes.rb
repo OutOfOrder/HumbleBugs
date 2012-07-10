@@ -35,6 +35,8 @@ HumbleBugs::Application.routes.draw do
   get '/forgot_password/:id' => 'password_reset#edit', :as => :password_reset
   put '/forgot_password/:id' => 'password_reset#update', :as => :password_reset
 
+  get '/confirm_account/:id' => 'confirm_account#confirm', :as => :confirm_account
+
   get 'signup' => 'users#new', :as => :signup
 
   # The priority is based upon order of creation:

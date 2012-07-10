@@ -9,4 +9,10 @@ class UserMailer < ActionMailer::Base
 
     mail to: user.email
   end
+
+  def confirm_account(user)
+    @user = user
+
+    mail to: user.email
+  end
 end
