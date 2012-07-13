@@ -86,7 +86,7 @@ protected
     if @game.nil?
       @issue = Issue.new (params[:issue] || {}).merge(:author => current_user)
     else
-      @issue = @game.issues.new (params[:issue] || {}).merge(:author => current_user)
+      @issue = @game.issues.build (params[:issue] || {}).merge(:author => current_user)
     end
   end
 end

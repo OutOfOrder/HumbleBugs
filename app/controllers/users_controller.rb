@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     if @user.permitted_to? :update_roles
-      roles = params[:roles].keys.map(&:to_sym)
+      roles = (params[:roles] || {}).keys.map(&:to_sym)
       cur_roles = @user.role_symbols
       added = roles - cur_roles
       removed = cur_roles - roles

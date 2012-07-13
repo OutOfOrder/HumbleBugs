@@ -8,7 +8,7 @@ describe GamesController do
 
   describe "GET index" do
     it "assigns all games as @games" do
-      game = FactoryGirl.create(:game)
+      game = FactoryGirl.create(:game, bundle: nil)
       get_with @user, :index
       assigns(:games).should eq([game])
     end
