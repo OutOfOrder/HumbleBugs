@@ -76,11 +76,16 @@ shared_examples 'basic issues on' do
 end
 
 shared_examples 'basic comments on' do
-  include_examples 'can X to this', :read, :create do
+  include_examples 'can X to this', :read do
     let(:this) { FactoryGirl.create :comment, commentable: commentable }
   end
+  context 'someone elses comments' do
+    include_examples 'can not X to this', :create, :update do
+      let(:this) { FactoryGirl.create :comment, commentable: commentable }
+    end
+  end
   context 'for a comment I created' do
-    include_examples 'can X to this', :read, :update do
+    include_examples 'can X to this', :read, :create, :update do
       let(:this) { FactoryGirl.create :comment, author: Authorization.current_user, commentable: commentable }
     end
   end

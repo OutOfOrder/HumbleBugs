@@ -16,10 +16,10 @@ authorization do
     has_permission_on :issues, :to => [:read, :update] do
       if_attribute :author => is { user }
     end
-    has_permission_on :comments, :to => [:read,:create] do
+    has_permission_on :comments, :to => :read do
       if_permitted_to :read, :commentable
     end
-    has_permission_on :comments, :to => :update, :join_by => :and do
+    has_permission_on :comments, :to => [:create,:update], :join_by => :and do
       if_permitted_to :read, :commentable
       if_attribute :author => is { user }
     end

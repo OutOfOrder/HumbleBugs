@@ -95,7 +95,7 @@ describe :porter do
         let(:commentable) { FactoryGirl.create :issue, game: FactoryGirl.create(:game, :with_active_bundle) }
       end
     end
-    context 'for an issue ona game I am porting' do
+    context 'for an issue on a game I am porting' do
       include_examples 'basic comments on' do
         let(:commentable) {
           port = FactoryGirl.create :port, porter: @user
