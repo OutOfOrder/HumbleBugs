@@ -77,6 +77,10 @@ protected
     @commentable = find_polymorphic
   end
 
+  def new_comment_from_params
+    @comment = @commentable.comments.build (params[:comment] || {}).merge(:author => current_user)
+  end
+
 private
   def find_polymorphic
     params.each do |name, value|

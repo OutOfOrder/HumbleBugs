@@ -43,7 +43,7 @@ describe CommentsController do
 
   describe "POST create" do
     before do
-      @comment = FactoryGirl.build(:comment, :commentable => @commentable).attributes.symbolize_keys.reject {|k,v| v.nil? }
+      @comment = FactoryGirl.attributes_for :comment
     end
     describe "with valid params" do
       it "creates a new Comment" do
@@ -61,6 +61,12 @@ describe CommentsController do
       it "redirects to the created comment" do
         post_with @user, :create, @base_params.merge({:comment => @comment})
         response.should redirect_to([@commentable, Comment.last])
+      end
+
+      it "should set the author to the logged in user" do
+        post_with @user, :create, @base_params.merge({:comment => @comment})
+
+        assigns(:comment).author.should == @user
       end
     end
 
