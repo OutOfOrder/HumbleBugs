@@ -5,17 +5,8 @@ describe CommentsController do
   before do
     # probably should be a MOCK
     @commentable = FactoryGirl.create(:issue)
-    @base_params = {:issue_id => @commentable.to_param}
+    @base_params = {:issue_id => @commentable.to_param, :format => :js}
     @user = FactoryGirl.create :user, :roles => [:dev]
-  end
-
-  describe "GET index" do
-    it "assigns all comments as @comments" do
-      FactoryGirl.create(:comment)
-      comment = FactoryGirl.create(:comment, :commentable => @commentable)
-      get_with @user, :index, @base_params
-      assigns(:comments).should eq([comment])
-    end
   end
 
   describe "GET show" do
@@ -58,9 +49,9 @@ describe CommentsController do
         assigns(:comment).should be_persisted
       end
 
-      it "redirects to the created comment" do
+      it "renders the create action" do
         post_with @user, :create, @base_params.merge({:comment => @comment})
-        response.should redirect_to([@commentable, Comment.last])
+        response.should render_template("create")
       end
 
       it "should set the author to the logged in user" do
@@ -82,7 +73,7 @@ describe CommentsController do
         # Trigger the behavior that occurs when invalid params are submitted
         Comment.any_instance.stub(:save).and_return(false)
         post_with @user, :create, @base_params.merge({:comment => {}})
-        response.should render_template("new")
+        response.should render_template("edit")
       end
     end
   end
@@ -105,10 +96,10 @@ describe CommentsController do
         assigns(:comment).should eq(comment)
       end
 
-      it "redirects to the comment" do
+      it "renders the show template" do
         comment = FactoryGirl.create(:comment, :commentable => @commentable)
         put_with @user, :update, @base_params.merge({:id => comment.to_param, :comment => FactoryGirl.attributes_for(:comment)})
-        response.should redirect_to([@commentable, comment])
+        response.should render_template("show")
       end
     end
 
@@ -139,10 +130,10 @@ describe CommentsController do
       }.to change(Comment, :count).by(-1)
     end
 
-    it "redirects to the comments list" do
+    it "renders the destoy action" do
       comment = FactoryGirl.create(:comment, :commentable => @commentable)
       delete_with @user, :destroy, @base_params.merge({:id => comment.to_param})
-      response.should redirect_to([@commentable, Comment])
+      response.should render_template("destroy")
     end
   end
 

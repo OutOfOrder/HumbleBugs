@@ -1,15 +1,5 @@
 class CommentsController < ApplicationController
   filter_resource_access :nested_in => :commentable
-  # GET /:polymorphic/1/comments
-  # GET /:polymorphic/1/comments.json
-  def index
-    @comments = @commentable.comments.with_permissions_to
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @comments }
-    end
-  end
 
   # GET /:polymorphic/1/comments/1
   # GET /:polymorphic/1/comments/1.json
@@ -67,7 +57,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to [@commentable, Comment] }
+      format.js # destroy.js.erb
       format.json { head :no_content }
     end
   end
