@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_time_zone, :set_auth_user
 
+  helper ExtraURLHelpers
+  include ExtraURLHelpers
+
 private
 
   def current_user
