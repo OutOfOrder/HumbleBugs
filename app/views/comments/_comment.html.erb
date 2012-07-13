@@ -1,0 +1,12 @@
+<div id="comment_<%= comment.id %>">
+  <p>
+    <%= comment.comment %>
+  </p>
+
+  <p>
+    <b>Posted By:</b>
+    <%= comment.author.name %>
+  </p>
+
+  <%= link_to 'Edit', edit_comment_path(comment), remote: true if permitted_to? :edit, comment %>
+</div>

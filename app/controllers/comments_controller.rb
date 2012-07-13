@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
   # GET /:polymorphic/1/comments/1.json
   def show
     respond_to do |format|
-      format.html # show.html.erb
+      format.js # show.js.erb
       format.json { render json: @comment }
     end
   end
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
   # GET /:polymorphic/1/comments/new.json
   def new
     respond_to do |format|
-      format.html # new.html.erb
+      format.js # new.js.erb
       format.json { render json: @comment }
     end
   end
@@ -38,10 +38,10 @@ class CommentsController < ApplicationController
   def create
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to [@commentable, @comment], notice: 'Comment was successfully created.' }
+        format.js
         format.json { render json: @comment, status: :created, location: @comment }
       else
-        format.html { render action: "new" }
+        format.js { render action: "edit" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -52,10 +52,10 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to [@commentable, @comment], notice: 'Comment was successfully updated.' }
+        format.js { render action: "show" }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.js { render action: "edit" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end

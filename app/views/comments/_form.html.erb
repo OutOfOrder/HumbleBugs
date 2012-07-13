@@ -1,23 +1,20 @@
-<%= form_for([@commentable, @comment]) do |f| %>
-  <fieldset>
-    <legend><%= title %></legend>
+<%= form_for([@commentable, @comment], remote: true) do |f| %>
     <% if @comment.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+        <div id="error_explanation">
+          <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-        <ul>
-          <% @comment.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
+          <ul>
+            <% @comment.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
     <% end %>
 
     <div class="field">
-      <%= f.text_area :comment %>
+      <%= f.text_area :comment, cols: 30, rows: 4 %>
     </div>
     <div class="actions">
       <%= f.submit %>
     </div>
-  </fieldset>
 <% end %>

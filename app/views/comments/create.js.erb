@@ -1,0 +1,3 @@
+//$('#comment_comment').text('');
+$('#comment_new').closest(':ui-dialog').dialog('close');
+$('#comments').append("<%= escape_javascript render(@comment) %>");

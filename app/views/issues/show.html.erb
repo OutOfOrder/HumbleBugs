@@ -27,3 +27,4 @@
     <%= link_to 'Back', game_path(@issue.game) %>
   </p>
 </fieldset>
+<%= render 'comments/comment_list', :commentable => @issue %>

@@ -109,7 +109,9 @@ p.actions {
 }
 
 form {
-  @include blueprint-form;
+  @include blueprint-form-layout;
+  @include blueprint-form-borders;
+  @include blueprint-form-sizes(95%, 95%, 6em);
   select {
     border-color: #bbbbbb;
     &:focus {
@@ -133,7 +135,7 @@ form {
     }
   }
   #error_explanation {
-    width: 45em;
+    max-width: 45em;
     @include box-shadow(0px 0px 2px 2px rgba($error-color,0.5));
     padding: 1ex;
     padding-bottom: 0;
