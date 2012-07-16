@@ -1,12 +1,14 @@
-<div id="comment_<%= comment.id %>">
-  <p>
+<div class="comment" id="comment_<%= comment.id %>">
+  <div class="comment_entry">
     <%= comment.comment %>
-  </p>
-
-  <p>
-    <b>Posted By:</b>
-    <%= comment.author.name %>
-  </p>
-
-  <%= link_to 'Edit', edit_comment_path(comment), remote: true if permitted_to? :edit, comment %>
+  </div>
+  <div class="authorship">
+    <b>Posted</b> <%= timeago comment.created_at %> <b>by</b> <%= comment.author.name %>
+  </div>
+  <div class="actions">
+    <%= link_to 'Edit', edit_comment_path(comment), remote: true if permitted_to? :edit, comment %>
+    <% permitted_to? :delete, comment do %>
+        | <%= link_to 'Delete', comment_path(comment), confirm: 'Are you sure?', method: :delete %>
+    <% end %>
+  </div>
 </div>
