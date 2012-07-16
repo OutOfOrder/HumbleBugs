@@ -9,7 +9,9 @@ en:
 
   user_mailer:
     password_reset:
-      subject: "Password Reset"
+      subject: "Reset your HumbleBugs account password"
+    confirm_account:
+      subject: "Confirm your HumbleBugs account"
   feedback_mailer:
     submit_feedback:
       subject: "HumbleBugs feedback"

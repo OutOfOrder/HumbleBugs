@@ -6,7 +6,7 @@ describe UserMailer do
     let(:mail) { UserMailer.password_reset(user) }
 
     it "renders the headers" do
-      mail.subject.should eq("Password Reset")
+      mail.subject.should eq("Reset your HumbleBugs account password")
       mail.to.should eq([user.email])
       mail.from.should eq(["myfromaddress@example.com"])
     end
@@ -16,4 +16,18 @@ describe UserMailer do
     end
   end
 
+  describe "confirm_account" do
+    user = FactoryGirl.create(:user, confirm_account_token: 'testtoken')
+    let(:mail) { UserMailer.confirm_account(user) }
+
+    it "renders the headers" do
+      mail.subject.should eq("Confirm your HumbleBugs account")
+      mail.to.should eq([user.email])
+      mail.from.should eq(["myfromaddress@example.com"])
+    end
+
+    it "renders the body" do
+      mail.body.encoded.should match("/confirm_account/testtoken")
+    end
+  end
 end
