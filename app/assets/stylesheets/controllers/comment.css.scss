@@ -1,0 +1,36 @@
+@import "blueprint";
+@import "blueprint/liquid";
+
+@import "library";
+@import "config";
+
+#comments {
+  .comment {
+    @include container;
+
+    padding: 1ex 1em;
+    border: 1px solid $secondary-legend-color;
+    @include box-shadow($secondary-legend-color 0px 0px 2px 1px);
+    @include border-radius(1em);
+    background-color: $secondary-bg-color;
+
+    @include background(linear-gradient(adjust-lightness($secondary-bg-color,15%), $secondary-bg-color));
+
+    margin-bottom: 1ex;
+
+    div.comment_entry {
+      padding-bottom: 1ex;
+      border-bottom: 1px solid $secondary-legend-color;
+      margin-bottom: 1ex;
+    }
+    div.authorship {
+      font-size: 0.95em;
+      @include column($blueprint-grid-columns / 4);
+    }
+    div.actions {
+      font-size: 0.95em;
+      @include column($blueprint-grid-columns / 2);
+      @include last;
+    }
+  }
+}
