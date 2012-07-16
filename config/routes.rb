@@ -13,7 +13,10 @@ HumbleBugs::Application.routes.draw do
     resources :comments, :except => [:index]
   end
 
-  resources :users
+  resources :users do
+    get :nda, :on => :member
+    post :nda, :on => :member, :action => 'sign_nda'
+  end
 
   resources :predefined_tags do
     collection do

@@ -51,5 +51,8 @@ describe :bundle_admin do
 
   context :users do
     include_examples 'can X to all', :create, :read, :update, :delete, :update_roles
+    include_examples 'sign my nda' do
+      let(:this) { @user }
+    end
   end
 end

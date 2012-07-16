@@ -134,5 +134,8 @@ describe :tester do
 
   context :users do
     include_examples 'edit my own user record'
+    include_examples 'sign my nda' do
+      let(:this) { @user }
+    end
   end
 end

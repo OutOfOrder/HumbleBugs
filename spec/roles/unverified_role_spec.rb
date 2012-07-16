@@ -82,5 +82,6 @@ describe :unverified do
 
   context :users do
     include_examples 'edit my own user record'
+    include_examples 'can not X to any', :nda
   end
 end

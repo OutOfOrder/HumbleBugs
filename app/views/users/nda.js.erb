@@ -1,0 +1,25 @@
+$('<div><iframe style="width:100%;height:99%;" src="<%= escape_javascript ENV['HUMBLE_NDA'] %>"/></div>').dialog({
+    title: 'Review NDA!',
+    modal: true,
+    resizable: false,
+    width: $(window).width() * 0.8,
+    height: $(window).height() * 0.9,
+    buttons: {
+        Sign: function() {
+            var dialog = this;
+            $.post('<%= escape_javascript nda_user_path(@user) %>', {agree:true}).done(function(data) {
+                $(dialog).dialog('close');
+                $('#review_nda').replaceWith(data.date);
+                $.jGrowl('You have signed the NDA', {title: 'Notice'});
+            }).fail(function() {
+                alert('Error occurred while trying to sign the NDA!');
+            });
+        },
+        Dismiss: function() {
+            $(this).dialog('close');
+        }
+    },
+    close: function() {
+        $(this).remove();
+    }
+});

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120710013644) do
+ActiveRecord::Schema.define(:version => 20120716204710) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -133,11 +133,13 @@ ActiveRecord::Schema.define(:version => 20120710013644) do
     t.string   "time_zone"
     t.string   "confirm_account_token"
     t.datetime "confirm_account_sent_at"
+    t.datetime "nda_signed_date"
   end
 
   add_index "users", ["auth_token"], :name => "index_users_on_auth_token", :unique => true
   add_index "users", ["confirm_account_token"], :name => "index_users_on_confirm_account_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["nda_signed_date"], :name => "index_users_on_nda_signed_date"
   add_index "users", ["password_reset_token"], :name => "index_users_on_password_reset_token", :unique => true
 
 end

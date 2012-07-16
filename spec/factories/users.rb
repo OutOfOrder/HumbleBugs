@@ -20,6 +20,10 @@ FactoryGirl.define do
       confirm_account_sent_at { Time.now }
     end
 
+    trait :signed_nda do
+      nda_signed_date { Time.now }
+    end
+
     after(:build) do |user, evaluator|
       evaluator.roles.each { |m| user.roles.build(:role => m.to_s) }
     end

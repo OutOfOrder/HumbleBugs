@@ -46,7 +46,7 @@ authorization do
     includes :active_bundles
     includes :base_reporter
 
-    has_permission_on :users, :to => [:read, :update] do
+    has_permission_on :users, :to => [:read, :update, :nda] do
       if_attribute :id => is { user.id }
     end
   end
@@ -97,6 +97,9 @@ authorization do
       if_permitted_to :manage, :commentable
     end
     has_permission_on :users, :to => [:manage, :update_roles]
+    has_permission_on :users, :to => [:nda] do
+      if_attribute :id => is { user.id }
+    end
   end
 
   role :admin do

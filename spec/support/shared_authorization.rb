@@ -90,3 +90,13 @@ shared_examples 'basic comments on' do
     end
   end
 end
+
+shared_examples 'sign my nda' do
+  it 'should be able to view and sign their NDA' do
+    this.should be_allowed_to :nda
+  end
+  it 'should be able to view and sign the NDA of another user' do
+    user = FactoryGirl.create :user
+    user.should_not be_allowed_to :nda
+  end
+end

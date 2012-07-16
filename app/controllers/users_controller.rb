@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  filter_resource_access
+  filter_resource_access :additional_member => {:sign_nda => :nda}
 
   # GET /users
   # GET /users.json
@@ -32,6 +32,20 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  # GET /users/1/nda
+  def nda
+  end
+
+  # POST /users/1/nda
+  def sign_nda
+    if params[:agree]
+      @user.update_attribute(:nda_signed_date, Time.now)
+      render json: {success: true, date: l(@user.nda_signed_date)}, status: :ok
+    else
+      render text: 'invalid request', status: 400
+    end
   end
 
   # POST /users

@@ -15,6 +15,15 @@
     <%= @user.time_zone %>
   </p>
 
+  <p>
+    <b>Signed NDA:</b>
+    <% if @user.nda_signed_date? %>
+        <%= l @user.nda_signed_date %>
+    <% else %>
+        <%= link_to "Review NDA", nda_user_path(@user), remote: true, id: 'review_nda' %>
+    <% end %>
+  </p>
+
   <% permitted_to? :update_roles, @user do %>
       <p>
         <b>Roles:</b>
