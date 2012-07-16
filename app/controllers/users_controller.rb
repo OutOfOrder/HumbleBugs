@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   def create
     respond_to do |format|
       if @user.save
-        format.html { redirect_to login_path, notice: 'Signed Up!' }
+        format.html { redirect_to login_url, notice: 'Signed Up!' }
         format.json { render json: @user, status: :created, location: @user }
         @user.send_confirm_account
       else
