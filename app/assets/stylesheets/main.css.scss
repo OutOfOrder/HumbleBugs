@@ -176,4 +176,9 @@ form {
 #perm_denied {
   margin: 1em;
   @include error;
+  .ui-dialog & { // Except when in a UI dialog.
+    margin: 0;
+    background: none;
+    border: none;
+  }
 }

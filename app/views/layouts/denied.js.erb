@@ -1,0 +1,13 @@
+$('<%= escape_javascript render :template => 'layouts/denied.html' %>').dialog({
+    title: 'Permission Denied!',
+    modal: true,
+    resizable: false,
+    buttons: {
+        Dismiss: function() {
+            $(this).dialog('close');
+        }
+    },
+    close: function() {
+        $(this).remove();
+    }
+});

@@ -19,7 +19,10 @@ protected
   ## declarative authorization error handler redirector
   def permission_denied
     if current_user
-      render 'layouts/denied'
+      respond_to do |format|
+        format.html { render 'layouts/denied' }
+        format.js { render 'layouts/denied.js' }
+      end
     else
       redirect_to login_url r: request.fullpath
     end
