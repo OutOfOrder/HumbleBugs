@@ -172,3 +172,8 @@ form {
     @include blueprint-inline-form;
   }
 }
+
+#perm_denied {
+  margin: 1em;
+  @include error;
+}

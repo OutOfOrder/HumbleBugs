@@ -22,7 +22,11 @@ class SessionsController < ApplicationController
           user.update_attribute :time_zone, tz.name
         end
       end
-      redirect_to root_url, :notice => "Logged in!"
+      if params[:r].present?
+        redirect_to request.protocol + request.host_with_port + params[:r], :notice => "Logged in!"
+      else
+        redirect_to root_url, :notice => "Logged in!"
+      end
     else
       flash[:alert] = "Invalid email or password"
       render "new"

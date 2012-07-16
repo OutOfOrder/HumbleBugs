@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
   helper ExtraURLHelpers
   include ExtraURLHelpers
 
-private
-
+protected
   def current_user
     if Rails.env.test?
       @current_user ||= session[:user]
@@ -17,6 +16,16 @@ private
   end
   helper_method :current_user
 
+  ## declarative authorization error handler redirector
+  def permission_denied
+    if current_user
+      render 'layouts/denied'
+    else
+      redirect_to login_url r: request.fullpath
+    end
+  end
+
+private
   def set_auth_user
     Authorization.current_user = current_user
   end

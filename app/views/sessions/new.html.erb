@@ -1,4 +1,5 @@
 <%= form_tag login_path, :class => :login_form do %>
+    <%= hidden_field_tag :r, params[:r] %>
   <fieldset>
     <legend>Log in</legend>
     <div class="field">
