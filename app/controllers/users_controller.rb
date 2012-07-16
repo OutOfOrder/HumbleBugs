@@ -43,6 +43,7 @@ class UsersController < ApplicationController
         format.json { render json: @user, status: :created, location: @user }
         @user.send_confirm_account
       else
+        @user.errors.delete(:password_digest)
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end

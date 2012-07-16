@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :roles, :class_name => 'UserRole', :inverse_of => :user, :dependent => :delete_all, :autosave => true
 
-  validates_presence_of :password, :on => :create
+  validates_presence_of :password, :password_confirmation, :on => :create
   validates_uniqueness_of :email, :case_sensitive => false
   validates :email, :presence => true, :email => true
   validates_presence_of :name
@@ -42,6 +42,19 @@ class User < ActiveRecord::Base
       roles.map { |m| m.role.to_sym }
     else
       [:unverified]
+    end
+  end
+
+  def update_with_password(params = {})
+    params ||= {}
+    if params[:password].blank?
+      self.errors.add(:password, :blank)
+      false
+    elsif params[:password_confirmation].blank?
+      self.errors.add(:password_confirmation, :blank)
+      false
+    else
+      update_attributes(params)
     end
   end
 
