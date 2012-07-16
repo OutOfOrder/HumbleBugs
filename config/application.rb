@@ -79,6 +79,6 @@ module HumbleBugs
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    ActionMailer::Base.default from: 'contact@humblebundle.com'
+    ActionMailer::Base.default from: (ENV['HUMBLE_FROM'] || 'test@example.com')
   end
 end
