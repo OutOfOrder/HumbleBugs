@@ -3,7 +3,7 @@
   <div class="details">
     <p>
       <b>Game:</b>
-      <%= @issue.game.name %>
+      <%= link_to @issue.game.name, @issue.game %>
     </p>
 
     <p>
@@ -23,8 +23,7 @@
   </div>
 
   <p class="actions">
-    <%= link_to 'Edit', edit_game_issue_path(@issue.game, @issue) if permitted_to? :edit %> |
-    <%= link_to 'Back', game_path(@issue.game) %>
+    <%= link_to 'Edit', edit_game_issue_path(@issue.game, @issue) if permitted_to? :edit %>
   </p>
 </fieldset>
 <%= render 'comments/comment_list', :commentable => @issue %>
