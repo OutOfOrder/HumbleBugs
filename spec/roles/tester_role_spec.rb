@@ -87,7 +87,6 @@ describe :tester do
         let(:commentable) { FactoryGirl.create :issue, game: FactoryGirl.create(:game, :testing) }
       end
     end
-    include_examples 'can not X to any', :delete
   end
 
   context :ports do

@@ -103,7 +103,6 @@ describe :porter do
         }
       end
     end
-    include_examples 'can not X to any', :delete
   end
 
   context :ports do

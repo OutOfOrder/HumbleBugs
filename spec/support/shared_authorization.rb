@@ -80,12 +80,12 @@ shared_examples 'basic comments on' do
     let(:this) { FactoryGirl.create :comment, commentable: commentable }
   end
   context 'someone elses comments' do
-    include_examples 'can not X to this', :create, :update do
+    include_examples 'can not X to this', :create, :update, :delete do
       let(:this) { FactoryGirl.create :comment, commentable: commentable }
     end
   end
   context 'for a comment I created' do
-    include_examples 'can X to this', :read, :create, :update do
+    include_examples 'can X to this', :read, :create, :update, :delete do
       let(:this) { FactoryGirl.create :comment, author: Authorization.current_user, commentable: commentable }
     end
   end

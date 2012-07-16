@@ -76,7 +76,6 @@ describe :user do
         let(:commentable) { FactoryGirl.create :issue, game: FactoryGirl.create(:game, :with_active_bundle) }
       end
     end
-    include_examples 'can not X to any', :delete
   end
 
   context :ports do
