@@ -6,7 +6,7 @@ class FeedbackController < ApplicationController
   def create
     @feedback = Feedback.new(params[:feedback])
     if @feedback.valid?
-      FeedbackMailer.submit_feedback(current_user, @feedback)
+      FeedbackMailer.submit_feedback(current_user, @feedback).deliver
     else
       render :action => 'new'
     end

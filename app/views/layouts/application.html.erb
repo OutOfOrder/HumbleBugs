@@ -21,9 +21,9 @@
     </div>
     <div id="user-nav">
       <div>
-        <%= link_to "Feedback", feedback_path, remote: true %> |
         <% if current_user %>
-            <%= link_to "My Account", current_user, :title => "Logged in as #{current_user.name} - #{current_user.email}" %>
+            <%= link_to "Feedback", feedback_path, remote: true %>
+            | <%= link_to "My Account", current_user, :title => "Logged in as #{current_user.name} - #{current_user.email}" %>
             | <%= link_to "Log out", logout_path %>
         <% else %>
             <%= link_to "Sign up", signup_path %> or

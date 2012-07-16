@@ -56,6 +56,21 @@ describe UsersController do
         post_with @user, :create, {:user => FactoryGirl.attributes_for(:user)}
         response.should redirect_to(login_url)
       end
+
+      it "should call send_confirm_account on the matched user" do
+        User.any_instance.should_receive(:send_confirm_account)
+        post_with @user, :create, {:user => FactoryGirl.attributes_for(:user)}
+      end
+
+      it "builds and sends the confirm_account email" do
+        mailer = double("UserMailer")
+        mailer.should_receive(:deliver)
+        UserMailer.should_receive(:confirm_account).
+            with(an_instance_of(User)).
+            and_return(mailer)
+
+        post_with @user, :create, {:user => FactoryGirl.attributes_for(:user)}
+      end
     end
 
     describe "with invalid params" do
