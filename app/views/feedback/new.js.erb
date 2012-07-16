@@ -1,0 +1,8 @@
+$("<div id=\"feedback_new\"><%= escape_javascript render 'form' %></div>").dialog({
+    modal:true,
+    title:'Send Feedback',
+    width: '40em',
+    close:function () {
+        $(this).remove();
+    }
+});

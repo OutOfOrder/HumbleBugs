@@ -23,6 +23,9 @@ HumbleBugs::Application.routes.draw do
     end
   end
 
+  get '/feedback' => 'feedback#new', :as => :feedback
+  post '/feedback' => 'feedback#create', :as => :feedback
+
   get '/login' => 'sessions#new', :as => :login
   if Rails.env.test? || Rails.env.development?
     post '/secret_login' => 'sessions#secret_login', :as => :secret_login

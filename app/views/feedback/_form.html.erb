@@ -1,0 +1,20 @@
+<%= form_for(@feedback, url: feedback_path, remote: true) do |f| %>
+    <% if @feedback.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@feedback.errors.count, "error") %> prohibited this feedback from being sent:</h2>
+
+          <ul>
+            <% @feedback.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.text_area :message, cols: 30, rows: 4 %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
