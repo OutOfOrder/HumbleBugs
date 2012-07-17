@@ -17,10 +17,11 @@ class Import < Thor
     #skip header
     for row in 2..ws.num_rows
       pass = SecureRandom.urlsafe_base64
+      Date.parse
       user = {
           name: ws[row, 3],
           email: ws[row, 4],
-          nda_signed_date: ws[row, 9],
+          nda_signed_date: Date.strptime(ws[row, 9], '%m/%d/%Y'),
           password: pass,
           password_confirmation: pass
       }
@@ -30,6 +31,12 @@ class Import < Thor
         u.nda_signed_date = nda_date
         u.roles.build role: 'user'
         u.save!
+
+        u.systems.create! name: 'Imported System 1',
+            operating_system: ws[row, 5],
+            processor: ws[row, 6],
+            graphics_card: ws[row, 7],
+            graphics_driver: ws[row, 8]
       end
     end
   end
