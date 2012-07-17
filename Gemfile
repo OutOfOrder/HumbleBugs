@@ -51,4 +51,4 @@ group :test do
   gem 'ffaker', :group => [:development, :test]
 end
 
-gem 'google_drive', :group => [:development], :require => false
+gem 'google_drive', :require => false
