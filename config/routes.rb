@@ -14,6 +14,8 @@ HumbleBugs::Application.routes.draw do
   end
 
   resources :users do
+    resources :systems
+
     get :nda, :on => :member
     post :nda, :on => :member, :action => 'sign_nda'
   end

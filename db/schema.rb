@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716204710) do
+ActiveRecord::Schema.define(:version => 20120717020212) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -93,6 +93,20 @@ ActiveRecord::Schema.define(:version => 20120716204710) do
 
   add_index "releases", ["game_id"], :name => "index_releases_on_game_id"
   add_index "releases", ["owner_id"], :name => "index_releases_on_owner_id"
+
+  create_table "systems", :force => true do |t|
+    t.integer  "user_id",          :null => false
+    t.string   "name",             :null => false
+    t.text     "description"
+    t.string   "operating_system"
+    t.string   "processor"
+    t.string   "graphics_card"
+    t.string   "graphics_driver"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "systems", ["user_id"], :name => "index_systems_on_user_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

@@ -1,0 +1,36 @@
+<fieldset>
+  <legend>System details</legend>
+  <p>
+    <b>Name:</b>
+    <%= @system.name %>
+  </p>
+
+  <p>
+    <b>Description:</b>
+    <%= @system.description %>
+  </p>
+
+  <p>
+    <b>Operating system:</b>
+    <%= @system.operating_system %>
+  </p>
+
+  <p>
+    <b>Processor:</b>
+    <%= @system.processor %>
+  </p>
+
+  <p>
+    <b>Graphics card:</b>
+    <%= @system.graphics_card %>
+  </p>
+
+  <p>
+    <b>Graphics driver:</b>
+    <%= @system.graphics_driver %>
+  </p>
+
+
+  <%= link_to 'Edit', edit_user_system_path(@user, @system) if permitted_to? :edit %> |
+  <%= link_to 'Back', user_systems_path(@user) %>
+</fieldset>

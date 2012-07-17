@@ -1,0 +1,31 @@
+<h1>Listing systems</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Operating system</th>
+    <th>Processor</th>
+    <th>Graphics Card</th>
+    <th>Graphics driver</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @systems.each do |system| %>
+  <tr>
+    <td><%= link_to system.name, [@user, system] %></td>
+    <td><%= system.operating_system %></td>
+    <td><%= system.processor %></td>
+    <td><%= system.graphics_card %></td>
+    <td><%= system.graphics_driver %></td>
+    <td><%= link_to 'Edit', edit_user_system_path(@user, system) if permitted_to? :edit, system %></td>
+    <% permitted_to? :delete, system do %>
+        <td><%= link_to 'Delete', [@user, system], confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New System', new_user_system_path(@user) if permitted_to? :create %>

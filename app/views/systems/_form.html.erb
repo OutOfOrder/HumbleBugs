@@ -1,0 +1,50 @@
+<%= form_for([@user, @system]) do |f| %>
+    <fieldset>
+      <legend><%= title %></legend>
+      <% if @system.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@system.errors.count, "error") %> prohibited this system from being saved:</h2>
+
+            <ul>
+              <% @system.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :name %>
+        <br/>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :description %>
+        <br/>
+        <%= f.text_area :description %>
+      </div>
+      <div class="field">
+        <%= f.label :operating_system %>
+        <br/>
+        <%= f.text_field :operating_system %>
+      </div>
+      <div class="field">
+        <%= f.label :processor %>
+        <br/>
+        <%= f.text_field :processor %>
+      </div>
+      <div class="field">
+        <%= f.label :graphics_card %>
+        <br/>
+        <%= f.text_field :graphics_card %>
+      </div>
+      <div class="field">
+        <%= f.label :graphics_driver %>
+        <br/>
+        <%= f.text_field :graphics_driver %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </fieldset>
+<% end %>
