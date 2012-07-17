@@ -82,4 +82,8 @@ describe :guest do
     end
     include_examples 'can not X to any', :read, :update, :delete, :update_roles, :nda
   end
+
+  context :systems do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
 end

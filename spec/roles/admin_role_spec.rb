@@ -7,6 +7,7 @@ describe :admin do
   end
   after :all do
     Authorization.current_user = nil
+    @user.destroy
   end
 
   it 'should have the admin role' do

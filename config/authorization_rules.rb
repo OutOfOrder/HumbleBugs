@@ -49,6 +49,9 @@ authorization do
     has_permission_on :users, :to => [:read, :update, :nda] do
       if_attribute :id => is { user.id }
     end
+    has_permission_on :systems, :to => [:manage] do
+      if_attribute :user => is { user }
+    end
   end
 
   role :tester do
@@ -99,6 +102,12 @@ authorization do
     has_permission_on :users, :to => [:manage, :update_roles]
     has_permission_on :users, :to => [:nda] do
       if_attribute :id => is { user.id }
+    end
+    has_permission_on :systems, :to => :read do
+      if_permitted_to :read, :user
+    end
+    has_permission_on :systems, :to => :manage do
+      if_attribute :user => is { user }
     end
   end
 

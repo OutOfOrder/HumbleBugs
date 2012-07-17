@@ -7,6 +7,7 @@ describe :unverified do
   end
   after :all do
     Authorization.current_user = nil
+    @user.destroy
   end
 
   it 'should have the unverified role' do
@@ -83,5 +84,9 @@ describe :unverified do
   context :users do
     include_examples 'edit my own user record'
     include_examples 'can not X to any', :nda
+  end
+
+  context :systems do
+    include_examples 'can not X to any', :create, :read, :update, :delete
   end
 end

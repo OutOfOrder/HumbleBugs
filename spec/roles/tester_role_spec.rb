@@ -7,6 +7,7 @@ describe :tester do
   end
   after :all do
     Authorization.current_user = nil
+    @user.destroy
   end
 
   it 'should have the tester role' do
@@ -136,6 +137,19 @@ describe :tester do
     include_examples 'edit my own user record'
     include_examples 'sign my nda' do
       let(:this) { @user }
+    end
+  end
+
+  context :systems do
+    context 'my systems' do
+      include_examples 'can X to this', :read, :create, :update, :delete do
+        let(:this) { FactoryGirl.create :system, user: @user }
+      end
+    end
+    context 'other users systems' do
+      include_examples 'can not X to this', :read, :create, :update, :delete do
+        let(:this) { FactoryGirl.create :system }
+      end
     end
   end
 end
