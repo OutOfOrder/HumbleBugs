@@ -58,4 +58,18 @@ protected
       end
     end
   end
+
+  def find_polymorphic(allowed = [])
+    params.each do |name, value|
+      if name.ends_with?("_id")
+        klass = name[0..-4]
+        if allowed.blank? || allowed.include?(klass.to_sym)
+          return klass.classify.constantize.find(value)
+        else
+          return nil
+        end
+      end
+    end
+    nil
+  end
 end

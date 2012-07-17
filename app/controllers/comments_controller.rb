@@ -64,20 +64,10 @@ class CommentsController < ApplicationController
 
 protected
   def load_commentable
-    @commentable = find_polymorphic
+    @commentable = find_polymorphic [:issue]
   end
 
   def new_comment_from_params
     @comment = @commentable.comments.build (params[:comment] || {}).merge(:author => current_user)
-  end
-
-private
-  def find_polymorphic
-    params.each do |name, value|
-      if name.ends_with?("_id")
-        return name[0..-4].classify.constantize.find(value)
-      end
-    end
-    nil
   end
 end
