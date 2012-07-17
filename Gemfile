@@ -48,6 +48,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', :require => false
+  gem 'ffaker', :group => [:development, :test]
 end
 
 gem 'google_drive', :group => [:development], :require => false
