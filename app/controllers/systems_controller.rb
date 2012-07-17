@@ -39,7 +39,7 @@ class SystemsController < ApplicationController
   def create
     respond_to do |format|
       if @system.save
-        format.html { redirect_to [@user, @system], notice: 'System was successfully created.' }
+        format.html { redirect_to @user, notice: 'System was successfully created.' }
         format.json { render json: @system, status: :created, location: @system }
       else
         format.html { render action: "new" }
@@ -53,7 +53,7 @@ class SystemsController < ApplicationController
   def update
     respond_to do |format|
       if @system.update_attributes(params[:system])
-        format.html { redirect_to [@user, @system], notice: 'System was successfully updated.' }
+        format.html { redirect_to @user, notice: 'System was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

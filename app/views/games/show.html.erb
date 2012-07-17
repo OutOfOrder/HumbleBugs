@@ -13,10 +13,10 @@
     </p>
 
     <% @game.bundle.present? && permitted_to?(:read, @game.bundle) do %>
-    <p class="bundle">
-      <b>Bundle:</b>
-      <%= link_to @game.bundle.name, @game.bundle %>
-    </p>
+        <p class="bundle">
+          <b>Bundle:</b>
+          <%= link_to @game.bundle.name, @game.bundle %>
+        </p>
     <% end %>
 
     <p class="description">
@@ -41,13 +41,17 @@
     <%= link_to 'Edit', edit_game_path(@game) if permitted_to? :edit %> |
   </p>
 </fieldset>
-<fieldset>
-  <legend>Releases</legend>
-  <%= render 'releases/releases', :releases => @game.releases %>
-  <%= link_to 'New release', new_game_release_path(@game) if permitted_to? :create, @game.releases %>
-</fieldset>
-<fieldset>
-  <legend>Issues</legend>
-  <%= render 'issues/issues', :issues => @game.issues %>
-  <%= link_to 'New issue', new_game_issue_path(@game) if permitted_to? :create, @game.issues %>
-</fieldset>
+<% permitted_to? :read, @game.releases do %>
+    <fieldset>
+      <legend>Releases</legend>
+      <%= render 'releases/releases', :releases => @game.releases.with_permissions_to %>
+      <%= link_to 'New release', new_game_release_path(@game) if permitted_to? :create, @game.releases %>
+    </fieldset>
+<% end %>
+<% permitted_to? :read, @game.issues do %>
+    <fieldset>
+      <legend>Issues</legend>
+      <%= render 'issues/issues', :issues => @game.issues.with_permissions_to %>
+      <%= link_to 'New issue', new_game_issue_path(@game) if permitted_to? :create, @game.issues %>
+    </fieldset>
+<% end %>

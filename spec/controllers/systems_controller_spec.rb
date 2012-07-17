@@ -52,9 +52,9 @@ describe SystemsController do
         assigns(:system).should be_persisted
       end
 
-      it "redirects to the created system" do
+      it "redirects to the user" do
         post_with @user, :create, @base_params.merge(system: FactoryGirl.attributes_for(:system))
-        response.should redirect_to([@user, System.last])
+        response.should redirect_to(@user)
       end
 
       it "sets the user of the new System" do
@@ -99,10 +99,10 @@ describe SystemsController do
         assigns(:system).should eq(system)
       end
 
-      it "redirects to the system" do
+      it "redirects to the user" do
         system = FactoryGirl.create :system, user: @user
         put_with @user, :update, @base_params.merge(id: system.to_param, system: FactoryGirl.attributes_for(:system))
-        response.should redirect_to([@user, system])
+        response.should redirect_to(@user)
       end
     end
 
@@ -133,7 +133,7 @@ describe SystemsController do
       }.to change(System, :count).by(-1)
     end
 
-    it "redirects to the systems list" do
+    it "redirects to the user" do
       system = FactoryGirl.create :system, user: @user
       delete_with @user, :destroy, @base_params.merge(id: system.to_param)
       response.should redirect_to(@user)
