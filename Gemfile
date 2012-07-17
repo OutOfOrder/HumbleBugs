@@ -49,3 +49,5 @@ group :test do
   gem 'launchy'
   gem 'simplecov', :require => false
 end
+
+gem 'google_drive', :group => [:development], :require => false
