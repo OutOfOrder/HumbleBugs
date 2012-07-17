@@ -1,4 +1,4 @@
-module UserHelper
+module UsersHelper
   def role_titles roles
     roles.map {|r|
       Authorization::Engine.instance.title_for(r) || r.to_s.humanize
