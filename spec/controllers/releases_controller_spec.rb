@@ -60,6 +60,12 @@ describe ReleasesController do
         post_with @user, :create, @base_params.merge({:release => @release})
         response.should redirect_to(@game)
       end
+
+      it "should set the owner to the logged in user" do
+        post_with @user, :create, @base_params.merge({:release => @release})
+
+        assigns(:release).owner.should == @user
+      end
     end
 
     describe "with invalid params" do

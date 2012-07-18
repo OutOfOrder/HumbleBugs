@@ -19,11 +19,6 @@
         <%= f.text_area :notes %>
       </div>
       <div class="field">
-        <%= f.label :owner_id %>
-        <br/>
-        <%= f.collection_select :owner_id, User.all, :id, :name, :prompt => true %>
-      </div>
-      <div class="field">
         <%= f.label :url %>
         <br/>
         <%= f.text_field :url %>

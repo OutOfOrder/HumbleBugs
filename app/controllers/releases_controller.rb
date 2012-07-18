@@ -72,4 +72,9 @@ class ReleasesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+protected
+  def new_release_from_params
+    @release = @game.releases.build (params[:release] || {}).merge(:owner => current_user)
+  end
 end
