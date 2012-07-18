@@ -1,5 +1,6 @@
 class System < ActiveRecord::Base
   belongs_to :user, :inverse_of => :systems
+  has_many :test_results, :inverse_of => :system
 
   acts_as_taggable_on :platforms
 

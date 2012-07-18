@@ -9,6 +9,12 @@ HumbleBugs::Application.routes.draw do
     resources :ports
   end
 
+  resources :releases, :only => [] do
+    resources :test_results, :only => [:new, :create]
+  end
+
+  resources :test_results, :except => [:new, :create, :index]
+
   resources :issues, :only => [:new, :create] do
     resources :comments, :except => [:index]
   end

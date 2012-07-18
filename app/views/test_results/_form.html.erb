@@ -1,0 +1,35 @@
+<%= form_for([@release, @test_result]) do |f| %>
+    <fieldset>
+      <legend><%= title %></legend>
+      <% if @test_result.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@test_result.errors.count, "error") %> prohibited this test result from being saved:</h2>
+
+            <ul>
+              <% @test_result.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :system %>
+        <br/>
+        <%= f.collection_select :system, @test_result.user.systems, :id, :name, :prompt => true %>
+      </div>
+      <div class="field">
+        <%= f.label :rating %>
+        <br/>
+        <%= f.select :rating, TestResult::RATINGS %>
+      </div>
+      <div class="field">
+        <%= f.label :comments %>
+        <br/>
+        <%= f.text_area :comments %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </fieldset>
+<% end %>

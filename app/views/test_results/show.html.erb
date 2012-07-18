@@ -1,0 +1,35 @@
+<fieldset>
+  <legend>Test result details</legend>
+  <p>
+    <b>Game:</b>
+    <%= @test_result.release.game.name %>
+  </p>
+
+  <p>
+    <b>Release:</b>
+    <%= l @test_result.release.created_at %>
+  </p>
+
+  <p>
+    <b>User:</b>
+    <%= @test_result.user.name %>
+  </p>
+
+  <p>
+    <b>System:</b>
+    <%= @test_result.system.name %>
+  </p>
+
+  <p>
+    <b>Rating:</b>
+    <%= label_for TestResult::RATINGS, @test_result.rating %>
+  </p>
+
+  <p>
+    <b>Comments:</b>
+    <%= @test_result.comments %>
+  </p>
+
+
+  <%= link_to 'Edit', edit_test_result_path(@test_result) if permitted_to? :edit %> |
+</fieldset>

@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>User</th>
+    <th>System</th>
+    <th>Rating</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% test_results.each do |test_result| %>
+      <tr>
+        <td><%= test_result.user.name %></td>
+        <td><%= test_result.system.name %></td>
+        <td><%= test_result.rating %></td>
+        <td><%= test_result.comments %></td>
+        <td><%= link_to 'Show', test_result %></td>
+        <td><%= link_to 'Edit', edit_test_result_path(test_result) if permitted_to? :edit, test_result %></td>
+        <% permitted_to? :delete, test_result do %>
+            <td><%= link_to 'Destroy', test_result, confirm: 'Are you sure?', method: :delete %></td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
