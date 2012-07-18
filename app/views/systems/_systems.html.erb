@@ -9,7 +9,7 @@
 
   <% systems.each do |system| %>
       <tr>
-        <td><%= permitted_to?(:update, system) ?link_to system.name, edit_user_system_path(system.user, system) : system.name %></td>
+        <td><%= permitted_to?(:update, system) ? link_to(system.name, edit_user_system_path(system.user, system)) : system.name %></td>
         <td><%= system.operating_system %></td>
         <td><%= system.processor %></td>
         <td><%= system.graphics_card %></td>

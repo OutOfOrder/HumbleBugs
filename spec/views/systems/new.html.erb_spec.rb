@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "systems/new" do
   before(:each) do
-    @system = assign(:system, FactoryGirl.create(:system))
+    @system = assign(:system, FactoryGirl.build(:system))
     @user = assign(:user, @system.user)
   end
 

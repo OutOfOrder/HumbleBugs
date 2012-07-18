@@ -17,7 +17,7 @@
       <div class="field">
         <%= f.label :game_id %>
         <br/>
-        <%= f.collection_select :game_id, Game.all, :id, :name, :prompt => true %>
+        <%= f.collection_select :game_id, Game.with_permissions_to, :id, :name, :prompt => true %>
       </div>
     <% end %>
     <div class="field">
