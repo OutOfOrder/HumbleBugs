@@ -36,12 +36,23 @@
     </div>
     
     <div id="app-nav">
-      <ul>
+      <ul class="navigation">
         <li class="<%= select_if :controller => :dashboard %>"><%= link_to 'Dashboard', root_path %></li>
-        <li class="<%= select_if :controller => :bundles %>"><%= link_to 'Bundles', bundles_path %></li>
-        <li class="<%= select_if :controller => :games %>"><%= link_to 'Games', games_path %></li>
+        <li class="<%= select_if :controller => :bundles, :exclude => [:new,:create] %>"><%= link_to 'Bundles', bundles_path %></li>
+        <li class="<%= select_if :controller => :games, :exclude => [:new,:create] %>"><%= link_to 'Games', games_path %></li>
         <% permitted_to? :manage, :users do %>
             <li class="<%= select_if :controller => :users %>"><%= link_to 'Users', users_path %></li>
+        <% end %>
+      </ul>
+      <ul class="new_actions">
+        <% permitted_to? :create, :bundles do %>
+            <li class="<%= select_if :controller => :bundles, :include => [:new,:create] %>"><%= link_to 'New bundle', new_bundle_path %></li>
+        <% end %>
+        <% permitted_to? :create, :games do %>
+            <li class="<%= select_if :controller => :games, :include => [:new,:create] %>"><%= link_to 'New game', new_game_path %></li>
+        <% end %>
+        <% permitted_to? :create, :issues do %>
+            <li class="<%= select_if :controller => :issues, :include => [:new,:create] %>"><%= link_to 'New issue', new_issue_path %></li>
         <% end %>
       </ul>
     </div>

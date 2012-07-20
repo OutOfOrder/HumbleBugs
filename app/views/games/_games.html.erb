@@ -1,15 +1,30 @@
 <table>
+  <colgroup>
+    <col width="33%"/>
+    <col width="33%"/>
+    <col width="33%"/>
+  </colgroup>
+
+  <thead>
   <tr>
     <th>Name</th>
+    <th>Issues</th>
     <th>State</th>
-    <th></th>
   </tr>
+  </thead>
 
+  <tbody>
   <% games.each do |game| %>
-    <tr class="game">
-      <td><%= link_to game.name, game %></td>
-      <td><%= label_for Game::STATES, game.state %></td>
-      <td><%= link_to "Report Issue", new_game_issue_path(game) if permitted_to? :create, game.issues %></td>
-    </tr>
+      <tr class="game">
+        <td><%= link_to game.name, game %></td>
+        <td>
+          <% permitted_to? :read, game.issues do %>
+              <%= link_to pluralize(game.issues.count, 'issue'), game_path(game, anchor: 'game_issues') %>
+          <% end %>
+          <%= link_to "Report new issue", new_game_issue_path(game), :class => 'right' if permitted_to? :create, game.issues %>
+        </td>
+        <td><%= label_for Game::STATES, game.state %></td>
+      </tr>
   <% end %>
+  </tbody>
 </table>

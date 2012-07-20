@@ -13,9 +13,23 @@ body {
 }
 
 @include blueprint-typography;
+// thead overrides
+body thead tr th {
+  @include background(linear-gradient(adjust-lightness($blueprint-table-header-color, 15%), $blueprint-table-header-color));
+  &:first-child {
+    @include border-left-radius(10px);
+  }
+  &:last-child {
+    @include border-right-radius(10px);
+  }
+}
+
 
 a {
   @include hover-link;
+  &.right {
+    float: right;
+  }
 }
 
 #container {
@@ -71,6 +85,12 @@ header {
           $tab-select-color: hsl(0,80%,50%);
           @include box-shadow(rgba($tab-select-color, 0.3) 0px 0px 2px 3px);
         }
+      }
+      &.navigation {
+        @include column($blueprint-grid-columns / 4);
+      }
+      &.new_actions {
+        @include column($blueprint-grid-columns / 4);
       }
     }
   }

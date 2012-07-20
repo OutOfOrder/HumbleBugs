@@ -1,14 +1,18 @@
-<h1>Listing games</h1>
-
 <% @bundles.each do |bundle| %>
-    <fieldset><legend><%= bundle.name %></legend>
-      <%= render :partial => 'games', :locals => { :games => bundle.games } %>
+    <% unless bundle.games.empty? %>
+        <fieldset class="game_listing">
+          <legend><%= bundle.name %></legend>
+          <%= render :partial => 'games', :locals => {:games => bundle.games} %>
+        </fieldset>
+    <% end %>
+<% end %>
+<% unless @games.empty? %>
+    <fieldset class="game_listing">
+      <legend>Unassigned</legend>
+      <%= render :partial => 'games', :locals => {:games => @games} %>
     </fieldset>
 <% end %>
-<fieldset><legend>Unassigned</legend>
-    <%= render :partial => 'games', :locals => { :games => @games } %>
-</fieldset>
 
-<br />
+<br/>
 
 <%= link_to 'New Game', new_game_path if permitted_to? :create %>

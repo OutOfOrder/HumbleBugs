@@ -1,7 +1,13 @@
 module ApplicationHelper
   def select_if options = {}
-    if (controller_name == options[:controller].to_s)
-      "selected"
+    if (controller_name.to_sym == options[:controller])
+      if options[:include].present?
+        "selected" if options[:include].include?(action_name.to_sym)
+      elsif options[:exclude].present?
+        "selected" unless options[:exclude].include?(action_name.to_sym)
+      else
+        "selected"
+      end
     end
   end
 

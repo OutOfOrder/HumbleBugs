@@ -1,6 +1,7 @@
 <h1>Listing <%= plural_table_name %></h1>
 
 <table>
+  <thead>
   <tr>
 <% attributes.each do |attribute| -%>
     <th><%= attribute.human_name %></th>
@@ -9,6 +10,7 @@
     <th></th>
     <th></th>
   </tr>
+  </thead>
 
 <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
   <tr>

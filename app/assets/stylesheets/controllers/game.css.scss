@@ -28,3 +28,8 @@ fieldset.game_controller {
     @include fieldset-tint($secondary-form-color, $secondary-legend-color);
   }
 }
+fieldset.game_listing {
+  table {
+    width: 100%;
+  }
+}
