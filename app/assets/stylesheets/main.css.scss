@@ -125,7 +125,7 @@ form {
     @include column($blueprint-grid-columns / 3);
     @include prepend($blueprint-grid-columns / 3);
   }
-  &.new_form {
+  &.new_edit_form {
     @include column($blueprint-grid-columns - 2);
     @include prepend(1);
   }

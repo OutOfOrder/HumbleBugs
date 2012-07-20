@@ -1,4 +1,4 @@
-<%= form_for(@predefined_tag) do |f| %>
+<%= form_for(@predefined_tag, :html=>{ :class => :new_edit_form}) do |f| %>
   <fieldset>
     <legend><%= title %></legend>
     <% if @predefined_tag.errors.any? %>

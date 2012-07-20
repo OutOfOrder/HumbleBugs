@@ -1,4 +1,4 @@
-<%= form_for(@game) do |f| %>
+<%= form_for(@game, :html=>{ :class => :new_edit_form}) do |f| %>
   <fieldset>
     <legend><%= title %></legend>
     <% if @game.errors.any? %>
