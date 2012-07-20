@@ -1,5 +1,8 @@
 class IssuesController < ApplicationController
-  filter_resource_access :nested_in => :games
+  filter_resource_access :nested_in => :games, :no_attribute_check => [:new]
+  before_filter :only => :new do
+    nested_check_with_attrs unless @game.nil?
+  end
 
   # GET /games/1/issues
   # GET /games/1/issues.json

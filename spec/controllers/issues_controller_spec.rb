@@ -39,6 +39,27 @@ describe IssuesController do
         end
       end
     end
+    context 'as a regular user' do
+      before do
+        @regular_user = FactoryGirl.create :user, :roles => [:user]
+        @game = FactoryGirl.create :game, :with_active_bundle
+      end
+      it 'should render when accessing the nested new' do
+        get_with @regular_user, :new, {:game => @game.to_param}
+        response.should render_template('new')
+        response.should be_ok
+      end
+      it 'should render when accessing the shallow new' do
+        get_with @regular_user, :new, {}
+        response.should render_template('new')
+        response.should be_ok
+      end
+      it 'should render the denied page when accessing the nested new with an invalid game' do
+        game = FactoryGirl.create :game
+        get_with @regular_user, :new, {game_id: game.to_param}
+        response.should render_template('layouts/denied')
+      end
+    end
   end
 
   describe "GET edit" do

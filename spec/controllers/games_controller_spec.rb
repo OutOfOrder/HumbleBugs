@@ -18,6 +18,27 @@ describe GamesController do
       assigns(:bundle).should eq(games.first.bundle)
       assigns(:games).should eq([games.first])
     end
+    context 'as a regular user' do
+      before do
+        @regular_user = FactoryGirl.create :user, :roles => [:user]
+        @game = FactoryGirl.create :game, :with_active_bundle
+      end
+      it 'should render when accessing the nested index' do
+        get_with @regular_user, :index, {:bundle_id => @game.bundle.to_param}
+        response.should render_template('index')
+        response.should be_ok
+      end
+      it 'should render when accessing the shallow index' do
+        get_with @regular_user, :index, {}
+        response.should render_template('index')
+        response.should be_ok
+      end
+      it 'should render the denied template when accessing against an inactive bundle' do
+        bundle = FactoryGirl.create :bundle
+        get_with @regular_user, :index, {:bundle_id => bundle.to_param}
+        response.should render_template('layouts/denied')
+      end
+    end
   end
 
   describe "GET show" do

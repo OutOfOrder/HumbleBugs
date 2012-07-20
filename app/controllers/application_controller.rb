@@ -38,11 +38,11 @@ private
   end
 
 protected
-  def nested_index_check_with_attrs
+  def nested_check_with_attrs
     model = instance_variable_get(:"@#{controller_name.to_s.singularize}")
     allowed = false
     begin
-      allowed = permitted_to! :index, model, :attribute_check => true
+      allowed = permitted_to! action_name.to_sym, model, :attribute_check => true
     rescue Authorization::NotAuthorized => e
       auth_exception = e
     end
