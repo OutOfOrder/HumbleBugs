@@ -13,9 +13,9 @@
         <td><%= label_for TestResult::RATINGS, tr.rating %></td>
         <td><%= tr.comments %></td>
         <td>
-          <%= link_to 'Edit', edit_test_result_path(tr) if permitted_to? :edit, tr %>
+          <%= link_to 'Edit', edit_test_result_path(tr), remote: true if permitted_to? :edit, tr %>
           <% permitted_to? :delete, tr do %>
-              | <%= link_to 'Delete', tr, confirm: 'Are you sure?', method: :delete %>
+              | <%= link_to 'Delete', tr, confirm: 'Are you sure?', method: :delete, remote: true %>
           <% end %>
         </td>
       </tr>

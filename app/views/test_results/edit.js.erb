@@ -1,0 +1,8 @@
+$("<div id=\"test_results_dialog\"><%= escape_javascript render 'form' %></div>").dialog({
+    modal:true,
+    title:'Edit test result',
+    width: '40em',
+    close:function () {
+        $(this).remove();
+    }
+});

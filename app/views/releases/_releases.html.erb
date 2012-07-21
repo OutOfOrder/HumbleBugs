@@ -22,7 +22,7 @@
           <% if permitted_to? :read, release.test_results %>
               <%= link_to 'View results', release_test_results_path(release), remote: true %>
               <% if permitted_to? :create, release.test_results %>
-                  | <%= link_to 'New result', new_release_test_result_path(release) %>
+                  | <%= link_to 'New result', new_release_test_result_path(release), remote: true %>
               <% end %>
           <% end %>
         </td>

@@ -1,0 +1,5 @@
+$('#test_results_dialog').dialog('close');
+$.get("<%= release_test_results_path(@test_result.release, format: :js) %>");
+<% if defined? notice %>
+$.jGrowl('<%= notice %>', {header: 'Notice'});
+<% end %>

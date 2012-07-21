@@ -22,10 +22,6 @@ class TestResultsController < ApplicationController
   # GET /test_results/new
   # GET /test_results/new.json
   def new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @test_result }
-    end
   end
 
   # GET /test_results/1/edit
@@ -37,9 +33,11 @@ class TestResultsController < ApplicationController
   def create
     respond_to do |format|
       if @test_result.save
+        format.js { render action: "done", locals: { notice: 'Test result was successfully created.' }  }
         format.html { redirect_to game_url(@test_result.release.game, anchor: 'game_releases'), notice: 'Test result was successfully created.' }
         format.json { render json: @test_result, status: :created, location: @test_result }
       else
+        format.js { render action: "error" }
         format.html { render action: "new" }
         format.json { render json: @test_result.errors, status: :unprocessable_entity }
       end
@@ -51,9 +49,11 @@ class TestResultsController < ApplicationController
   def update
     respond_to do |format|
       if @test_result.update_attributes(params[:test_result])
+        format.js { render action: "done", locals: { notice: 'Test result was successfully updated.' } }
         format.html { redirect_to game_url(@test_result.release.game, anchor: 'game_releases'), notice: 'Test result was successfully updated.' }
         format.json { head :no_content }
       else
+        format.js { render action: "error" }
         format.html { render action: "edit" }
         format.json { render json: @test_result.errors, status: :unprocessable_entity }
       end
@@ -66,6 +66,7 @@ class TestResultsController < ApplicationController
     @test_result.destroy
 
     respond_to do |format|
+      format.js { render action: "done", locals: { notice: 'Test result was successfully deleted.' }  }
       format.html { redirect_to game_url(@test_result.release.game, anchor: 'game_releases') }
       format.json { head :no_content }
     end
