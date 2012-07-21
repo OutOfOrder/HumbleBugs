@@ -54,9 +54,13 @@ header {
       color: $header-color;
       @include text-shadow(rgba($header-color, 0.3) 4px 4px 2px);
     }
-    @include column(floor($blueprint-grid-columns / 3 * 2));
+    @include column(floor($blueprint-grid-columns / 2));
   }
 
+  #user-welcome {
+    @include column(floor($blueprint-grid-columns / 2 - $blueprint-grid-columns / 3));
+    text-align: right;
+  }
   #user-nav {
     div {
       padding: 1ex;

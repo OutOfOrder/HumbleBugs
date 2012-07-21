@@ -19,6 +19,11 @@
     <div id="logo">
       <h1>HumbleBugs</h1>
     </div>
+    <div id="user-welcome">
+      <% if current_user %>
+          <div>Welcome <%= current_user.name %></div>
+      <% end %>
+    </div>
     <div id="user-nav">
       <div>
         <% if current_user %>
