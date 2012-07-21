@@ -1,0 +1,23 @@
+<table>
+  <thead>
+  <tr>
+    <th>System</th>
+    <th>Rating</th>
+    <th>Comments</th>
+    <th></th>
+  </tr>
+  </thead>
+  <% @test_results.each do |tr| %>
+      <tr>
+        <td><%= tr.system.name %></td>
+        <td><%= label_for TestResult::RATINGS, tr.rating %></td>
+        <td><%= tr.comments %></td>
+        <td>
+          <%= link_to 'Edit', edit_test_result_path(tr) if permitted_to? :edit, tr %>
+          <% permitted_to? :delete, tr do %>
+              | <%= link_to 'Delete', tr, confirm: 'Are you sure?', method: :delete %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+</table>

@@ -23,8 +23,15 @@ fieldset.game_controller {
     @include fieldset-tint($secondary-form-color, $secondary-legend-color);
   }
 }
-fieldset.game_listing {
-  table {
-    width: 100%;
+
+#game_releases {
+  tr.detail {
+    div {
+      padding: 0 1ex;
+    }
+    table {
+      @include border-radius;
+      @include table-tint($secondary-form-color, $secondary-legend-color);
+    }
   }
 }

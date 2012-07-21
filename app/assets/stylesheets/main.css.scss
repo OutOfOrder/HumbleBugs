@@ -18,11 +18,14 @@ table {
 thead th {
   @include background(linear-gradient(adjust-lightness($blueprint-table-header-color, 15%), $blueprint-table-header-color));
   &:first-child {
-    @include border-left-radius(10px);
+    @include border-left-radius;
   }
   &:last-child {
-    @include border-right-radius(10px);
+    @include border-right-radius;
   }
+}
+tr.detail > td {
+  padding: 0;
 }
 
 a {

@@ -5,6 +5,16 @@ describe TestResultsController do
     @user = FactoryGirl.create :user, roles: [:dev]
   end
 
+  describe "GET index" do
+    it "assigns the requested test_results as @test_results" do
+      release = FactoryGirl.create :release
+      test_results = FactoryGirl.create_list :test_result, 2, release: release
+      get_with @user, :index, {release_id: release.id}
+      assigns(:test_results).should eq(test_results)
+    end
+
+  end
+
   describe "GET show" do
     it "assigns the requested test_result as @test_result" do
       test_result = FactoryGirl.create :test_result
@@ -53,9 +63,9 @@ describe TestResultsController do
         assigns(:test_result).should be_persisted
       end
 
-      it "redirects to the created test_result" do
+      it "redirects to the associated game" do
         post_with @user, :create, @base_params.merge(test_result: @valid_attributes)
-        response.should redirect_to(TestResult.last)
+        response.should redirect_to(game_url(TestResult.last.release.game, anchor: "game_releases"))
       end
       it "should set the user to the logged in user" do
         post_with @user, :create, @base_params.merge({test_result: @valid_attributes})
@@ -103,10 +113,10 @@ describe TestResultsController do
         assigns(:test_result).should eq(test_result)
       end
 
-      it "redirects to the test_result" do
+      it "redirects to the associated game" do
         test_result = FactoryGirl.create :test_result
         put_with @user, :update, {id: test_result.to_param, test_result: @valid_attributes}
-        response.should redirect_to(test_result)
+        response.should redirect_to(game_url(test_result.release.game, anchor: "game_releases"))
       end
     end
 
@@ -137,10 +147,10 @@ describe TestResultsController do
       }.to change(TestResult, :count).by(-1)
     end
 
-    it "redirects to the test_results list" do
+    it "redirects to the associated game" do
       test_result = FactoryGirl.create :test_result
       delete_with @user, :destroy, {id: test_result.to_param}
-      response.should redirect_to(test_result.release.game)
+      response.should redirect_to(game_url(test_result.release.game, anchor: "game_releases"))
     end
   end
 

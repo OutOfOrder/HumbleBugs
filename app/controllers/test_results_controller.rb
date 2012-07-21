@@ -1,6 +1,15 @@
 class TestResultsController < ApplicationController
   filter_resource_access :nested_in => :releases, :shallow => true
 
+  def index
+    @test_results = @release.test_results.with_permissions_to
+    respond_to do |format|
+      format.html # show.js.erb
+      format.js # index.js.erb
+      format.json { render json: @test_results }
+    end
+  end
+
   # GET /test_results/1
   # GET /test_results/1.json
   def show
@@ -28,7 +37,7 @@ class TestResultsController < ApplicationController
   def create
     respond_to do |format|
       if @test_result.save
-        format.html { redirect_to @test_result, notice: 'Test result was successfully created.' }
+        format.html { redirect_to game_url(@test_result.release.game, anchor: 'game_releases'), notice: 'Test result was successfully created.' }
         format.json { render json: @test_result, status: :created, location: @test_result }
       else
         format.html { render action: "new" }
@@ -42,7 +51,7 @@ class TestResultsController < ApplicationController
   def update
     respond_to do |format|
       if @test_result.update_attributes(params[:test_result])
-        format.html { redirect_to @test_result, notice: 'Test result was successfully updated.' }
+        format.html { redirect_to game_url(@test_result.release.game, anchor: 'game_releases'), notice: 'Test result was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -57,7 +66,7 @@ class TestResultsController < ApplicationController
     @test_result.destroy
 
     respond_to do |format|
-      format.html { redirect_to @test_result.release.game }
+      format.html { redirect_to game_url(@test_result.release.game, anchor: 'game_releases') }
       format.json { head :no_content }
     end
   end

@@ -1,0 +1,3 @@
+$('#release_<%= @release.id %>_test_results')
+        .html("<%= escape_javascript render template: 'test_results/index.html' %>")
+        .slideDown();

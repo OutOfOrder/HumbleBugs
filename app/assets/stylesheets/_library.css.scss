@@ -7,3 +7,12 @@
   background-color: $main-color;
   @include background(linear-gradient(adjust-lightness($main-color,15%), $main-color));
 }
+
+@mixin table_tint($main-color, $heading-color) {
+  thead th {
+    background-color: $heading-color;
+    @include background(linear-gradient(adjust-lightness($heading-color,15%), $heading-color));
+  }
+  background-color: $main-color;
+  @include background(linear-gradient(adjust-lightness($main-color,15%), $main-color));
+}
