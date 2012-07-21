@@ -1,8 +1,4 @@
-@import "blueprint";
-@import "blueprint/liquid";
-
-@import "library";
-@import "config";
+@import "base";
 
 fieldset.issue_controller {
   div.details {

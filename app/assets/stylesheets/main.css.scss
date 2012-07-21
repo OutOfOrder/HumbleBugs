@@ -1,20 +1,21 @@
-@import "blueprint/reset";
-@import "blueprint";
-@import "blueprint/liquid";
-@import "blueprint/fancy-type";
-@import "compass/typography";
-@import "compass/css3";
+@import "base";
 
-@import "library";
-@import "config";
+@import "blueprint/reset";
+
+@import "blueprint/fancy-type";
+@import "blueprint/buttons";
+@import "compass/typography";
 
 body {
   background-color: $bg-color;
 }
 
 @include blueprint-typography;
-// thead overrides
-body thead tr th {
+// typography overrides
+table {
+  margin-bottom: 0;
+}
+thead th {
   @include background(linear-gradient(adjust-lightness($blueprint-table-header-color, 15%), $blueprint-table-header-color));
   &:first-child {
     @include border-left-radius(10px);
@@ -24,11 +25,39 @@ body thead tr th {
   }
 }
 
-
 a {
   @include hover-link;
   &.right {
     float: right;
+  }
+}
+
+a.button {
+  @include anchor-button;
+  @include button-colors;
+  @include button-hover-colors;
+  @include button-active-colors;
+}
+input[type="submit"],
+    button
+{
+  @include button-button;
+  @include button-colors;
+  @include button-hover-colors;
+  @include button-active-colors;
+}
+
+a.button, input[type="submit"], button {
+  @include background-image(linear-gradient(#049cdb, #0064cd));
+  @include border-radius;
+  @include box-shadow(inset 0 1px 0 rgba(255,55,255,0.2), 0 1px 2px rgba(0, 0, 0, 0.05));
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border-color: #0064cd #0064cd #003f81;
+  &:hover {
+    color: white;
+    border-color: #0064cd #0064cd #003f81;
+    background: #0064cd;
   }
 }
 
