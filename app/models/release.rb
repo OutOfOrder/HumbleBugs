@@ -7,5 +7,5 @@ class Release < ActiveRecord::Base
 
   acts_as_taggable_on :platforms
 
-  validates_presence_of :game_id, :owner_id
+  validates_presence_of :game_id, :owner_id, :version, :url
 end

@@ -1,25 +1,40 @@
 <table>
+  <colgroup>
+    <col width="15%"/>
+    <col width="10%"/>
+    <col width="10%"/>
+  </colgroup>
+  <col width="40%"/>
   <thead>
   <tr>
-    <th>Results</th>
+    <th>Test Results</th>
+    <th>Download</th>
+    <th>Version</th>
     <th>Notes</th>
     <th>Uploaded</th>
-    <th></th>
     <th></th>
   </tr>
   </thead>
 
   <% releases.each do |release| %>
       <tr>
-        <td><%= link_to 'View results', release_test_results_path(release), remote: true if permitted_to? :read, release.test_results %></td>
+        <td>
+          <% if permitted_to? :read, release.test_results %>
+              <%= link_to 'View results', release_test_results_path(release), remote: true %>
+              <% if permitted_to? :create, release.test_results %>
+                  | <%= link_to 'New result', new_release_test_result_path(release) %>
+              <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Download', download_release_path(release) if permitted_to? :download, release %></td>
+        <td><%= release.version %></td>
         <td><%= release.notes %></td>
-        <td>Released  <%= timeago(release.created_at) %> by <%= release.owner.name %></td>
-        <td><%= link_to 'New test result', new_release_test_result_path(release) if permitted_to? :create, release.test_results %></td>
-        <td><%= link_to 'Edit', edit_game_release_path(release.game, release) if permitted_to? :edit, release %></td>
+        <td title="<%= release.owner.name %>"><%= timeago(release.created_at) %></td>
+        <td><%= link_to 'Edit', edit_release_path(release) if permitted_to? :edit, release %></td>
       </tr>
       <tr class="detail">
-        <td colspan="5">
-        <div id="release_<%= release.id %>_test_results" style="display: none;"></div>
+        <td colspan="6">
+          <div id="release_<%= release.id %>_test_results" style="display: none;"></div>
         </td>
       </tr>
   <% end %>

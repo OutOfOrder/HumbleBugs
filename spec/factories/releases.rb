@@ -6,5 +6,6 @@ FactoryGirl.define do
     association :owner, :factory => :user
     association :game
     url "http://www.example.com/awesomeGame.zip"
+    version { Faker::Product.letters(4) }
   end
 end

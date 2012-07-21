@@ -5,11 +5,12 @@ HumbleBugs::Application.routes.draw do
 
   resources :games do
     resources :issues
-    resources :releases
+    resources :releases, :only => [:new, :create, :index]
     resources :ports
   end
 
-  resources :releases, :only => [] do
+  resources :releases, :except => [:new, :create, :index] do
+    get :download, :on => :member
     resources :test_results, :only => [:index, :new, :create]
   end
 

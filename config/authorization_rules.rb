@@ -143,4 +143,5 @@ privileges do
   privilege :create, :includes => :new
   privilege :update, :includes => :edit
   privilege :delete, :includes => :destroy
+  privilege :read, :releases, :includes => :download
 end

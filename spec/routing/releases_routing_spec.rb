@@ -11,12 +11,16 @@ describe ReleasesController do
       get("/games/1/releases/new").should route_to("releases#new", :game_id => "1")
     end
 
+    it "routes to #download" do
+      get("/releases/1/download").should route_to("releases#download", :id => "1")
+    end
+
     it "routes to #show" do
-      get("/games/1/releases/1").should route_to("releases#show", :game_id => "1", :id => "1")
+      get("/releases/1").should route_to("releases#show", :id => "1")
     end
 
     it "routes to #edit" do
-      get("/games/1/releases/1/edit").should route_to("releases#edit", :game_id => "1", :id => "1")
+      get("/releases/1/edit").should route_to("releases#edit", :id => "1")
     end
 
     it "routes to #create" do
@@ -24,11 +28,11 @@ describe ReleasesController do
     end
 
     it "routes to #update" do
-      put("/games/1/releases/1").should route_to("releases#update", :game_id => "1", :id => "1")
+      put("/releases/1").should route_to("releases#update", :id => "1")
     end
 
     it "routes to #destroy" do
-      delete("/games/1/releases/1").should route_to("releases#destroy", :game_id => "1", :id => "1")
+      delete("/releases/1").should route_to("releases#destroy", :id => "1")
     end
 
   end

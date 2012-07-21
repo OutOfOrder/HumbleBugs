@@ -1,11 +1,20 @@
 <% if !defined? show_game then show_game = false end %>
 <table>
+  <colgroup>
+    <col width="10%"/>
+    <% if show_game %>
+        <col width="10%"/>
+    <% end %>
+    <col width="10%"/>
+    <col width="10%"/>
+  </colgroup>
   <thead>
   <tr>
     <th>ID</th>
     <% if show_game %>
       <th>Game</th>
     <% end %>
+    <th>Updated</th>
     <th>Status</th>
     <th>Description</th>
   </tr>
@@ -13,10 +22,11 @@
 
   <% issues.each do |issue| %>
     <tr class="issue">
-      <td><%= link_to "##{issue.id}", [issue.game, issue] %></td>
+      <td><%= link_to "View ##{issue.id}", [issue.game, issue] %></td>
       <% if show_game %>
         <td><%= issue.game.name %></td>
       <% end %>
+      <td><%= timeago issue.updated_at %></td>
       <td><%= label_for Issue::STATUSES, issue.status %></td>
       <td><%= issue.description %></td>
     </tr>

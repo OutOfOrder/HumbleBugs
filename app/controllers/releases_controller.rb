@@ -1,5 +1,5 @@
 class ReleasesController < ApplicationController
-  filter_resource_access :nested_in => :games
+  filter_resource_access :nested_in => :games, :shallow => true, :additional_member => :download
 
   # GET /games/1/releases
   # GET /games/1/releases.json
@@ -10,6 +10,11 @@ class ReleasesController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @releases }
     end
+  end
+
+  def download
+    Release.increment_counter :download_count, @release.id
+    redirect_to @release.url
   end
 
   # GET /games/1/releases/1
@@ -39,7 +44,7 @@ class ReleasesController < ApplicationController
   def create
     respond_to do |format|
       if @release.save
-        format.html { redirect_to @game, notice: 'Release was successfully created.' }
+        format.html { redirect_to game_url(@game, anchor:'game_releases'), notice: 'Release was successfully created.' }
         format.json { render json: @release, status: :created, location: @release }
       else
         format.html { render action: "new" }
@@ -53,7 +58,7 @@ class ReleasesController < ApplicationController
   def update
     respond_to do |format|
       if @release.update_attributes(params[:release])
-        format.html { redirect_to @game, notice: 'Release was successfully updated.' }
+        format.html { redirect_to game_url(@release.game, anchor:'game_releases'), notice: 'Release was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -68,7 +73,7 @@ class ReleasesController < ApplicationController
     @release.destroy
 
     respond_to do |format|
-      format.html { redirect_to game_releases_url(@game) }
+      format.html { redirect_to game_url(@release.game, anchor:'game_releases') }
       format.json { head :no_content }
     end
   end

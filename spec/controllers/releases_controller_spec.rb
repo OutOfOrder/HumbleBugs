@@ -16,10 +16,30 @@ describe ReleasesController do
     end
   end
 
+  describe "GET download" do
+    it "assigns the requested release as @release" do
+      release = FactoryGirl.create(:release, :game => @game)
+      get_with @user, :download, {:id => release.to_param}
+      assigns(:release).should eq(release)
+    end
+    it "should redirect to the download url" do
+      release = FactoryGirl.create(:release, :game => @game)
+      get_with @user, :download, {:id => release.to_param}
+      response.should redirect_to(release.url)
+    end
+    it "should increment the download count" do
+      release = FactoryGirl.create(:release, :game => @game)
+      expect {
+        get_with @user, :download, {:id => release.to_param}
+        release.reload
+      }.to change(release, :download_count).by(1)
+    end
+  end
+
   describe "GET show" do
     it "assigns the requested release as @release" do
       release = FactoryGirl.create(:release, :game => @game)
-      get_with @user, :show, @base_params.merge({:id => release.to_param})
+      get_with @user, :show, {:id => release.to_param}
       assigns(:release).should eq(release)
     end
   end
@@ -34,7 +54,7 @@ describe ReleasesController do
   describe "GET edit" do
     it "assigns the requested release as @release" do
       release = FactoryGirl.create(:release, :game => @game)
-      get_with @user, :edit, @base_params.merge({:id => release.to_param})
+      get_with @user, :edit, {:id => release.to_param}
       assigns(:release).should eq(release)
     end
   end
@@ -58,7 +78,7 @@ describe ReleasesController do
 
       it "redirects to the parent game" do
         post_with @user, :create, @base_params.merge({:release => @release})
-        response.should redirect_to(@game)
+        response.should redirect_to(game_url(@game, anchor:'game_releases'))
       end
 
       it "should set the owner to the logged in user" do
@@ -94,19 +114,19 @@ describe ReleasesController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Release.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put_with @user, :update, @base_params.merge({:id => release.to_param, :release => {'these' => 'params'}})
+        put_with @user, :update, {:id => release.to_param, :release => {'these' => 'params'}}
       end
 
       it "assigns the requested release as @release" do
         release = FactoryGirl.create(:release, :game => @game)
-        put_with @user, :update, @base_params.merge({:id => release.to_param, :release => FactoryGirl.attributes_for(:release)})
+        put_with @user, :update, {:id => release.to_param, :release => FactoryGirl.attributes_for(:release)}
         assigns(:release).should eq(release)
       end
 
       it "redirects to the parent game" do
         release = FactoryGirl.create(:release, :game => @game)
         put_with @user, :update, @base_params.merge({:id => release.to_param, :release => FactoryGirl.attributes_for(:release)})
-        response.should redirect_to(@game)
+        response.should redirect_to(game_url(@game, anchor:'game_releases'))
       end
     end
 
@@ -115,7 +135,7 @@ describe ReleasesController do
         release = FactoryGirl.create(:release, :game => @game)
         # Trigger the behavior that occurs when invalid params are submitted
         Release.any_instance.stub(:save).and_return(false)
-        put_with @user, :update, @base_params.merge({:id => release.to_param, :release => {}})
+        put_with @user, :update, {:id => release.to_param, :release => {}}
         assigns(:release).should eq(release)
       end
 
@@ -123,7 +143,7 @@ describe ReleasesController do
         release = FactoryGirl.create(:release, :game => @game)
         # Trigger the behavior that occurs when invalid params are submitted
         Release.any_instance.stub(:save).and_return(false)
-        put_with @user, :update, @base_params.merge({:id => release.to_param, :release => {}})
+        put_with @user, :update, {:id => release.to_param, :release => {}}
         response.should render_template("edit")
       end
     end
@@ -133,14 +153,14 @@ describe ReleasesController do
     it "destroys the requested release" do
       release = FactoryGirl.create(:release, :game => @game)
       expect {
-        delete_with @user, :destroy, @base_params.merge({:id => release.to_param})
+        delete_with @user, :destroy, {:id => release.to_param}
       }.to change(Release, :count).by(-1)
     end
 
     it "redirects to the releases list" do
       release = FactoryGirl.create(:release, :game => @game)
-      delete_with @user, :destroy, @base_params.merge({:id => release.to_param})
-      response.should redirect_to(game_releases_url(@game))
+      delete_with @user, :destroy, {:id => release.to_param}
+      response.should redirect_to(game_url(@game, anchor:'game_releases'))
     end
   end
 
