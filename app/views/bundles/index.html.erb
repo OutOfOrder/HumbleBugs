@@ -1,23 +1,22 @@
-<h1>Listing bundles</h1>
+<fieldset>
+  <legend>Bundles</legend>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Target date</th>
+      <th>Description</th>
+      <th>State</th>
+    </tr>
+    </thead>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Target date</th>
-    <th>Description</th>
-    <th>State</th>
-  </tr>
-
-<% @bundles.each do |bundle| %>
-  <tr class="bundle">
-    <td><%= link_to bundle.name, bundle %></td>
-    <td><%= timeago bundle.target_date if bundle.target_date.present? %></td>
-    <td><%= bundle.description %></td>
-    <td><%= label_for Bundle::STATES ,bundle.state %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Bundle', new_bundle_path if permitted_to? :create %>
+    <% @bundles.each do |bundle| %>
+        <tr class="bundle">
+          <td><%= link_to bundle.name, bundle %></td>
+          <td><%= timeago bundle.target_date if bundle.target_date.present? %></td>
+          <td><%= bundle.description %></td>
+          <td><%= label_for Bundle::STATES, bundle.state %></td>
+        </tr>
+    <% end %>
+  </table>
+</fieldset>

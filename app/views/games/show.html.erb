@@ -38,7 +38,7 @@
   </fieldset>
 
   <p class="actions">
-    <%= link_to 'Edit', edit_game_path(@game) if permitted_to? :edit %> |
+    <%= link_to 'Edit', edit_game_path(@game) if permitted_to? :edit %>
   </p>
 </fieldset>
 <% permitted_to? :read, @game.releases do %>
