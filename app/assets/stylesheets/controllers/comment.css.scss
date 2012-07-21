@@ -24,11 +24,16 @@
       margin-bottom: 1ex;
     }
     div.authorship {
+      img {
+        vertical-align: bottom;
+      }
       font-size: 0.95em;
+      line-height: 20px;
       @include column($blueprint-grid-columns / 4);
     }
     div.actions {
       font-size: 0.95em;
+      line-height: 20px;
       @include column($blueprint-grid-columns / 2);
       @include last;
     }
