@@ -62,10 +62,10 @@ describe :bundle_admin do
         @game = FactoryGirl.create :game, :with_active_bundle
         @release = FactoryGirl.create :release, game: @game
       end
-      include_examples 'can X to this', :read do
+      include_examples 'can X to this', :read, :create do
         let(:this) { FactoryGirl.create :test_result, release: @release }
       end
-      include_examples 'can not X to this', :create, :edit, :delete do
+      include_examples 'can not X to this', :edit, :delete do
         let(:this) { FactoryGirl.create :test_result, release: @release }
       end
       context 'for my own test result' do
@@ -79,10 +79,10 @@ describe :bundle_admin do
         @game = FactoryGirl.create :game, :testing
         @release = FactoryGirl.create :release, game: @game
       end
-      include_examples 'can X to this', :read do
+      include_examples 'can X to this', :read, :create do
         let(:this) { FactoryGirl.create :test_result, release: @release }
       end
-      include_examples 'can not X to this', :create, :edit, :delete do
+      include_examples 'can not X to this', :edit, :delete do
         let(:this) { FactoryGirl.create :test_result, release: @release }
       end
       context 'for my own test result' do

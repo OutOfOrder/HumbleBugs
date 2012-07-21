@@ -10,7 +10,7 @@ authorization do
 
   role :base_reporter do
     has_permission_on :predefined_tags, :to => :read
-    has_permission_on :issues, :to => [:read,:create] do
+    has_permission_on :issues, :to => [:read, :create] do
       if_permitted_to :read, :game
     end
     has_permission_on :issues, :to => [:read, :update] do
@@ -55,10 +55,10 @@ authorization do
   end
 
   role :base_test_results do
-    has_permission_on :test_results, :to => :read do
+    has_permission_on :test_results, :to => [:read, :create] do
       if_permitted_to :read, :release
     end
-    has_permission_on :test_results, :to => [:create, :update, :delete], :join_by => :and do
+    has_permission_on :test_results, :to => [:update, :delete], :join_by => :and do
       if_permitted_to :read
       if_attribute :user => is { user }
     end

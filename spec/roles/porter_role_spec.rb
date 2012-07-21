@@ -174,10 +174,10 @@ describe :porter do
         @game = @port.game
         @release = FactoryGirl.create :release, game: @game
       end
-      include_examples 'can X to this', :read do
+      include_examples 'can X to this', :read, :create do
         let(:this) { FactoryGirl.create :test_result, release: @release }
       end
-      include_examples 'can not X to this', :create, :edit, :delete do
+      include_examples 'can not X to this', :edit, :delete do
         let(:this) { FactoryGirl.create :test_result, release: @release }
       end
       context 'for my own test result' do
