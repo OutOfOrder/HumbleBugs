@@ -76,6 +76,10 @@ describe :guest do
     include_examples 'can not X to any', :create, :read, :update, :delete
   end
 
+  context :test_results do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
   context :users do
     it 'can signup as a new user' do
       should be_allowed_to :create

@@ -133,6 +133,43 @@ describe :tester do
     include_examples 'can not X to any', :create, :update, :delete
   end
 
+  context :test_results do
+    context 'for a game on an active bundle' do
+      before do
+        @game = FactoryGirl.create :game, :with_active_bundle
+        @release = FactoryGirl.create :release, game: @game
+      end
+      include_examples 'can X to this', :read do
+        let(:this) { FactoryGirl.create :test_result, release: @release }
+      end
+      include_examples 'can not X to this', :create, :edit, :delete do
+        let(:this) { FactoryGirl.create :test_result, release: @release }
+      end
+      context 'for my own test result' do
+        include_examples 'can X to this', :read, :create, :edit, :delete do
+          let(:this) { FactoryGirl.create :test_result, release: @release, user: @user }
+        end
+      end
+    end
+    context 'for a game in testing' do
+      before do
+        @game = FactoryGirl.create :game, :testing
+        @release = FactoryGirl.create :release, game: @game
+      end
+      include_examples 'can X to this', :read do
+        let(:this) { FactoryGirl.create :test_result, release: @release }
+      end
+      include_examples 'can not X to this', :create, :edit, :delete do
+        let(:this) { FactoryGirl.create :test_result, release: @release }
+      end
+      context 'for my own test result' do
+        include_examples 'can X to this', :read, :create, :edit, :delete do
+          let(:this) { FactoryGirl.create :test_result, release: @release, user: @user }
+        end
+      end
+    end
+  end
+
   context :users do
     include_examples 'edit my own user record'
     include_examples 'sign my nda' do

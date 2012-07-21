@@ -94,6 +94,10 @@ describe :user do
     include_examples 'can not X to any', :create, :read, :update, :delete
   end
 
+  context :test_results do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
   describe :users do
     include_examples 'edit my own user record'
     include_examples 'sign my nda' do

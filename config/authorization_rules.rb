@@ -54,6 +54,16 @@ authorization do
     end
   end
 
+  role :base_test_results do
+    has_permission_on :test_results, :to => :read do
+      if_permitted_to :read, :release
+    end
+    has_permission_on :test_results, :to => [:create, :update, :delete], :join_by => :and do
+      if_permitted_to :read
+      if_attribute :user => is { user }
+    end
+  end
+
   role :tester do
     title 'Game tester'
     includes :user
@@ -66,6 +76,7 @@ authorization do
     has_permission_on :releases, :to => :read do
       if_permitted_to :read, :game
     end
+    includes :base_test_results
   end
 
   role :porter do
@@ -86,6 +97,7 @@ authorization do
     has_permission_on :issues, :to => :update do
       if_permitted_to :read_port, :game
     end
+    includes :base_test_results
   end
 
   role :bundle_admin do
@@ -96,6 +108,7 @@ authorization do
     has_permission_on [:ports, :releases, :issues], :to => :manage do
       if_permitted_to :manage, :game
     end
+    includes :base_test_results
     has_permission_on :comments, :to => :manage do
       if_permitted_to :manage, :commentable
     end
