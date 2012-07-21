@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
         format.js
         format.json { render json: @comment, status: :created, location: @comment }
       else
-        format.js { render action: "edit" }
+        format.js { render action: "error" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end

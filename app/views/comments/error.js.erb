@@ -1,0 +1,3 @@
+$('#comments_dialog')
+        .html("<%= escape_javascript render 'form' %>")
+        .dialog('option', 'position', $('#comments_dialog').dialog('option', 'position'));
