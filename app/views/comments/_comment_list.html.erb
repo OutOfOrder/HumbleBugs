@@ -3,5 +3,5 @@
   <div id="comments">
     <%= render commentable.comments %>
   </div>
-  <%= button_to 'New Comment', new_polymorphic_path([commentable, Comment.new]), method: "get", remote: true %>
+  <%= button_to 'New Comment', new_polymorphic_path([commentable, Comment.new]), class: 'button', method: "get", remote: true %>
 </fieldset>

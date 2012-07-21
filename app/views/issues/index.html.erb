@@ -1,7 +1,4 @@
-<h1>Listing issues</h1>
-
-<%= render :partial => 'issues', :locals => { :issues => @issues } %>
-
-<br />
-
-<%= link_to 'New Issue', new_issue_path if permitted_to? :create %>
+<fieldset>
+  <legend>Issues</legend>
+  <%= render :partial => 'issues', :locals => { :issues => @issues } %>
+</fieldset>

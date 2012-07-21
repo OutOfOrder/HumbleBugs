@@ -4,4 +4,4 @@
 
 <br />
 
-<%= link_to 'New Port', new_game_port_path(@game) if permitted_to? :create, @game.ports %>
+<%= link_to 'New Port', new_game_port_path(@game), class: 'button' if permitted_to? :create, @game.ports %>

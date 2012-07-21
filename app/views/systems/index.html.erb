@@ -4,4 +4,4 @@
 
 <br />
 
-<%= link_to 'New System', new_user_system_path(@user) if permitted_to? :create %>
+<%= link_to 'New System', new_user_system_path(@user), class: 'button' if permitted_to? :create %>

@@ -44,6 +44,6 @@
     <fieldset>
       <legend>Systems</legend>
       <%= render 'systems/systems', :systems => @user.systems.with_permissions_to %>
-      <%= link_to 'New system', new_user_system_path(@user) if permitted_to? :create, @user.systems %>
+      <%= link_to 'New system', new_user_system_path(@user), class: 'button' if permitted_to? :create, @user.systems %>
     </fieldset>
 <% end %>

@@ -12,7 +12,3 @@
       <%= render :partial => 'games', :locals => {:games => @games} %>
     </fieldset>
 <% end %>
-
-<br/>
-
-<%= link_to 'New Game', new_game_path if permitted_to? :create %>

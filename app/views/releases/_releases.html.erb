@@ -11,6 +11,7 @@
       <td><%= link_to 'Download', release.url %></td>
       <td><%= release.notes %></td>
       <td><%= release.owner.name %> on <%= timeago(release.created_at) %></td>
+      <td><%= link_to 'New test result', new_release_test_result_path(release) if permitted_to? :create, release.test_results %></td>
       <td><%= link_to 'Edit', edit_game_release_path(release.game, release) if permitted_to? :edit, release %></td>
     </tr>
   <% end %>

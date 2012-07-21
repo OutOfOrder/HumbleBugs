@@ -1,5 +1,6 @@
 <% if !defined? show_game then show_game = false end %>
 <table>
+  <thead>
   <tr>
     <th>ID</th>
     <% if show_game %>
@@ -8,6 +9,7 @@
     <th>Status</th>
     <th>Description</th>
   </tr>
+  </thead>
 
   <% issues.each do |issue| %>
     <tr class="issue">

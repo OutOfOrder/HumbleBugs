@@ -34,7 +34,7 @@
   <fieldset class="ports">
     <legend>Ports</legend>
     <%= render 'ports/ports', :ports => @game.ports %>
-    <%= link_to 'New Port', new_game_port_path(@game) if permitted_to? :create, @game.ports %>
+    <%= link_to 'New Port', new_game_port_path(@game), class: 'button' if permitted_to? :create, @game.ports %>
   </fieldset>
 
   <p class="actions">
@@ -45,13 +45,13 @@
     <fieldset id="game_releases">
       <legend>Releases</legend>
       <%= render 'releases/releases', :releases => @game.releases.with_permissions_to %>
-      <%= link_to 'New release', new_game_release_path(@game) if permitted_to? :create, @game.releases %>
+      <%= link_to 'New release', new_game_release_path(@game), class: 'button' if permitted_to? :create, @game.releases %>
     </fieldset>
 <% end %>
 <% permitted_to? :read, @game.issues do %>
     <fieldset id="game_issues">
       <legend>Issues</legend>
       <%= render 'issues/issues', :issues => @game.issues.with_permissions_to %>
-      <%= link_to 'New issue', new_game_issue_path(@game) if permitted_to? :create, @game.issues %>
+      <%= link_to 'New issue', new_game_issue_path(@game), class: 'button' if permitted_to? :create, @game.issues %>
     </fieldset>
 <% end %>
