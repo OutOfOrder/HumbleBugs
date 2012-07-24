@@ -14,4 +14,5 @@ class TestResult < ActiveRecord::Base
       ['Excellent', :excellent],
   ]
   validates_inclusion_of :rating, :in => RATINGS.map { |m| m.second.to_s }, :message => "%{value} is not a valid rating"
+  validates_uniqueness_of :system_id, :scope => [:release_id]
 end

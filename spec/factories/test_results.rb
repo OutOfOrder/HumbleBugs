@@ -12,6 +12,8 @@ FactoryGirl.define do
     after(:build) do |test_result, evaluator|
       if evaluator.system == :build
         test_result.system = FactoryGirl.create(:system, user: test_result.user)
+      else
+        test_result.system = evaluator.system
       end
     end
   end

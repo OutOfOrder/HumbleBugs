@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120721205512) do
+ActiveRecord::Schema.define(:version => 20120724233728) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20120721205512) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "test_results", ["release_id", "system_id"], :name => "index_test_results_on_release_id_and_system_id", :unique => true
   add_index "test_results", ["release_id"], :name => "index_test_results_on_release_id"
   add_index "test_results", ["system_id"], :name => "index_test_results_on_system_id"
   add_index "test_results", ["user_id"], :name => "index_test_results_on_user_id"
