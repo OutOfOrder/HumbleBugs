@@ -1,6 +1,7 @@
 <table>
   <thead>
   <tr>
+    <th>User</th>
     <th>System</th>
     <th>Rating</th>
     <th>Comments</th>
@@ -9,6 +10,7 @@
   </thead>
   <% @test_results.each do |tr| %>
       <tr>
+        <td><%= tr.user.name %></td>
         <td><%= tr.system.name %></td>
         <td><%= label_for TestResult::RATINGS, tr.rating %></td>
         <td><%= tr.comments %></td>
