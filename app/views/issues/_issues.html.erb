@@ -16,7 +16,7 @@
     <% end %>
     <th>Updated</th>
     <th>Status</th>
-    <th>Description</th>
+    <th>Summary</th>
   </tr>
   </thead>
 
@@ -28,7 +28,7 @@
       <% end %>
       <td><%= timeago issue.updated_at %></td>
       <td><%= label_for Issue::STATUSES, issue.status %></td>
-      <td><%= issue.description %></td>
+      <td><%= issue.summary %></td>
     </tr>
   <% end %>
 </table>
