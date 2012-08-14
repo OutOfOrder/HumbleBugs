@@ -3,6 +3,7 @@ class FeedbackMailer < ActionMailer::Base
     @user = user
     @feedback = feedback
 
-    mail to: ENV['FEEDBACK_EMAIL'] || 'feedback@example.com'
+    mail to: ENV['FEEDBACK_EMAIL'] || 'feedback@example.com',
+         reply_to: @user.email
   end
 end
