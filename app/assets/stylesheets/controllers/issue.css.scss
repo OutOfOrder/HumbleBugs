@@ -11,6 +11,9 @@ fieldset.issue_controller {
       }
       &.description {
         @include column($blueprint-grid-columns / 4 * 3 - 2);
+        max-height: 100em;
+        white-space: pre-wrap;
+        overflow: auto;
       }
     }
   }
