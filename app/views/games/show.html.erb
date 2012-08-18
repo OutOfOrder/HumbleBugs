@@ -2,33 +2,32 @@
   <legend>Game details</legend>
 
   <div class="details">
-    <p>
+    <div>
       <b>Name:</b>
       <%= @game.name %>
-    </p>
+    </div>
 
-    <p>
+    <div>
       <b>State:</b>
       <%= label_for Game::STATES, @game.state %>
-    </p>
+    </div>
 
     <% @game.bundle.present? && permitted_to?(:read, @game.bundle) do %>
-        <p class="bundle">
+        <div class="bundle">
           <b>Bundle:</b>
           <%= link_to @game.bundle.name, @game.bundle %>
-        </p>
+        </div>
     <% end %>
 
-    <p class="description">
+    <div class="description">
       <b>Description:</b>
       <%= @game.description %>
-    </p>
+    </div>
 
-    <p class="platforms">
+    <div class="platforms">
       <b>Current Platforms:</b>
       <%= platform_list @game.platforms %>
-    </p>
-
+    </div>
   </div>
 
   <fieldset class="ports">
@@ -38,7 +37,7 @@
   </fieldset>
 
   <p class="actions">
-    <%= link_to 'Edit', edit_game_path(@game) if permitted_to? :edit %>
+    <%= link_to 'Edit', edit_game_path(@game), class: 'button' if permitted_to? :edit %>
   </p>
 </fieldset>
 <% permitted_to? :read, @game.releases do %>

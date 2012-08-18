@@ -28,7 +28,7 @@
   </div>
 
   <p class="actions">
-    <%= link_to 'Edit', edit_game_issue_path(@issue.game, @issue) if permitted_to? :edit %>
+    <%= link_to 'Edit', edit_game_issue_path(@issue.game, @issue), class: 'button' if permitted_to? :edit %>
   </p>
 </fieldset>
 <%= render 'comments/comment_list', :commentable => @issue %>

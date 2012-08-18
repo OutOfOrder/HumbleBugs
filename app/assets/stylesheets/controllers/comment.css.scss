@@ -18,6 +18,9 @@
       padding-bottom: 1ex;
       border-bottom: 1px solid $secondary-legend-color;
       margin-bottom: 1ex;
+      white-space: pre-wrap;
+      overflow: auto;
+      max-height: 5em;
     }
     div.authorship {
       img {

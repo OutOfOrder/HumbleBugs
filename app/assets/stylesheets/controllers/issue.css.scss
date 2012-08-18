@@ -7,21 +7,14 @@ fieldset.issue_controller {
       @include column($blueprint-grid-columns / 4);
       margin-bottom: 1em;
       &.platforms {
-        @include column($blueprint-grid-columns / 4 * 2);
-        @include last;
+        @include column($blueprint-grid-columns / 4 * 2, true);
       }
       &.summary {
         @include column($blueprint-grid-columns);
       }
       &.description {
-        @include column($blueprint-grid-columns);
-        @include last;
-        > div {
-          margin: 0;
-          max-height: 30em;
-          white-space: pre-wrap;
-          overflow: auto;
-        }
+        @include column($blueprint-grid-columns, true);
+        @include description;
       }
     }
   }

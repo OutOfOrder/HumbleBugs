@@ -3,15 +3,17 @@
 fieldset.game_controller {
   div.details {
     @include container;
-    > p {
+    > div {
       @include column($blueprint-grid-columns / 4);
+      margin-bottom: 1em;
       &.bundle {
         @include prepend($blueprint-grid-columns / 4 - 2);
         @include column($blueprint-grid-columns / 4 + 2);
         @include last;
       }
       &.description {
-        @include column($blueprint-grid-columns / 4 * 3 - 2);
+        @include column($blueprint-grid-columns / 4 * 3 - 2, true);
+        @include description;
       }
       &.platforms {
         @include column($blueprint-grid-columns / 4 + 2, true);

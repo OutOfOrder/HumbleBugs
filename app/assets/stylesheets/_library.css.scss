@@ -16,3 +16,12 @@
   background-color: $main-color;
   @include background(linear-gradient(adjust-lightness($main-color,15%), $main-color));
 }
+
+@mixin description {
+  > div {
+    margin: 0;
+    max-height: 30em;
+    white-space: pre-wrap;
+    overflow: auto;
+  }
+}

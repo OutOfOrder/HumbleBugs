@@ -3,8 +3,9 @@
 fieldset.bundle_controller {
   div.details {
     @include container;
-    > p {
+    > div {
       @include column($blueprint-grid-columns / 4);
+      margin-bottom: 1em;
       &.target {
         @include prepend($blueprint-grid-columns / 4 - 2);
         @include column($blueprint-grid-columns / 4 + 2);
@@ -12,6 +13,7 @@ fieldset.bundle_controller {
       }
       &.description {
         @include column($blueprint-grid-columns / 4 * 3 - 2);
+        @include description;
       }
     }
   }

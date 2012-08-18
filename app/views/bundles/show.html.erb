@@ -1,30 +1,29 @@
 <fieldset class="bundle_controller">
   <legend>Bundle details</legend>
   <div class="details">
-    <p>
+    <div>
       <b>Name:</b>
       <%= @bundle.name %>
-    </p>
+    </div>
 
-    <p>
+    <div>
       <b>State:</b>
       <%= label_for Bundle::STATES, @bundle.state %>
-    </p>
+    </div>
 
-    <p class="target">
+    <div class="target">
       <b>Target date:</b>
       <%= timeago @bundle.target_date if @bundle.target_date.present?%>
-    </p>
+    </div>
 
-    <p class="description">
+    <div class="description">
       <b>Description:</b>
       <%= @bundle.description %>
-    </p>
+    </div>
   </div>
 
   <p class="actions">
-    <%= link_to 'Edit', edit_bundle_path(@bundle) if permitted_to? :edit %> |
-    <%= link_to 'Back', bundles_path %>
+    <%= link_to 'Edit', edit_bundle_path(@bundle), class: 'edit' if permitted_to? :edit %>
   </p>
 </fieldset>
 <fieldset>
