@@ -1,8 +1,8 @@
 class Game < ActiveRecord::Base
   belongs_to :bundle, :inverse_of => :games
-  has_many :ports, :inverse_of => :game
-  has_many :issues, :inverse_of => :game
-  has_many :releases, :inverse_of => :game
+  has_many :ports, :inverse_of => :game, :dependent => :destroy
+  has_many :issues, :inverse_of => :game, :dependent => :destroy
+  has_many :releases, :inverse_of => :game, :dependent => :destroy
 
   acts_as_taggable_on :platforms
 

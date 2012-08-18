@@ -1,5 +1,5 @@
 class Bundle < ActiveRecord::Base
-  has_many :games, :inverse_of => :bundle
+  has_many :games, :inverse_of => :bundle, :dependent => :nullify
   has_many :issues, :through => :games
 
   STATES = [
