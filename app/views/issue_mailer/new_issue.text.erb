@@ -1,0 +1,10 @@
+HumbleBugs User,
+
+A new issue has been created by <%= @issue.author.name %> for <%= @issue.game.name %>.
+
+The summary is:
+<%= @issue.summary %>
+
+Follow this link to view the issue
+
+<%= game_issue_url(@issue.game, @issue) %>
