@@ -15,10 +15,6 @@ class Issue < ActiveRecord::Base
       ['Resolved', :completed]
   ]
 
-  validates_presence_of :status, :description, :game_id, :author_id
+  validates_presence_of :status, :description, :summary, :game_id, :author_id
   validates_inclusion_of :status, :in => STATUSES.map { |m| m.second.to_s }, :message => "%{value} is not a valid status"
-
-  def summary
-    ActionController::Base.helpers.truncate(description, length: 50)
-  end
 end

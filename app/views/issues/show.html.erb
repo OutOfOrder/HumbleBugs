@@ -1,25 +1,30 @@
 <fieldset class="issue_controller">
   <legend>Issue details</legend>
   <div class="details">
-    <p>
+    <div>
       <b>Game:</b>
       <%= link_to @issue.game.name, @issue.game %>
-    </p>
+    </div>
 
-    <p>
+    <div>
       <b>Status:</b>
       <%= label_for Issue::STATUSES, @issue.status %>
-    </p>
+    </div>
 
-    <p class="platforms">
+    <div class="platforms">
       <b>Platforms:</b>
       <%= platform_list @issue.platforms %>
-    </p>
+    </div>
 
-    <p class="description">
+    <div class="summary">
+      <b>Summary:</b>
+      <%= @issue.summary %>
+    </div>
+
+    <div class="description">
       <b>Description:</b>
-      <%= @issue.description %>
-    </p>
+      <div><%= @issue.description %></div>
+    </div>
   </div>
 
   <p class="actions">
