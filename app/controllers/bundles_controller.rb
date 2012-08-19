@@ -4,7 +4,7 @@ class BundlesController < ApplicationController
   # GET /bundles
   # GET /bundles.json
   def index
-    @bundles = Bundle.with_permissions_to
+    @bundles = Bundle.with_permissions_to.order('bundles.target_date DESC')
 
     respond_to do |format|
       format.html # index.html.erb

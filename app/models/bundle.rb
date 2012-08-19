@@ -1,6 +1,6 @@
 class Bundle < ActiveRecord::Base
-  has_many :games, :inverse_of => :bundle, :dependent => :nullify
-  has_many :issues, :through => :games
+  has_many :games, :inverse_of => :bundle, :dependent => :nullify, :order => 'games.name ASC'
+  has_many :issues, :through => :games, :order => 'issues.updated_at DESC'
 
   STATES = [
       ['Planned', :planned],

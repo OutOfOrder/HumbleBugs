@@ -8,8 +8,8 @@ class GamesController < ApplicationController
   # GET /games.json
   def index
     if @bundle.nil?
-      @games = Game.with_permissions_to
-      @bundles = Bundle.with_permissions_to
+      @games = Game.with_permissions_to.order('games.name ASC')
+      @bundles = Bundle.with_permissions_to.order('bundles.name ASC').includes(:games)
       @bundles.each do |bundle|
         @games -= bundle.games
       end

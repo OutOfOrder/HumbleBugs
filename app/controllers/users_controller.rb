@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.with_permissions_to
+    @users = User.with_permissions_to.order('users.name ASC')
 
     respond_to do |format|
       format.html # index.html.erb
