@@ -1,7 +1,5 @@
 <div class="comment" id="comment_<%= comment.id %>">
-  <div class="comment_entry">
-    <%= comment.comment %>
-  </div>
+  <div class="comment_entry"><%= comment.comment %></div>
   <div class="authorship">
     <%= gravatar_tag comment.author, size: 20 %>
     <b>Posted</b> <%= timeago comment.created_at %> <b>by</b> <%= comment.author.name %>
