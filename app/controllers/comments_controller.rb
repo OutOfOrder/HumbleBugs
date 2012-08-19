@@ -30,6 +30,9 @@ class CommentsController < ApplicationController
       if @comment.save
         format.js
         format.json { render json: @comment, status: :created, location: @comment }
+        if @commentable.is_a?(Issue)
+          IssueMailer.new_comment(@comment).deliver
+        end
       else
         format.js { render action: "error" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }

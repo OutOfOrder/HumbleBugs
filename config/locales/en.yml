@@ -15,3 +15,8 @@ en:
   feedback_mailer:
     submit_feedback:
       subject: "HumbleBugs feedback"
+  issue_mailer:
+    new_issue:
+      subject: "New HumbleBugs issue"
+    new_comment:
+      subject: "New HumbleBugs comment"

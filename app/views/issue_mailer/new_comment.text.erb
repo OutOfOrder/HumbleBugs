@@ -1,0 +1,10 @@
+HumbleBugs User,
+
+<%= @comment.author.name %> has added a new comment to the following issue.
+
+<%= game_issue_url(@issue.game, @issue, anchor: "comment_#{@comment.id}") %>
+
+Comment:
+
+<%= @comment.comment %>
+
