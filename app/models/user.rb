@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   def role_symbols
     if roles.present? then
-      roles.map { |m| m.role.to_sym }
+      @role_symbols ||= roles.map { |m| m.role.to_sym }
     else
       [:unverified]
     end
@@ -58,6 +58,16 @@ class User < ActiveRecord::Base
       false
     else
       update_attributes(params)
+    end
+  end
+
+  def dashboard_columns
+    if role_symbols.include?(:bundle_admin)
+      [[:news],[:testing_games]]
+    elsif role_symbols.include?(:tester)
+      [[:news],[:testing_games]]
+    else
+      [[:news]]
     end
   end
 

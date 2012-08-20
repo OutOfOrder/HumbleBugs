@@ -6,6 +6,8 @@ class Game < ActiveRecord::Base
 
   acts_as_taggable_on :platforms
 
+  scope :testing, where(:state => :testing)
+
   STATES = [
       ['Prospective', :prospective],
       ['Planned', :planned],

@@ -20,3 +20,7 @@ en:
       subject: "New HumbleBugs issue"
     new_comment:
       subject: "New HumbleBugs comment"
+
+  dashboard_controller:
+    widgets:
+      testing_games: "Games in Testing"

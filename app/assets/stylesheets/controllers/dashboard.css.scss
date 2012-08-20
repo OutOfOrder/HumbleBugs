@@ -1,0 +1,25 @@
+@import "base";
+@import "compass/typography/lists/bullets";
+
+div.dashboard_column {
+  @include column($blueprint-grid-columns / 3);
+  min-height: 10em;
+  &:last-child {
+    @include last;
+  }
+  >fieldset.ui-sortable-placeholder {
+    border: 1px dotted black;
+    @include border-radius(0);
+    @include box-shadow(none);
+    background: transparent none!important;
+    visibility: visible !important;
+    height: 5em !important;
+  }
+}
+
+fieldset.widget_news {
+  time {
+    font-weight: bold;
+    display: block;
+  }
+}

@@ -92,6 +92,7 @@ header {
   #user-welcome {
     @include column(floor($blueprint-grid-columns / 2 - $blueprint-grid-columns / 3));
     text-align: right;
+    padding-top: 1ex;
   }
   #user-nav {
     div {
@@ -123,10 +124,10 @@ header {
         }
       }
       &.navigation {
-        @include column($blueprint-grid-columns / 4);
+        @include column($blueprint-grid-columns / 3);
       }
       &.new_actions {
-        @include column($blueprint-grid-columns / 4);
+        @include column($blueprint-grid-columns / 3);
       }
     }
   }
