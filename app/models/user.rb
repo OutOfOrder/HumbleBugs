@@ -64,8 +64,10 @@ class User < ActiveRecord::Base
   def dashboard_columns
     if role_symbols.include?(:bundle_admin)
       [[:news],[:testing_games]]
+    elsif role_symbols.include?(:porter)
+      [[:news],[:testing_games, :recently_commented_on, :new_issues],[:game_ports]]
     elsif role_symbols.include?(:tester)
-      [[:news],[:testing_games]]
+      [[:news],[:testing_games, :recently_commented_on, :new_issues]]
     else
       [[:news]]
     end

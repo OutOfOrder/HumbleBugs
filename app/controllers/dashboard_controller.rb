@@ -28,4 +28,19 @@ private
     data[:games] = Game.testing.with_permissions_to
     data
   end
+
+  def widget_new_issues data
+    data[:issues] = Issue.with_permissions_to.where(:game_id => Game.testing.with_permissions_to).order('issues.created_at DESC').includes(:game).limit(5)
+    data
+  end
+
+  def widget_recently_commented_on data
+    data[:issues] = Issue.with_permissions_to.joins(:comments).order("comments.updated_at DESC").includes(:game).limit(10)
+    data
+  end
+
+  def widget_game_ports data
+    data[:games] = Game.joins(:ports).merge( Port.where(:porter_id => current_user))
+    data
+  end
 end
