@@ -73,8 +73,9 @@ authorization do
     has_permission_on :ports, :to => :read do
       if_permitted_to :read_testing, :game
     end
-    has_permission_on :releases, :to => :read do
+    has_permission_on :releases, :to => :read, :join_by => :and do
       if_permitted_to :read, :game
+      if_attribute :status => is_in { [ 'active', 'obsolete' ] }
     end
     includes :base_test_results
   end

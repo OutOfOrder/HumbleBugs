@@ -27,6 +27,15 @@ fieldset.game_controller {
 }
 
 #game_releases {
+  tr.status_obsolete {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+  tr.status_retired {
+    text-decoration: line-through;
+    opacity: 0.6;
+    color: red;
+  }
   tr.detail {
     div {
       padding: 0 1ex;

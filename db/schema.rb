@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818162011) do
+ActiveRecord::Schema.define(:version => 20120829020018) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -88,10 +88,12 @@ ActiveRecord::Schema.define(:version => 20120818162011) do
     t.text     "notes"
     t.integer  "owner_id"
     t.string   "url"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.integer  "download_count", :default => 0, :null => false
-    t.string   "version",                       :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.integer  "download_count", :default => 0,        :null => false
+    t.string   "version",                              :null => false
+    t.string   "checksum"
+    t.string   "status",         :default => "active", :null => false
   end
 
   add_index "releases", ["game_id"], :name => "index_releases_on_game_id"

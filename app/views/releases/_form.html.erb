@@ -19,6 +19,11 @@
         <%= f.text_area :notes %>
       </div>
       <div class="field">
+        <%= f.label :checksum %>
+        <br/>
+        <%= f.text_field :checksum %>
+      </div>
+      <div class="field">
         <%= f.label :version %>
         <br/>
         <%= f.text_field :version %>
@@ -27,6 +32,11 @@
         <%= f.label :url %>
         <br/>
         <%= f.text_field :url %>
+      </div>
+      <div class="field">
+        <%= f.label :status %>
+        <br/>
+        <%= f.select :status, Release::STATUSES %>
       </div>
       <div class="field">
         <%=  f.label :platform_list, 'Platforms' %>

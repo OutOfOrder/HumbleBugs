@@ -3,6 +3,7 @@
     <col width="15%"/>
     <col width="10%"/>
     <col width="10%"/>
+    <col width="10%"/>
   </colgroup>
   <col width="40%"/>
   <thead>
@@ -10,6 +11,7 @@
     <th>Test Results</th>
     <th>Download</th>
     <th>Version</th>
+    <th>Checksum</th>
     <th>Notes</th>
     <th>Uploaded</th>
     <th></th>
@@ -17,7 +19,7 @@
   </thead>
 
   <% releases.each do |release| %>
-      <tr>
+      <tr class="status_<%= release.status %>">
         <td>
           <% if permitted_to? :read, release.test_results %>
               <%= link_to 'View results', release_test_results_path(release), remote: true %>
@@ -28,6 +30,7 @@
         </td>
         <td><%= link_to 'Download', download_release_path(release) if permitted_to? :download, release %></td>
         <td><%= release.version %></td>
+        <td><%= release.checksum %></td>
         <td><%= release.notes %></td>
         <td title="<%= release.owner.name %>"><%= timeago(release.created_at) %></td>
         <td><%= link_to 'Edit', edit_release_path(release) if permitted_to? :edit, release %></td>

@@ -7,5 +7,20 @@ class Release < ActiveRecord::Base
 
   acts_as_taggable_on :platforms
 
-  validates_presence_of :game_id, :owner_id, :version, :url
+  STATUSES = [
+      ['Active', :active],
+      ['Obsolete', :obsolete],
+      ['Retired', :retired]
+  ]
+
+  validate :valid_checksum_length
+  validates_format_of :checksum, allow_blank: true, with: /^[a-fA-F0-9]+$/, message: 'contains invalid MD5 or SHA1 characters'
+  validates_inclusion_of :status, :in => STATUSES.map { |m| m.second.to_s }, :message => "%{value} is not a valid status"
+  validates_presence_of :game_id, :owner_id, :version, :url, :status
+
+private
+  def valid_checksum_length
+    length_ok = checksum.length == 32 || checksum.length == 40 || checksum.length == 0
+    errors.add(:checksum, "length is not a valid MD5 of SHA1") unless length_ok
+  end
 end
