@@ -10,7 +10,9 @@ fieldset.issue_controller {
         @include column($blueprint-grid-columns / 4 * 2, true);
       }
       &.summary {
-        @include column($blueprint-grid-columns);
+        @include column($blueprint-grid-columns / 4 * 3, true);
+        height: 25px;
+        line-height: 30px;
       }
       &.description {
         @include column($blueprint-grid-columns, true);

@@ -16,6 +16,11 @@
       <%= platform_list @issue.platforms %>
     </div>
 
+    <div class="submitter">
+      <b>Submitted by:</b>
+      <%= gravatar_tag @issue.author, size: 20 %> <%= @issue.author.name %>
+    </div>
+
     <div class="summary">
       <b>Summary:</b>
       <%= @issue.summary %>
