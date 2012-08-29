@@ -1,7 +1,7 @@
 <fieldset>
   <legend>User details</legend>
   <p>
-    <b>Gravatar:</b>
+    <b><%= link_to 'Gravatar', 'http://gravatar.com/', target: '_blank' %>:</b>
     <%= gravatar_tag @user %>
   </p>
   <p>
