@@ -7,6 +7,7 @@
     <% end %>
     <col width="10%"/>
     <col width="10%"/>
+    <col width="15%"/>
   </colgroup>
   <thead>
   <tr>
@@ -16,6 +17,7 @@
     <% end %>
     <th>Updated</th>
     <th>Status</th>
+    <th>Platforms</th>
     <th>Summary</th>
   </tr>
   </thead>
@@ -28,6 +30,7 @@
       <% end %>
       <td><%= timeago issue.updated_at %></td>
       <td><%= label_for Issue::STATUSES, issue.status %></td>
+      <td><%= platform_list issue.platforms %></td>
       <td><%= issue.summary %></td>
     </tr>
   <% end %>
