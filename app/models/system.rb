@@ -4,8 +4,9 @@ class System < ActiveRecord::Base
 
   acts_as_taggable_on :platforms
 
-  attr_accessible :name, :description, :graphics_card, :graphics_driver, :operating_system, :processor
+  attr_accessible :name, :description, :graphics_card, :graphics_driver, :operating_system, :processor, :platform_list
 
   validates_presence_of :name, :user_id
   validates_uniqueness_of :name, :scope => [ :user_id ]
+  validates_presence_of :platform_list
 end

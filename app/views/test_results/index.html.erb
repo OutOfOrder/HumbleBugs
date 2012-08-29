@@ -4,16 +4,16 @@
     <th>User</th>
     <th>System</th>
     <th>Rating</th>
-    <th>Comments</th>
+    <th>Platforms</th>
     <th></th>
   </tr>
   </thead>
   <% @test_results.each do |tr| %>
-      <tr>
+      <tr title="<%= tr.comments %>">
         <td><%= tr.user.name %></td>
         <td><%= tr.system.name %></td>
         <td><%= label_for TestResult::RATINGS, tr.rating %></td>
-        <td><%= tr.comments %></td>
+        <td><%= platform_list tr.system.platforms %></td>
         <td>
           <%= link_to 'Edit', edit_test_result_path(tr), remote: true if permitted_to? :edit, tr %>
           <% permitted_to? :delete, tr do %>
