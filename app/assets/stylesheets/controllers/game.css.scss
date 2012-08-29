@@ -36,6 +36,13 @@ fieldset.game_controller {
     opacity: 0.6;
     color: red;
   }
+  tr.spacer {
+    td {
+      height: 4px;
+      padding: 0;
+      background-color: $form-color;
+    }
+  }
   tr.detail {
     div {
       padding: 0 1ex;

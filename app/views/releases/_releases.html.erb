@@ -1,17 +1,15 @@
 <table>
   <colgroup>
+    <col width="10%"/>
     <col width="15%"/>
-    <col width="10%"/>
-    <col width="10%"/>
-    <col width="10%"/>
   </colgroup>
+  <col width="20%"/>
   <col width="40%"/>
   <thead>
   <tr>
-    <th>Test Results</th>
-    <th>Download</th>
     <th>Version</th>
-    <th>Checksum</th>
+    <th>Results</th>
+    <th>Platforms</th>
     <th>Notes</th>
     <th>Uploaded</th>
     <th></th>
@@ -20,25 +18,32 @@
 
   <% releases.each do |release| %>
       <tr class="status_<%= release.status %>">
+        <td><%= release.version %></td>
         <td>
           <% if permitted_to? :read, release.test_results %>
-              <%= link_to 'View results', release_test_results_path(release), remote: true %>
+              <%= link_to "View results (#{release.test_results.count})", release_test_results_path(release), remote: true %>
               <% if permitted_to? :create, release.test_results %>
                   | <%= link_to 'New result', new_release_test_result_path(release), remote: true %>
               <% end %>
           <% end %>
         </td>
-        <td><%= link_to 'Download', download_release_path(release) if permitted_to? :download, release %></td>
-        <td><%= release.version %></td>
-        <td><%= release.checksum %></td>
-        <td><%= release.notes %></td>
+        <td rowspan="2" style="vertical-align: top;"><%= platform_list release.platforms %></td>
+        <td rowspan="2" style="vertical-align: top;"><%= release.notes %></td>
         <td title="<%= release.owner.name %>"><%= timeago(release.created_at) %></td>
+      </tr>
+      <tr>
+        <td colspan="2"><%= link_to 'Download', download_release_path(release) if permitted_to? :download, release %>
+          &nbsp;
+        <%= pretty_checksum release.checksum %></td>
         <td><%= link_to 'Edit', edit_release_path(release) if permitted_to? :edit, release %></td>
       </tr>
       <tr class="detail">
-        <td colspan="6">
+        <td colspan="5">
           <div id="release_<%= release.id %>_test_results" style="display: none;"></div>
         </td>
+      </tr>
+      <tr class="spacer">
+        <td colspan="5"></td>
       </tr>
   <% end %>
 </table>

@@ -19,6 +19,16 @@ module ApplicationHelper
     platforms.map(&:name).join(separator)
   end
 
+  def pretty_checksum checksum
+    if checksum.nil?
+      nil
+    elsif checksum.length == 32 then
+      "MD5: #{checksum}"
+    elsif checksum.length == 40
+      "SHA1: #{checksum}"
+    end
+  end
+
   def timeago(time, options = {})
     options[:class] ||= "timeago"
     content_tag(:time, l(time), options.merge(:datetime => time.getutc.iso8601)) if time
