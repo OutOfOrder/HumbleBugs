@@ -20,7 +20,7 @@ class Release < ActiveRecord::Base
 
 private
   def valid_checksum_length
-    length_ok = checksum.length == 32 || checksum.length == 40 || checksum.length == 0
+    length_ok =  checksum.blank? || checksum.length == 32 || checksum.length == 40
     errors.add(:checksum, "length is not a valid MD5 of SHA1") unless length_ok
   end
 end

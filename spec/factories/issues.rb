@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :issue do
     association :game
     association :author, :factory => :user
+    summary "Issue Summary"
     description "Issue Description"
     status "new"
 

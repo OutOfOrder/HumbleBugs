@@ -8,5 +8,6 @@ FactoryGirl.define do
     processor "M68K"
     graphics_card "Matrox G900"
     graphics_driver "VESA"
+    platform_list "Mac OS X"
   end
 end

@@ -53,7 +53,6 @@ describe TestResultsController do
       it "creates a new TestResult" do
         expect {
           post_with @user, :create, @base_params.merge(test_result: @valid_attributes)
-          ap assigns(:test_result).errors.messages
         }.to change(TestResult, :count).by(1)
       end
 

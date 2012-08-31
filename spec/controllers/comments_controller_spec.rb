@@ -73,7 +73,7 @@ describe CommentsController do
         # Trigger the behavior that occurs when invalid params are submitted
         Comment.any_instance.stub(:save).and_return(false)
         post_with @user, :create, @base_params.merge({:comment => {}})
-        response.should render_template("edit")
+        response.should render_template("comments/error")
       end
     end
   end

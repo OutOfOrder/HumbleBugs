@@ -10,7 +10,7 @@ describe "releases/index" do
   it "renders a list of releases" do
     render_with @user
     assert_select "tr>td", :text => @releases.first.notes, :count => 2
-    assert_select "tr>td", :text => "Download", :count => 2
+    assert_select "tr>td a", :text => "Download", :count => 2
     assert_select "tr>td a", :href => download_release_path(@releases.first)
     assert_select "tr>td a", :href => download_release_path(@releases.second)
   end
