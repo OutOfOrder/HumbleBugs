@@ -25,3 +25,15 @@
     overflow: auto;
   }
 }
+
+@import "compass/layout/grid-background";
+
+@mixin flexible-grid-background {
+  @include grid-background(
+    $total    : $blueprint-grid-columns,
+    $column   : $blueprint-liquid-grid-width,
+    $gutter   : $blueprint-liquid-grid-margin,
+    $baseline : $blueprint-font-size * 1.5,
+    $offset   : 0
+  );
+}

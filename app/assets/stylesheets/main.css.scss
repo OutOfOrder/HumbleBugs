@@ -64,14 +64,14 @@ a.button, input[type="submit"], button {
   }
 }
 
-#container {
+footer, header, #content {
   @include container;
-
-  width: 100%;
+  //@include flexible-grid-background;
 }
 
 header {
-  @include column($blueprint-grid-columns, true);
+  width: 100%;
+
   border-bottom: 2px solid $tab-color;
   @include box-shadow(rgba(black, 0.5) 0 5px 3px -3px);
 
@@ -106,17 +106,15 @@ header {
   }
 
   #app-nav {
-    @include column($blueprint-grid-columns - 2);
-    @include prepend(1);
+    @include column($blueprint-grid-columns, true);
     ul {
       @include horizontal-list;
-      padding: 1ex 0 0 1ex;
       li {
         @include border-top-radius(1ex);
         background-color: $tab-color;
         @include background(linear-gradient(adjust-lightness($tab-color, 15%), $tab-color));
-        padding: 0 1ex !important;
-        margin-right: 1ex;
+        padding: 0 6px !important;
+        margin: 6px 3px 0 6px;
         @include box-shadow(rgba(black, 0.3) 0px 0px 2px 3px);
         &.selected {
           $tab-select-color: hsl(0,80%,50%);
@@ -124,24 +122,17 @@ header {
         }
       }
       &.navigation {
-        @include column($blueprint-grid-columns / 3);
+        @include column($blueprint-grid-columns / 3 * 2);
+        > li:first-child {
+          margin-left: 12px;
+        }
       }
       &.new_actions {
-        @include column($blueprint-grid-columns / 3);
+        @include column($blueprint-grid-columns / 3, true);
       }
     }
   }
 }
-
-footer {
-  @include column($blueprint-grid-columns);
-
-}
-
-#content {
-  @include column($blueprint-grid-columns);
-}
-
 
 fieldset {
   @include fieldset-tint($form-color, $legend-color);
