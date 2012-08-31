@@ -1,0 +1,36 @@
+<fieldset class="developer_controller">
+  <legend>Developer details</legend>
+  <div class="details">
+    <div>
+      <b>Name:</b>
+      <%= @developer.name %>
+    </div>
+
+    <div>
+      <b>Website:</b>
+      <%= @developer.website %>
+    </div>
+
+    <div>
+      <b>Time zone:</b>
+      <%= @developer.time_zone %>
+    </div>
+
+    <div class="address">
+      <b>Address:</b>
+      <div><%= @developer.address %></div>
+    </div>
+
+    <div class="contact_information">
+      <b>Contact information:</b>
+      <div><%= @developer.contact_information %></div>
+    </div>
+  </div>
+
+  <p class="actions">
+    <%= link_to 'Edit', edit_developer_path(@developer), class: 'button' if permitted_to? :edit %>
+    <% permitted_to? :delete, @developer do %>
+      <%= link_to 'Delete', @developer, class: 'button', confirm: 'Are you sure?', method: :delete %>
+    <% end %>
+  </p>
+</fieldset>

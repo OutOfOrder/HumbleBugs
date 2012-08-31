@@ -47,6 +47,9 @@
         <% permitted_to? :manage, :users do %>
             <li class="<%= select_if :controller => :users %>"><%= link_to 'Users', users_path %></li>
         <% end %>
+        <% permitted_to? :manage, :developers do %>
+            <li class="<%= select_if :controller => :developers %>"><%= link_to 'Developers', developers_path %></li>
+        <% end %>
       </ul>
       <ul class="new_actions">
         <% permitted_to? :create, :bundles do %>

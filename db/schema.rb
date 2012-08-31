@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829020018) do
+ActiveRecord::Schema.define(:version => 20120830200451) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,18 @@ ActiveRecord::Schema.define(:version => 20120829020018) do
 
   add_index "comments", ["author_id"], :name => "index_notes_on_owner_id"
   add_index "comments", ["commentable_id", "commentable_type"], :name => "index_notes_on_noteable_id_and_noteable_type"
+
+  create_table "developers", :force => true do |t|
+    t.string   "name",                :null => false
+    t.string   "website"
+    t.string   "time_zone"
+    t.text     "address"
+    t.text     "contact_information"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "developers", ["name"], :name => "index_developers_on_name", :unique => true
 
   create_table "games", :force => true do |t|
     t.string   "name"

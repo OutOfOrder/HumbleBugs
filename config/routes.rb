@@ -20,6 +20,8 @@ HumbleBugs::Application.routes.draw do
     resources :comments, :except => [:index]
   end
 
+  resources :developers
+
   resources :users do
     resources :systems
 

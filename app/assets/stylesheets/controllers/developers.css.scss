@@ -1,0 +1,19 @@
+@import "base";
+
+fieldset.developer_controller {
+  div.details {
+    @include container;
+    > div {
+      @include column($blueprint-grid-columns / 4);
+      margin-bottom: 1em;
+      &.address {
+        @include column($blueprint-grid-columns / 2);
+        @include description;
+      }
+      &.contact_information {
+        @include column($blueprint-grid-columns / 2, true);
+        @include description;
+      }
+    }
+  }
+}

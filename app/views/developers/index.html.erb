@@ -1,0 +1,27 @@
+<fieldset>
+  <legend>Developers</legend>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Website</th>
+      <th>Timezone</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <% @developers.each do |developer| %>
+      <tr>
+        <td><%= developer.name %></td>
+        <td><%= link_to developer.website, developer.website, target: '_blank' %></td>
+        <td><%= developer.time_zone %></td>
+        <td><%= link_to 'Show', developer %></td>
+        <td><%= link_to 'Edit', edit_developer_path(developer) if permitted_to? :edit, developer %></td>
+      </tr>
+    <% end %>
+  </table>
+</fieldset>
+
+<%= link_to 'New Developer', new_developer_path, class: 'button' if permitted_to? :create %>
