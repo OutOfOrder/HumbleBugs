@@ -155,11 +155,47 @@ describe :user do
   end
 
   context :releases do
-    include_examples 'can not X to any', :create, :read, :update, :delete
+    context 'for a game on I am the developer' do
+      before do
+        developer = FactoryGirl.create :developer
+        @user.update_attribute(:developer_id, developer.id)
+        @game = FactoryGirl.create :game, developer: developer
+      end
+      include_examples 'can X to this', :read, :create, :update, :delete do
+        let(:this) { FactoryGirl.create :release, game: @game }
+      end
+    end
+
+    context 'any other game' do
+      before do
+        @game = FactoryGirl.create :game, :with_active_bundle
+      end
+      include_examples 'can not X to this', :read, :create, :update, :delete do
+        let(:this) { FactoryGirl.create :release, game: @game }
+      end
+    end
   end
 
   context :test_results do
-    include_examples 'can not X to any', :create, :read, :update, :delete
+    context 'for a game I am the developer' do
+      before do
+        developer = FactoryGirl.create :developer
+        @user.update_attribute(:developer_id, developer.id)
+        @game = FactoryGirl.create :game, developer: developer
+        @release = FactoryGirl.create :release, game: @game
+      end
+      include_examples 'can X to this', :read, :create do
+        let(:this) { FactoryGirl.create :test_result, release: @release }
+      end
+      include_examples 'can not X to this', :edit, :delete do
+        let(:this) { FactoryGirl.create :test_result, release: @release }
+      end
+      context 'for my own test result' do
+        include_examples 'can X to this', :read, :create, :edit, :delete do
+          let(:this) { FactoryGirl.create :test_result, release: @release, user: @user }
+        end
+      end
+    end
   end
 
   describe :users do
