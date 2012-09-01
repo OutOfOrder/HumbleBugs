@@ -43,6 +43,18 @@ authorization do
     end
   end
 
+  role :developer do
+    has_permission_on :developers, :to => [:read, :read_address, :update, :update_address] do
+      if_attribute :users => contains { user }
+    end
+    has_permission_on :games, :to => [:read, :read_developer] do
+      if_attribute :developer => is { user.developer }
+    end
+    has_permission_on :issues, :to => :update do
+      if_permitted_to :read_developer, :game
+    end
+  end
+
   # after a new user verifies their email they gain user
   role :user do
     title 'User'
@@ -56,9 +68,7 @@ authorization do
       if_attribute :user => is { user }
     end
 
-    has_permission_on :developers, :to => [:read, :read_address, :update, :update_address] do
-      if_attribute :users => contains { user }
-    end
+    includes :developer
   end
 
   role :base_test_results do

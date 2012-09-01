@@ -79,6 +79,12 @@ describe :user do
       game = FactoryGirl.create :game, bundle: bundle
       game.should be_allowed_to :read
     end
+    it 'should be able to read those for which they are the developer' do
+      developer = FactoryGirl.create :developer
+      @user.update_attribute(:developer_id, developer.id)
+      game = FactoryGirl.create :game, developer: developer
+      game.should be_allowed_to :read
+    end
     Bundle::STATES.each do |s|
       next if s.last == :active
       it 'should not be able to read those that are in an #{s.last} bundle' do
@@ -103,6 +109,17 @@ describe :user do
       end
     end
 
+    context 'for a game I am the developer on' do
+      before do
+        developer = FactoryGirl.create :developer
+        @user.update_attribute(:developer_id, developer.id)
+        @game = FactoryGirl.create :game, developer: developer
+      end
+      include_examples 'can X to this', :create, :read, :update do
+        let(:this) { FactoryGirl.create :issue, game: @game }
+      end
+    end
+
     include_examples 'can not X to any', :delete
   end
 
@@ -112,6 +129,18 @@ describe :user do
         let(:commentable) { FactoryGirl.create :issue, game: FactoryGirl.create(:game, :with_active_bundle) }
       end
     end
+
+    context 'for an issue on a game where I am the developer' do
+      include_examples 'basic comments on' do
+        let(:commentable) {
+          developer = FactoryGirl.create :developer
+          @user.update_attribute(:developer_id, developer.id)
+          game = FactoryGirl.create :game, developer: developer
+          FactoryGirl.create :issue, game: game
+        }
+      end
+    end
+
   end
 
   context :ports do
