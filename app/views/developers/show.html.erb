@@ -10,21 +10,22 @@
       <b>Website:</b>
       <%= link_to @developer.website, @developer.website, target: '_blank' if @developer.website.present? %>
     </div>
-
     <div>
       <b>Time zone:</b>
       <%= @developer.time_zone %>
     </div>
 
-    <div class="address">
-      <b>Address:</b>
-      <div><%= @developer.address %></div>
-    </div>
+    <% permitted_to? :read_address, @developer do %>
+      <div class="address">
+        <b>Address:</b>
+        <div><%= @developer.address %></div>
+      </div>
 
-    <div class="contact_information">
-      <b>Contact information:</b>
-      <div><%= @developer.contact_information %></div>
-    </div>
+      <div class="contact_information">
+        <b>Contact information:</b>
+        <div><%= @developer.contact_information %></div>
+      </div>
+    <% end %>
   </div>
 
   <p class="actions">

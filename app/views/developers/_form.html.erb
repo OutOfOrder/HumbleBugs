@@ -28,16 +28,18 @@
       <br/>
       <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, :prompt => '- Select Timezone -' %>
     </div>
-    <div class="field">
-      <%= f.label :address %>
-      <br/>
-      <%= f.text_area :address %>
-    </div>
-    <div class="field">
-      <%= f.label :contact_information %>
-      <br/>
-      <%= f.text_area :contact_information %>
-    </div>
+    <% permitted_to? :read_address, @developer do %>
+      <div class="field">
+        <%= f.label :address %>
+        <br/>
+        <%= f.text_area :address %>
+      </div>
+      <div class="field">
+        <%= f.label :contact_information %>
+        <br/>
+        <%= f.text_area :contact_information %>
+      </div>
+    <% end %>
     <div class="actions">
       <%= f.submit %>
     </div>
