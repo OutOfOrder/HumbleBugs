@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  belongs_to :developer, :inverse_of => :users
   has_many :roles, :class_name => 'UserRole', :inverse_of => :user, :dependent => :destroy, :autosave => true
 
   has_many :systems, :inverse_of => :user, :dependent => :nullify, :autosave => true
@@ -12,6 +13,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name
 
   attr_accessible :email, :name, :password, :password_confirmation, :time_zone
+  attr_accessible :email, :name, :password, :password_confirmation, :time_zone, :developer_id, :as => :manager
 
   before_create { generate_token(:auth_token) }
   before_save :set_null_fields

@@ -28,6 +28,19 @@
     <% end %>
   </p>
 
+  <% if @user.developer.present? %>
+    <p>
+      <b>Developer at:</b>
+      <%= if permitted_to?(:read, @user.developer)
+            link_to @user.developer.name, @user.developer
+          elsif @user.developer.website.present?
+            link_to @user.developer.name, @user.developer.website
+          else
+            @user.developer.name
+          end %>
+    </p>
+  <% end %>
+
   <% permitted_to? :update_roles, @user do %>
       <p>
         <b>Roles:</b>

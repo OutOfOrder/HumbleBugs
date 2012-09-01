@@ -67,6 +67,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    options = {}
     if @user.permitted_to? :update_roles
       roles = (params[:roles] || {}).keys.map(&:to_sym)
       cur_roles = @user.role_symbols
@@ -79,10 +80,12 @@ class UsersController < ApplicationController
       added.each do |r|
         @user.roles.build :role => r.to_s
       end
+
+      options[:as] = :manager
     end
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:user], options)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else

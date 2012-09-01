@@ -1,5 +1,6 @@
 class Developer < ActiveRecord::Base
   has_many :games, :inverse_of => :developer
+  has_many :users, :inverse_of => :developer
 
   attr_accessible :name, :time_zone, :website
   attr_accessible :name, :time_zone, :website, :address, :contact_information, :as => :manager
