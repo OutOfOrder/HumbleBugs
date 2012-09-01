@@ -41,11 +41,13 @@
     </div>
   </div>
 
-  <fieldset class="ports">
-    <legend>Ports</legend>
-    <%= render 'ports/ports', :ports => @game.ports %>
-    <%= link_to 'New Port', new_game_port_path(@game), class: 'button' if permitted_to? :create, @game.ports %>
-  </fieldset>
+  <% permitted_to? :read, :ports do %>
+    <fieldset class="ports">
+      <legend>Ports</legend>
+      <%= render 'ports/ports', :ports => @game.ports.with_permissions_to %>
+      <%= link_to 'New Port', new_game_port_path(@game), class: 'button' if permitted_to? :create, @game.ports %>
+    </fieldset>
+  <% end %>
 
   <p class="actions">
     <%= link_to 'Edit', edit_game_path(@game), class: 'button' if permitted_to? :edit %>

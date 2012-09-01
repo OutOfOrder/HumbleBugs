@@ -56,6 +56,9 @@ authorization do
     has_permission_on :releases, :to => :manage do
       if_permitted_to :read_developer, :game
     end
+    has_permission_on :ports, :to => :read do
+      if_permitted_to :read_developer, :game
+    end
     # @todo should probably better scope this
     includes :base_test_results
   end

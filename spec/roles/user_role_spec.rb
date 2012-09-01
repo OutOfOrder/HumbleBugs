@@ -144,7 +144,32 @@ describe :user do
   end
 
   context :ports do
-    include_examples 'can not X to any', :create, :read, :update, :delete
+    context 'for a game on an active bundle' do
+      include_examples 'can not X to this', :read, :update do
+        let(:this) { FactoryGirl.create :port, game: FactoryGirl.create(:game, :with_active_bundle) }
+      end
+    end
+    context 'for a game on I am the developer' do
+      before do
+        developer = FactoryGirl.create :developer
+        @user.update_attribute(:developer_id, developer.id)
+        @game = FactoryGirl.create :game, developer: developer
+      end
+      it 'can read ports' do
+        port = FactoryGirl.create :port, game: @game
+        port.should be_allowed_to :read
+      end
+      it 'can not update ports' do
+        port = FactoryGirl.create :port, game: @game
+        port.should_not be_allowed_to :update
+      end
+    end
+    context 'a bundle I am not porting nor in an active bundle' do
+      include_examples 'can not X to this', :read, :update do
+          let(:this) { FactoryGirl.create :port }
+      end
+    end
+    include_examples 'can not X to any', :create, :delete
   end
 
   context :predefined_tags do
