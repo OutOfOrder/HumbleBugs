@@ -23,6 +23,7 @@ authorization do
       if_permitted_to :read, :commentable
       if_attribute :author => is { user }
     end
+    has_permission_on :developers, :to => :read
   end
 
   role :guest do
@@ -105,6 +106,7 @@ authorization do
     title 'Bundle admin'
     has_permission_on :predefined_tags, :to => :manage
     has_permission_on :bundles, :to => :manage
+    has_permission_on :developers, :to => :manage
     has_permission_on :games, :to => :manage
     has_permission_on [:ports, :releases, :issues], :to => :manage do
       if_permitted_to :manage, :game

@@ -18,6 +18,10 @@ describe :bundle_admin do
     include_examples 'can X to all', :create, :read, :update, :delete
   end
 
+  context :developers do
+    include_examples 'can X to all', :create, :read, :update, :delete
+  end
+
   context :games do
     include_examples 'can X to all', :create, :read, :update, :delete
   end

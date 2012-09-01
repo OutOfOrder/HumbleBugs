@@ -35,6 +35,10 @@ describe :unverified do
     include_examples 'can not X to any', :create, :update, :delete
   end
 
+  context :developers do
+    include_examples 'can not X to any', :create, :read, :update, :delete
+  end
+
   context :games do
     it 'should be able to get a list of permissible games' do
       should be_allowed_to :index, true
