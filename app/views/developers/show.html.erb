@@ -8,7 +8,7 @@
 
     <div>
       <b>Website:</b>
-      <%= @developer.website %>
+      <%= link_to @developer.website, @developer.website, target: '_blank' if @developer.website.present? %>
     </div>
 
     <div>
@@ -34,3 +34,10 @@
     <% end %>
   </p>
 </fieldset>
+<% permitted_to? :read, @developer.games do %>
+    <fieldset id="developer_games">
+      <legend>Games</legend>
+      <%= render 'games/games', :games => @developer.games.with_permissions_to, :without => [:developer] %>
+    </fieldset>
+<% end %>
+

@@ -2,14 +2,19 @@
   <colgroup>
     <col width="33%"/>
     <col width="33%"/>
-    <col width="10%"/>
+    <% if !defined?(without) || !without.include?(:developer) %>
+      <col/>
+    <% end %>
+    <col width="20%"/>
   </colgroup>
 
   <thead>
   <tr>
     <th>Name</th>
     <th>State</th>
-    <th>Developer</th>
+    <% if !defined?(without) || !without.include?(:developer) %>
+      <th>Developer</th>
+    <% end %>
     <th>Issues</th>
   </tr>
   </thead>
@@ -19,11 +24,13 @@
       <tr class="game">
         <td><%= link_to game.name, game %></td>
         <td><%= label_for Game::STATES, game.state %></td>
-        <td><%= if game.developer.try(:website)
-                  link_to game.developer.name, game.developer.website
-                else
-                  game.developer.try(:name)
-                end %></td>
+        <% if !defined?(without) || !without.include?(:developer) %>
+          <td><%= if game.developer.try(:website)
+                    link_to game.developer.name, game.developer.website
+                  else
+                    game.developer.try(:name)
+                  end %></td>
+        <% end %>
         <td>
           <% permitted_to? :read, game.issues do %>
               <%= link_to pluralize(game.issues.count, 'issue'), game_path(game, anchor: 'game_issues') %>
