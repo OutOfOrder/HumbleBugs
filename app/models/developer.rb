@@ -1,4 +1,6 @@
 class Developer < ActiveRecord::Base
+  has_many :games, :inverse_of => :developer
+
   attr_accessible :address, :name, :time_zone, :contact_information, :website
 
   validates_presence_of :name

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830200451) do
+ActiveRecord::Schema.define(:version => 20120831163013) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -53,8 +53,9 @@ ActiveRecord::Schema.define(:version => 20120830200451) do
     t.text     "description"
     t.integer  "bundle_id"
     t.string   "state"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "developer_id"
   end
 
   add_index "games", ["bundle_id"], :name => "index_games_on_bundle_id"

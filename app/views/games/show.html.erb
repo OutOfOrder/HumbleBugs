@@ -8,16 +8,27 @@
     </div>
 
     <div>
+      <b>Developer:</b>
+      <%= if @game.developer.present? && permitted_to?(:read, @game.developer)
+            link_to @game.developer.name, @game.developer
+          elsif @game.developer.try(:website)
+            link_to @game.developer.name, @game.developer.website
+          else
+            @game.developer.try(:name)
+          end %>
+    </div>
+
+    <div class="state">
       <b>State:</b>
       <%= label_for Game::STATES, @game.state %>
     </div>
 
-    <% @game.bundle.present? && permitted_to?(:read, @game.bundle) do %>
-        <div class="bundle">
-          <b>Bundle:</b>
-          <%= link_to @game.bundle.name, @game.bundle %>
-        </div>
-    <% end %>
+    <div class="bundle">
+      <% @game.bundle.present? && permitted_to?(:read, @game.bundle) do %>
+        <b>Bundle:</b>
+        <%= link_to @game.bundle.name, @game.bundle %>
+      <% end %>
+    </div>
 
     <div class="description">
       <b>Description:</b>

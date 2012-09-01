@@ -23,6 +23,13 @@
       <br/>
       <%= f.text_area :description %>
     </div>
+    <% permitted_to? :read, :developer do %>
+      <div class="field">
+        <%= f.label :developer_id %>
+        <br/>
+        <%= f.collection_select :developer_id, Developer.with_permissions_to, :id, :name, :include_blank => '- Unknown developer -' %>
+      </div>
+    <% end %>
     <div class="field">
       <%= f.label :bundle %>
       <br/>
