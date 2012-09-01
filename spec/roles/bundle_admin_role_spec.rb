@@ -19,7 +19,7 @@ describe :bundle_admin do
   end
 
   context :developers do
-    include_examples 'can X to all', :create, :read, :update, :delete
+    include_examples 'can X to all', :create, :read, :read_address, :update, :update_address, :delete
   end
 
   context :games do

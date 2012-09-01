@@ -36,7 +36,7 @@ describe :unverified do
   end
 
   context :developers do
-    include_examples 'can not X to any', :create, :read, :update, :delete
+    include_examples 'can not X to any', :create, :read, :read_address, :update, :update_address, :delete
   end
 
   context :games do

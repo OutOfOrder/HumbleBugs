@@ -28,7 +28,7 @@
       <br/>
       <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, :prompt => '- Select Timezone -' %>
     </div>
-    <% permitted_to? :read_address, @developer do %>
+    <% permitted_to? :update_address, @developer do %>
       <div class="field">
         <%= f.label :address %>
         <br/>

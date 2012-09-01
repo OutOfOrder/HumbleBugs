@@ -23,7 +23,9 @@ authorization do
       if_permitted_to :read, :commentable
       if_attribute :author => is { user }
     end
-    has_permission_on :developers, :to => :read
+    has_permission_on :developers, :to => :read do
+      if_attribute :games => { :bundle => { :state => is { 'active' } } }
+    end
   end
 
   role :guest do
@@ -78,6 +80,9 @@ authorization do
       if_permitted_to :read, :game
       if_attribute :status => is_in { [ 'active', 'obsolete' ] }
     end
+    has_permission_on :developers, :to => :read do
+      if_attribute :games => { :state => is_in { ['testing', 'complete' ] } }
+    end
     includes :base_test_results
   end
 
@@ -98,6 +103,9 @@ authorization do
     end
     has_permission_on :issues, :to => :update do
       if_permitted_to :read_port, :game
+    end
+    has_permission_on :developers, :to => [:read, :read_address] do
+      if_attribute :games => { :ports => { :porter => is { user } } }
     end
     includes :base_test_results
   end
@@ -146,5 +154,7 @@ privileges do
   privilege :create, :includes => :new
   privilege :update, :includes => :edit
   privilege :delete, :includes => :destroy
+
   privilege :read, :releases, :includes => :download
+  privilege :manage, :developers, :includes => [:read_address, :update_address]
 end

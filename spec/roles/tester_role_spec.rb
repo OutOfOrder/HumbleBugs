@@ -36,8 +36,31 @@ describe :tester do
   end
 
   context :developers do
-    include_examples 'can X to all', :read
-    include_examples 'can not X to any', :create, :delete, :edit
+    it 'can read but not address info for developers with games in an active bundle' do
+      developer = FactoryGirl.create :developer
+      FactoryGirl.create :game, :with_active_bundle, developer: developer
+
+      developer.should be_allowed_to :read
+      developer.should_not be_allowed_to :read_address
+    end
+
+    it 'can read but not address info for developers with games in testing' do
+      developer = FactoryGirl.create :developer
+      FactoryGirl.create :game, :testing, developer: developer
+
+      developer.should be_allowed_to :read
+      developer.should_not be_allowed_to :read_address
+    end
+
+    it 'can not read info about developers with games I can not read' do
+      developer = FactoryGirl.create :developer
+      FactoryGirl.create :game, developer: developer
+
+      developer.should_not be_allowed_to :read
+      developer.should_not be_allowed_to :read_address
+    end
+
+    include_examples 'can not X to any', :create, :read_address, :delete, :edit, :update_address
   end
 
   context :games do
