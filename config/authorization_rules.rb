@@ -55,6 +55,10 @@ authorization do
     has_permission_on :systems, :to => [:manage] do
       if_attribute :user => is { user }
     end
+
+    has_permission_on :developers, :to => [:read, :read_address, :update, :update_address] do
+      if_attribute :users => contains { user }
+    end
   end
 
   role :base_test_results do

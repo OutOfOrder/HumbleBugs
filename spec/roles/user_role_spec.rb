@@ -42,6 +42,8 @@ describe :user do
 
       developer.should be_allowed_to :read
       developer.should_not be_allowed_to :read_address
+      developer.should_not be_allowed_to :update
+      developer.should_not be_allowed_to :update_address
     end
 
     it 'can not read info about developers with games I can not read' do
@@ -50,9 +52,22 @@ describe :user do
 
       developer.should_not be_allowed_to :read
       developer.should_not be_allowed_to :read_address
+      developer.should_not be_allowed_to :edit
+      developer.should_not be_allowed_to :update_address
     end
 
-    include_examples 'can not X to any', :create, :read_address, :delete, :edit, :update_address
+    it 'can read address info for a developer I belong to' do
+      developer = FactoryGirl.create :developer
+      FactoryGirl.create :game, developer: developer
+      @user.update_attribute(:developer_id, developer.id)
+
+      developer.should be_allowed_to :read
+      developer.should be_allowed_to :read_address
+      developer.should be_allowed_to :update
+      developer.should be_allowed_to :update_address
+    end
+
+    include_examples 'can not X to any', :create, :delete
   end
 
   context :games do
