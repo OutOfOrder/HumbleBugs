@@ -52,7 +52,9 @@ class DevelopersController < ApplicationController
   # PUT /developers/1.json
   def update
     respond_to do |format|
-      if @developer.update_attributes(params[:developer])
+      options = {}
+      options[:as] = :manager  if permitted_to? :update_address, @developer
+      if @developer.update_attributes(params[:developer], options)
         format.html { redirect_to @developer, notice: 'Developer was successfully updated.' }
         format.json { head :no_content }
       else
