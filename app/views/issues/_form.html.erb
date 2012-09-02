@@ -13,7 +13,7 @@
       </div>
     <% end %>
 
-    <% if !defined? @game %>
+    <% if @game.nil? %>
       <div class="field">
         <%= f.label :game_id %>
         <br/>
