@@ -191,6 +191,15 @@ describe :user do
       end
     end
 
+    context 'for a game in testing' do
+      before do
+        @game = FactoryGirl.create :game, :testing
+      end
+      include_examples 'can not X to this', :read, :create, :update, :delete do
+        let(:this) { FactoryGirl.create :release, game: @game }
+      end
+    end
+
     context 'any other game' do
       before do
         @game = FactoryGirl.create :game, :with_active_bundle
