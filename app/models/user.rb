@@ -63,18 +63,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def dashboard_columns
-    if role_symbols.include?(:bundle_admin)
-      [[:news],[:testing_games]]
-    elsif role_symbols.include?(:porter)
-      [[:news],[:testing_games, :recently_commented_on, :new_issues],[:game_ports]]
-    elsif role_symbols.include?(:tester)
-      [[:news],[:testing_games, :recently_commented_on, :new_issues]]
-    else
-      [[:news]]
-    end
-  end
-
 private
   def set_null_fields
     self.time_zone = nil if self.time_zone.blank?
