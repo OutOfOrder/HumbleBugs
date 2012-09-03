@@ -15,7 +15,7 @@
     <% @developers.each do |developer| %>
       <tr>
         <td><%= developer.name %></td>
-        <td><%= link_to developer.website, developer.website, target: '_blank' %></td>
+        <td><%= link_to developer.website, developer.website, target: '_blank' if developer.website.present? %></td>
         <td><%= developer.time_zone %></td>
         <td><%= link_to 'Show', developer %></td>
         <td><%= link_to 'Edit', edit_developer_path(developer) if permitted_to? :edit, developer %></td>
