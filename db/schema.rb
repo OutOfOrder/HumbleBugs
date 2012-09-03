@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901030736) do
+ActiveRecord::Schema.define(:version => 20120903141730) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(:version => 20120901030736) do
     t.datetime "confirm_account_sent_at"
     t.datetime "nda_signed_date"
     t.integer  "developer_id"
+    t.text     "dashboard"
   end
 
   add_index "users", ["auth_token"], :name => "index_users_on_auth_token", :unique => true

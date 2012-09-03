@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   before_create { generate_token(:auth_token) }
   before_save :set_null_fields
 
+  serialize :dashboard, JSONColumn
+
   scope :with_role, -> role do
     joins(:roles).where(:user_roles => {role: role.to_s})
   end

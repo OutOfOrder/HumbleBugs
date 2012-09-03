@@ -12,6 +12,9 @@ private
   def dashboard_columns
     if current_user.nil?
       [[:news]]
+    elsif current_user.dashboard.present?
+      logger.info "Using Custom Dashboard"
+      current_user.dashboard
     else
       is_developer = current_user.role_symbols.include?(:porter) || current_user.developer.present?
       is_tester    = current_user.role_symbols.include?(:tester)
