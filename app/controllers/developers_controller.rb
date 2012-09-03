@@ -74,4 +74,13 @@ class DevelopersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+protected
+
+  def new_developer_from_params
+    options = {}
+    options[:as] = :manager  if permitted_to? :update_address, :developers
+
+    @developer = Developer.new params[:developer], options
+  end
 end
