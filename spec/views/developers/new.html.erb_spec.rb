@@ -13,8 +13,9 @@ describe "developers/new" do
       assert_select "input#developer_name", :name => "developer[name]"
       assert_select "input#developer_website", :name => "developer[website]"
       assert_select "select#developer_time_zone", :name => "developer[time_zone]"
-      assert_select "textarea#developer_address", :name => "developer[address]"
-      assert_select "textarea#developer_contact_information", :name => "developer[contact_information]"
+      # todo only available if correct permission
+      #assert_select "textarea#developer_address", :name => "developer[address]"
+      #assert_select "textarea#developer_contact_information", :name => "developer[contact_information]"
     end
   end
 end

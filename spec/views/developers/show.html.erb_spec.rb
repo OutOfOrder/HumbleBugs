@@ -11,7 +11,8 @@ describe "developers/show" do
     rendered.should match(/Dev Name \d+/)
     rendered.should match(/http:\/\/www\.gamedeveloper\.com\//)
     rendered.should match(/EST/)
-    rendered.should match(/123 Nowhere/)
-    rendered.should match(/555-1234/)
+    # todo only available if correct permission
+    #rendered.should match(/123 Nowhere/)
+    #rendered.should match(/555-1234/)
   end
 end
