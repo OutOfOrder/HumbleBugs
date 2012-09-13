@@ -60,7 +60,7 @@ describe :tester do
       developer.should_not be_allowed_to :read_address
     end
 
-    include_examples 'can not X to any', :create, :read_address, :delete, :edit, :update_address
+    include_examples 'can not X to any', :create, :delete
   end
 
   context :games do
@@ -158,7 +158,6 @@ describe :tester do
         let(:this) { FactoryGirl.create :release, game: FactoryGirl.create(:game, :testing) }
       end
     end
-    include_examples 'can not X to any', :create, :update, :delete
   end
 
   context :test_results do

@@ -47,8 +47,9 @@ authorization do
     has_permission_on :developers, :to => [:read, :read_address, :update, :update_address] do
       if_attribute :users => contains { user }
     end
-    has_permission_on :games, :to => [:read, :read_developer] do
-      if_attribute :developer => { :users => contains { user } }
+    has_permission_on :games, :to => [:read, :read_developer], :join_by => :and do
+      if_attribute :developer => is { user.developer }
+      if_attribute :developer => is_not { nil }
     end
     has_permission_on :issues, :to => :update do
       if_permitted_to :read_developer, :game

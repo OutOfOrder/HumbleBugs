@@ -60,7 +60,7 @@ describe :porter do
       developer.should_not be_allowed_to :read_address
     end
 
-    include_examples 'can not X to any', :create, :delete, :edit, :edit_address
+    include_examples 'can not X to any', :create, :delete
   end
 
   context :games do

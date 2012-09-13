@@ -85,6 +85,12 @@ describe :user do
       game = FactoryGirl.create :game, developer: developer
       game.should be_allowed_to :read
     end
+    it 'should not be able to read games with no developer and the user has no developer' do
+      game = FactoryGirl.create :game
+      game.developer.should be_blank
+      @user.developer.should be_blank
+      game.should_not be_allowed_to :read
+    end
     Bundle::STATES.each do |s|
       next if s.last == :active
       it 'should not be able to read those that are in an #{s.last} bundle' do
