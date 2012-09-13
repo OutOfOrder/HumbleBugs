@@ -56,17 +56,6 @@ describe :user do
       developer.should_not be_allowed_to :update_address
     end
 
-    it 'can read address info for a developer I belong to' do
-      developer = FactoryGirl.create :developer
-      FactoryGirl.create :game, developer: developer
-      @user.update_attribute(:developer_id, developer.id)
-
-      developer.should be_allowed_to :read
-      developer.should be_allowed_to :read_address
-      developer.should be_allowed_to :update
-      developer.should be_allowed_to :update_address
-    end
-
     include_examples 'can not X to any', :create, :delete
   end
 
@@ -77,12 +66,6 @@ describe :user do
     it 'should be able to read those that are in an active bundle' do
       bundle = FactoryGirl.create :bundle, :active
       game = FactoryGirl.create :game, bundle: bundle
-      game.should be_allowed_to :read
-    end
-    it 'should be able to read those for which they are the developer' do
-      developer = FactoryGirl.create :developer
-      @user.update_attribute(:developer_id, developer.id)
-      game = FactoryGirl.create :game, developer: developer
       game.should be_allowed_to :read
     end
     it 'should not be able to read games with no developer and the user has no developer' do
@@ -115,17 +98,6 @@ describe :user do
       end
     end
 
-    context 'for a game I am the developer on' do
-      before do
-        developer = FactoryGirl.create :developer
-        @user.update_attribute(:developer_id, developer.id)
-        @game = FactoryGirl.create :game, developer: developer
-      end
-      include_examples 'can X to this', :create, :read, :update do
-        let(:this) { FactoryGirl.create :issue, game: @game }
-      end
-    end
-
     include_examples 'can not X to any', :delete
   end
 
@@ -135,39 +107,12 @@ describe :user do
         let(:commentable) { FactoryGirl.create :issue, game: FactoryGirl.create(:game, :with_active_bundle) }
       end
     end
-
-    context 'for an issue on a game where I am the developer' do
-      include_examples 'basic comments on' do
-        let(:commentable) {
-          developer = FactoryGirl.create :developer
-          @user.update_attribute(:developer_id, developer.id)
-          game = FactoryGirl.create :game, developer: developer
-          FactoryGirl.create :issue, game: game
-        }
-      end
-    end
-
   end
 
   context :ports do
     context 'for a game on an active bundle' do
       include_examples 'can not X to this', :read, :update do
         let(:this) { FactoryGirl.create :port, game: FactoryGirl.create(:game, :with_active_bundle) }
-      end
-    end
-    context 'for a game on I am the developer' do
-      before do
-        developer = FactoryGirl.create :developer
-        @user.update_attribute(:developer_id, developer.id)
-        @game = FactoryGirl.create :game, developer: developer
-      end
-      it 'can read ports' do
-        port = FactoryGirl.create :port, game: @game
-        port.should be_allowed_to :read
-      end
-      it 'can not update ports' do
-        port = FactoryGirl.create :port, game: @game
-        port.should_not be_allowed_to :update
       end
     end
     context 'a bundle I am not porting nor in an active bundle' do
@@ -186,17 +131,6 @@ describe :user do
   end
 
   context :releases do
-    context 'for a game on I am the developer' do
-      before do
-        developer = FactoryGirl.create :developer
-        @user.update_attribute(:developer_id, developer.id)
-        @game = FactoryGirl.create :game, developer: developer
-      end
-      include_examples 'can X to this', :read, :create, :update, :delete do
-        let(:this) { FactoryGirl.create :release, game: @game }
-      end
-    end
-
     context 'for a game in testing' do
       before do
         @game = FactoryGirl.create :game, :testing
@@ -217,25 +151,7 @@ describe :user do
   end
 
   context :test_results do
-    context 'for a game I am the developer' do
-      before do
-        developer = FactoryGirl.create :developer
-        @user.update_attribute(:developer_id, developer.id)
-        @game = FactoryGirl.create :game, developer: developer
-        @release = FactoryGirl.create :release, game: @game
-      end
-      include_examples 'can X to this', :read, :create do
-        let(:this) { FactoryGirl.create :test_result, release: @release }
-      end
-      include_examples 'can not X to this', :edit, :delete do
-        let(:this) { FactoryGirl.create :test_result, release: @release }
-      end
-      context 'for my own test result' do
-        include_examples 'can X to this', :read, :create, :edit, :delete do
-          let(:this) { FactoryGirl.create :test_result, release: @release, user: @user }
-        end
-      end
-    end
+    pending "negative tests for non-developer users"
   end
 
   describe :users do
