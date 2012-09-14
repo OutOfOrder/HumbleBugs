@@ -66,7 +66,7 @@ describe SessionsController do
       post :secret_login, { :id => user.to_param}
 
       response.cookies['auth_token'].should eq(user.auth_token)
-      session[:user].should === user
+      session[:auth_token].should === user.auth_token
     end
   end
 
