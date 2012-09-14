@@ -13,5 +13,5 @@ When /^I submit a new game for bundle "([^"]+)"$/ do |bundle_name|
     end
   end
   page.select bundle.name, :from => 'game_bundle_id'
-  click_button 'submit_game'
+  click_button 'Create Game'
 end

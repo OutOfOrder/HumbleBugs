@@ -33,6 +33,6 @@
       <br/>
       <%= f.password_field :password_confirmation, :placeholder => 'Confirm Password' %>
     </div>
-    <div class="actions"><%= f.submit "Sign Up" %></div>
+    <div class="actions"><%= f.submit "Sign Up", disable_with: 'Submitting...' %></div>
   </fieldset>
 <% end %>
