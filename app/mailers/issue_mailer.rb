@@ -12,6 +12,9 @@ class IssueMailer < ActionMailer::Base
       recipients.select! { |e| e != Authorization.current_user.email }
     end
 
+    if recipients.blank?
+      raise NoRecipientsException.new
+    end
     mail bcc: recipients
   end
 
@@ -32,6 +35,9 @@ class IssueMailer < ActionMailer::Base
       recipients.select! { |e| e != Authorization.current_user.email }
     end
 
+    if recipients.blank?
+      raise NoRecipientsException.new
+    end
     mail bcc: recipients
   end
 end

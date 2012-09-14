@@ -31,7 +31,10 @@ class CommentsController < ApplicationController
         format.js
         format.json { render json: @comment, status: :created, location: @comment }
         if @commentable.is_a?(Issue)
-          IssueMailer.new_comment(@comment).deliver
+          begin
+            IssueMailer.new_comment(@comment).deliver
+          rescue NoRecipientsException
+          end
         end
       else
         format.js { render action: "error" }

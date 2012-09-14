@@ -1,0 +1,2 @@
+class NoRecipientsException < Exception
+end

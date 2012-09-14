@@ -44,8 +44,10 @@ class IssuesController < ApplicationController
       if @issue.save
         format.html { redirect_to [@issue.game, @issue], notice: 'Issue was successfully created.' }
         format.json { render json: @issue, status: :created, location: [@issue.game, @issue] }
-
-        IssueMailer.new_issue(@issue).deliver
+        begin
+          IssueMailer.new_issue(@issue).deliver
+        rescue NoRecipientsException
+        end
       else
         format.html { render action: "new" }
         format.json { render json: @issue.errors, status: :unprocessable_entity }

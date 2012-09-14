@@ -110,6 +110,12 @@ describe IssuesController do
 
         assigns(:issue).author.should == @user
       end
+
+      it 'should not error when submitting an issue where no one is emailed' do
+        expect {
+          post_with @user, :create, @base_params.merge({:issue => @issue})
+        }.to_not raise_error
+      end
     end
 
     describe "with invalid params" do
