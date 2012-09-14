@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
 if Rails.env.test? || Rails.env.development?
   def secret_login
     user = User.find(params[:id])
-    session[:auth_token] = user.auth_token
+    session[:user_id] = user.id
     cookies[:auth_token] = {
         value: user.auth_token,
         httponly: true

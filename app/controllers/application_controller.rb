@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 protected
   def current_user
     if Rails.env.test?
-      @current_user ||= User.find_by_auth_token(session[:auth_token]) if session[:auth_token]
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
     else
       @current_user ||= User.find_by_auth_token(cookies[:auth_token]) if cookies[:auth_token]
     end
