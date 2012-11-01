@@ -16,7 +16,7 @@
       <% end %>
       <td><%= platform_list port.platforms %></td>
       <td><%= label_for Port::STATES, port.state %></td>
-      <td><%= port.porter.name %></td>
+      <td><%= port.porter.try(:name) %></td>
       <td><%= link_to 'Edit', edit_game_port_path(port.game, port) if permitted_to? :edit, port %></td>
     </tr>
   <% end %>
