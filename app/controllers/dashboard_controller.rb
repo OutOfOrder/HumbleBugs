@@ -79,7 +79,7 @@ private
   end
 
   def widget_my_game_ports data
-    data[:games] = Game.joins(:ports).merge( Port.where(:porter_id => current_user)).uniq.order('games.name ASC')
+    data[:games] = Game.joins(:ports).merge( Port.where(:developer_id => current_user.developer_id)).uniq.order('games.name ASC')
     data[:view] = 'game_list'
     data
   end

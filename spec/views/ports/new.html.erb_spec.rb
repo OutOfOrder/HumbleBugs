@@ -11,7 +11,7 @@ describe "ports/new" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => game_ports_path(@game), :method => "post" do
-      assert_select "select#port_porter_id", :name => "port[porter_id]"
+      assert_select "select#port_developer_id", :name => "port[developer_id]"
       assert_select "select#port_state", :name => "port[state]"
     end
   end

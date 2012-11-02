@@ -3,26 +3,25 @@ require "spec_helper"
 describe IssueMailer do
   describe "new_issue" do
     it "renders the headers" do
-      issue = FactoryGirl.create(:issue)
+      game = FactoryGirl.create :game, :with_developer
+      issue = FactoryGirl.create(:issue, game: game)
       mail = IssueMailer.new_issue(issue)
       mail.subject.should eq("New HumbleBugs issue")
       mail.from.should eq(["myfromaddress@example.com"])
     end
 
     it 'should email all developers for the associated game' do
-      developer = FactoryGirl.create :developer
-      user = FactoryGirl.create :user, developer: developer
-      game = FactoryGirl.create :game, developer: developer
+      game = FactoryGirl.create :game, :with_developer
       issue = FactoryGirl.create :issue, game: game
       mail = IssueMailer.new_issue(issue)
-      mail.bcc.should eq([user.email])
+      mail.bcc.should eq(game.developer.users.map &:email)
     end
 
     it 'should email all porters for the associated game' do
       port = FactoryGirl.create :port
       issue = FactoryGirl.create :issue, game: port.game
       mail = IssueMailer.new_issue(issue)
-      mail.bcc.should eq([port.porter.email])
+      mail.bcc.should eq(port.developer.users.map &:email)
     end
   end
 
@@ -49,7 +48,7 @@ describe IssueMailer do
       issue = FactoryGirl.create :issue, game: port.game
       comment = FactoryGirl.create :comment, commentable: issue
       mail = IssueMailer.new_comment(comment)
-      mail.bcc.should match_array([port.porter.email, issue.author.email, comment.author.email])
+      mail.bcc.should match_array([*port.developer.users.map(&:email), issue.author.email, comment.author.email])
     end
 
     it 'should filter out myself' do

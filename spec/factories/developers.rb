@@ -7,5 +7,11 @@ FactoryGirl.define do
     time_zone "EST"
     address "123 Nowhere"
     contact_information "555-1234"
+
+    trait :with_user do
+      after(:create) do |developer|
+        FactoryGirl.create(:user, developer:developer)
+      end
+    end
   end
 end

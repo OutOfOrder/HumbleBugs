@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :port do
     association :game
-    association :porter, :factory => :user
+    association :developer
     state "planned"
   end
 end

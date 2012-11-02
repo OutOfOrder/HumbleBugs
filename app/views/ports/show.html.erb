@@ -6,8 +6,8 @@
   </p>
 
   <p>
-    <b>Porter:</b>
-    <%= @port.porter.name %>
+    <b>Developer:</b>
+    <%= @port.developer.try(:name) || @port.porter.try(:name) %>
   </p>
 
   <p>
