@@ -2,16 +2,14 @@ require 'spec_helper'
 
 describe :porter do
   before :all do
-    @user = FactoryGirl.create :user, :roles => [:porter]
+    @user = FactoryGirl.create :user, :with_developer, :roles => [:user]
+    @developer                 = @user.developer
     Authorization.current_user = @user
   end
   after :all do
     Authorization.current_user = nil
+    @developer.destroy
     @user.destroy
-  end
-
-  it 'should have the porter role' do
-    Authorization.current_user.role_symbols.should == [:porter]
   end
 
   context :bundles do
@@ -39,7 +37,7 @@ describe :porter do
     it 'can read including address info for developers with games I am porting' do
       developer = FactoryGirl.create :developer
       game = FactoryGirl.create :game, developer: developer
-      FactoryGirl.create :port, game: game, porter: @user
+      FactoryGirl.create :port, game: game, developer: @developer
 
       developer.should be_allowed_to :read
       developer.should be_allowed_to :read_address
@@ -87,7 +85,7 @@ describe :porter do
     end
 
     it 'should be able to read games where I am the porter' do
-      port = FactoryGirl.create :port, :porter => @user
+      port = FactoryGirl.create :port, developer: @developer
       port.game.should be_allowed_to :read
     end
     it 'should not be able to read games where I am not the porter' do
@@ -107,7 +105,7 @@ describe :porter do
 
     context 'for a game I am porting' do
       before do
-        @port = FactoryGirl.create :port, porter: @user
+        @port = FactoryGirl.create :port, developer: @developer
         @game = @port.game
       end
       include_examples 'can X to this', :create, :read, :update do
@@ -127,7 +125,7 @@ describe :porter do
     context 'for an issue on a game I am porting' do
       include_examples 'basic comments on' do
         let(:commentable) {
-          port = FactoryGirl.create :port, porter: @user
+          port = FactoryGirl.create :port, developer: @developer
           FactoryGirl.create :issue, game: port.game
         }
       end
@@ -142,7 +140,7 @@ describe :porter do
     end
     context 'for a game on I am porting' do
       before do
-        @port = FactoryGirl.create :port, porter: @user
+        @port = FactoryGirl.create :port, developer: @developer
         @game = @port.game
       end
       it 'can read other ports' do
@@ -186,7 +184,7 @@ describe :porter do
 
     context 'for a game on I am porting' do
       before do
-        @port = FactoryGirl.create :port, porter: @user
+        @port = FactoryGirl.create :port, developer: @developer
         @game = @port.game
       end
       include_examples 'can X to this', :read, :create, :update, :delete do
@@ -198,7 +196,7 @@ describe :porter do
   context :test_results do
     context 'for a game I am porting' do
       before do
-        @port = FactoryGirl.create :port, porter: @user
+        @port = FactoryGirl.create :port, developer: @developer
         @game = @port.game
         @release = FactoryGirl.create :release, game: @game
       end

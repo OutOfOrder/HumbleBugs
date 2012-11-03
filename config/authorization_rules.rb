@@ -43,8 +43,8 @@ authorization do
     end
   end
 
-  role :developer do
-    has_permission_on :developers, :to => [:read, :read_address, :update, :update_address] do
+  role :game_developer do
+    has_permission_on :developers, :to => [:is_member, :read, :read_address, :update, :update_address] do
       if_attribute :users => contains { user }
     end
     has_permission_on :games, :to => [:read, :read_developer], :join_by => :and do
@@ -60,8 +60,27 @@ authorization do
     has_permission_on :ports, :to => :read do
       if_permitted_to :read_developer, :game
     end
-    # @todo should probably better scope this
-    includes :base_test_results
+  end
+
+  role :game_porter do
+    has_permission_on :games, :to => [:read, :is_porter] do
+      if_permitted_to :is_member, :ports => :developer
+    end
+    has_permission_on :ports, :to => :read do
+      if_permitted_to :is_porter, :game
+    end
+    has_permission_on :ports, :to => :update do
+      if_permitted_to :is_member, :developer
+    end
+    has_permission_on :releases, :to => :manage do
+      if_permitted_to :is_porter, :game
+    end
+    has_permission_on :issues, :to => :update do
+      if_permitted_to :is_porter, :game
+    end
+    has_permission_on :developers, :to => [:read, :read_address] do
+      if_permitted_to :is_member, :games => { :ports => :developer }
+    end
   end
 
   # after a new user verifies their email they gain user
@@ -77,7 +96,10 @@ authorization do
       if_attribute :user => is { user }
     end
 
-    includes :developer
+    includes :game_developer
+    includes :game_porter
+    # @todo should probably better scope this
+    includes :base_test_results
   end
 
   role :base_test_results do
