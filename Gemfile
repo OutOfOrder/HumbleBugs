@@ -24,7 +24,7 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'acts-as-taggable-on'
-gem 'declarative_authorization', :git => "https://github.com/stffn/declarative_authorization.git"
+gem 'declarative_authorization'
 gem 'valid_email'
 
 gem 'gravatarify'
