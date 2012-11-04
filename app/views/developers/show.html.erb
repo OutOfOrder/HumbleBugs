@@ -41,4 +41,9 @@
       <%= render 'games/games', :games => @developer.games.with_permissions_to, :without => [:developer] %>
     </fieldset>
 <% end %>
-
+<% permitted_to? :read, @developer.ports do %>
+  <fieldset id="developer_ports">
+    <legend>Ports</legend>
+    <%= render 'ports/ports', :ports => @developer.ports.with_permissions_to, :without => [:developer] %>
+  </fieldset>
+<% end %>                                                                                         User.
