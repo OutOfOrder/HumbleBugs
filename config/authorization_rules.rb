@@ -131,30 +131,6 @@ authorization do
     includes :base_test_results
   end
 
-  role :porter do
-    title 'Game porter'
-    includes :user
-    has_permission_on :games, :to => [:read, :read_port] do
-      if_attribute :ports => { :porter => is { user } }
-    end
-    has_permission_on :ports, :to => :read do
-      if_permitted_to :read_port, :game
-    end
-    has_permission_on :ports, :to => :update do
-      if_attribute :porter => is { user }
-    end
-    has_permission_on :releases, :to => :manage do
-      if_permitted_to :read_port, :game
-    end
-    has_permission_on :issues, :to => :update do
-      if_permitted_to :read_port, :game
-    end
-    has_permission_on :developers, :to => [:read, :read_address] do
-      if_attribute :games => { :ports => { :porter => is { user } } }
-    end
-    includes :base_test_results
-  end
-
   role :bundle_admin do
     title 'Bundle admin'
     has_permission_on :predefined_tags, :to => :manage
