@@ -14,7 +14,7 @@
     <div class="field">
       <%= f.label :system_id %>
       <br/>
-      <%= f.collection_select :system_id, @test_result.user.systems, :id, :name, :prompt => true %>
+      <%= f.collection_select :system_id, @test_result.user.systems.order('systems.name'), :id, :name, :prompt => true %>
     </div>
     <div class="field">
       <%= f.label :rating %>

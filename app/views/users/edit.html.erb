@@ -32,7 +32,7 @@
           <div class="field">
             <%= f.label :developer_id %>
             <br/>
-            <%= f.collection_select :developer_id, Developer.with_permissions_to, :id, :name, include_blank: '- No Developer -' %>
+            <%= f.collection_select :developer_id, Developer.with_permissions_to.order('developers.name'), :id, :name, include_blank: '- No Developer -' %>
           </div>
           <div class="field">
             <fieldset class="role_editor">
