@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105135454) do
+ActiveRecord::Schema.define(:version => 20121105142557) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20121105135454) do
   end
 
   add_index "games", ["bundle_id"], :name => "index_games_on_bundle_id"
+  add_index "games", ["developer_id"], :name => "index_games_on_developer_id"
 
   create_table "issues", :force => true do |t|
     t.integer  "game_id"
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20121105135454) do
     t.string   "summary"
   end
 
+  add_index "issues", ["author_id"], :name => "index_issues_on_author_id"
   add_index "issues", ["fixed_in_id"], :name => "index_issues_on_fixed_in_id"
   add_index "issues", ["game_id"], :name => "index_issues_on_game_id"
   add_index "issues", ["reported_against_id"], :name => "index_issues_on_reported_against_id"
@@ -84,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20121105135454) do
     t.integer  "developer_id"
   end
 
+  add_index "ports", ["developer_id"], :name => "index_ports_on_developer_id"
   add_index "ports", ["game_id"], :name => "index_ports_on_game_id"
 
   create_table "predefined_tags", :force => true do |t|
@@ -153,7 +156,6 @@ ActiveRecord::Schema.define(:version => 20121105135454) do
   end
 
   add_index "test_results", ["release_id", "system_id"], :name => "index_test_results_on_release_id_and_system_id", :unique => true
-  add_index "test_results", ["release_id"], :name => "index_test_results_on_release_id"
   add_index "test_results", ["system_id"], :name => "index_test_results_on_system_id"
   add_index "test_results", ["user_id"], :name => "index_test_results_on_user_id"
 
