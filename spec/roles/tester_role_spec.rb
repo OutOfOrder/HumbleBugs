@@ -120,24 +120,19 @@ describe :tester do
 
   context :ports do
     context 'for a game on an active bundle' do
-      before do
-        @game = FactoryGirl.create(:game, :with_active_bundle)
-      end
-      it 'can not read' do
-        port = FactoryGirl.create :port, game: @game
-        port.should_not be_allowed_to :read
+      include_examples 'can not X to this', :read, :update do
+        let(:this) { FactoryGirl.create :port, game: FactoryGirl.create(:game, :with_active_bundle) }
       end
     end
     context 'for a game in testing' do
-      before do
-        @game = FactoryGirl.create :game, :testing
+      include_examples 'can X to this', :read do
+        let(:this) { FactoryGirl.create :port, game: FactoryGirl.create(:game, :testing) }
       end
-      it 'can read' do
-        port =FactoryGirl.create :port, game: @game
-        port.should be_allowed_to :read
+      include_examples 'can not X to this', :update do
+        let(:this) { FactoryGirl.create :port, game: FactoryGirl.create(:game, :testing) }
       end
     end
-    include_examples 'can not X to any', :create, :update, :delete
+    include_examples 'can not X to any', :create, :delete
   end
 
   context :predefined_tags do
