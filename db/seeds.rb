@@ -24,9 +24,14 @@ if Rails.env.development?
     end
   end
 
-  developer = Developer.find_or_create_by_name!({name: 'Test Developer', time_zone: 'Pacific Time (US & Canada', address: '123 Nowhere', contact_information: '555-1234' }, without_protection: true)
+  developer = Developer.find_or_create_by_name!({name: 'Test Developer', time_zone: 'Pacific Time (US & Canada)', address: '123 Nowhere', contact_information: '555-1234' }, without_protection: true)
   unless User.find_by_email("developer@example.com")
     u = User.create!({name: 'Developer', email: "developer@example.com", password: "test", password_confirmation: "test", developer: developer}, without_protection: true)
+    u.roles.create! role: 'user'
+  end
+  porter = Developer.find_or_create_by_name!({name: 'Porter Developer', time_zone: 'Eastern Time (US & Canada)', address: '123 Nowhere', contact_information: '555-4321' }, without_protection: true)
+  unless User.find_by_email("porter@example.com")
+    u = User.create!({name: 'Porter', email: "porter@example.com", password: "test", password_confirmation: "test", developer: porter}, without_protection: true)
     u.roles.create! role: 'user'
   end
 
@@ -46,11 +51,11 @@ if Rails.env.development?
     Bundle.create!(name: 'In Development Bundle', state: 'development', description: 'In development').tap do |bundle|
       game_name = Faker::Product.product_name
       bundle.games.create!(name: game_name, description: game_name, state: 'development', platform_list: 'Windows').tap do |game|
-        game.ports.create!(porter: User.find_by_email('porter@example.com'), state: 'development', platform_list: 'Linux x86,Mac OS X')
+        game.ports.create!(developer: porter, state: 'development', platform_list: 'Linux x86,Mac OS X')
       end
       game_name = Faker::Product.product_name
       bundle.games.create!(name: game_name, description: game_name, state: 'planned', platform_list: 'Windows,Mac OS X').tap do |game|
-        game.ports.create!(porter: User.find_by_email('porter@example.com'), state: 'development', platform_list: 'Linux x86')
+        game.ports.create!(developer: porter, state: 'development', platform_list: 'Linux x86')
       end
     end
   end
@@ -60,7 +65,7 @@ if Rails.env.development?
       bundle.games.create!(name: game_name, description: game_name, state: 'testing', platform_list: 'Windows,Mac OS X,Linux x86,Linux x86_64')
       game_name = Faker::Product.product_name
       bundle.games.create!(name: game_name, description: game_name, state: 'testing', platform_list: 'Windows').tap do |game|
-        game.ports.create!(porter: User.find_by_email('porter@example.com'), state: 'development', platform_list: 'Linux x86,Mac OS X')
+        game.ports.create!(developer: porter, state: 'development', platform_list: 'Linux x86,Mac OS X')
       end
     end
   end

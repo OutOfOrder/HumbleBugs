@@ -24,14 +24,6 @@ describe PredefinedTagsController do
       get_with @user, :complete, { :context => 'tests' }
       assigns(:predefined_tags).should eq(predefined_tags)
     end
-    context 'as a porter' do
-      it 'should be allowed' do
-        FactoryGirl.create :predefined_tag
-        user = FactoryGirl.create :user, :roles => [:porter]
-        get_with user, :complete, { :context => 'platforms' }
-        response.code.should eq('200')
-      end
-    end
   end
 
   describe "GET show" do

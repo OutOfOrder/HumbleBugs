@@ -16,7 +16,7 @@ private
       logger.info "Using Custom Dashboard"
       current_user.dashboard
     else
-      is_developer = current_user.role_symbols.include?(:porter) || current_user.developer.present?
+      is_developer = current_user.developer.present?
       is_tester    = current_user.role_symbols.include?(:tester)
       is_admin     = current_user.role_symbols.include?(:bundle_admin)
       if is_admin

@@ -7,7 +7,7 @@
 
   <p>
     <b>Developer:</b>
-    <%= @port.developer.try(:name) || @port.porter.try(:name) %>
+    <%= @port.developer.try(:name) || '(Unassigned)' %>
   </p>
 
   <p>

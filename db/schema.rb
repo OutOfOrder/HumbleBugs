@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121102141033) do
+ActiveRecord::Schema.define(:version => 20121105135454) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(:version => 20121102141033) do
 
   create_table "ports", :force => true do |t|
     t.integer  "game_id"
-    t.integer  "porter_id"
     t.string   "state"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
@@ -86,7 +85,6 @@ ActiveRecord::Schema.define(:version => 20121102141033) do
   end
 
   add_index "ports", ["game_id"], :name => "index_ports_on_game_id"
-  add_index "ports", ["porter_id"], :name => "index_ports_on_porter_id"
 
   create_table "predefined_tags", :force => true do |t|
     t.string   "name"
