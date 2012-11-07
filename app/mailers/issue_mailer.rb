@@ -3,7 +3,9 @@ class IssueMailer < ActionMailer::Base
     @issue = issue
 
     recipients = []
-    recipients.push *@issue.game.ports.includes(:developer).map {|p| p.developer.users.map(&:email) }
+    @issue.game.ports.where('ports.developer_id IS NOT NULL').includes(:developer).each do |p|
+      recipients.push *p.developer.users.map(&:email)
+    end
     if @issue.game.developer.present?
       recipients.push *@issue.game.developer.users.map(&:email)
     end
@@ -27,7 +29,9 @@ class IssueMailer < ActionMailer::Base
     recipients = []
     recipients.push @issue.author.try(:email)
     recipients.push *@issue.comments.includes(:author).map {|c| c.author.try(:email)}
-    recipients.push *@issue.game.ports.includes(:developer).map {|p| p.developer.users.map(&:email) }
+    @issue.game.ports.where('ports.developer_id IS NOT NULL').includes(:developer).each do |p|
+      recipients.push *p.developer.users.map(&:email)
+    end
     if @issue.game.developer.present?
       recipients.push *@issue.game.developer.users.map(&:email)
     end
