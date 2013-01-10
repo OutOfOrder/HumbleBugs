@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def platform_list platforms, separator = ", "
-    platforms.map(&:name).join(separator)
+    platforms && platforms.map(&:name).join(separator)
   end
 
   def pretty_checksum checksum

@@ -11,9 +11,9 @@
   <% @test_results.each do |tr| %>
       <tr title="<%= tr.comments %>">
         <td><%= tr.user.name %></td>
-        <td><%= tr.system.name %></td>
+        <td><%= tr.system.try(:name) || '(System Removed)' %></td>
         <td><%= label_for TestResult::RATINGS, tr.rating %></td>
-        <td><%= platform_list tr.system.platforms %></td>
+        <td><%= platform_list tr.system.try(:platforms) %></td>
         <td>
           <%= link_to 'Edit', edit_test_result_path(tr), remote: true if permitted_to? :edit, tr %>
           <% permitted_to? :delete, tr do %>
