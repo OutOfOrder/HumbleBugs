@@ -19,6 +19,7 @@ describe IssueMailer do
 
     it 'should email all porters for the associated game' do
       port = FactoryGirl.create :port
+      FactoryGirl.create :user, roles:[:user], developer: port.developer
       issue = FactoryGirl.create :issue, game: port.game
       mail = IssueMailer.new_issue(issue)
       mail.bcc.should eq(port.developer.users.map &:email)

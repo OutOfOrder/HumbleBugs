@@ -7,7 +7,8 @@ describe "ports/new" do
   end
 
   it "renders new port form" do
-    render
+    user = FactoryGirl.create :user, roles:[:user], developer: @port.developer
+    render_with user
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => game_ports_path(@game), :method => "post" do
