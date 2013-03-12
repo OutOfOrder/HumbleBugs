@@ -11,6 +11,18 @@ en:
     attributes:
       user:
         developer_id: 'Developer at'
+        password_confirmation: 'Confirm password'
+        email: 'E-mail'
+      game:
+        platform_list: 'Current Platforms'
+      issue:
+        platform_list: 'Affected Platforms'
+      port:
+        platform_list: 'Target Platforms'
+      release:
+        platform_list: 'Platforms'
+      system:
+        platform_list: 'Platforms'
 
   user_mailer:
     password_reset:
