@@ -7,7 +7,7 @@
   <div class="actions">
     <%= link_to 'Edit', edit_comment_path(comment), remote: true if permitted_to? :edit, comment %>
     <% permitted_to? :delete, comment do %>
-        | <%= link_to 'Delete', comment_path(comment), confirm: 'Are you sure?', method: :delete %>
+        | <%= link_to 'Delete', comment_path(comment), confirm: 'Are you sure?', method: :delete, remote: true %>
     <% end %>
   </div>
 </div>
