@@ -1,4 +1,7 @@
 class PredefinedTag < ActiveRecord::Base
+  def self.with_context(*contexts)
+    where(:context => contexts.map(&:to_s))
+  end
 
   CONTEXTS = [
       ['Platforms', :platforms],
