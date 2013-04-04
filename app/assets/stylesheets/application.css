@@ -13,7 +13,7 @@
  *= require jquery.ui.resizable
  *= require jquery.ui.autocomplete
  *= require jquery.ui.dialog
- *= require jquery.tagsinput
+ *= require select2
  *= require jquery.jgrowl
  *= require_tree ./controllers
 */
