@@ -169,6 +169,9 @@ form {
   fieldset {
     margin: 1.5em 1em 1em 1em;
   }
+  .select2-input {
+    min-width: 100px;
+  }
   &.login_form {
     @include column($blueprint-grid-columns / 3);
     @include prepend($blueprint-grid-columns / 3);
