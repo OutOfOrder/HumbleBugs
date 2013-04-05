@@ -85,7 +85,10 @@ private
   end
 
   def widget_my_issues data
-    data[:issues] = Issue.scoped_by_author_id(current_user.id)
+    i = Issue.arel_table
+    sub = Comment.select('commentable_id').scoped_by_commentable_type_and_author_id('Issue',current_user.id)
+    data[:issues] = Issue.where(i[:author_id].eq(current_user.id).
+                                    or(i[:id].in(sub.arel))).order('issues.updated_at DESC')
     data[:view] = 'issue_list'
     data
   end
