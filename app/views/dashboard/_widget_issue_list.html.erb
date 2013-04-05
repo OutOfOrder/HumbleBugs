@@ -1,0 +1,5 @@
+<ul>
+  <% issues.each do |issue| %>
+    <li><%= link_to "View ##{issue.id}", [issue.game, issue], title: "For game #{issue.game.name}" %> updated <%= timeago(issue.updated_at) %></li>
+  <% end %>
+</ul>

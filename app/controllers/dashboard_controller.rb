@@ -22,9 +22,9 @@ private
       if is_admin
         [[:news], [:testing_games, :recently_commented_on, :new_issues], [:game_ports]]
       elsif is_tester && !is_developer
-        [[:news], [:testing_games, :recently_commented_on, :new_issues]]
+        [[:news, :my_issues], [:testing_games, :recently_commented_on, :new_issues]]
       elsif is_developer
-        [[:news], [:testing_games, :recently_commented_on, :new_issues], [:my_game_ports, :my_games]]
+        [[:news, :my_issues], [:testing_games, :recently_commented_on, :new_issues], [:my_game_ports, :my_games]]
       else
         [[:news]]
       end
@@ -81,6 +81,12 @@ private
   def widget_my_game_ports data
     data[:games] = Game.joins(:ports).merge( Port.where(:developer_id => current_user.developer_id)).uniq.order('games.name ASC')
     data[:view] = 'game_list'
+    data
+  end
+
+  def widget_my_issues data
+    data[:issues] = Issue.scoped_by_author_id(current_user.id)
+    data[:view] = 'issue_list'
     data
   end
 end
