@@ -1,6 +1,5 @@
-<fieldset class="widget widget_<%= widget[:name] %>">
-  <legend><%= t "dashboard_controller.widgets.#{widget[:name]}" %></legend>
+<%= field_set_tag t("dashboard_controller.widgets.#{widget[:name]}"), class: "widget widget_#{widget[:name]}", data:{widget:widget[:name]} do %>
   <div class="content">
     <%= render :partial => "widget_#{widget[:view] || widget[:name]}", :locals => widget %>
   </div>
-</fieldset>
+<% end %>
