@@ -10,6 +10,7 @@ gem 'rails', '3.2.13'
 gem 'sqlite3', :group => [:development, :test]
 gem 'pg', :group => [:production]
 
+gem 'awesome_print'
 gem 'airbrake'
 
 # Gems used only for assets and not required
@@ -25,6 +26,7 @@ gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'password_strength'
 
 gem 'acts-as-taggable-on'
 gem 'declarative_authorization'
@@ -47,7 +49,6 @@ gem 'unicorn'
 group :test do
   gem 'database_cleaner'
   gem 'rspec-rails', :group => [:development, :test]
-  gem 'awesome_print', :group => [:development, :test]
   gem 'factory_girl_rails'
   gem 'cucumber-rails', :require => false
   gem 'capybara'
