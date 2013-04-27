@@ -16,22 +16,24 @@
 end
 
 if Rails.env.development?
+  password = 't3stpassword'
+
   # load dummy users
   Authorization::Engine.instance.role_titles.each do |role, title|
     unless User.find_by_email("#{role.to_s}@example.com")
-      u = User.create!(name: title, email: "#{role.to_s}@example.com", password: "test", password_confirmation: "test")
+      u = User.create!(name: title, email: "#{role.to_s}@example.com", password: password, password_confirmation: password)
       u.roles.create! role: role.to_s
     end
   end
 
   developer = Developer.find_or_create_by_name!({name: 'Test Developer', time_zone: 'Pacific Time (US & Canada)', address: '123 Nowhere', contact_information: '555-1234' }, without_protection: true)
   unless User.find_by_email("developer@example.com")
-    u = User.create!({name: 'Developer', email: "developer@example.com", password: "test", password_confirmation: "test", developer: developer}, without_protection: true)
+    u = User.create!({name: 'Developer', email: "developer@example.com", password: password, password_confirmation: password, developer: developer}, without_protection: true)
     u.roles.create! role: 'user'
   end
   porter = Developer.find_or_create_by_name!({name: 'Porter Developer', time_zone: 'Eastern Time (US & Canada)', address: '123 Nowhere', contact_information: '555-4321' }, without_protection: true)
   unless User.find_by_email("porter@example.com")
-    u = User.create!({name: 'Porter', email: "porter@example.com", password: "test", password_confirmation: "test", developer: porter}, without_protection: true)
+    u = User.create!({name: 'Porter', email: "porter@example.com", password: password, password_confirmation: password, developer: porter}, without_protection: true)
     u.roles.create! role: 'user'
   end
 

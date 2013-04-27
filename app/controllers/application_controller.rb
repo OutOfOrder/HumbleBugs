@@ -21,10 +21,10 @@ protected
     if current_user
       respond_to do |format|
         format.html { render 'layouts/denied' }
-        format.js { render 'layouts/denied.js' }
+        format.js { render 'layouts/denied', formats: [:js] }
       end
     else
-      redirect_to login_url r: request.fullpath
+      redirect_to login_url(r: request.fullpath), :alert => 'You must login first'
     end
   end
 

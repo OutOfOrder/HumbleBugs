@@ -7,8 +7,8 @@ FactoryGirl.define do
     end
     sequence(:email) { |n| "user#{n}@example.com" }
     name "user name"
-    password "test password"
-    password_confirmation "test password"
+    password "t3stpassword"
+    password_confirmation "t3stpassword"
 
     trait :password_reset do
       password_reset_token { SecureRandom.urlsafe_base64 }
@@ -26,6 +26,12 @@ FactoryGirl.define do
 
     trait :with_developer do
       developer
+    end
+
+    trait :confirmed do
+      roles ['user']
+	  confirm_account_token nil
+      confirm_account_sent_at { Time.now }
     end
 
     after(:build) do |user, evaluator|

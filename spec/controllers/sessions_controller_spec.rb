@@ -13,7 +13,7 @@ describe SessionsController do
   describe "POST create" do
     before do
       @password = 'sw0rdf1sh'
-      @user = FactoryGirl.create :user, :email => 'test@nowhere.com', :password => @password, :password_confirmation => @password
+      @user = FactoryGirl.create :user, :confirmed, :email => 'test@nowhere.com', :password => @password, :password_confirmation => @password
     end
     describe "with valid params" do
       it "log in the user" do
@@ -44,7 +44,7 @@ describe SessionsController do
     describe "with mixed case emails" do
       before do
         @email = 'MixedCase@MySite.com'
-        @user2 = FactoryGirl.create :user, :email => @email, :password => @password, :password_confirmation => @password
+        @user2 = FactoryGirl.create :user, :confirmed, :email => @email, :password => @password, :password_confirmation => @password
       end
       it "should log in of case is the same" do
         post :create, {:email => @email, :password => @password }
@@ -61,6 +61,13 @@ describe SessionsController do
   end
 
   describe "POST secret_login" do
+    it 'should not be available in production' do
+      Rails.stub(env: ActiveSupport::StringInquirer.new("production"))
+      user = FactoryGirl.create :user
+      post :secret_login, { id: user.to_param }
+      response.cookies['auth_token'].should_not eq(user.auth_token)
+      response.code.should eq("500")
+    end
     it 'logs in the user' do
       user = FactoryGirl.create :user
       post :secret_login, { :id => user.to_param}

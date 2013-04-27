@@ -1,6 +1,6 @@
 class ConfirmAccountController < ApplicationController
   def confirm
-    @user = User.find_by_confirm_account_token!(params[:id])
+    @user = User.find_by_confirm_account_token(params[:id])
     if @user
       @user.confirm_account_token = nil
       @user.roles.build role: 'user'

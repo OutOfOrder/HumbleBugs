@@ -28,13 +28,17 @@ class SessionsController < ApplicationController
         redirect_to root_url, :notice => "Logged in!"
       end
     else
-      flash[:alert] = "Invalid email or password"
+      flash.now[:alert] = "Invalid email or password"
       render "new"
     end
   end
 
 if Rails.env.test? || Rails.env.development?
   def secret_login
+    if Rails.env.production?
+      render status: 500, text: ''
+      return
+    end
     user = User.find(params[:id])
     session[:user_id] = user.id
     cookies[:auth_token] = {

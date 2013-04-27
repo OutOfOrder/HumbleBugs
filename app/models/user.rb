@@ -7,10 +7,13 @@ class User < ActiveRecord::Base
   has_many :systems, :inverse_of => :user, :dependent => :nullify, :autosave => true
   has_many :test_results, :inverse_of => :user
 
-  validates_presence_of :password, :password_confirmation, :on => :create
+  validates :name, :length => { :minimum => 4 }, :presence => true
   validates_uniqueness_of :email, :case_sensitive => false
   validates :email, :presence => true, :email => true
-  validates_presence_of :name
+  with_options :if => :password_required? do |m|
+    m.validates :password, presence: true, length: { minimum: 6 }, strength: { :with => :email }
+    m.validates :password_confirmation, presence: true
+  end
 
   attr_accessible :email, :name, :password, :password_confirmation, :time_zone
   attr_accessible :email, :name, :password, :password_confirmation, :time_zone, :developer_id, :as => :manager
@@ -68,5 +71,9 @@ class User < ActiveRecord::Base
 private
   def set_null_fields
     self.time_zone = nil if self.time_zone.blank?
+  end
+
+  def password_required?
+    self.new_record? || !password.nil? || !password_confirmation.nil?
   end
 end
