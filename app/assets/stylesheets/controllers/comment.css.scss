@@ -33,12 +33,29 @@
     div.actions {
       font-size: 0.95em;
       line-height: 20px;
-      @include column($blueprint-grid-columns / 2);
+      @include column($blueprint-grid-columns / 4 * 3);
       @include last;
+
+      span.expand {
+        float: right;
+        cursor: pointer;
+        &:hover {
+          border: 1px solid #333;
+          @include border-radius(50%);
+        }
+      }
     }
 
     &:target {
       border-color: green;
     }
   }
+}
+
+div.ui-dialog div.comment_entry {
+  padding-bottom: 1ex;
+  border-bottom: 1px solid $secondary-legend-color;
+  margin-bottom: 1ex;
+  white-space: pre-wrap;
+  overflow: auto;
 }

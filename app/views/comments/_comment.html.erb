@@ -9,5 +9,6 @@
     <% permitted_to? :delete, comment do %>
         | <%= link_to 'Delete', comment_path(comment), confirm: 'Are you sure?', method: :delete, remote: true %>
     <% end %>
+    <span class="expand ui-icon ui-icon-arrowthick-2-se-nw"/>
   </div>
 </div>
