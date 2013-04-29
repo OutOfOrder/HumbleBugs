@@ -49,6 +49,8 @@ GEM
     childprocess (0.3.2)
       ffi (~> 1.0.6)
     chunky_png (1.2.5)
+    ci_reporter (1.8.4)
+      builder (>= 2.1.2)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -198,6 +200,7 @@ DEPENDENCIES
   awesome_print
   bcrypt-ruby (~> 3.0.0)
   capybara
+  ci_reporter
   compass-rails
   cucumber-rails
   database_cleaner

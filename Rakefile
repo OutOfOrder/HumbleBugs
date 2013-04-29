@@ -5,3 +5,5 @@
 require File.expand_path('../config/application', __FILE__)
 
 HumbleBugs::Application.load_tasks
+
+require 'ci/reporter/rake/rspec'
