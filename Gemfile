@@ -54,6 +54,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', :require => false
+  gem 'simplecov-rcov', :require => false
   gem 'ffaker', :group => [:development, :test]
 end
 
