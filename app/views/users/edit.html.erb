@@ -28,7 +28,7 @@
         <br/>
         <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, :prompt => '- Select Timezone -' %>
       </div>
-      <fieldset>
+      <!--fieldset>
         <legend>Change Password</legend>
         <div class="field">
           <%= f.label :password %>
@@ -38,7 +38,7 @@
           <%= f.label :password_confirmation %>
           <%= f.password_field :password_confirmation %>
         </div>
-      </fieldset>
+      </fieldset-->
       <% permitted_to? :update_roles, @user do %>
           <div class="field">
             <%= f.label :developer_id %>
