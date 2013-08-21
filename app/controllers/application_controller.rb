@@ -34,7 +34,7 @@ private
   end
 
   def set_time_zone
-    Time.zone = current_user.time_zone if current_user
+    Time.zone = current_user ? current_user.time_zone : nil
   end
 
 protected
