@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     joins(:roles).where(:user_roles => {role: role.to_s})
   end
 
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64

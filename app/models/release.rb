@@ -18,6 +18,9 @@ class Release < ActiveRecord::Base
   validates_inclusion_of :status, :in => STATUSES.map { |m| m.second.to_s }, :message => "%{value} is not a valid status"
   validates_presence_of :game_id, :owner_id, :version, :url, :status
 
+  def to_param
+    "#{id}-#{game.name.parameterize}-#{version.parameterize}"
+  end
 private
   def valid_checksum_length
     length_ok =  checksum.blank? || checksum.length == 32 || checksum.length == 40

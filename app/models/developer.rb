@@ -12,6 +12,10 @@ class Developer < ActiveRecord::Base
 
   before_save :set_null_fields
 
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+
 private
   def set_null_fields
     self.time_zone = nil if self.time_zone.blank?
