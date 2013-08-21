@@ -93,7 +93,9 @@ describe DevelopersController do
 
       it "redirects to the developer" do
         developer = FactoryGirl.create(:developer)
-        put_with @user, :update, {:id => developer.to_param, :developer => FactoryGirl.attributes_for(:developer)}
+        attrs = FactoryGirl.attributes_for(:developer)
+        attrs[:name] = developer.name
+        put_with @user, :update, {:id => developer.to_param, :developer => attrs }
         response.should redirect_to(developer)
       end
     end
