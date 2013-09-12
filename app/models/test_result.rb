@@ -1,7 +1,7 @@
 class TestResult < ActiveRecord::Base
   belongs_to :user, :inverse_of => :test_results
   belongs_to :system, :inverse_of => :test_results
-  belongs_to :release, :inverse_of => :test_results
+  belongs_to :release, :inverse_of => :test_results, :touch => true
 
   attr_accessible :comments, :rating, :system_id
 

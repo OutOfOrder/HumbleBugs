@@ -1,5 +1,5 @@
 class Port < ActiveRecord::Base
-  belongs_to :game, :inverse_of => :ports
+  belongs_to :game, :inverse_of => :ports, :touch => true
   belongs_to :developer, :inverse_of => :ports
 
   acts_as_taggable_on :platforms
