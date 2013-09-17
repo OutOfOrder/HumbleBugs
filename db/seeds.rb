@@ -78,7 +78,7 @@ if Rails.env.development?
     end
   end
   unless Bundle.find_by_name('Past Bundle')
-    Bundle.create!('Past Bundle', state: 'completed', description: 'In the past and completed', target_date: 4.weeks.ago).tap do |bundle|
+    Bundle.create!(name: 'Past Bundle', state: 'completed', description: 'In the past and completed', target_date: 4.weeks.ago).tap do |bundle|
       game_name = Faker::Product.product_name
       bundle.games.create!(name: game_name, description: game_name, state: 'completed', platform_list: 'Windows,Mac OS X,Linux x86,Linux x86_64')
     end
