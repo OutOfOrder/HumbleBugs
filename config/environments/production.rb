@@ -66,7 +66,7 @@ HumbleBugs::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.action_mailer.default_url_options = {
-      host: 'bugs.humblebundle.com'
+      host: ENV['PUBLIC_HOST'] || 'example.com'
   }
   config.action_mailer.smtp_settings = {
       :address => ENV['SMTP_HOST'],
@@ -77,4 +77,9 @@ HumbleBugs::Application.configure do
       :domain => ENV['SMTP_DOMAIN'],
       :enable_starttls_auto => true
   }
+
+  config.force_ssl = ENV['FORCE_SSL'] == '1'
+
+  # Insert at the Beginning of the Stack so it occurs BEFORE Rack::SSL
+  config.middleware.insert 0, "RedirectURL", ENV['PUBLIC_HOST'], config.force_ssl
 end
