@@ -9,7 +9,7 @@ class RedirectURL
 
     request = Rack::Request.new(env)
 
-    if !@public_url.nil? && request.host != @public_url
+    if !@public_host.nil? && request.host != @public_host
       url = request.url.sub("//#{request.host}", "//#{@public_host}")
       url = url.sub("http://", "https://") if @force_ssl
       [302, {"Location" => url}, []]
