@@ -4,11 +4,11 @@
     <legend>Log in</legend>
     <div class="field">
       <%= label_tag :email, 'E-mail' %><br/>
-      <%= text_field_tag :email, params[:email], :placeholder => 'E-mail' %>
+      <%= text_field_tag :email, params[:email], :placeholder => 'E-mail', :tabindex => 1 %>
     </div>
     <p>
       <%= label_tag :password %>&nbsp;<%= link_to "Forgotten password?", forgot_password_path %><br/>
-      <%= password_field_tag :password, nil, :placeholder => 'Password' %>
+      <%= password_field_tag :password, nil, :placeholder => 'Password', :tabindex => 2 %>
     </p>
 
     <p>
