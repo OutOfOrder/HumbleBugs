@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   def new
+    unless current_user.nil?
+      redirect_to :root
+    end
   end
 
   def create
