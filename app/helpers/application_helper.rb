@@ -1,6 +1,6 @@
 module ApplicationHelper
   def select_if options = {}
-    if (controller_name.to_sym == options[:controller])
+    if controller_name.to_sym == options[:controller]
       if options[:include].present?
         "selected" if options[:include].include?(action_name.to_sym)
       elsif options[:exclude].present?
@@ -40,12 +40,12 @@ module ApplicationHelper
 
   def multi_checkbox model, name, value, checked = false, options = {}
     html_options = {
-      "type" => "checkbox",
-      "name" => "#{model}[#{name}][]",
-      "id" => sanitize_to_id("#{model}_#{name}_#{value}"),
-      "value" => value,
+      type: 'checkbox',
+      name: "#{model}[#{name}][]",
+      id: sanitize_to_id("#{model}_#{name}_#{value}"),
+      value: value,
     }.update(options.stringify_keys)
-    html_options["checked"] = "checked" if checked
+    html_options[:checked] = 'checked' if checked
     tag :input, html_options
   end
 end

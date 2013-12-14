@@ -12,7 +12,7 @@
     {context: 'platforms', name: 'Linux x86_64'},
     {context: 'platforms', name: 'Android'}
 ].each do |o|
-  PredefinedTag.find_or_create_by_context_and_name(o[:context], o[:name]);
+  PredefinedTag.find_or_create_by_context_and_name(o[:context], o[:name])
 end
 
 if Rails.env.development?
