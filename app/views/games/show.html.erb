@@ -9,13 +9,7 @@
 
     <div>
       <b>Developer:</b>
-      <%= if @game.developer.present? && permitted_to?(:read, @game.developer)
-            link_to @game.developer.name, @game.developer
-          elsif @game.developer.try(:website)
-            link_to @game.developer.name, @game.developer.website
-          else
-            @game.developer.try(:name)
-          end %>
+      <%= developer_link(@game.developer) %>
     </div>
 
     <div class="state">

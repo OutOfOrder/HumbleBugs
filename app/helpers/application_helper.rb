@@ -1,4 +1,15 @@
 module ApplicationHelper
+  def developer_link(developer)
+    return if developer.nil?
+    if permitted_to?(:read, developer)
+      link_to developer.name, developer
+    elsif developer.website
+      link_to developer.name, developer.website
+    else
+      developer.name
+    end
+  end
+
   def select_if options = {}
     if controller_name.to_sym == options[:controller]
       if options[:include].present?

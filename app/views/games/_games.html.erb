@@ -25,11 +25,7 @@
         <td><%= link_to game.name, game %></td>
         <td><%= label_for Game::STATES, game.state %></td>
         <% if !defined?(without) || !without.include?(:developer) %>
-          <td><%= if game.developer.try(:website)
-                    link_to game.developer.name, game.developer.website
-                  else
-                    game.developer.try(:name)
-                  end %></td>
+          <td><%= developer_link(game.developer) %></td>
         <% end %>
         <td>
           <% permitted_to? :read, game.issues do %>
