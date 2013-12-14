@@ -136,9 +136,7 @@ authorization do
     has_permission_on :bundles, :to => :manage
     has_permission_on :developers, :to => :manage
     has_permission_on :games, :to => :manage
-    has_permission_on [:ports, :releases, :issues], :to => :manage do
-      if_permitted_to :manage, :game
-    end
+    has_permission_on [:ports, :releases, :issues], :to => :manage
     includes :base_test_results
     has_permission_on :comments, :to => :manage do
       if_permitted_to :manage, :commentable
