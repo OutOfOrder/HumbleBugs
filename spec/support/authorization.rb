@@ -11,6 +11,7 @@ end
 def render_with user, options = {}, local_assigns = {}, &block
   Authorization::Maintenance.with_user(user) do
     controller.stub(:current_user).and_return(user)
+    view.stub(:current_user).and_return(user)
     render options, local_assigns, &block
   end
 end

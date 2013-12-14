@@ -5,8 +5,11 @@ FactoryGirl.define do
     sequence(:name) { |n| "Dev Name #{n}" }
     website "http://www.gamedeveloper.com/"
     time_zone "EST"
-    address "123 Nowhere"
-    contact_information "555-1234"
+
+    trait :contact do
+      address "123 Nowhere"
+      contact_information "555-1234"
+    end
 
     trait :with_user do
       after(:create) do |developer|
