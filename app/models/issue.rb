@@ -9,10 +9,12 @@ class Issue < ActiveRecord::Base
 
   STATUSES = [
       ['New', :new],
-      ['Waiting Feedback', :feedback],
-      ['Active', :active],
-      ['Suspended', :suspended],
-      ['Resolved', :completed]
+      ['Waiting on Tester Feedback', :feedback],
+      ['Waiting on Developer', :active],
+      ['Won\'t fix', :suspended],
+      ['Duplicate', :duplicate],
+      ['Invalid', :invalid],
+      ['Fixed', :completed]
   ]
 
   validates_presence_of :status, :description, :summary, :game_id, :author_id
