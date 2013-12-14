@@ -27,6 +27,7 @@ HumbleBugs::Application.routes.draw do
 
     get :nda, :on => :member
     post :nda, :on => :member, :action => 'sign_nda'
+    post :confirm, :on => :member
   end
 
   resources :predefined_tags do

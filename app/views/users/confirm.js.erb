@@ -1,0 +1,13 @@
+$('<div>Please check your email for the confirmation message and click the link.</div>').dialog({
+  title: 'Confirmation resent!',
+     modal: true,
+     resizable: false,
+     buttons: {
+         Dismiss: function() {
+             $(this).dialog('close');
+         }
+     },
+  close: function() {
+      $(this).remove();
+  }
+});

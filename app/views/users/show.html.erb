@@ -23,8 +23,10 @@
     <b>Signed NDA:</b>
     <% if @user.nda_signed_date? %>
         <%= l @user.nda_signed_date %>
-    <% else %>
+    <% elsif @user.permitted_to? :nda %>
         <%= link_to "Review NDA", nda_user_path(@user), remote: true, id: 'review_nda' %>
+    <% else has_role?(:unverified) %>
+        Verify your email account first. <%= link_to 'Resend Confirmation', confirm_user_path(@user), method: :post, remote: true %>
     <% end %>
   </p>
 

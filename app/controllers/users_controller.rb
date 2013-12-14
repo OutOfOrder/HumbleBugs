@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  filter_resource_access :additional_member => {:sign_nda => :nda}
+  filter_resource_access :additional_member => {:sign_nda => :nda, :confirm => :update}
 
   # GET /users
   # GET /users.json
@@ -62,6 +62,11 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+
+  def confirm
+    @user.send_confirm_account
   end
 
   # PUT /users/1
