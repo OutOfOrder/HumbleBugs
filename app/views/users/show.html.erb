@@ -25,7 +25,7 @@
         <%= l @user.nda_signed_date %>
     <% elsif @user.permitted_to? :nda %>
         <%= link_to "Review NDA", nda_user_path(@user), remote: true, id: 'review_nda' %>
-    <% else has_role?(:unverified) %>
+    <% else @user.role_symbols.include?(:unverified) %>
         Verify your email account first. <%= link_to 'Resend Confirmation', confirm_user_path(@user), method: :post, remote: true %>
     <% end %>
   </p>
