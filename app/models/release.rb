@@ -18,6 +18,8 @@ class Release < ActiveRecord::Base
   validates_inclusion_of :status, :in => STATUSES.map { |m| m.second.to_s }, :message => "%{value} is not a valid status"
   validates_presence_of :game_id, :owner_id, :version, :url, :status
 
+  before_save :fixup_url
+
   def to_param
     "#{id}-#{game.name.parameterize}-#{version.parameterize}"
   end
@@ -25,5 +27,12 @@ private
   def valid_checksum_length
     length_ok =  checksum.blank? || checksum.length == 32 || checksum.length == 40
     errors.add(:checksum, "length is not a valid MD5 of SHA1") unless length_ok
+  end
+
+  def fixup_url
+    m = /^https:\/\/www\.dropbox\.com\/(.+?)(\?dl=1)?$/.match(self.url)
+    if m
+      self.url = "https://dl.dropboxusercontent.com/#{m[1]}?dl=1"
+    end
   end
 end
