@@ -35,6 +35,7 @@ describe GamesController do
       end
       it 'should render the denied template when accessing against an inactive bundle' do
         bundle = FactoryGirl.create :bundle
+	bundle.should_not be_allowed_to :index
         get_with @regular_user, :index, {:bundle_id => bundle.to_param}
         response.should render_template('layouts/denied')
       end
