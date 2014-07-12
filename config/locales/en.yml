@@ -29,6 +29,8 @@ en:
       subject: "Reset your HumbleBugs account password"
     confirm_account:
       subject: "Confirm your HumbleBugs account"
+    new_account:
+      subject: "New HumbleBugs account registered"
   feedback_mailer:
     submit_feedback:
       subject: "HumbleBugs feedback"

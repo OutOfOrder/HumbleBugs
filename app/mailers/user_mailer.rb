@@ -15,4 +15,10 @@ class UserMailer < ActionMailer::Base
 
     mail to: user.email
   end
+
+  def new_account(user)
+    @user = user
+
+    mail to: ENV['FEEDBACK_EMAIL'] || 'feedback@example.com'
+  end
 end

@@ -34,4 +34,21 @@ describe UserMailer do
       @mail.body.encoded.should match("/confirm_account/testtoken")
     end
   end
+
+  describe "new_account" do
+    before do
+      @user = FactoryGirl.create(:user, confirm_account_token: 'testtoken')
+      @mail = UserMailer.new_account(@user)
+    end
+
+    it "renders the headers" do
+      @mail.subject.should eq("New HumbleBugs account registered")
+      @mail.to.should eq(['feedback@example.com'])
+      @mail.from.should eq(["myfromaddress@example.com"])
+    end
+
+    it "renders the body" do
+      @mail.body.encoded.should match("/users/#{@user.id}")
+    end
+  end
 end

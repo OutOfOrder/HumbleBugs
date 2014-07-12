@@ -56,6 +56,7 @@ class UsersController < ApplicationController
         format.html { redirect_to login_url, notice: 'Signed Up!' }
         format.json { render json: @user, status: :created, location: @user }
         @user.send_confirm_account
+        UserMailer.new_account(@user).deliver
       else
         @user.errors.delete(:password_digest)
         format.html { render action: "new" }

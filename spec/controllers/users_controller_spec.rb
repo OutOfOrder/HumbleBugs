@@ -71,6 +71,16 @@ describe UsersController do
 
         post_with @user, :create, {:user => FactoryGirl.attributes_for(:user)}
       end
+
+      it "builds and sends the new_account email" do
+        mailer = double("UserMailer")
+        mailer.should_receive(:deliver)
+        UserMailer.should_receive(:new_account).
+            with(an_instance_of(User)).
+            and_return(mailer)
+
+        post_with @user, :create, {:user => FactoryGirl.attributes_for(:user)}
+      end
     end
 
     describe "with invalid params" do
