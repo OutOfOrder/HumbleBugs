@@ -47,7 +47,9 @@
     <%= render 'ports/ports', :ports => @developer.ports.with_permissions_to, :without => [:developer] %>
   </fieldset>
 <% end %>
-<fieldset id="developer_users">
-  <legend>Users</legend>
-  <%= render partial: 'users', locals: { users: @developer.users.with_permissions_to } %>
-</fieldset>
+<% permitted_to? :read, @developer.ports do %>
+    <fieldset id="developer_users">
+      <legend>Users</legend>
+      <%= render partial: 'users', locals: { users: @developer.users.with_permissions_to } %>
+    </fieldset>
+<% end %>
