@@ -10,6 +10,8 @@ gem 'rails', '3.2.19'
 gem 'sqlite3', :group => [:development, :test]
 gem 'pg', :group => [:production]
 
+gem 'rails_12factor', group: :production
+
 gem 'awesome_print'
 gem 'airbrake'
 gem 'newrelic_rpm'
