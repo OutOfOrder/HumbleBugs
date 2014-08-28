@@ -1,0 +1,12 @@
+general:
+  branches:
+    ignore:
+      - gh-pages
+  artifacts:
+    - "coverage"
+deployment:
+  production:
+    branch: master
+    owner: humble
+    heroku:
+      appname: humblebugs
