@@ -8,7 +8,7 @@ class IssuesController < ApplicationController
   # GET /games/1/issues.json
   def index
     @issues = if @game.nil?
-                Issue.with_permissions_to.order('issues.updated_at DESC')
+                Issue.open.with_permissions_to.order('issues.updated_at DESC')
               else
                 @game.issues.with_permissions_to
               end

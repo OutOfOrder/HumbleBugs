@@ -12,5 +12,9 @@ FactoryGirl.define do
       author nil
       game nil
     end
+
+    trait :completed do
+      status 'completed'
+    end
   end
 end

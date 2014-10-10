@@ -21,6 +21,14 @@ describe IssuesController do
       get_with @user, :index
       assigns(:issues).should =~ [issue, issue1]
     end
+    it "with no game only fetches open issues" do
+      FactoryGirl.create(:issue, :completed)
+      FactoryGirl.create(:issue, :completed, game: @game)
+      issue1 = FactoryGirl.create(:issue)
+      issue = FactoryGirl.create(:issue, :game => @game)
+      get_with @user, :index
+      assigns(:issues).should =~ [issue, issue1]
+    end
   end
 
   describe "GET show" do

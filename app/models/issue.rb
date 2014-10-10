@@ -17,6 +17,13 @@ class Issue < ActiveRecord::Base
       ['Fixed', :completed]
   ]
 
+  OPEN_STATUSES = [:new, :feedback, :active]
+  ALL_STATUSES = STATUSES.map { |m| m.second }
+
   validates_presence_of :status, :description, :summary, :game_id, :author_id
-  validates_inclusion_of :status, :in => STATUSES.map { |m| m.second.to_s }, :message => "%{value} is not a valid status"
+  validates_inclusion_of :status, :in => ALL_STATUSES.map(&:to_s), :message => "%{value} is not a valid status"
+
+  def self.open
+    where(status: OPEN_STATUSES)
+  end
 end
