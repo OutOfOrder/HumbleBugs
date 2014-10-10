@@ -16,7 +16,7 @@ HumbleBugs::Application.routes.draw do
 
   resources :test_results, :except => [:new, :create, :index]
 
-  resources :issues, :only => [:new, :create] do
+  resources :issues, :only => [:index, :new, :create] do
     resources :comments, :except => [:index]
   end
 

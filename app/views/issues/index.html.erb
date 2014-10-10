@@ -1,4 +1,4 @@
 <fieldset>
   <legend>Issues</legend>
-  <%= render :partial => 'issues', :locals => { :issues => @issues } %>
+  <%= render :partial => 'issues', :locals => { :issues => @issues, show_game: @game.nil? } %>
 </fieldset>

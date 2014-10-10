@@ -1,13 +1,17 @@
 class IssuesController < ApplicationController
-  filter_resource_access :nested_in => :games, :no_attribute_check => [:new]
-  before_filter :only => :new do
+  filter_resource_access :nested_in => :games, :no_attribute_check => [:index, :new]
+  before_filter :only => [:new] do
     nested_check_with_attrs unless @game.nil?
   end
 
   # GET /games/1/issues
   # GET /games/1/issues.json
   def index
-    @issues = @game.issues.with_permissions_to
+    @issues = if @game.nil?
+                Issue.with_permissions_to.order('issues.updated_at DESC')
+              else
+                @game.issues.with_permissions_to
+              end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -86,6 +90,14 @@ protected
       @game = Game.find(params[:game_id])
     else
       @game = nil
+    end
+  end
+
+  def new_issue_for_collection
+    if @game.nil?
+      @issue = Issue.new
+    else
+      @game.issues.new
     end
   end
 

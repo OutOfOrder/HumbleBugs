@@ -15,6 +15,12 @@ describe IssuesController do
       get_with @user, :index, @base_params
       assigns(:issues).should eq([issue])
     end
+    it "with no game assigns all recent issues as @issues" do
+      issue1 = FactoryGirl.create(:issue)
+      issue = FactoryGirl.create(:issue, :game => @game)
+      get_with @user, :index
+      assigns(:issues).should =~ [issue, issue1]
+    end
   end
 
   describe "GET show" do
