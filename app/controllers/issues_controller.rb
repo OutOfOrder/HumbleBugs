@@ -13,6 +13,10 @@ class IssuesController < ApplicationController
                 @game.issues.with_permissions_to
               end
 
+    if params[:platforms].present?
+      @issues = @issues.tagged_with(params[:platforms].split(','), on: 'platforms', any: true)
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @issues }

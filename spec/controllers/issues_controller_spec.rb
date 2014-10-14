@@ -29,6 +29,20 @@ describe IssuesController do
       get_with @user, :index
       assigns(:issues).should =~ [issue, issue1]
     end
+    it 'will filter by platform if a platform filter is set' do
+      FactoryGirl.create(:issue, platform_list: 'Windows')
+      issue = FactoryGirl.create(:issue, platform_list: 'Linux,Mac OS X')
+      FactoryGirl.create(:issue, platform_list: 'Mac OS X')
+      get_with @user, :index, {platforms: 'Linux'}
+      assigns(:issues).should =~ [issue]
+    end
+    it 'will filter by either platform if a multiple platforms werwe specified for the platform filter' do
+      issue = FactoryGirl.create(:issue, platform_list: 'Windows')
+      issue2 = FactoryGirl.create(:issue, platform_list: 'Linux,Mac OS X')
+      FactoryGirl.create(:issue, platform_list: 'Mac OS X')
+      get_with @user, :index, {platforms: 'Linux,Windows'}
+      assigns(:issues).should =~ [issue, issue2]
+    end
   end
 
   describe "GET show" do
