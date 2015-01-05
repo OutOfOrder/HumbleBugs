@@ -49,7 +49,7 @@ protected
 
     unless allowed
       logger.info "Permission denied: #{auth_exception}"
-      if respond_to?(:permission_denied)
+      if respond_to?(:permission_denied, true)
         # permission_denied needs to render or redirect
         send(:permission_denied)
       else
