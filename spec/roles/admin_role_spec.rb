@@ -11,7 +11,7 @@ describe :admin do
   end
 
   it 'should have the admin role' do
-    Authorization.current_user.role_symbols.should == [:admin]
+    expect(Authorization.current_user.role_symbols).to eq([:admin])
   end
 
   #admin has omnipotence so do we really need to test anything?

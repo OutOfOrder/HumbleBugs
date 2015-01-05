@@ -11,7 +11,7 @@ FactoryGirl.define do
       state "testing"
     end
 
-    ignore do
+    transient do
       developer_users []
     end
 

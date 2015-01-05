@@ -5,7 +5,7 @@ describe SessionsController do
   describe "GET new" do
     it "should render the new login page" do
       get :new
-      response.should render_template("new")
+      expect(response).to render_template("new")
     end
   end
 
@@ -18,12 +18,12 @@ describe SessionsController do
     describe "with valid params" do
       it "log in the user" do
         post :create, {:email => @user.email, :password => @password}
-        response.cookies['auth_token'].should eq(@user.auth_token)
+        expect(response.cookies['auth_token']).to eq(@user.auth_token)
       end
 
       it "redirects to the dashboard" do
         post :create, {:email => @user.email, :password => @password}
-        response.should redirect_to(root_url)
+        expect(response).to redirect_to(root_url)
       end
     end
 
@@ -31,13 +31,13 @@ describe SessionsController do
       it "should not log in the user" do
         post :create, {:email => @user.email, :password => 'bad password'}
 
-        response.cookies['auth_token'].should be_blank
+        expect(response.cookies['auth_token']).to be_blank
       end
 
       it "re-renders the 'new' template" do
         post :create, {:email => @user.email, :password => 'bad password'}
 
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
 
@@ -49,31 +49,31 @@ describe SessionsController do
       it "should log in of case is the same" do
         post :create, {:email => @email, :password => @password }
 
-        response.cookies['auth_token'].should eq(@user2.auth_token)
+        expect(response.cookies['auth_token']).to eq(@user2.auth_token)
       end
 
       it "should log in of case is not the same" do
         post :create, {:email => @email.downcase, :password => @password }
 
-        response.cookies['auth_token'].should eq(@user2.auth_token)
+        expect(response.cookies['auth_token']).to eq(@user2.auth_token)
       end
     end
   end
 
   describe "POST secret_login" do
     it 'should not be available in production' do
-      Rails.stub(env: ActiveSupport::StringInquirer.new("production"))
+      allow(Rails).to receive_messages(env: ActiveSupport::StringInquirer.new("production"))
       user = FactoryGirl.create :user
       post :secret_login, { id: user.to_param }
-      response.cookies['auth_token'].should_not eq(user.auth_token)
-      response.code.should eq("500")
+      expect(response.cookies['auth_token']).not_to eq(user.auth_token)
+      expect(response.code).to eq("500")
     end
     it 'logs in the user' do
       user = FactoryGirl.create :user
       post :secret_login, { :id => user.to_param}
 
-      response.cookies['auth_token'].should eq(user.auth_token)
-      session[:user_id].should === user.id
+      expect(response.cookies['auth_token']).to eq(user.auth_token)
+      expect(session[:user_id]).to be === user.id
     end
   end
 
@@ -85,7 +85,7 @@ describe SessionsController do
       request.cookies['auth_token'] = user.auth_token
       get_with user, :destroy
 
-      response.cookies['auth_token'].should be_nil
+      expect(response.cookies['auth_token']).to be_nil
     end
   end
 end

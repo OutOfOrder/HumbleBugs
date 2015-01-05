@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :user do
-    ignore do
+    transient do
       roles []
     end
     sequence(:email) { |n| "user#{n}@example.com" }

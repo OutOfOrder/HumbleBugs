@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :test_result do
     user
-    ignore do
+    transient do
       system :build
     end
     release

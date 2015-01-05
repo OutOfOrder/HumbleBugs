@@ -1,7 +1,7 @@
 shared_examples "can not X to any" do |*privileges|
   privileges.each do |privilege|
     it "should not be able to #{privilege} any" do
-      should_not be_allowed_to privilege, true
+      is_expected.not_to be_allowed_to privilege, true
     end
   end
 end
@@ -9,7 +9,7 @@ end
 shared_examples "can X to all" do |*privileges|
   privileges.each do |privilege|
     it "should be able to #{privilege} all" do
-      should be_allowed_to privilege
+      is_expected.to be_allowed_to privilege
     end
   end
 end
@@ -17,7 +17,7 @@ end
 shared_examples "can not X to this" do |*privileges|
   privileges.each do |privilege|
     it "should not be able to #{privilege}" do
-      this.should_not be_allowed_to privilege
+      expect(this).not_to be_allowed_to privilege
     end
   end
 end
@@ -25,7 +25,7 @@ end
 shared_examples "can X to this" do |*privileges|
   privileges.each do |privilege|
     it "should be able to #{privilege}" do
-      this.should be_allowed_to privilege
+      expect(this).to be_allowed_to privilege
     end
   end
 end
@@ -34,20 +34,20 @@ shared_examples "edit my own user record" do
   context 'my user record' do
     subject { Authorization.current_user }
     it 'passed user is valid' do
-      subject.should be_a User
+      expect(subject).to be_a User
     end
     it 'can read' do
-      subject.should be_allowed_to :read
+      expect(subject).to be_allowed_to :read
     end
     it 'can update' do
-      subject.should be_allowed_to :update
+      expect(subject).to be_allowed_to :update
     end
   end
   context 'other users' do
     [:read, :update].each do |p|
       it "can not #{p}" do
         user = FactoryGirl.create :user
-        user.should_not be_allowed_to p
+        expect(user).not_to be_allowed_to p
       end
     end
   end
@@ -56,22 +56,22 @@ end
 
 shared_examples 'basic issues on' do
   it 'should be able to create' do
-    game.issues.build.should be_allowed_to :create
+    expect(game.issues.build).to be_allowed_to :create
   end
 
   it 'should be able to update ones I created' do
     issue = FactoryGirl.create :issue, game: game, author: Authorization.current_user
-    issue.should be_allowed_to :update
+    expect(issue).to be_allowed_to :update
   end
 
   it 'should be able to read other issues' do
     issue = FactoryGirl.create :issue, game: game
-    issue.should be_allowed_to :read
+    expect(issue).to be_allowed_to :read
   end
 
   it 'should not be able to update ones I did not create' do
     issue = FactoryGirl.create :issue, game: game
-    issue.should_not be_allowed_to :update
+    expect(issue).not_to be_allowed_to :update
   end
 end
 
@@ -93,10 +93,10 @@ end
 
 shared_examples 'sign my nda' do
   it 'should be able to view and sign their NDA' do
-    this.should be_allowed_to :nda
+    expect(this).to be_allowed_to :nda
   end
   it 'should be able to view and sign the NDA of another user' do
     user = FactoryGirl.create :user
-    user.should_not be_allowed_to :nda
+    expect(user).not_to be_allowed_to :nda
   end
 end

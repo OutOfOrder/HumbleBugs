@@ -10,7 +10,7 @@ describe TestResultsController do
       release = FactoryGirl.create :release
       test_results = FactoryGirl.create_list :test_result, 2, release: release
       get_with @user, :index, {release_id: release.id}
-      assigns(:test_results).should eq(test_results)
+      expect(assigns(:test_results)).to eq(test_results)
     end
 
   end
@@ -19,7 +19,7 @@ describe TestResultsController do
     it "assigns the requested test_result as @test_result" do
       test_result = FactoryGirl.create :test_result
       get_with @user, :show, {id: test_result.to_param}
-      assigns(:test_result).should eq(test_result)
+      expect(assigns(:test_result)).to eq(test_result)
     end
   end
 
@@ -27,7 +27,7 @@ describe TestResultsController do
     it "assigns a new test_result as @test_result" do
       release = FactoryGirl.create :release
       get_with @user, :new, {release_id: release.id}
-      assigns(:test_result).should be_a_new(TestResult)
+      expect(assigns(:test_result)).to be_a_new(TestResult)
     end
   end
 
@@ -35,7 +35,7 @@ describe TestResultsController do
     it "assigns the requested test_result as @test_result" do
       test_result = FactoryGirl.create :test_result
       get_with @user, :edit, {id: test_result.to_param}
-      assigns(:test_result).should eq(test_result)
+      expect(assigns(:test_result)).to eq(test_result)
     end
   end
 
@@ -58,34 +58,34 @@ describe TestResultsController do
 
       it "assigns a newly created test_result as @test_result" do
         post_with @user, :create, @base_params.merge(test_result: @valid_attributes)
-        assigns(:test_result).should be_a(TestResult)
-        assigns(:test_result).should be_persisted
+        expect(assigns(:test_result)).to be_a(TestResult)
+        expect(assigns(:test_result)).to be_persisted
       end
 
       it "redirects to the associated game" do
         post_with @user, :create, @base_params.merge(test_result: @valid_attributes)
-        response.should redirect_to(game_url(TestResult.last.release.game, anchor: "game_releases"))
+        expect(response).to redirect_to(game_url(TestResult.last.release.game, anchor: "game_releases"))
       end
       it "should set the user to the logged in user" do
         post_with @user, :create, @base_params.merge({test_result: @valid_attributes})
 
-        assigns(:test_result).user.should == @user
+        expect(assigns(:test_result).user).to eq(@user)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved test_result as @test_result" do
         # Trigger the behavior that occurs when invalid params are submitted
-        TestResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(TestResult).to receive(:save).and_return(false)
         post_with @user, :create, @base_params.merge(test_result: {})
-        assigns(:test_result).should be_a_new(TestResult)
+        expect(assigns(:test_result)).to be_a_new(TestResult)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        TestResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(TestResult).to receive(:save).and_return(false)
         post_with @user, :create, @base_params.merge(test_result: {})
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -102,20 +102,20 @@ describe TestResultsController do
         # specifies that the TestResult created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        TestResult.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(TestResult).to receive(:update_attributes).with({'these' => 'params'})
         put_with @user, :update, {id: test_result.to_param, test_result: {'these' => 'params'}}
       end
 
       it "assigns the requested test_result as @test_result" do
         test_result = FactoryGirl.create :test_result
         put_with @user, :update, {id: test_result.to_param, test_result: @valid_attributes}
-        assigns(:test_result).should eq(test_result)
+        expect(assigns(:test_result)).to eq(test_result)
       end
 
       it "redirects to the associated game" do
         test_result = FactoryGirl.create :test_result
         put_with @user, :update, {id: test_result.to_param, test_result: @valid_attributes}
-        response.should redirect_to(game_url(test_result.release.game, anchor: "game_releases"))
+        expect(response).to redirect_to(game_url(test_result.release.game, anchor: "game_releases"))
       end
     end
 
@@ -123,17 +123,17 @@ describe TestResultsController do
       it "assigns the test_result as @test_result" do
         test_result = FactoryGirl.create :test_result
         # Trigger the behavior that occurs when invalid params are submitted
-        TestResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(TestResult).to receive(:save).and_return(false)
         put_with @user, :update, {id: test_result.to_param, test_result: {}}
-        assigns(:test_result).should eq(test_result)
+        expect(assigns(:test_result)).to eq(test_result)
       end
 
       it "re-renders the 'edit' template" do
         test_result = FactoryGirl.create :test_result
         # Trigger the behavior that occurs when invalid params are submitted
-        TestResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(TestResult).to receive(:save).and_return(false)
         put_with @user, :update, {id: test_result.to_param, test_result: {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -149,7 +149,7 @@ describe TestResultsController do
     it "redirects to the associated game" do
       test_result = FactoryGirl.create :test_result
       delete_with @user, :destroy, {id: test_result.to_param}
-      response.should redirect_to(game_url(test_result.release.game, anchor: "game_releases"))
+      expect(response).to redirect_to(game_url(test_result.release.game, anchor: "game_releases"))
     end
   end
 

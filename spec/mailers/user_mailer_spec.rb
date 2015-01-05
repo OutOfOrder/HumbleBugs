@@ -8,13 +8,13 @@ describe UserMailer do
     end
 
     it "renders the headers" do
-      @mail.subject.should eq("Reset your HumbleBugs account password")
-      @mail.to.should eq([@user.email])
-      @mail.from.should eq(["myfromaddress@example.com"])
+      expect(@mail.subject).to eq("Reset your HumbleBugs account password")
+      expect(@mail.to).to eq([@user.email])
+      expect(@mail.from).to eq(["myfromaddress@example.com"])
     end
 
     it "renders the body" do
-      @mail.body.encoded.should match("/forgot_password/testtoken")
+      expect(@mail.body.encoded).to match("/forgot_password/testtoken")
     end
   end
 
@@ -25,13 +25,13 @@ describe UserMailer do
     end
 
     it "renders the headers" do
-      @mail.subject.should eq("Confirm your HumbleBugs account")
-      @mail.to.should eq([@user.email])
-      @mail.from.should eq(["myfromaddress@example.com"])
+      expect(@mail.subject).to eq("Confirm your HumbleBugs account")
+      expect(@mail.to).to eq([@user.email])
+      expect(@mail.from).to eq(["myfromaddress@example.com"])
     end
 
     it "renders the body" do
-      @mail.body.encoded.should match("/confirm_account/testtoken")
+      expect(@mail.body.encoded).to match("/confirm_account/testtoken")
     end
   end
 
@@ -42,13 +42,13 @@ describe UserMailer do
     end
 
     it "renders the headers" do
-      @mail.subject.should eq("New HumbleBugs account registered")
-      @mail.to.should eq(['feedback@example.com'])
-      @mail.from.should eq(["myfromaddress@example.com"])
+      expect(@mail.subject).to eq("New HumbleBugs account registered")
+      expect(@mail.to).to eq(['feedback@example.com'])
+      expect(@mail.from).to eq(["myfromaddress@example.com"])
     end
 
     it "renders the body" do
-      @mail.body.encoded.should match("/users/#{@user.id}")
+      expect(@mail.body.encoded).to match("/users/#{@user.id}")
     end
   end
 end

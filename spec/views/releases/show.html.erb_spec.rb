@@ -7,7 +7,7 @@ describe "releases/show" do
 
   it "renders attributes in <p>" do
     render
-    rendered.should match(/MyText/)
-    rendered.should match(/#{@release.url}/)
+    expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/#{@release.url}/)
   end
 end

@@ -7,7 +7,7 @@ describe "users/show" do
 
   it "renders attributes in <p>" do
     render
-    rendered.should match(/#{@user.email}/)
-    rendered.should match(/Name/)
+    expect(rendered).to match(/#{@user.email}/)
+    expect(rendered).to match(/Name/)
   end
 end

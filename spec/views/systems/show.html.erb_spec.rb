@@ -9,10 +9,10 @@ describe "systems/show" do
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/My System \d+/)
-    rendered.should match(/Minix/)
-    rendered.should match(/M68K/)
-    rendered.should match(/Matrox G900/)
-    rendered.should match(/VESA/)
+    expect(rendered).to match(/My System \d+/)
+    expect(rendered).to match(/Minix/)
+    expect(rendered).to match(/M68K/)
+    expect(rendered).to match(/Matrox G900/)
+    expect(rendered).to match(/VESA/)
   end
 end

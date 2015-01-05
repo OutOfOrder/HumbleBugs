@@ -14,19 +14,19 @@ describe :porter do
 
   context :bundles do
     it 'should be able to get a list of permissible bundles' do
-      should be_allowed_to :index, true
+      is_expected.to be_allowed_to :index, true
     end
 
     it 'should be able to read active bundles' do
       bundle = FactoryGirl.create :bundle, :active
-      bundle.should be_allowed_to :read
+      expect(bundle).to be_allowed_to :read
     end
 
     Bundle::STATES.each do |s|
       next if s.last == :active
       it "should not be able to read bundles in the #{s.last} state" do
         bundle = FactoryGirl.create :bundle, state: s.last.to_s
-        bundle.should_not be_allowed_to :read
+        expect(bundle).not_to be_allowed_to :read
       end
     end
 
@@ -39,23 +39,23 @@ describe :porter do
       game = FactoryGirl.create :game, developer: developer
       FactoryGirl.create :port, game: game, developer: @developer
 
-      developer.should be_allowed_to :read
-      developer.should be_allowed_to :read_address
+      expect(developer).to be_allowed_to :read
+      expect(developer).to be_allowed_to :read_address
     end
     it 'can read but not address info for developers with games I am not porting' do
       developer = FactoryGirl.create :developer
       FactoryGirl.create :game, :with_active_bundle, developer: developer
 
-      developer.should be_allowed_to :read
-      developer.should_not be_allowed_to :read_address
+      expect(developer).to be_allowed_to :read
+      expect(developer).not_to be_allowed_to :read_address
     end
 
     it 'can not read info about developers with games I can not read' do
       developer = FactoryGirl.create :developer
       FactoryGirl.create :game, developer: developer
 
-      developer.should_not be_allowed_to :read
-      developer.should_not be_allowed_to :read_address
+      expect(developer).not_to be_allowed_to :read
+      expect(developer).not_to be_allowed_to :read_address
     end
 
     include_examples 'can not X to any', :create, :delete
@@ -63,34 +63,34 @@ describe :porter do
 
   context :games do
     it 'should be able to get a list of permissible games' do
-      should be_allowed_to :index, true
+      is_expected.to be_allowed_to :index, true
     end
     it 'should be able to read those that are in an active bundle' do
       bundle = FactoryGirl.create :bundle, :active
       game = FactoryGirl.create :game, bundle: bundle
-      game.should be_allowed_to :read
+      expect(game).to be_allowed_to :read
     end
     Bundle::STATES.each do |s|
       next if s.last == :active
       it 'should not be able to read those that are in an #{s.last} bundle' do
         bundle = FactoryGirl.create :bundle, state: s.last.to_s
         game = FactoryGirl.create :game, bundle: bundle
-        game.should_not be_allowed_to :read
+        expect(game).not_to be_allowed_to :read
       end
     end
 
     it 'can read games in testing state' do
       game = FactoryGirl.create :game, :testing
-      game.should_not be_allowed_to :read
+      expect(game).not_to be_allowed_to :read
     end
 
     it 'should be able to read games where I am the porter' do
       port = FactoryGirl.create :port, developer: @developer
-      port.game.should be_allowed_to :read
+      expect(port.game).to be_allowed_to :read
     end
     it 'should not be able to read games where I am not the porter' do
       port = FactoryGirl.create :port
-      port.game.should_not be_allowed_to :read
+      expect(port.game).not_to be_allowed_to :read
     end
 
     include_examples 'can not X to any', :create, :update, :delete
@@ -145,14 +145,14 @@ describe :porter do
       end
       it 'can read other ports' do
         port = FactoryGirl.create :port, game: @game
-        port.should be_allowed_to :read
+        expect(port).to be_allowed_to :read
       end
       it 'can update my own port' do
-        @port.should be_allowed_to :update
+        expect(@port).to be_allowed_to :update
       end
       it 'can not update other ports' do
         port = FactoryGirl.create :port, game: @game
-        port.should_not be_allowed_to :update
+        expect(port).not_to be_allowed_to :update
       end
     end
     context 'a bundle I am not porting nor in an active bundle' do
@@ -165,7 +165,7 @@ describe :porter do
 
   context :predefined_tags do
     it 'should be able to read' do
-      should be_allowed_to :read
+      is_expected.to be_allowed_to :read
     end
     include_examples 'can not X to any', :create, :update, :delete
   end

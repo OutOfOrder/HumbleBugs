@@ -7,6 +7,6 @@ describe "ports/show" do
 
   it "renders attributes in <p>" do
     render
-    rendered.should match(/Planned/)
+    expect(rendered).to match(/Planned/)
   end
 end

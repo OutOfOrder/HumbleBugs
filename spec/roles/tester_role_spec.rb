@@ -11,24 +11,24 @@ describe :tester do
   end
 
   it 'should have the tester role' do
-    Authorization.current_user.role_symbols.should == [:tester]
+    expect(Authorization.current_user.role_symbols).to eq([:tester])
   end
 
   context :bundles do
     it 'should be able to get a list of permissible bundles' do
-      should be_allowed_to :index, true
+      is_expected.to be_allowed_to :index, true
     end
 
     it 'should be able to read active bundles' do
       bundle = FactoryGirl.create :bundle, :active
-      bundle.should be_allowed_to :read
+      expect(bundle).to be_allowed_to :read
     end
 
     Bundle::STATES.each do |s|
       next if s.last == :active
       it "should not be able to read bundles in the #{s.last} state" do
         bundle = FactoryGirl.create :bundle, state: s.last.to_s
-        bundle.should_not be_allowed_to :read
+        expect(bundle).not_to be_allowed_to :read
       end
     end
 
@@ -40,24 +40,24 @@ describe :tester do
       developer = FactoryGirl.create :developer
       FactoryGirl.create :game, :with_active_bundle, developer: developer
 
-      developer.should be_allowed_to :read
-      developer.should_not be_allowed_to :read_address
+      expect(developer).to be_allowed_to :read
+      expect(developer).not_to be_allowed_to :read_address
     end
 
     it 'can read but not address info for developers with games in testing' do
       developer = FactoryGirl.create :developer
       FactoryGirl.create :game, :testing, developer: developer
 
-      developer.should be_allowed_to :read
-      developer.should_not be_allowed_to :read_address
+      expect(developer).to be_allowed_to :read
+      expect(developer).not_to be_allowed_to :read_address
     end
 
     it 'can not read info about developers with games I can not read' do
       developer = FactoryGirl.create :developer
       FactoryGirl.create :game, developer: developer
 
-      developer.should_not be_allowed_to :read
-      developer.should_not be_allowed_to :read_address
+      expect(developer).not_to be_allowed_to :read
+      expect(developer).not_to be_allowed_to :read_address
     end
 
     include_examples 'can not X to any', :create, :delete
@@ -65,25 +65,25 @@ describe :tester do
 
   context :games do
     it 'should be able to get a list of permissible games' do
-      should be_allowed_to :index, true
+      is_expected.to be_allowed_to :index, true
     end
     it 'should be able to read those that are in an active bundle' do
       bundle = FactoryGirl.create :bundle, :active
       game = FactoryGirl.create :game, bundle: bundle
-      game.should be_allowed_to :read
+      expect(game).to be_allowed_to :read
     end
     Bundle::STATES.each do |s|
       next if s.last == :active
       it 'should not be able to read those that are in an #{s.last} bundle' do
         bundle = FactoryGirl.create :bundle, state: s.last.to_s
         game = FactoryGirl.create :game, bundle: bundle
-        game.should_not be_allowed_to :read
+        expect(game).not_to be_allowed_to :read
       end
     end
 
     it 'can read games in testing state' do
       game = FactoryGirl.create :game, :testing
-      game.should be_allowed_to :read
+      expect(game).to be_allowed_to :read
     end
 
     include_examples 'can not X to any', :create, :update, :delete
@@ -137,7 +137,7 @@ describe :tester do
 
   context :predefined_tags do
     it 'should be able to read' do
-      should be_allowed_to :read
+      is_expected.to be_allowed_to :read
     end
     include_examples 'can not X to any', :create, :update, :delete
   end

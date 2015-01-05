@@ -9,8 +9,8 @@ describe "bundles/show" do
 
   it "renders attributes in <p>" do
     render
-    rendered.should match(/Name/)
-    rendered.should match(/MyText/)
-    rendered.should match(/Planned/)
+    expect(rendered).to match(/Name/)
+    expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/Planned/)
   end
 end

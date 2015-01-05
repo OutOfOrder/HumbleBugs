@@ -7,7 +7,7 @@ describe "issues/show" do
 
   it "renders attributes in <p>" do
     render
-    rendered.should match(/New/)
-    rendered.should match(/Issue Description/)
+    expect(rendered).to match(/New/)
+    expect(rendered).to match(/Issue Description/)
   end
 end

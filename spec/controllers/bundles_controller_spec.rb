@@ -10,7 +10,7 @@ describe BundlesController do
     it "assigns all bundles as @bundles" do
       bundle = FactoryGirl.create(:bundle)
       get_with @user, :index
-      assigns(:bundles).should eq([bundle])
+      expect(assigns(:bundles)).to eq([bundle])
     end
   end
 
@@ -18,14 +18,14 @@ describe BundlesController do
     it "assigns the requested bundle as @bundle" do
       bundle = FactoryGirl.create(:bundle)
       get_with @user, :show, {:id => bundle.to_param}
-      assigns(:bundle).should eq(bundle)
+      expect(assigns(:bundle)).to eq(bundle)
     end
   end
 
   describe "GET new" do
     it "assigns a new bundle as @bundle" do
       get_with @user, :new
-      assigns(:bundle).should be_a_new(Bundle)
+      expect(assigns(:bundle)).to be_a_new(Bundle)
     end
   end
 
@@ -33,7 +33,7 @@ describe BundlesController do
     it "assigns the requested bundle as @bundle" do
       bundle = FactoryGirl.create(:bundle)
       get_with @user, :edit, {:id => bundle.to_param}
-      assigns(:bundle).should eq(bundle)
+      expect(assigns(:bundle)).to eq(bundle)
     end
   end
 
@@ -47,29 +47,29 @@ describe BundlesController do
 
       it "assigns a newly created bundle as @bundle" do
         post_with @user, :create, {:bundle => FactoryGirl.attributes_for(:bundle)}
-        assigns(:bundle).should be_a(Bundle)
-        assigns(:bundle).should be_persisted
+        expect(assigns(:bundle)).to be_a(Bundle)
+        expect(assigns(:bundle)).to be_persisted
       end
 
       it "redirects to the created bundle" do
         post_with @user, :create, {:bundle => FactoryGirl.attributes_for(:bundle)}
-        response.should redirect_to(Bundle.last)
+        expect(response).to redirect_to(Bundle.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved bundle as @bundle" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Bundle.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Bundle).to receive(:save).and_return(false)
         post_with @user, :create, {:bundle => {}}
-        assigns(:bundle).should be_a_new(Bundle)
+        expect(assigns(:bundle)).to be_a_new(Bundle)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Bundle.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Bundle).to receive(:save).and_return(false)
         post_with @user, :create, {:bundle => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -82,20 +82,20 @@ describe BundlesController do
         # specifies that the Bundle created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Bundle.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(Bundle).to receive(:update_attributes).with({'these' => 'params'})
         put_with @user, :update, {:id => bundle.to_param, :bundle => {'these' => 'params'}}
       end
 
       it "assigns the requested bundle as @bundle" do
         bundle = FactoryGirl.create(:bundle)
         put_with @user, :update, {:id => bundle.to_param, :bundle => FactoryGirl.attributes_for(:bundle)}
-        assigns(:bundle).should eq(bundle)
+        expect(assigns(:bundle)).to eq(bundle)
       end
 
       it "redirects to the bundle" do
         bundle = FactoryGirl.create(:bundle)
         put_with @user, :update, {:id => bundle.to_param, :bundle => FactoryGirl.attributes_for(:bundle)}
-        response.should redirect_to(bundle)
+        expect(response).to redirect_to(bundle)
       end
     end
 
@@ -103,17 +103,17 @@ describe BundlesController do
       it "assigns the bundle as @bundle" do
         bundle = FactoryGirl.create(:bundle)
         # Trigger the behavior that occurs when invalid params are submitted
-        Bundle.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Bundle).to receive(:save).and_return(false)
         put_with @user, :update, {:id => bundle.to_param, :bundle => {}}
-        assigns(:bundle).should eq(bundle)
+        expect(assigns(:bundle)).to eq(bundle)
       end
 
       it "re-renders the 'edit' template" do
         bundle = FactoryGirl.create(:bundle)
         # Trigger the behavior that occurs when invalid params are submitted
-        Bundle.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Bundle).to receive(:save).and_return(false)
         put_with @user, :update, {:id => bundle.to_param, :bundle => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -129,7 +129,7 @@ describe BundlesController do
     it "redirects to the bundles list" do
       bundle = FactoryGirl.create(:bundle)
       delete_with @user, :destroy, {:id => bundle.to_param}
-      response.should redirect_to(bundles_url)
+      expect(response).to redirect_to(bundles_url)
     end
   end
 

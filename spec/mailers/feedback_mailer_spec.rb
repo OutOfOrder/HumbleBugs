@@ -9,13 +9,13 @@ describe FeedbackMailer do
     end
 
     it "renders the headers" do
-      @mail.subject.should eq("HumbleBugs feedback")
-      @mail.to.should eq(['feedback@example.com'])
-      @mail.from.should eq(["myfromaddress@example.com"])
+      expect(@mail.subject).to eq("HumbleBugs feedback")
+      expect(@mail.to).to eq(['feedback@example.com'])
+      expect(@mail.from).to eq(["myfromaddress@example.com"])
     end
 
     it "renders the body" do
-      @mail.body.encoded.should match(user_path(@user))
+      expect(@mail.body.encoded).to match(user_path(@user))
     end
   end
 

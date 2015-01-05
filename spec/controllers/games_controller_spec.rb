@@ -10,13 +10,13 @@ describe GamesController do
     it "assigns all games as @games" do
       game = FactoryGirl.create(:game, bundle: nil)
       get_with @user, :index
-      assigns(:games).should eq([game])
+      expect(assigns(:games)).to eq([game])
     end
     it "assigns all game in the bundle as @games" do
       games = FactoryGirl.create_list(:game, 2)
       get_with @user, :index, {:bundle_id => games.first.bundle.to_param}
-      assigns(:bundle).should eq(games.first.bundle)
-      assigns(:games).should eq([games.first])
+      expect(assigns(:bundle)).to eq(games.first.bundle)
+      expect(assigns(:games)).to eq([games.first])
     end
     context 'as a regular user' do
       before do
@@ -25,19 +25,19 @@ describe GamesController do
       end
       it 'should render when accessing the nested index' do
         get_with @regular_user, :index, {:bundle_id => @game.bundle.to_param}
-        response.should render_template('index')
-        response.should be_ok
+        expect(response).to render_template('index')
+        expect(response).to be_ok
       end
       it 'should render when accessing the shallow index' do
         get_with @regular_user, :index, {}
-        response.should render_template('index')
-        response.should be_ok
+        expect(response).to render_template('index')
+        expect(response).to be_ok
       end
       it 'should render the denied template when accessing against an inactive bundle' do
         bundle = FactoryGirl.create :bundle
-        bundle.should_not be_allowed_to :index
+        expect(bundle).not_to be_allowed_to :index
         get_with @regular_user, :index, {:bundle_id => bundle.to_param}
-        response.should render_template('layouts/denied')
+        expect(response).to render_template('layouts/denied')
       end
     end
   end
@@ -46,13 +46,13 @@ describe GamesController do
     it "assigns the requested game as @game" do
       game = FactoryGirl.create(:game)
       get_with @user, :show, {:id => game.to_param}
-      assigns(:game).should eq(game)
+      expect(assigns(:game)).to eq(game)
     end
     it "assigns the requested game as @game and bundle as @bundle" do
       game = FactoryGirl.create(:game)
       get_with @user, :show, {:bundle_id => game.bundle.to_param, :id => game.to_param}
-      assigns(:bundle).should eq(game.bundle)
-      assigns(:game).should eq(game)
+      expect(assigns(:bundle)).to eq(game.bundle)
+      expect(assigns(:game)).to eq(game)
     end
   end
 
@@ -60,7 +60,7 @@ describe GamesController do
     it "assigns a new game as @game" do
       bundle = FactoryGirl.create(:bundle)
       get_with @user, :new
-      assigns(:game).should be_a_new(Game)
+      expect(assigns(:game)).to be_a_new(Game)
     end
   end
 
@@ -68,7 +68,7 @@ describe GamesController do
     it "assigns the requested game as @game" do
       game = FactoryGirl.create(:game)
       get_with @user, :edit, {:id => game.to_param}
-      assigns(:game).should eq(game)
+      expect(assigns(:game)).to eq(game)
     end
   end
 
@@ -82,29 +82,29 @@ describe GamesController do
 
       it "assigns a newly created game as @game" do
         post_with @user, :create, {:game => FactoryGirl.attributes_for(:game)}
-        assigns(:game).should be_a(Game)
-        assigns(:game).should be_persisted
+        expect(assigns(:game)).to be_a(Game)
+        expect(assigns(:game)).to be_persisted
       end
 
       it "redirects to the created game" do
         post_with @user, :create, {:game => FactoryGirl.attributes_for(:game)}
-        response.should redirect_to(Game.last)
+        expect(response).to redirect_to(Game.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved game as @game" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Game.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Game).to receive(:save).and_return(false)
         post_with @user, :create, {:game => {}}
-        assigns(:game).should be_a_new(Game)
+        expect(assigns(:game)).to be_a_new(Game)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Game.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Game).to receive(:save).and_return(false)
         post_with @user, :create, {:game => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -117,20 +117,20 @@ describe GamesController do
         # specifies that the Game created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Game.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(Game).to receive(:update_attributes).with({'these' => 'params'})
         put_with @user, :update, {:id => game.to_param, :game => {'these' => 'params'}}
       end
 
       it "assigns the requested game as @game" do
         game = FactoryGirl.create(:game)
         put_with @user, :update, {:id => game.to_param, :game => FactoryGirl.attributes_for(:game)}
-        assigns(:game).should eq(game)
+        expect(assigns(:game)).to eq(game)
       end
 
       it "redirects to the game" do
         game = FactoryGirl.create(:game)
         put_with @user, :update, {:id => game.to_param, :game => FactoryGirl.attributes_for(:game)}
-        response.should redirect_to(game)
+        expect(response).to redirect_to(game)
       end
     end
 
@@ -138,17 +138,17 @@ describe GamesController do
       it "assigns the game as @game" do
         game = FactoryGirl.create(:game)
         # Trigger the behavior that occurs when invalid params are submitted
-        Game.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Game).to receive(:save).and_return(false)
         put_with @user, :update, {:id => game.to_param, :game => {}}
-        assigns(:game).should eq(game)
+        expect(assigns(:game)).to eq(game)
       end
 
       it "re-renders the 'edit' template" do
         game = FactoryGirl.create(:game)
         # Trigger the behavior that occurs when invalid params are submitted
-        Game.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Game).to receive(:save).and_return(false)
         put_with @user, :update, {:id => game.to_param, :game => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -164,7 +164,7 @@ describe GamesController do
     it "redirects to the games list" do
       game = FactoryGirl.create(:game)
       delete_with @user, :destroy, {:id => game.to_param}
-      response.should redirect_to(games_url)
+      expect(response).to redirect_to(games_url)
     end
   end
 

@@ -11,7 +11,7 @@ describe SystemsController do
     it "assigns all systems as @systems" do
       system = FactoryGirl.create :system, user: @user
       get_with @user, :index, @base_params
-      assigns(:systems).should eq([system])
+      expect(assigns(:systems)).to eq([system])
     end
   end
 
@@ -19,14 +19,14 @@ describe SystemsController do
     it "assigns the requested system as @system" do
       system = FactoryGirl.create :system, user: @user
       get_with @user, :show, @base_params.merge(id: system.to_param)
-      assigns(:system).should eq(system)
+      expect(assigns(:system)).to eq(system)
     end
   end
 
   describe "GET new" do
     it "assigns a new system as @system" do
       get_with @user, :new, @base_params
-      assigns(:system).should be_a_new(System)
+      expect(assigns(:system)).to be_a_new(System)
     end
   end
 
@@ -34,7 +34,7 @@ describe SystemsController do
     it "assigns the requested system as @system" do
       system = FactoryGirl.create :system, user: @user
       get_with @user, :edit, @base_params.merge(id: system.to_param)
-      assigns(:system).should eq(system)
+      expect(assigns(:system)).to eq(system)
     end
   end
 
@@ -48,35 +48,35 @@ describe SystemsController do
 
       it "assigns a newly created system as @system" do
         post_with @user, :create, @base_params.merge(system: FactoryGirl.attributes_for(:system))
-        assigns(:system).should be_a(System)
-        assigns(:system).should be_persisted
+        expect(assigns(:system)).to be_a(System)
+        expect(assigns(:system)).to be_persisted
       end
 
       it "redirects to the user" do
         post_with @user, :create, @base_params.merge(system: FactoryGirl.attributes_for(:system))
-        response.should redirect_to(@user)
+        expect(response).to redirect_to(@user)
       end
 
       it "sets the user of the new System" do
         post_with @user, :create, @base_params.merge(system: FactoryGirl.attributes_for(:system))
 
-        assigns(:system).user.should == @user
+        expect(assigns(:system).user).to eq(@user)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved system as @system" do
         # Trigger the behavior that occurs when invalid params are submitted
-        System.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(System).to receive(:save).and_return(false)
         post_with @user, :create, @base_params.merge(system: {})
-        assigns(:system).should be_a_new(System)
+        expect(assigns(:system)).to be_a_new(System)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        System.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(System).to receive(:save).and_return(false)
         post_with @user, :create, @base_params.merge(system: {})
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -89,20 +89,20 @@ describe SystemsController do
         # specifies that the System created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        System.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(System).to receive(:update_attributes).with({'these' => 'params'})
         put_with @user, :update, @base_params.merge(id: system.to_param, system: {'these' => 'params'})
       end
 
       it "assigns the requested system as @system" do
         system = FactoryGirl.create :system, user: @user
         put_with @user, :update, @base_params.merge(id: system.to_param, system: FactoryGirl.attributes_for(:system))
-        assigns(:system).should eq(system)
+        expect(assigns(:system)).to eq(system)
       end
 
       it "redirects to the user" do
         system = FactoryGirl.create :system, user: @user
         put_with @user, :update, @base_params.merge(id: system.to_param, system: FactoryGirl.attributes_for(:system))
-        response.should redirect_to(@user)
+        expect(response).to redirect_to(@user)
       end
     end
 
@@ -110,17 +110,17 @@ describe SystemsController do
       it "assigns the system as @system" do
         system = FactoryGirl.create :system, user: @user
         # Trigger the behavior that occurs when invalid params are submitted
-        System.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(System).to receive(:save).and_return(false)
         put_with @user, :update, @base_params.merge(id: system.to_param, system: {})
-        assigns(:system).should eq(system)
+        expect(assigns(:system)).to eq(system)
       end
 
       it "re-renders the 'edit' template" do
         system = FactoryGirl.create :system, user: @user
         # Trigger the behavior that occurs when invalid params are submitted
-        System.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(System).to receive(:save).and_return(false)
         put_with @user, :update, @base_params.merge(id: system.to_param, system: {})
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -136,7 +136,7 @@ describe SystemsController do
     it "redirects to the user" do
       system = FactoryGirl.create :system, user: @user
       delete_with @user, :destroy, @base_params.merge(id: system.to_param)
-      response.should redirect_to(@user)
+      expect(response).to redirect_to(@user)
     end
   end
 

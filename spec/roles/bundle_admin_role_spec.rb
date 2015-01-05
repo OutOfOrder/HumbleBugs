@@ -11,7 +11,7 @@ describe :bundle_admin do
   end
 
   it 'should have the bundle_admin role' do
-    Authorization.current_user.role_symbols.should == [:bundle_admin]
+    expect(Authorization.current_user.role_symbols).to eq([:bundle_admin])
   end
 
   context :bundles do

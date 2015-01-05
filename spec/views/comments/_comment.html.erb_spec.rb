@@ -9,7 +9,7 @@ describe "comments/_comment" do
   it "renders attributes in <p>" do
     render partial: 'comment', locals: { comment: @comment }
 
-    rendered.should match(/Posted/ )
-    rendered.should match(@comment.author.name)
+    expect(rendered).to match(/Posted/ )
+    expect(rendered).to match(@comment.author.name)
   end
 end

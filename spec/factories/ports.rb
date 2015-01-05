@@ -6,7 +6,7 @@ FactoryGirl.define do
     association :developer
     state "planned"
 
-    ignore do
+    transient do
       porter nil
     end
     after(:build) do |port, evaluator|

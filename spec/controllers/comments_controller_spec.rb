@@ -13,14 +13,14 @@ describe CommentsController do
     it "assigns the requested comment as @comment" do
       comment = FactoryGirl.create(:comment, :commentable => @commentable)
       get_with @user, :show, @base_params.merge({:id => comment.to_param})
-      assigns(:comment).should eq(comment)
+      expect(assigns(:comment)).to eq(comment)
     end
   end
 
   describe "GET new" do
     it "assigns a new comment as @comment" do
       get_with @user, :new, @base_params
-      assigns(:comment).should be_a_new(Comment)
+      expect(assigns(:comment)).to be_a_new(Comment)
     end
   end
 
@@ -28,7 +28,7 @@ describe CommentsController do
     it "assigns the requested comment as @comment" do
       comment = FactoryGirl.create(:comment, :commentable => @commentable)
       get_with @user, :edit, @base_params.merge({:id => comment.to_param})
-      assigns(:comment).should eq(comment)
+      expect(assigns(:comment)).to eq(comment)
     end
   end
 
@@ -45,35 +45,35 @@ describe CommentsController do
 
       it "assigns a newly created comment as @comment" do
         post_with @user, :create, @base_params.merge({:comment => @comment})
-        assigns(:comment).should be_a(Comment)
-        assigns(:comment).should be_persisted
+        expect(assigns(:comment)).to be_a(Comment)
+        expect(assigns(:comment)).to be_persisted
       end
 
       it "renders the create action" do
         post_with @user, :create, @base_params.merge({:comment => @comment})
-        response.should render_template("create")
+        expect(response).to render_template("create")
       end
 
       it "should set the author to the logged in user" do
         post_with @user, :create, @base_params.merge({:comment => @comment})
 
-        assigns(:comment).author.should == @user
+        expect(assigns(:comment).author).to eq(@user)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved comment as @comment" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Comment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Comment).to receive(:save).and_return(false)
         post_with @user, :create, @base_params.merge({:comment => {}})
-        assigns(:comment).should be_a_new(Comment)
+        expect(assigns(:comment)).to be_a_new(Comment)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Comment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Comment).to receive(:save).and_return(false)
         post_with @user, :create, @base_params.merge({:comment => {}})
-        response.should render_template("comments/error")
+        expect(response).to render_template("comments/error")
       end
     end
   end
@@ -86,20 +86,20 @@ describe CommentsController do
         # specifies that the Comment created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Comment.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(Comment).to receive(:update_attributes).with({'these' => 'params'})
         put_with @user, :update, @base_params.merge({:id => comment.to_param, :comment => {'these' => 'params'}})
       end
 
       it "assigns the requested comment as @comment" do
         comment = FactoryGirl.create(:comment, :commentable => @commentable)
         put_with @user, :update, @base_params.merge({:id => comment.to_param, :comment => FactoryGirl.attributes_for(:comment)})
-        assigns(:comment).should eq(comment)
+        expect(assigns(:comment)).to eq(comment)
       end
 
       it "renders the show template" do
         comment = FactoryGirl.create(:comment, :commentable => @commentable)
         put_with @user, :update, @base_params.merge({:id => comment.to_param, :comment => FactoryGirl.attributes_for(:comment)})
-        response.should render_template("show")
+        expect(response).to render_template("show")
       end
     end
 
@@ -107,17 +107,17 @@ describe CommentsController do
       it "assigns the comment as @comment" do
         comment = FactoryGirl.create(:comment, :commentable => @commentable)
         # Trigger the behavior that occurs when invalid params are submitted
-        Comment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Comment).to receive(:save).and_return(false)
         put_with @user, :update, @base_params.merge({:id => comment.to_param, :comment => {}})
-        assigns(:comment).should eq(comment)
+        expect(assigns(:comment)).to eq(comment)
       end
 
       it "re-renders the 'edit' template" do
         comment = FactoryGirl.create(:comment, :commentable => @commentable)
         # Trigger the behavior that occurs when invalid params are submitted
-        Comment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Comment).to receive(:save).and_return(false)
         put_with @user, :update, @base_params.merge({:id => comment.to_param, :comment => {}})
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -133,7 +133,7 @@ describe CommentsController do
     it "renders the destoy action" do
       comment = FactoryGirl.create(:comment, :commentable => @commentable)
       delete_with @user, :destroy, @base_params.merge({:id => comment.to_param})
-      response.should render_template("destroy")
+      expect(response).to render_template("destroy")
     end
   end
 

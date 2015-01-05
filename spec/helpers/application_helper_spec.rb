@@ -13,13 +13,13 @@ require 'spec_helper'
 describe ApplicationHelper do
   describe "select if" do
     it 'returns selected if the passed controller name is current' do
-      helper.stub(:controller_name).and_return('test_controller')
-      helper.select_if(:controller => :test_controller).should == "selected"
+      allow(helper).to receive(:controller_name).and_return('test_controller')
+      expect(helper.select_if(:controller => :test_controller)).to eq("selected")
     end
 
     it 'returns nothing if the passed controller name is not current' do
-      helper.stub(:controller_name).and_return('other_controller')
-      helper.select_if(:controller => :test_controller).should_not == "selected"
+      allow(helper).to receive(:controller_name).and_return('other_controller')
+      expect(helper.select_if(:controller => :test_controller)).not_to eq("selected")
     end
   end
 
@@ -31,12 +31,12 @@ describe ApplicationHelper do
       ]
     end
     it 'should return the label for a value' do
-      helper.label_for(@options, 'blue').should == "Blue"
-      helper.label_for(@options, 'red').should == "Red"
+      expect(helper.label_for(@options, 'blue')).to eq("Blue")
+      expect(helper.label_for(@options, 'red')).to eq("Red")
     end
 
     it 'should return nil if there is no matched value' do
-      helper.label_for(@options, 'green').should be_nil
+      expect(helper.label_for(@options, 'green')).to be_nil
     end
   end
 
@@ -44,7 +44,7 @@ describe ApplicationHelper do
     it 'should return a separated list of platforms' do
       @platforms = FactoryGirl.build_list :tag, 3, :name => "test"
 
-      helper.platform_list(@platforms).should == "test, test, test"
+      expect(helper.platform_list(@platforms)).to eq("test, test, test")
     end
   end
 end

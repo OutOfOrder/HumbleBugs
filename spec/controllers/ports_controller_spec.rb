@@ -12,7 +12,7 @@ describe PortsController do
       FactoryGirl.create(:port)
       port = FactoryGirl.create(:port, :game => @game)
       get_with @user, :index, @base_params
-      assigns(:ports).should eq([port])
+      expect(assigns(:ports)).to eq([port])
     end
   end
 
@@ -20,14 +20,14 @@ describe PortsController do
     it "assigns the requested port as @port" do
       port = FactoryGirl.create(:port, :game => @game)
       get_with @user, :show, @base_params.merge({:id => port.to_param})
-      assigns(:port).should eq(port)
+      expect(assigns(:port)).to eq(port)
     end
   end
 
   describe "GET new" do
     it "assigns a new port as @port" do
       get_with @user, :new, @base_params
-      assigns(:port).should be_a_new(Port)
+      expect(assigns(:port)).to be_a_new(Port)
     end
   end
 
@@ -35,7 +35,7 @@ describe PortsController do
     it "assigns the requested port as @port" do
       port = FactoryGirl.create(:port, :game => @game)
       get_with @user, :edit, @base_params.merge({:id => port.to_param})
-      assigns(:port).should eq(port)
+      expect(assigns(:port)).to eq(port)
     end
   end
 
@@ -52,29 +52,29 @@ describe PortsController do
 
       it "assigns a newly created port as @port" do
         post_with @user, :create, @base_params.merge({:port => @port})
-        assigns(:port).should be_a(Port)
-        assigns(:port).should be_persisted
+        expect(assigns(:port)).to be_a(Port)
+        expect(assigns(:port)).to be_persisted
       end
 
       it "redirects to the parent game" do
         post_with @user, :create, @base_params.merge({:port => @port})
-        response.should redirect_to(@game)
+        expect(response).to redirect_to(@game)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved port as @port" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Port.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Port).to receive(:save).and_return(false)
         post_with @user, :create, @base_params.merge({:port => {}})
-        assigns(:port).should be_a_new(Port)
+        expect(assigns(:port)).to be_a_new(Port)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Port.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Port).to receive(:save).and_return(false)
         post_with @user, :create, @base_params.merge({:port => {}})
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -87,20 +87,20 @@ describe PortsController do
         # specifies that the Port created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Port.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(Port).to receive(:update_attributes).with({'these' => 'params'})
         put_with @user, :update, @base_params.merge({:id => port.to_param, :port => {'these' => 'params'}})
       end
 
       it "assigns the requested port as @port" do
         port = FactoryGirl.create(:port, :game => @game)
         put_with @user, :update, @base_params.merge({:id => port.to_param, :port => FactoryGirl.attributes_for(:port, :game => @game)})
-        assigns(:port).should eq(port)
+        expect(assigns(:port)).to eq(port)
       end
 
       it "redirects to the parent game" do
         port = FactoryGirl.create(:port, :game => @game)
         put_with @user, :update, @base_params.merge({:id => port.to_param, :port => FactoryGirl.attributes_for(:port, :game => @game)})
-        response.should redirect_to(@game)
+        expect(response).to redirect_to(@game)
       end
     end
 
@@ -108,17 +108,17 @@ describe PortsController do
       it "assigns the port as @port" do
         port = FactoryGirl.create(:port, :game => @game)
         # Trigger the behavior that occurs when invalid params are submitted
-        Port.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Port).to receive(:save).and_return(false)
         put_with @user, :update, @base_params.merge({:id => port.to_param, :port => {}})
-        assigns(:port).should eq(port)
+        expect(assigns(:port)).to eq(port)
       end
 
       it "re-renders the 'edit' template" do
         port = FactoryGirl.create(:port, :game => @game)
         # Trigger the behavior that occurs when invalid params are submitted
-        Port.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Port).to receive(:save).and_return(false)
         put_with @user, :update, @base_params.merge({:id => port.to_param, :port => {}})
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -134,7 +134,7 @@ describe PortsController do
     it "redirects to the ports list" do
       port = FactoryGirl.create(:port, :game => @game)
       delete_with @user, :destroy, @base_params.merge({:id => port.to_param})
-      response.should redirect_to(game_ports_url(@game))
+      expect(response).to redirect_to(game_ports_url(@game))
     end
   end
 

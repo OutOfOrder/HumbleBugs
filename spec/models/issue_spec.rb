@@ -13,7 +13,7 @@ describe Issue do
           FactoryGirl.create(:issue, game: game, status: status.to_s)
         end
 
-        Issue.open.should =~ open_issues
+        expect(Issue.open).to match_array(open_issues)
       end
     end
   end

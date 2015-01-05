@@ -4,9 +4,9 @@ describe "games/show" do
   it "renders attributes in <p>" do
     assign(:game, FactoryGirl.create(:game))
     render
-    rendered.should match(/Name/)
-    rendered.should match(/Pong Game/)
-    rendered.should match(/Prospective/)
+    expect(rendered).to match(/Name/)
+    expect(rendered).to match(/Pong Game/)
+    expect(rendered).to match(/Prospective/)
   end
 
   it 'a tester can not see the bundle of a game in testing' do
@@ -14,7 +14,7 @@ describe "games/show" do
     assign(:game, FactoryGirl.create(:game, :testing))
 
     render_with user
-    rendered.should match(/Name/)
-    rendered.should_not match(/Bundle:/)
+    expect(rendered).to match(/Name/)
+    expect(rendered).not_to match(/Bundle:/)
   end
 end

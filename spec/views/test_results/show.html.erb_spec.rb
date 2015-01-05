@@ -8,7 +8,7 @@ describe "test_results/show" do
   it "renders attributes in <p>" do
     render
 
-    rendered.should match(/Good/)
-    rendered.should match(/My Comment/)
+    expect(rendered).to match(/Good/)
+    expect(rendered).to match(/My Comment/)
   end
 end

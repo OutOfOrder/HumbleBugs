@@ -13,23 +13,23 @@ describe :developer do
   end
 
   it 'should have the user role' do
-    Authorization.current_user.role_symbols.should == [:user]
-    @user.developer.should_not be_blank
+    expect(Authorization.current_user.role_symbols).to eq([:user])
+    expect(@user.developer).not_to be_blank
   end
 
   context :developers do
     it 'can read address info for a developer I belong to' do
-      @developer.should be_allowed_to :read
-      @developer.should be_allowed_to :read_address
-      @developer.should be_allowed_to :update
-      @developer.should be_allowed_to :update_address
+      expect(@developer).to be_allowed_to :read
+      expect(@developer).to be_allowed_to :read_address
+      expect(@developer).to be_allowed_to :update
+      expect(@developer).to be_allowed_to :update_address
     end
   end
 
   context :games do
     it 'should be able to read those for which they are the developer' do
       game = FactoryGirl.create :game, developer: @developer
-      game.should be_allowed_to :read
+      expect(game).to be_allowed_to :read
     end
   end
 
@@ -64,11 +64,11 @@ describe :developer do
       end
       it 'can read ports' do
         port = FactoryGirl.create :port, game: @game
-        port.should be_allowed_to :read
+        expect(port).to be_allowed_to :read
       end
       it 'can not update ports' do
         port = FactoryGirl.create :port, game: @game
-        port.should_not be_allowed_to :update
+        expect(port).not_to be_allowed_to :update
       end
     end
   end
