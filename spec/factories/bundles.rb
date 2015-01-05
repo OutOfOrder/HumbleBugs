@@ -10,5 +10,9 @@ FactoryGirl.define do
     trait :active do
       state "active"
     end
+
+    trait :planned do
+      state "planned"
+    end
   end
 end

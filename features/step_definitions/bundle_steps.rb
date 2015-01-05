@@ -1,4 +1,4 @@
-Given /^an (.*?) "(.*?)" Bundle exists$/ do |state, name|
+Given /^an? (.*?) "(.*?)" Bundle exists$/ do |state, name|
   FactoryGirl.create :bundle, state.to_sym, :name => name
 end
 

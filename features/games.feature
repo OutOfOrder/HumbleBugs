@@ -14,7 +14,7 @@ Feature: Games
 
   Scenario: Add a game
     Given I am logged in as admin User
-    Given a Bundle exists with a Name of "Cucumber"
+    Given a planned "Cucumber" Bundle exists
     When I go to the new Game page
     And I submit a new game for bundle "Cucumber"
     Then I should have 1 game for bundle "Cucumber"
