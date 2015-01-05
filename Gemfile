@@ -19,8 +19,9 @@ gem 'newrelic_rpm'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'compass-rails'
+  gem 'sass-rails', '~> 3.2.3'
+  gem 'sass', '~> 3.2.7'
+  gem 'compass-rails', '~> 1.0.3'
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-ui-rails'
 end
