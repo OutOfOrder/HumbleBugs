@@ -31,10 +31,9 @@ GEM
     acts-as-taggable-on (2.2.2)
       rails (~> 3.0)
     addressable (2.2.8)
-    airbrake (3.1.11)
-      activesupport
+    airbrake (4.1.0)
       builder
-      json
+      multi_json
     arel (3.0.3)
     awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
@@ -103,7 +102,7 @@ GEM
     mini_portile (0.6.2)
     multi_json (1.10.1)
     multi_test (0.1.1)
-    newrelic_rpm (3.6.7.159)
+    newrelic_rpm (3.9.9.275)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     password_strength (0.3.2)
