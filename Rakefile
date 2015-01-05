@@ -5,7 +5,3 @@
 require File.expand_path('../config/application', __FILE__)
 
 HumbleBugs::Application.load_tasks
-
-if ENV['RAILS_ENV'] != 'production'
-    require 'ci/reporter/rake/rspec'
-end

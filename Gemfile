@@ -51,7 +51,6 @@ gem 'unicorn'
 
 group :test do
   gem 'database_cleaner'
-  gem 'ci_reporter'
   gem 'rspec-rails', :group => [:development, :test]
   gem 'factory_girl_rails'
   gem 'cucumber-rails', :require => false

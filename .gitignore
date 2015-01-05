@@ -20,6 +20,3 @@
 
 # Ignore code coverage results
 /coverage
-# Ignore junit output files
-/features/reports
-/spec/reports
