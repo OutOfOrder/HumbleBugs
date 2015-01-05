@@ -72,4 +72,8 @@ protected
     end
     nil
   end
+
+  def handle_unverified_request
+    raise ActionController::InvalidAuthenticityToken
+  end
 end
