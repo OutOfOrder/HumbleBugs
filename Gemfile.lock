@@ -28,8 +28,8 @@ GEM
     activesupport (3.2.19)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    acts-as-taggable-on (2.2.2)
-      rails (~> 3.0)
+    acts-as-taggable-on (3.4.2)
+      activerecord (>= 3.2, < 5)
     addressable (2.3.6)
     airbrake (4.1.0)
       builder
