@@ -75,7 +75,7 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    ffaker (1.25.0)
+    ffaker (1.32.1)
     fssm (0.2.10)
     gherkin (2.12.2)
       multi_json (~> 1.3)
