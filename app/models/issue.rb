@@ -14,7 +14,8 @@ class Issue < ActiveRecord::Base
       ['Won\'t fix', :suspended],
       ['Duplicate', :duplicate],
       ['Invalid', :invalid],
-      ['Fixed', :completed]
+      ['Fixed', :fixed],
+      ['Verified Fixed', :completed],
   ]
 
   OPEN_STATUSES = [:new, :feedback, :active]
