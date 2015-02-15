@@ -21,6 +21,15 @@ class Issue < ActiveRecord::Base
   OPEN_STATUSES = [:new, :feedback, :active]
   ALL_STATUSES = STATUSES.map { |m| m.second }
 
+  PRIORITIES = [
+      'Low' => 30,
+      'Normal' => 50,
+      'High' => 70,
+      'Critical' => 90,
+  ]
+
+  validates :priority, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+
   validates_presence_of :status, :description, :summary, :game_id, :author_id
   validates_inclusion_of :status, :in => ALL_STATUSES.map(&:to_s), :message => "%{value} is not a valid status"
 

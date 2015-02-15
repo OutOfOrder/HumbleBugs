@@ -17,4 +17,19 @@ describe Issue do
       end
     end
   end
+
+  describe 'validations' do
+    it 'should be invalid with a priority less than zero' do
+      issue = FactoryGirl.build :issue, game: game, priority: -1
+      expect(issue).to_not be_valid
+    end
+    it 'should be invalid with a priority greater than 100' do
+      issue = FactoryGirl.build :issue, game: game, priority: 101
+      expect(issue).to_not be_valid
+    end
+    it 'should be valid with a priority in range' do
+      issue = FactoryGirl.build :issue, game: game, priority: 50
+      expect(issue).to be_valid
+    end
+  end
 end
