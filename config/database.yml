@@ -27,5 +27,11 @@ production: &production
 staging:
   <<: *production
 
+# Put your "local" override configuration in a file called dblocal.yml
+# derived from http://6brand.com/how-to-manage-your-database-yml.html
+# NOTE this works fine with heroku client as of version 2.10.0 (Oct 2011)
+<%= file = File.join('config', 'dblocal.yml')
+    IO.read(file) if File.exist?(file) %>
+
 cucumber:
   <<: *test
