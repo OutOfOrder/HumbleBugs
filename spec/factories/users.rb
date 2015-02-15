@@ -30,7 +30,7 @@ FactoryGirl.define do
 
     trait :confirmed do
       roles ['user']
-	  confirm_account_token nil
+	    confirm_account_token nil
       confirm_account_sent_at { Time.now }
     end
 

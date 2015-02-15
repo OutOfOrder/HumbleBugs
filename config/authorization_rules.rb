@@ -29,7 +29,7 @@ authorization do
   end
 
   role :guest do
-    includes :active_bundles
+    # includes :active_bundles
 
     has_permission_on :users, :to => :create
   end
@@ -37,7 +37,7 @@ authorization do
   # new user signups before they verify their email address
   role :unverified do
     title 'Unverified user'
-    includes :active_bundles
+    # includes :active_bundles
     has_permission_on :users, :to => [:read, :update] do
       if_attribute :id => is { user.id }
     end
