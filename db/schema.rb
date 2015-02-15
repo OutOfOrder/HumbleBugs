@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150105052050) do
+ActiveRecord::Schema.define(:version => 20150214222155) do
 
   create_table "bundles", :force => true do |t|
     t.string   "name"
@@ -65,17 +65,19 @@ ActiveRecord::Schema.define(:version => 20150105052050) do
     t.integer  "game_id"
     t.text     "description"
     t.string   "status"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "reported_against_id"
     t.integer  "fixed_in_id"
     t.integer  "author_id"
     t.string   "summary"
+    t.integer  "priority",            :default => 50, :null => false
   end
 
   add_index "issues", ["author_id"], :name => "index_issues_on_author_id"
   add_index "issues", ["fixed_in_id"], :name => "index_issues_on_fixed_in_id"
   add_index "issues", ["game_id"], :name => "index_issues_on_game_id"
+  add_index "issues", ["priority"], :name => "index_issues_on_priority", :order => {"priority"=>:desc}
   add_index "issues", ["reported_against_id"], :name => "index_issues_on_reported_against_id"
 
   create_table "ports", :force => true do |t|
