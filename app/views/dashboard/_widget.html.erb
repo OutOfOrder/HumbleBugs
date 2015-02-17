@@ -1,5 +1,5 @@
 <%= field_set_tag t("dashboard_controller.widgets.#{widget[:name]}"), class: "widget widget_#{widget[:name]}", data:{widget:widget[:name]} do %>
   <div class="content">
-    <%= render :partial => "widget_#{widget[:view] || widget[:name]}", :locals => widget %>
+    <%= render :partial => "widget_#{widget[:view]}", :locals => widget %>
   </div>
 <% end %>

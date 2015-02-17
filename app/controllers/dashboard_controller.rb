@@ -35,6 +35,7 @@ private
     m = "widget_#{name}".to_sym
     o = Hash.new
     o[:name] = name.to_s
+    o[:view] = name.to_s
     if respond_to?(m, true)
       send(m, o)
     else
