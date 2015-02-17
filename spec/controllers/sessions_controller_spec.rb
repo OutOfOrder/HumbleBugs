@@ -23,7 +23,7 @@ describe SessionsController do
 
       it "redirects to the dashboard" do
         post :create, {:email => @user.email, :password => @password}
-        expect(response).to redirect_to(root_url)
+        expect(response).to redirect_to(dashboard_url)
       end
     end
 

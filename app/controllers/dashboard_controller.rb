@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  def index
+  def show
     columns = dashboard_columns
     columns << [] << [] << [] # ensure 3 columns
 

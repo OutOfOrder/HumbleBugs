@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       if params[:r].present?
         redirect_to request.protocol + request.host_with_port + params[:r], :notice => "Logged in!"
       else
-        redirect_to root_url, :notice => "Logged in!"
+        redirect_to dashboard_url, :notice => "Logged in!"
       end
     else
       flash.now[:alert] = "Invalid email or password"

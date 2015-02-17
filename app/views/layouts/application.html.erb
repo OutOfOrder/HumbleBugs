@@ -41,7 +41,7 @@
     
     <div id="app-nav">
       <ul class="navigation">
-        <li class="<%= select_if :controller => :dashboard %>"><%= link_to 'Dashboard', root_path %></li>
+        <li class="<%= select_if :controller => :dashboard %>"><%= link_to 'Dashboard', dashboard_path %></li>
         <li class="<%= select_if :controller => :bundles, :exclude => [:new,:create] %>"><%= link_to 'Bundles', bundles_path %></li>
         <li class="<%= select_if :controller => :games, :exclude => [:new,:create] %>"><%= link_to 'Games', games_path %></li>
         <% permitted_to? :manage, :users do %>
