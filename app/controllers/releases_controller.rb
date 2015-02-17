@@ -5,11 +5,6 @@ class ReleasesController < ApplicationController
   # GET /games/1/releases.json
   def index
     @releases = @game.releases.with_permissions_to
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @releases }
-    end
   end
 
   def download
@@ -20,19 +15,11 @@ class ReleasesController < ApplicationController
   # GET /games/1/releases/1
   # GET /games/1/releases/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @release }
-    end
   end
 
   # GET /games/1/releases/new
   # GET /games/1/releases/new.json
   def new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @release }
-    end
   end
 
   # GET /games/1/releases/1/edit
@@ -42,28 +29,20 @@ class ReleasesController < ApplicationController
   # POST /games/1/releases
   # POST /games/1/releases.json
   def create
-    respond_to do |format|
-      if @release.save
-        format.html { redirect_to game_url(@game, anchor:'game_releases'), notice: 'Release was successfully created.' }
-        format.json { render json: @release, status: :created, location: @release }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @release.errors, status: :unprocessable_entity }
-      end
+    if @release.save
+      redirect_to game_url(@game, anchor:'game_releases'), notice: 'Release was successfully created.'
+    else
+      render action: "new"
     end
   end
 
   # PUT /games/1/releases/1
   # PUT /games/1/releases/1.json
   def update
-    respond_to do |format|
-      if @release.update_attributes(params[:release])
-        format.html { redirect_to game_url(@release.game, anchor:'game_releases'), notice: 'Release was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @release.errors, status: :unprocessable_entity }
-      end
+    if @release.update_attributes(params[:release])
+      redirect_to game_url(@release.game, anchor:'game_releases'), notice: 'Release was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -72,10 +51,7 @@ class ReleasesController < ApplicationController
   def destroy
     @release.destroy
 
-    respond_to do |format|
-      format.html { redirect_to game_url(@release.game, anchor:'game_releases') }
-      format.json { head :no_content }
-    end
+    redirect_to game_url(@release.game, anchor:'game_releases')
   end
 
 protected

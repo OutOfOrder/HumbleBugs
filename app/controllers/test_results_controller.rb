@@ -3,20 +3,11 @@ class TestResultsController < ApplicationController
 
   def index
     @test_results = @release.test_results.with_permissions_to
-    respond_to do |format|
-      format.html # show.js.erb
-      format.js # index.js.erb
-      format.json { render json: @test_results }
-    end
   end
 
   # GET /test_results/1
   # GET /test_results/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @test_result }
-    end
   end
 
   # GET /test_results/new
@@ -35,11 +26,9 @@ class TestResultsController < ApplicationController
       if @test_result.save
         format.js { render action: "done", locals: { notice: 'Test result was successfully created.' }  }
         format.html { redirect_to game_url(@test_result.release.game, anchor: 'game_releases'), notice: 'Test result was successfully created.' }
-        format.json { render json: @test_result, status: :created, location: @test_result }
       else
         format.js { render action: "error" }
         format.html { render action: "new" }
-        format.json { render json: @test_result.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -51,11 +40,9 @@ class TestResultsController < ApplicationController
       if @test_result.update_attributes(params[:test_result])
         format.js { render action: "done", locals: { notice: 'Test result was successfully updated.' } }
         format.html { redirect_to game_url(@test_result.release.game, anchor: 'game_releases'), notice: 'Test result was successfully updated.' }
-        format.json { head :no_content }
       else
         format.js { render action: "error" }
         format.html { render action: "edit" }
-        format.json { render json: @test_result.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,7 +55,6 @@ class TestResultsController < ApplicationController
     respond_to do |format|
       format.js { render action: "done", locals: { notice: 'Test result was successfully deleted.' }  }
       format.html { redirect_to game_url(@test_result.release.game, anchor: 'game_releases') }
-      format.json { head :no_content }
     end
   end
 

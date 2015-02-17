@@ -16,29 +16,16 @@ class IssuesController < ApplicationController
     if params[:platforms].present?
       @issues = @issues.tagged_with(params[:platforms].split(','), on: 'platforms', any: true)
     end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @issues }
-    end
   end
 
   # GET /games/1/issues/1
   # GET /games/1/issues/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @issue }
-    end
   end
 
   # GET /games/1/issues/new
   # GET /games/1/issues/new.json
   def new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @issue }
-    end
   end
 
   # GET /games/1/issues/1/edit
@@ -48,32 +35,24 @@ class IssuesController < ApplicationController
   # POST /games/1/issues
   # POST /games/1/issues.json
   def create
-    respond_to do |format|
-      if @issue.save
-        format.html { redirect_to [@issue.game, @issue], notice: 'Issue was successfully created.' }
-        format.json { render json: @issue, status: :created, location: [@issue.game, @issue] }
-        begin
-          IssueMailer.new_issue(@issue).deliver
-        rescue NoRecipientsException
-        end
-      else
-        format.html { render action: "new" }
-        format.json { render json: @issue.errors, status: :unprocessable_entity }
+    if @issue.save
+      redirect_to [@issue.game, @issue], notice: 'Issue was successfully created.'
+      begin
+        IssueMailer.new_issue(@issue).deliver
+      rescue NoRecipientsException
       end
+    else
+      render action: "new"
     end
   end
 
   # PUT /games/1/issues/1
   # PUT /games/1/issues/1.json
   def update
-    respond_to do |format|
-      if @issue.update_attributes(params[:issue])
-        format.html { redirect_to [@game, @issue], notice: 'Issue was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @issue.errors, status: :unprocessable_entity }
-      end
+    if @issue.update_attributes(params[:issue])
+      redirect_to [@issue.game, @issue], notice: 'Issue was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -82,10 +61,7 @@ class IssuesController < ApplicationController
   def destroy
     @issue.destroy
 
-    respond_to do |format|
-      format.html { redirect_to game_issues_url(@game) }
-      format.json { head :no_content }
-    end
+    redirect_to game_issues_url(@issue.game)
   end
 
 protected
