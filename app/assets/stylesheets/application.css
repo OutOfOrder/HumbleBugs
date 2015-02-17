@@ -10,9 +10,9 @@
  *
  *= require_self
  *= require main
- *= require jquery.ui.resizable
- *= require jquery.ui.autocomplete
- *= require jquery.ui.dialog
+ *= require jquery-ui/resizable
+ *= require jquery-ui/autocomplete
+ *= require jquery-ui/dialog
  *= require select2
  *= require jquery.jgrowl
  *= require_tree ./controllers
