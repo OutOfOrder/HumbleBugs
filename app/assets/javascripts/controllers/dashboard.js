@@ -17,6 +17,18 @@
         saveDashboard: function() {
             var config = Dashboard.serialize();
             console.log('Dashboard Change', config);
+            $.ajax({
+                type: 'PUT',
+                url: '/dashboard',
+                data: JSON.stringify({dashboard: config }),
+                contentType: 'application/json; charset=UTF-8',
+                processData: false,
+                dataType: 'json'
+            }).done(function(data, status, XHR) {
+                console.log('Success?', data);
+            }).fail(function(XHR, status, error) {
+                console.log('Fail!');
+            });
         }
     };
 
@@ -26,7 +38,7 @@
         distance: 5,
         cursor: 'crosshair',
         cancel: '.content',
-        update: Dashboard.saveDashboard
+        update: function(e, ui) { if (ui.sender == null) Dashboard.saveDashboard(); }
       });
     });
 })();

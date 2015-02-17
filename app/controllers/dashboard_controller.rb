@@ -8,6 +8,19 @@ class DashboardController < ApplicationController
     @column3 = columns.third.map {|w| widget_for w} .compact
   end
 
+  def update
+    unless current_user.nil?
+      current_user.dashboard = params[:dashboard]
+      if current_user.save
+        render json: {}
+      else
+        render json: {error: 'Failed to save dashboard config'}
+      end
+    else
+      render json: {}
+    end
+  end
+
 private
   def dashboard_columns
     if current_user.nil?
