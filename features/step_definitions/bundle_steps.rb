@@ -19,5 +19,5 @@ end
 
 Then /^I should have (\d+) game for bundle "([^"]+)"/ do |count, name|
   bundle = Bundle.find_by_name(name)
-  bundle.games.count.should eq(count.to_i)
+  expect(bundle.games.count).to eq(count.to_i)
 end

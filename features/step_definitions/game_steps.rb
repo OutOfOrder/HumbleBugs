@@ -1,5 +1,5 @@
 Then /^I should see (\d+) games in a list$/ do |count|
-  page.should have_css("table tr.game", :count => count.to_i)
+  expect(page).to have_css("table tr.game", :count => count.to_i)
 end
 
 When /^I submit a new game for bundle "([^"]+)"$/ do |bundle_name|

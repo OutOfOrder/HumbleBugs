@@ -1,9 +1,9 @@
 Then /^I should see a field named "([^"]*)"$/ do |id|
-  page.should have_field(id)
+  expect(page).to have_field(id)
 end
 
 Then /^I should see a button named "([^"]*)"$/ do |text|
-  page.should have_button(text)
+  expect(page).to have_button(text)
 end
 
 When /^I go to the (.+) page$/ do |page|
