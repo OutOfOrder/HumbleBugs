@@ -3,6 +3,7 @@ Feature: Games
   We need to track each game for a bundle
 
   Scenario: List Games
+    Given I am logged in as admin User
     Given an active "Cucumber" Bundle exists
     And the Bundle "Cucumber" has the following games
       |name   |
