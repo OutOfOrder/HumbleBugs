@@ -4,6 +4,8 @@
   .comment {
     @include container;
 
+    width: 98%;
+
     padding: 1ex 1em;
     border: 1px solid $secondary-legend-color;
     @include box-shadow($secondary-legend-color 0px 0px 2px 1px);
