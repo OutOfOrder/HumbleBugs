@@ -1,15 +1,5 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the ApplicationHelper. For example:
-#
-# describe ApplicationHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       helper.concat_strings("this","that").should == "this that"
-#     end
-#   end
-# end
 describe ApplicationHelper do
   describe "select if" do
     it 'returns selected if the passed controller name is current' do
@@ -24,19 +14,41 @@ describe ApplicationHelper do
   end
 
   describe 'label for' do
-    before do
-      @options = [
-          ["Blue", :blue],
-          ["Red", :red],
-      ]
-    end
-    it 'should return the label for a value' do
-      expect(helper.label_for(@options, 'blue')).to eq("Blue")
-      expect(helper.label_for(@options, 'red')).to eq("Red")
+    let(:symbol_options) { [ ["Blue", :blue],  ["Red", :red], ] }
+    let(:integer_options) { [ ['Low', 30], ['Normal', 50], ['High', 70], ] }
+
+    context 'a symbol based option set' do
+      it 'should return the label for a value' do
+        expect(helper.label_for(symbol_options, 'blue')).to eq("Blue")
+        expect(helper.label_for(symbol_options, 'red')).to eq("Red")
+      end
+
+      it 'should return nil if there is no matched value' do
+        expect(helper.label_for(symbol_options, 'green')).to be_nil
+      end
     end
 
-    it 'should return nil if there is no matched value' do
-      expect(helper.label_for(@options, 'green')).to be_nil
+    context 'integer based option set' do
+      it 'should return the label for a value' do
+        expect(helper.label_for(integer_options, 30)).to eq('Low')
+        expect(helper.label_for(integer_options, 50)).to eq('Normal')
+        expect(helper.label_for(integer_options, 70)).to eq('High')
+      end
+
+      it 'should return the previous label if it does not match exactly' do
+        expect(helper.label_for(integer_options, 35)).to eq('Low')
+        expect(helper.label_for(integer_options, 55)).to eq('Normal')
+        expect(helper.label_for(integer_options, 75)).to eq('High')
+      end
+
+      it 'should return nil if there is no previous label' do
+        expect(helper.label_for(integer_options, 25)).to be_nil
+      end
+
+      it 'should not sort the values if sorted option is passed' do
+        expect(integer_options).to_not receive(:sort_by)
+        helper.label_for(integer_options, 25, sorted: true)
+      end
     end
   end
 

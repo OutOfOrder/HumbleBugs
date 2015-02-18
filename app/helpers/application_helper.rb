@@ -26,8 +26,21 @@ module ApplicationHelper
     form.collection_select method, PredefinedTag.with_context(context).order(:name), :name, :name, {}, {multiple: true}
   end
 
-  def label_for options, value
-    options.rassoc(value.to_sym).try(:first)
+  def label_for labels, value, options = {}
+    if value.is_a?(Integer)
+      o = nil
+      labels = labels.sort_by(&:second) unless options[:sorted]
+      labels.each do |l|
+        if value == l.second
+          o = l
+        end
+        break if value <= l.second
+        o = l
+      end
+      o.try(:first)
+    else
+      labels.rassoc(value.to_sym).try(:first)
+    end
   end
 
   def platform_list platforms, separator = ", "
