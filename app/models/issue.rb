@@ -22,10 +22,10 @@ class Issue < ActiveRecord::Base
   ALL_STATUSES = STATUSES.map { |m| m.second }
 
   PRIORITIES = [
-      'Low' => 30,
-      'Normal' => 50,
-      'High' => 70,
-      'Critical' => 90,
+      ['Low', 30],
+      ['Normal', 50],
+      ['High', 70],
+      ['Critical', 90],
   ]
 
   validates :priority, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }

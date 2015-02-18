@@ -1,9 +1,16 @@
 <fieldset class="issue_controller">
   <legend>Issue details</legend>
   <div class="details">
-    <div>
+    <div class="game">
       <b>Game:</b>
       <%= link_to @issue.game.name, @issue.game %>
+    </div>
+
+    <div class="submitted">
+      <b>Submitted:</b>
+      <%= timeago @issue.created_at %>
+      <b>by:</b>
+      <%= gravatar_tag @issue.author, size: 20 %> <%= @issue.author.name %>
     </div>
 
     <div>
@@ -11,14 +18,14 @@
       <%= label_for Issue::STATUSES, @issue.status %>
     </div>
 
+    <div>
+      <b>Priority:</b>
+      <%= label_for Issue::PRIORITIES, @issue.priority, sorted: true %>
+    </div>
+
     <div class="platforms">
       <b>Affected Platforms:</b>
       <%= platform_list @issue.platforms %>
-    </div>
-
-    <div class="submitter">
-      <b>Submitted by:</b>
-      <%= gravatar_tag @issue.author, size: 20 %> <%= @issue.author.name %>
     </div>
 
     <div class="summary">

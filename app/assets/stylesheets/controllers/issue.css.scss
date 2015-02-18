@@ -4,15 +4,24 @@ fieldset.issue_controller {
   div.details {
     @include container;
     > div {
-      @include column($blueprint-grid-columns / 4);
+      @include column($blueprint-grid-columns / 6);
       margin-bottom: 1em;
-      &.platforms {
-        @include column($blueprint-grid-columns / 4 * 2, true);
-      }
-      &.summary {
-        @include column($blueprint-grid-columns / 4 * 3, true);
+
+      &.game {
+        @include column($blueprint-grid-columns / 6);
         height: 25px;
         line-height: 30px;
+      }
+      &.submitted {
+        @include column($blueprint-grid-columns / 6 * 5, true);
+        height: 25px;
+        line-height: 30px;
+      }
+      &.platforms {
+        @include column($blueprint-grid-columns / 6 * 4, true);
+      }
+      &.summary {
+        @include column($blueprint-grid-columns, true);
       }
       &.description {
         @include column($blueprint-grid-columns, true);

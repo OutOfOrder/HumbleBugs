@@ -30,10 +30,17 @@
       <br/>
       <%= f.text_area :description %>
     </div>
-    <div class="field">
-      <%= f.label :status %>
-      <br/>
-      <%= f.select :status, Issue::STATUSES %>
+    <div class="field_row">
+      <div class="field">
+        <%= f.label :status %>
+        <br/>
+        <%= f.select :status, Issue::STATUSES %>
+      </div>
+      <div class="field">
+        <%= f.label :priority %>
+        <br/>
+        <%= f.select :priority, Issue::PRIORITIES %>
+      </div>
     </div>
     <div class="field">
       <%= f.label :platform_list %>

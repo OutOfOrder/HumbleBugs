@@ -191,10 +191,14 @@ form {
     @include column($blueprint-grid-columns - 2);
     @include prepend(1);
   }
-  div {
-    &.field, &.actions {
-      margin-bottom: 1ex;
+  div.field, div.actions {
+    margin-bottom: 1ex;
+  }
+  div.field_row {
+    div.field {
+      @include column($blueprint-grid-columns / 4);
     }
+    @include container;
   }
   #error_explanation {
     max-width: 45em;
