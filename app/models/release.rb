@@ -30,7 +30,7 @@ private
   end
 
   def fixup_url
-    m = /^https:\/\/www\.dropbox\.com\/(.+?)(\?dl=1)?$/.match(self.url)
+    m = /^https:\/\/www\.dropbox\.com\/(.+?)(\?.+)?$/.match(self.url)
     if m
       self.url = "https://dl.dropboxusercontent.com/#{m[1]}?dl=1"
     end
