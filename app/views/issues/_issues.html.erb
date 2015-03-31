@@ -1,5 +1,5 @@
 <% if !defined? show_game then show_game = false end %>
-<table>
+<table class="issues-table">
   <colgroup>
     <col width="10%"/>
     <% if show_game %>
@@ -12,6 +12,9 @@
   </colgroup>
   <thead>
   <tr>
+    <td><input class="fuzzy-search" placeholder="Search"/></td>
+  </tr>
+  <tr>
     <th>ID</th>
     <% if show_game %>
       <th>Game</th>
@@ -23,18 +26,19 @@
     <th>Summary</th>
   </tr>
   </thead>
-
+  <tbody class="list">
   <% issues.each do |issue| %>
     <tr class="issue">
       <td><%= link_to "View ##{issue.id}", [issue.game, issue] %></td>
       <% if show_game %>
-        <td><%= issue.game.name %></td>
+        <td class="game"><%= issue.game.name %></td>
       <% end %>
-      <td><%= timeago issue.updated_at %></td>
-      <td><%= label_for Issue::STATUSES, issue.status %></td>
-      <td><%= label_for Issue::PRIORITIES, issue.priority, sorted: true %></td>
-      <td><%= platform_list issue.platforms %></td>
-      <td><%= issue.summary %></td>
+      <td><%= timeago issue.updated_at %><span class="updated hidden"><%= issue.updated_at.utc.iso8601 %></span></td>
+      <td><%= label_for Issue::STATUSES, issue.status %><span class="status hidden"><%= issue.status %></span> </td>
+      <td class="priority"><%= label_for Issue::PRIORITIES, issue.priority, sorted: true %></td>
+      <td class="platforms"><%= platform_list issue.platforms %></td>
+      <td class="summary"><%= issue.summary %><span class="details hidden"><%= issue.description %></span></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
