@@ -739,6 +739,7 @@ var List = function(id, options, values) {
             self.matchingItems  = [];
             self.searched       = false;
             self.filtered       = false;
+            self.searchColumns  = undefined;
             self.handlers       = { 'updated': [] };
             self.plugins        = {};
             self.helpers        = {
@@ -964,7 +965,9 @@ module.exports = function(list) {
             }
         },
         setColumns: function() {
-            columns = (columns === undefined) ? prepare.toArray(list.items[0].values()) : columns;
+            if (columns == undefined) {
+                columns = (list.searchColumns == undefined) ? prepare.toArray(list.items[0].values()) : list.searchColumns;
+            }
         },
         setSearchString: function(s) {
             s = toString(s).toLowerCase();
