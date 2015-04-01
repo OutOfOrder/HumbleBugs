@@ -19,13 +19,18 @@ class CommentsController < ApplicationController
   # POST /:polymorphic/1/comments.json
   def create
     if @comment.save
-      render
+      @reload = false
+      if params[:commentable]
+        @commentable.update_attributes(params[:commentable])
+        @reload = true
+      end
       if @commentable.is_a?(Issue)
         begin
           IssueMailer.new_comment(@comment).deliver
         rescue NoRecipientsException
         end
       end
+      render
     else
       render action: "error"
     end

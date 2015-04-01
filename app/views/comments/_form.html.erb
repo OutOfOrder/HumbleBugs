@@ -16,5 +16,6 @@
     </div>
     <div class="actions">
       <%= f.submit disable_with: 'Saving...' %>
+      <%= commentable_actions(@commentable, @comment, !@comment.persisted?) %>
     </div>
 <% end %>
