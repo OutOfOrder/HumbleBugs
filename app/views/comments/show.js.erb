@@ -1,1 +1,1 @@
-$('#comment_<%= @comment.id %>').html("<%= escape_javascript render(@comment) %>").find('time.timeago').timeago();
+$('#comment_<%= @comment.id %>').replaceWith("<%= escape_javascript render(@comment) %>").find('time.timeago').timeago();
