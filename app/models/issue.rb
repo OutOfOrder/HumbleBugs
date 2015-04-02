@@ -7,27 +7,13 @@ class Issue < ActiveRecord::Base
 
   acts_as_taggable_on :platforms
 
-  STATUSES = [
-      ['New', :new],
-      ['Waiting on Tester Feedback', :feedback],
-      ['Waiting on Developer', :active],
-      ['Won\'t fix', :suspended],
-      ['Duplicate', :duplicate],
-      ['Invalid', :invalid],
-      ['Fixed', :fixed],
-      ['Verified Fixed', :completed],
-  ]
+  STATUSES = Types::Issue::STATUSES
 
-  OPEN_STATUSES = [:new, :feedback, :active].freeze
-  ALL_STATUSES = STATUSES.map { |m| m.second }.freeze
-  CLOSED_STATUSES = (ALL_STATUSES - OPEN_STATUSES).freeze
+  OPEN_STATUSES = Types::Issue::OPEN_STATUSES
+  ALL_STATUSES = Types::Issue::ALL_STATUSES
+  CLOSED_STATUSES = Types::Issue::CLOSED_STATUSES
 
-  PRIORITIES = [
-      ['Low', 30],
-      ['Normal', 50],
-      ['High', 70],
-      ['Critical', 90],
-  ]
+  PRIORITIES = Types::Issue::PRIORITIES
 
   validates :priority, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 

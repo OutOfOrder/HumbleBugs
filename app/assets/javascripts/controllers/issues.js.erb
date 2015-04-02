@@ -1,7 +1,8 @@
+<% require 'types.rb' %>
 $(function() {
     var STATUSES = {
-        open: <%= Issue::OPEN_STATUSES.as_json %>,
-        closed: <%= Issue::CLOSED_STATUSES.as_json %>
+        open: <%= Types::Issue::OPEN_STATUSES.as_json %>,
+        closed: <%= Types::Issue::CLOSED_STATUSES.as_json %>
     };
     var filterState = {
         status: 'open'
