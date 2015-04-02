@@ -18,8 +18,9 @@ class Issue < ActiveRecord::Base
       ['Verified Fixed', :completed],
   ]
 
-  OPEN_STATUSES = [:new, :feedback, :active]
-  ALL_STATUSES = STATUSES.map { |m| m.second }
+  OPEN_STATUSES = [:new, :feedback, :active].freeze
+  ALL_STATUSES = STATUSES.map { |m| m.second }.freeze
+  CLOSED_STATUSES = (ALL_STATUSES - OPEN_STATUSES).freeze
 
   PRIORITIES = [
       ['Low', 30],

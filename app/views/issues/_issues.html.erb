@@ -12,7 +12,14 @@
   </colgroup>
   <thead>
   <tr>
-    <td><input class="fuzzy-search" placeholder="Search"/></td>
+    <td colspan="4">
+      <input class="fuzzy-search" placeholder="Search"/>
+      <div class="status_filter buttonset">
+        <label class="button"><input type="radio" name="status_filter" value=""><span>All</span></label>
+        <label class="button"><input type="radio" name="status_filter" value="open"><span>Open</span></label>
+        <label class="button"><input type="radio" name="status_filter" value="closed"><span>Closed</span></label>
+      </div>
+    </td>
   </tr>
   <tr>
     <th>ID</th>
