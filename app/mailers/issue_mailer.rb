@@ -19,7 +19,8 @@ class IssueMailer < ActionMailer::Base
     if recipients.blank?
       raise NoRecipientsException.new
     end
-    mail bcc: recipients
+    mail bcc: recipients,
+        subject: default_i18n_subject({summary: @issue.summary})
   end
 
   def new_comment(comment)
@@ -45,6 +46,7 @@ class IssueMailer < ActionMailer::Base
     if recipients.blank?
       raise NoRecipientsException.new
     end
-    mail bcc: recipients
+    mail bcc: recipients,
+         subject: default_i18n_subject({summary: @issue.summary})
   end
 end

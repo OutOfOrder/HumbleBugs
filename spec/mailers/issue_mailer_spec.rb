@@ -6,7 +6,8 @@ describe IssueMailer do
       game = FactoryGirl.create :game, :with_developer
       issue = FactoryGirl.create(:issue, game: game)
       mail = IssueMailer.new_issue(issue)
-      expect(mail.subject).to eq("New HumbleBugs issue")
+      expect(mail.subject).to match(/HumbleBugs issue/)
+      expect(mail.subject).to match(/Issue Summary/)
       expect(mail.from).to eq(["myfromaddress@example.com"])
     end
 
@@ -30,7 +31,8 @@ describe IssueMailer do
     it "renders the headers" do
       comment = FactoryGirl.create(:comment)
       mail = IssueMailer.new_comment(comment)
-      expect(mail.subject).to eq("New HumbleBugs comment")
+      expect(mail.subject).to match(/HumbleBugs comment/)
+      expect(mail.subject).to match(/Issue Summary/)
       expect(mail.from).to eq(["myfromaddress@example.com"])
     end
 

@@ -36,9 +36,9 @@ en:
       subject: "HumbleBugs feedback"
   issue_mailer:
     new_issue:
-      subject: "New HumbleBugs issue"
+      subject: "HumbleBugs issue: %{summary}"
     new_comment:
-      subject: "New HumbleBugs comment"
+      subject: "HumbleBugs comment: %{summary}"
 
   dashboard_controller:
     widgets:
