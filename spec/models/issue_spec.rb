@@ -6,10 +6,10 @@ describe Issue do
     describe '#open' do
       it 'should return issues in the open states' do
         open_issues = []
-        Issue::OPEN_STATUSES.each do |status|
+        Types::Issue::OPEN_STATUSES.each do |status|
           open_issues << FactoryGirl.create(:issue, game: game, status: status.to_s)
         end
-        (Issue::ALL_STATUSES - Issue::OPEN_STATUSES).each do |status|
+        (Types::Issue::ALL_STATUSES - Types::Issue::OPEN_STATUSES).each do |status|
           FactoryGirl.create(:issue, game: game, status: status.to_s)
         end
 

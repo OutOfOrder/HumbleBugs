@@ -84,7 +84,9 @@ module Types
   module PredefinedTag
     CONTEXTS = [
         ['Platforms', :platforms],
-    ].freeze
+    ]
+    CONTEXTS << ['Test', :testing] if Rails.env.test?
+    CONTEXTS.freeze
 
     ALL_CONTEXTS = CONTEXTS.map { |m| m.second }.freeze
   end

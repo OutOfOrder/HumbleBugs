@@ -24,7 +24,7 @@ describe :user do
       expect(bundle).to be_allowed_to :read
     end
 
-    Bundle::STATES.each do |s|
+    Types::Bundle::STATES.each do |s|
       next if s.last == :active
       it "should not be able to read bundles in the #{s.last} state" do
         bundle = FactoryGirl.create :bundle, state: s.last.to_s
@@ -74,7 +74,7 @@ describe :user do
       expect(@user.developer).to be_blank
       expect(game).not_to be_allowed_to :read
     end
-    Bundle::STATES.each do |s|
+    Types::Bundle::STATES.each do |s|
       next if s.last == :active
       it 'should not be able to read those that are in an #{s.last} bundle' do
         bundle = FactoryGirl.create :bundle, state: s.last.to_s

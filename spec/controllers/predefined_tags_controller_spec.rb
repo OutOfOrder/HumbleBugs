@@ -16,12 +16,11 @@ describe PredefinedTagsController do
 
   describe "GET complete" do
     it "assigns all predefined_tags within a context as @predefined_tags" do
-      # Fudge a fake context for this test
-      PredefinedTag::CONTEXTS << ['Test', :tests]
+      context = Types::PredefinedTag::ALL_CONTEXTS.last.to_s
 
       FactoryGirl.create(:predefined_tag)
-      predefined_tags = FactoryGirl.create_list(:predefined_tag, 2, :context => "tests")
-      get_with @user, :complete, { :context => 'tests' }
+      predefined_tags = FactoryGirl.create_list(:predefined_tag, 2, :context => context)
+      get_with @user, :complete, { :context => context }
       expect(assigns(:predefined_tags)).to eq(predefined_tags)
     end
   end
