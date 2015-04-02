@@ -20,7 +20,7 @@ class IssueMailer < ActionMailer::Base
       raise NoRecipientsException.new
     end
     mail bcc: recipients,
-        subject: default_i18n_subject({summary: @issue.summary})
+        subject: default_i18n_subject(summary: @issue.summary, issue_id: @issue.id)
   end
 
   def new_comment(comment)
@@ -47,6 +47,6 @@ class IssueMailer < ActionMailer::Base
       raise NoRecipientsException.new
     end
     mail bcc: recipients,
-         subject: default_i18n_subject({summary: @issue.summary})
+         subject: default_i18n_subject(summary: @issue.summary, issue_id: @issue.id)
   end
 end

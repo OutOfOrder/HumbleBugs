@@ -4,6 +4,9 @@ HumbleBugs User,
 
 <%= game_issue_url(@issue.game, @issue, anchor: "comment_#{@comment.id}") %>
 
+Issue Summary:
+<%= @issue.summary %>
+
 Comment:
 
 <%= @comment.comment %>

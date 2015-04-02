@@ -8,7 +8,7 @@ describe UserMailer do
     end
 
     it "renders the headers" do
-      expect(@mail.subject).to eq("Reset your HumbleBugs account password")
+      expect(@mail.subject).to match(/Reset your account password/)
       expect(@mail.to).to eq([@user.email])
       expect(@mail.from).to eq(["myfromaddress@example.com"])
     end
@@ -25,7 +25,7 @@ describe UserMailer do
     end
 
     it "renders the headers" do
-      expect(@mail.subject).to eq("Confirm your HumbleBugs account")
+      expect(@mail.subject).to match(/Confirm your account/)
       expect(@mail.to).to eq([@user.email])
       expect(@mail.from).to eq(["myfromaddress@example.com"])
     end
@@ -42,7 +42,7 @@ describe UserMailer do
     end
 
     it "renders the headers" do
-      expect(@mail.subject).to eq("New HumbleBugs account registered")
+      expect(@mail.subject).to eq(/New account registered/)
       expect(@mail.to).to eq(['feedback@example.com'])
       expect(@mail.from).to eq(["myfromaddress@example.com"])
     end

@@ -5,6 +5,9 @@ A new issue has been created by <%= @issue.author.name %> for <%= @issue.game.na
 The summary is:
 <%= @issue.summary %>
 
+Description:
+<%= @issue.description %>
+
 Follow this link to view the issue
 
 <%= game_issue_url(@issue.game, @issue) %>

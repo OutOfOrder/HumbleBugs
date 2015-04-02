@@ -26,19 +26,19 @@ en:
 
   user_mailer:
     password_reset:
-      subject: "Reset your HumbleBugs account password"
+      subject: "[HumbleBugs] Reset your account password"
     confirm_account:
-      subject: "Confirm your HumbleBugs account"
+      subject: "[HumbleBugs] Confirm your account"
     new_account:
-      subject: "New HumbleBugs account registered"
+      subject: "[HumbleBugs] New account registered - %{email}"
   feedback_mailer:
     submit_feedback:
-      subject: "HumbleBugs feedback"
+      subject: "[HumbleBugs] Feedback"
   issue_mailer:
     new_issue:
-      subject: "HumbleBugs issue: %{summary}"
+      subject: "[HumbleBugs] # %{issue_id}: %{summary}"
     new_comment:
-      subject: "HumbleBugs comment: %{summary}"
+      subject: "[HumbleBugs] # %{issue_id}: %{summary}"
 
   dashboard_controller:
     widgets:

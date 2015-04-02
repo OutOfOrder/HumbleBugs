@@ -9,7 +9,7 @@ describe FeedbackMailer do
     end
 
     it "renders the headers" do
-      expect(@mail.subject).to eq("HumbleBugs feedback")
+      expect(@mail.subject).to match(/Feedback/)
       expect(@mail.to).to eq(['feedback@example.com'])
       expect(@mail.from).to eq(["myfromaddress@example.com"])
     end

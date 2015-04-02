@@ -19,6 +19,7 @@ class UserMailer < ActionMailer::Base
   def new_account(user)
     @user = user
 
-    mail to: ENV['FEEDBACK_EMAIL'] || 'feedback@example.com'
+    mail to: ENV['FEEDBACK_EMAIL'] || 'feedback@example.com',
+         subject: default_i18n_subject(email: @user.email)
   end
 end
