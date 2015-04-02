@@ -41,8 +41,7 @@ a.button {
   @include button-hover-colors;
   @include button-active-colors;
 }
-input[type="submit"],
-    button
+input[type="submit"], button
 {
   @include button-button;
   @include button-colors;
@@ -50,7 +49,7 @@ input[type="submit"],
   @include button-active-colors;
 }
 
-a.button, input[type="submit"], button {
+@mixin humblebugs-button-colors {
   @include background-image(linear-gradient(#049cdb, #0064cd));
   @include border-radius;
   @include box-shadow(inset 0 1px 0 rgba(255,55,255,0.2), 0 1px 2px rgba(0, 0, 0, 0.05));
@@ -61,6 +60,56 @@ a.button, input[type="submit"], button {
     color: white;
     border-color: #0064cd #0064cd #003f81;
     background: #0064cd;
+  }
+}
+
+a.button, input[type="submit"], button {
+  @include humblebugs-button-colors;
+}
+
+label.button {
+  input[type="checkbox"],input[type="radio"] {
+    display: none;
+    &:checked + span {
+      background: #04b0cd;
+    }
+  }
+  > span {
+    @include button-button;
+    @include button-colors;
+    @include button-hover-colors;
+    @include button-active-colors;
+    @include humblebugs-button-colors;
+
+    padding-top: 5px;
+    padding-bottom: 4px;
+  }
+}
+
+.buttonset {
+  margin-left: 1em;
+  @include inline-block;
+  a.button, button {
+    margin-right: -.3em;
+    &:not(:first-child) {
+      @include border-left-radius(0);
+    }
+    &:not(:last-child) {
+      @include border-right-radius(0);
+      border-right: none;
+    }
+  }
+  label.button {
+    > span {
+      margin-right: -.3em;
+    }
+    &:not(:first-child) > span {
+      @include border-left-radius(0);
+    }
+    &:not(:last-child) > span {
+      @include border-right-radius(0);
+      border-right: none;
+    }
   }
 }
 
