@@ -42,7 +42,7 @@ describe UserMailer do
     end
 
     it "renders the headers" do
-      expect(@mail.subject).to eq(/New account registered/)
+      expect(@mail.subject).to match(/New account registered/)
       expect(@mail.to).to eq(['feedback@example.com'])
       expect(@mail.from).to eq(["myfromaddress@example.com"])
     end
