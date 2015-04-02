@@ -1,17 +1,12 @@
-<% require 'types.rb' %>
 $(function() {
-    var STATUSES = {
-        open: <%= Types::Issue::OPEN_STATUSES.as_json %>,
-        closed: <%= Types::Issue::CLOSED_STATUSES.as_json %>
-    };
     var filterState = {
         status: 'open'
     };
     var filters = {
         status: function(item) {
             if (filterState.status == '') return true;
-            if (filterState.status in STATUSES) {
-                return (STATUSES[filterState.status].indexOf(item.values()['status']) != -1);
+            if (filterState.status in Types.Issue.STATUSES) {
+                return (Types.Issue.STATUSES[filterState.status].indexOf(item.values()['status']) != -1);
             } else {
                 return item.values()['status'] == filterState.status;
             }

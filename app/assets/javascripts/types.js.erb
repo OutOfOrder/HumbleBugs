@@ -1,0 +1,38 @@
+<% require 'types.rb' %>
+var Types = {
+    Bundle: {
+        STATES: {
+            all: <%= Types::Bundle::ALL_STATES.as_json %>
+        }
+    },
+    Game: {
+        STATES: {
+            all: <%= Types::Game::ALL_STATES.as_json %>
+        }
+    },
+    Port: {
+        STATES: {
+            all: <%= Types::Port::ALL_STATES.as_json %>
+        }
+    },
+    Issue: {
+        STATUSES: {
+            all: <%= Types::Issue::ALL_STATUSES.as_json %>,
+            open: <%= Types::Issue::OPEN_STATUSES.as_json %>,
+            closed: <%= Types::Issue::CLOSED_STATUSES.as_json %>
+        },
+        PRIORITIES: {
+            all: <%= Types::Issue::ALL_PRIORITIES.as_json %>
+        }
+    },
+    Release: {
+        STATUSES: {
+            all: <%= Types::Release::ALL_STATUSES.as_json %>
+        }
+    },
+    TestResult: {
+        RATINGS: {
+            all: <%= Types::TestResult::ALL_RATINGS.as_json %>
+        }
+    }
+};
