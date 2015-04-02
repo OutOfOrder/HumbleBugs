@@ -12,12 +12,18 @@
   </colgroup>
   <thead>
   <tr>
-    <td colspan="4">
+    <td colspan="6">
       <input class="fuzzy-search" placeholder="Search"/>
-      <div class="status_filter buttonset">
+      <div class="status_filter buttonset" title="Filter by status">
         <label class="button"><input type="radio" name="status_filter" value=""><span>All</span></label>
         <label class="button"><input type="radio" name="status_filter" value="open"><span>Open</span></label>
         <label class="button"><input type="radio" name="status_filter" value="closed"><span>Closed</span></label>
+      </div>
+      <div class="priority_filter buttonset" title="Filter by priority">
+        <label class="button"><input type="radio" name="priority_filter" value="-1"><span>All</span></label>
+        <% Types::Issue::PRIORITIES.each do |p| %>
+            <label class="button"><input type="radio" name="priority_filter" value="<%= p.second %>"><span><%= p.first %></span></label>
+        <% end %>
       </div>
     </td>
   </tr>
@@ -42,9 +48,9 @@
       <% end %>
       <td><%= timeago issue.updated_at %><span class="updated hidden"><%= issue.updated_at.utc.iso8601 %></span></td>
       <td><%= label_for Types::Issue::STATUSES, issue.status %><span class="status hidden"><%= issue.status %></span> </td>
-      <td class="priority"><%= label_for Types::Issue::PRIORITIES, issue.priority, sorted: true %></td>
+      <td><%= label_for Types::Issue::PRIORITIES, issue.priority, sorted: true %><span class="priority hidden"><%= issue.priority %></span></td>
       <td class="platforms"><%= platform_list issue.platforms %></td>
-      <td class="summary"><%= issue.summary %><span class="details hidden"><%= issue.description %></span></td>
+      <td><span class="summary"><%= issue.summary %></span><span class="details hidden"><%= issue.description %></span></td>
     </tr>
   <% end %>
   </tbody>

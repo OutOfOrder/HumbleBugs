@@ -12,6 +12,7 @@
  *= require main
  *= require jquery-ui/resizable
  *= require jquery-ui/dialog
+ *= require jquery-ui/tooltip
  *= require select2
  *= require jquery.jgrowl
  *= require_tree ./controllers

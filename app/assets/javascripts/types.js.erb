@@ -21,9 +21,7 @@ var Types = {
             open: <%= Types::Issue::OPEN_STATUSES.as_json %>,
             closed: <%= Types::Issue::CLOSED_STATUSES.as_json %>
         },
-        PRIORITIES: {
-            all: <%= Types::Issue::ALL_PRIORITIES.as_json %>
-        }
+        PRIORITIES: <%= Types::Issue::ALL_PRIORITIES.sort.reverse.as_json %>
     },
     Release: {
         STATUSES: {

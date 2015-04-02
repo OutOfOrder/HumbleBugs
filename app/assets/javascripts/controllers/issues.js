@@ -1,6 +1,7 @@
 $(function() {
     var filterState = {
-        status: 'open'
+        status: 'open',
+        priority: -1
     };
     var filters = {
         status: function(item) {
@@ -10,6 +11,22 @@ $(function() {
             } else {
                 return item.values()['status'] == filterState.status;
             }
+        },
+        priority: function(item) {
+            if (filterState.priority == -1) return true;
+
+            var i, max_priority = 100;
+            for (i = 0; i < Types.Issue.PRIORITIES.length; ++i) {
+                if (filterState.priority < Types.Issue.PRIORITIES[i]) {
+                    max_priority = Types.Issue.PRIORITIES[i];
+                } else {
+                    break;
+                }
+            }
+
+            var priority = parseInt(item.values()['priority']);
+
+            return priority >= filterState.priority && priority < max_priority;
         }
     };
     function filterFunc(item) {
@@ -35,5 +52,9 @@ $(function() {
             filterState.status = $(this).val();
             listjs.filter(filterFunc);
         }).find('input[value="'+filterState.status+'"]').prop('checked', true);
+        $(this).find('.priority_filter').on('change', 'input', function() {
+            filterState.priority = parseInt($(this).val());
+            listjs.filter(filterFunc);
+        }).find('input[value="'+filterState.priority+'"]').prop('checked', true);
     });
 });
