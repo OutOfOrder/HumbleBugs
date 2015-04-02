@@ -8,6 +8,8 @@ module Types
         ['Active', :active],
         ['Completed', :completed]
     ].freeze
+
+    ALL_STATES = STATES.map { |m| m.second }.freeze
   end
 
   module Game
@@ -18,6 +20,8 @@ module Types
         ['QA Testing', :testing],
         ['Completed', :completed]
     ].freeze
+
+    ALL_STATES = STATES.map { |m| m.second }.freeze
   end
 
   module Port
@@ -26,23 +30,8 @@ module Types
         ['In Development', :development],
         ['Completed', :completed]
     ].freeze
-  end
 
-  module Release
-    STATUSES = [
-        ['Active', :active],
-        ['Obsolete', :obsolete],
-        ['Retired', :retired]
-    ].freeze
-  end
-
-  module TestResult
-    RATINGS = [
-        ['Does not run', :does_not_run],
-        ['Poor', :poor],
-        ['Good',:good],
-        ['Excellent', :excellent],
-    ].freeze
+    ALL_STATES = STATES.map { |m| m.second }.freeze
   end
 
   module Issue
@@ -57,8 +46,8 @@ module Types
         ['Verified Fixed', :completed],
     ].freeze
 
-    OPEN_STATUSES = [:new, :feedback, :active].freeze
     ALL_STATUSES = STATUSES.map { |m| m.second }.freeze
+    OPEN_STATUSES = [:new, :feedback, :active].freeze
     CLOSED_STATUSES = (ALL_STATUSES - OPEN_STATUSES).freeze
 
     PRIORITIES = [
@@ -67,5 +56,36 @@ module Types
         ['High', 70],
         ['Critical', 90],
     ].freeze
+
+    ALL_PRIORITIES = PRIORITIES.map { |m| m.second }.freeze
+  end
+
+  module Release
+    STATUSES = [
+        ['Active', :active],
+        ['Obsolete', :obsolete],
+        ['Retired', :retired]
+    ].freeze
+
+    ALL_STATUSES = STATUSES.map { |m| m.second }.freeze
+  end
+
+  module TestResult
+    RATINGS = [
+        ['Does not run', :does_not_run],
+        ['Poor', :poor],
+        ['Good',:good],
+        ['Excellent', :excellent],
+    ].freeze
+
+    ALL_RATINGS = RATINGS.map { |m| m.second }.freeze
+  end
+
+  module PredefinedTag
+    CONTEXTS = [
+        ['Platforms', :platforms],
+    ].freeze
+
+    ALL_CONTEXTS = CONTEXTS.map { |m| m.second }.freeze
   end
 end
