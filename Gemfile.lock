@@ -1,3 +1,12 @@
+GIT
+  remote: git@github.com:circleci/rspec_junit_formatter.git
+  revision: 7b098c8ab2ac5e5f78190b51629ed6d67a9de4d1
+  specs:
+    rspec_junit_formatter (0.2.0)
+      builder (< 4)
+      rspec (>= 2, < 4)
+      rspec-core (!= 2.12.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -137,6 +146,10 @@ GEM
     rake (10.4.2)
     rdoc (3.12.2)
       json (~> 1.4)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
     rspec-core (3.2.0)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
@@ -216,6 +229,7 @@ DEPENDENCIES
   rails (= 3.2.21)
   rails_12factor
   rspec-rails
+  rspec_junit_formatter!
   sass (~> 3.2.7)
   sass-rails (~> 3.2.3)
   simplecov
