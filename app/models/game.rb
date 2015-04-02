@@ -12,7 +12,7 @@ class Game < ActiveRecord::Base
   STATES = Types::Game::STATES
 
   validates_presence_of :name, :state, :description
-  validates_inclusion_of :state, :in => STATES.map { |m| m.second.to_s }, :message => "%{value} is not a valid state"
+  validates_inclusion_of :state, :in => Types::Game::ALL_STATES.map(&:to_s), :message => "%{value} is not a valid state"
 
   def to_param
     "#{id}-#{name.parameterize}"

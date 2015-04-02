@@ -12,7 +12,7 @@
 <% @predefined_tags.each do |predefined_tag| %>
   <tr>
     <td><%= predefined_tag.name %></td>
-    <td><%= label_for PredefinedTag::CONTEXTS, predefined_tag.context %></td>
+    <td><%= label_for Types::PredefinedTag::CONTEXTS, predefined_tag.context %></td>
     <td><%= link_to 'Show', predefined_tag %></td>
     <td><%= link_to 'Edit', edit_predefined_tag_path(predefined_tag) if permitted_to? :edit, predefined_tag %></td>
     <% permitted_to? :delete, predefined_tag do %>

@@ -19,7 +19,7 @@
     </div>
       <div class="field">
       <%= f.label :context %><br />
-      <%= f.select :context, PredefinedTag::CONTEXTS %>
+      <%= f.select :context, Types::PredefinedTag::CONTEXTS %>
     </div>
       <div class="actions">
       <%= f.submit disable_with: 'Saving...' %>

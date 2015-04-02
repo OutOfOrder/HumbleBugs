@@ -31,7 +31,7 @@
     <div class="field">
       <%= f.label :state %>
       <br/>
-      <%= f.select :state, Bundle::STATES %>
+      <%= f.select :state, Types::Bundle::STATES %>
     </div>
     <div class="actions">
       <%= f.submit disable_with: 'Saving...' %>

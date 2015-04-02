@@ -15,7 +15,7 @@
           <td><%= link_to bundle.name, bundle %></td>
           <td><%= timeago bundle.target_date if bundle.target_date.present? %></td>
           <td><%= bundle.description %></td>
-          <td><%= label_for Bundle::STATES, bundle.state %></td>
+          <td><%= label_for Types::Bundle::STATES, bundle.state %></td>
         </tr>
     <% end %>
   </table>

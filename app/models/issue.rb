@@ -7,20 +7,12 @@ class Issue < ActiveRecord::Base
 
   acts_as_taggable_on :platforms
 
-  STATUSES = Types::Issue::STATUSES
-
-  OPEN_STATUSES = Types::Issue::OPEN_STATUSES
-  ALL_STATUSES = Types::Issue::ALL_STATUSES
-  CLOSED_STATUSES = Types::Issue::CLOSED_STATUSES
-
-  PRIORITIES = Types::Issue::PRIORITIES
-
   validates :priority, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
   validates_presence_of :status, :description, :summary, :game_id, :author_id
-  validates_inclusion_of :status, :in => ALL_STATUSES.map(&:to_s), :message => "%{value} is not a valid status"
+  validates_inclusion_of :status, :in => Types::Issue::ALL_STATUSES.map(&:to_s), :message => "%{value} is not a valid status"
 
   def self.open
-    where(status: OPEN_STATUSES)
+    where(status: Types::Issue::OPEN_STATUSES)
   end
 end

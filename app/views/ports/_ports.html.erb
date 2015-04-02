@@ -16,7 +16,7 @@
         <td><%= port.game.name %></td>
       <% end %>
       <td><%= platform_list port.platforms %></td>
-      <td><%= label_for Port::STATES, port.state %></td>
+      <td><%= label_for Types::Port::STATES, port.state %></td>
       <% if !defined?(without) || !without.include?(:developer) %>
         <td><%= port.developer.try(:name) || '(Unassigned)' %></td>
       <% end %>

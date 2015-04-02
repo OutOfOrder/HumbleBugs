@@ -7,11 +7,9 @@ class Release < ActiveRecord::Base
 
   acts_as_taggable_on :platforms
 
-  STATUSES = Types::Release::STATUSES
-
   validate :valid_checksum_length
   validates_format_of :checksum, allow_blank: true, with: /^[a-fA-F0-9]+$/, message: 'contains invalid MD5 or SHA1 characters'
-  validates_inclusion_of :status, :in => STATUSES.map { |m| m.second.to_s }, :message => "%{value} is not a valid status"
+  validates_inclusion_of :status, :in => Types::Release::ALL_STATUSES.map(&:to_s), :message => "%{value} is not a valid status"
   validates_presence_of :game_id, :owner_id, :version, :url, :status
 
   before_save :fixup_url

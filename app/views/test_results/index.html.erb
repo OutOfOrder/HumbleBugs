@@ -12,7 +12,7 @@
       <tr title="<%= tr.comments %>">
         <td><%= tr.user.name %></td>
         <td><%= tr.system.try(:name) || '(System Removed)' %></td>
-        <td><%= label_for TestResult::RATINGS, tr.rating %></td>
+        <td><%= label_for Types::TestResult::RATINGS, tr.rating %></td>
         <td><%= platform_list tr.system.try(:platforms) %></td>
         <td>
           <%= link_to 'Edit', edit_test_result_path(tr), remote: true if permitted_to? :edit, tr %>

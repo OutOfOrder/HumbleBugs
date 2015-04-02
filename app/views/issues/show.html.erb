@@ -15,12 +15,12 @@
 
     <div>
       <b>Status:</b>
-      <%= label_for Issue::STATUSES, @issue.status %>
+      <%= label_for Types::Issue::STATUSES, @issue.status %>
     </div>
 
     <div>
       <b>Priority:</b>
-      <%= label_for Issue::PRIORITIES, @issue.priority, sorted: true %>
+      <%= label_for Types::Issue::PRIORITIES, @issue.priority, sorted: true %>
     </div>
 
     <div class="platforms">

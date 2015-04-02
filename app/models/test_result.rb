@@ -7,8 +7,6 @@ class TestResult < ActiveRecord::Base
 
   validates_presence_of :user_id, :system_id, :release_id
 
-  RATINGS = Types::TestResult::RATINGS
-
-  validates_inclusion_of :rating, :in => RATINGS.map { |m| m.second.to_s }, :message => "%{value} is not a valid rating"
+  validates_inclusion_of :rating, :in => Types::TestResult::ALL_RATINGS.map(&:to_s), :message => "%{value} is not a valid rating"
   validates_uniqueness_of :system_id, :scope => [:release_id]
 end

@@ -23,7 +23,7 @@
   <% games.each do |game| %>
       <tr class="game">
         <td><%= link_to game.name, game %></td>
-        <td><%= label_for Game::STATES, game.state %></td>
+        <td><%= label_for Types::Game::STATES, game.state %></td>
         <% if !defined?(without) || !without.include?(:developer) %>
           <td><%= developer_link(game.developer) %></td>
         <% end %>

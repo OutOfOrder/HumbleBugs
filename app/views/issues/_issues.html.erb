@@ -41,8 +41,8 @@
         <td class="game"><%= issue.game.name %></td>
       <% end %>
       <td><%= timeago issue.updated_at %><span class="updated hidden"><%= issue.updated_at.utc.iso8601 %></span></td>
-      <td><%= label_for Issue::STATUSES, issue.status %><span class="status hidden"><%= issue.status %></span> </td>
-      <td class="priority"><%= label_for Issue::PRIORITIES, issue.priority, sorted: true %></td>
+      <td><%= label_for Types::Issue::STATUSES, issue.status %><span class="status hidden"><%= issue.status %></span> </td>
+      <td class="priority"><%= label_for Types::Issue::PRIORITIES, issue.priority, sorted: true %></td>
       <td class="platforms"><%= platform_list issue.platforms %></td>
       <td class="summary"><%= issue.summary %><span class="details hidden"><%= issue.description %></span></td>
     </tr>

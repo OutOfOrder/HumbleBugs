@@ -34,12 +34,12 @@
       <div class="field">
         <%= f.label :status %>
         <br/>
-        <%= f.select :status, Issue::STATUSES %>
+        <%= f.select :status, Types::Issue::STATUSES %>
       </div>
       <div class="field">
         <%= f.label :priority %>
         <br/>
-        <%= f.select :priority, Issue::PRIORITIES %>
+        <%= f.select :priority, Types::Issue::PRIORITIES %>
       </div>
     </div>
     <div class="field">
