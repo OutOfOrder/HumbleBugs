@@ -7,11 +7,7 @@ class Release < ActiveRecord::Base
 
   acts_as_taggable_on :platforms
 
-  STATUSES = [
-      ['Active', :active],
-      ['Obsolete', :obsolete],
-      ['Retired', :retired]
-  ]
+  STATUSES = Types::Release::STATUSES
 
   validate :valid_checksum_length
   validates_format_of :checksum, allow_blank: true, with: /^[a-fA-F0-9]+$/, message: 'contains invalid MD5 or SHA1 characters'

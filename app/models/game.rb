@@ -9,13 +9,7 @@ class Game < ActiveRecord::Base
 
   scope :testing, where(:state => :testing)
 
-  STATES = [
-      ['Prospective', :prospective],
-      ['Planned', :planned],
-      ['In Development', :development],
-      ['QA Testing', :testing],
-      ['Completed', :completed]
-  ]
+  STATES = Types::Game::STATES
 
   validates_presence_of :name, :state, :description
   validates_inclusion_of :state, :in => STATES.map { |m| m.second.to_s }, :message => "%{value} is not a valid state"

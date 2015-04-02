@@ -4,11 +4,7 @@ class Port < ActiveRecord::Base
 
   acts_as_taggable_on :platforms
 
-  STATES = [
-      ['Planned', :planned],
-      ['In Development', :development],
-      ['Completed', :completed]
-  ]
+  STATES = Types::Port::STATES
 
   validates_presence_of :game_id, :state
   validates_inclusion_of :state, :in => STATES.map { |m| m.second.to_s }, :message => "state %{value} is not a valid state"

@@ -1,4 +1,50 @@
 module Types
+
+  module Bundle
+    STATES = [
+        ['Planned', :planned],
+        ['In Development', :development],
+        ['Pending Release', :pending],
+        ['Active', :active],
+        ['Completed', :completed]
+    ].freeze
+  end
+
+  module Game
+    STATES = [
+        ['Prospective', :prospective],
+        ['Planned', :planned],
+        ['In Development', :development],
+        ['QA Testing', :testing],
+        ['Completed', :completed]
+    ].freeze
+  end
+
+  module Port
+    STATES = [
+        ['Planned', :planned],
+        ['In Development', :development],
+        ['Completed', :completed]
+    ].freeze
+  end
+
+  module Release
+    STATUSES = [
+        ['Active', :active],
+        ['Obsolete', :obsolete],
+        ['Retired', :retired]
+    ].freeze
+  end
+
+  module TestResult
+    RATINGS = [
+        ['Does not run', :does_not_run],
+        ['Poor', :poor],
+        ['Good',:good],
+        ['Excellent', :excellent],
+    ].freeze
+  end
+
   module Issue
     STATUSES = [
         ['New', :new],
