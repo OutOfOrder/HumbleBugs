@@ -1,3 +1,18 @@
-$('#release_<%= @release.id %>_test_results')
-        .html("<%= escape_javascript render template: 'test_results/index.html' %>")
-        .slideDown();
+var content = "<%= escape_javascript render template: 'test_results/index.html' %>";
+var $testResults = $('#test_results_list');
+console.log($testResults);
+if ($testResults.length > 0) {
+    $testResults.html(content);
+} else {
+    $("<div id=\"test_results_list\"%>"+content+"</div>").dialog({
+        modal: true,
+        title: 'Test Results',
+        width: '40em',
+        buttons: [
+            { text: 'Dismiss', click: function() { $(this).dialog('close'); }}
+        ],
+        close: function () {
+            $(this).remove();
+        }
+    });
+}

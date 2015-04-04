@@ -2,6 +2,7 @@ $("<div id=\"test_results_dialog\"><%= escape_javascript render 'form' %></div>"
     modal:true,
     title:'New test result',
     width: '40em',
+    closeOnEscape: false,
     close:function () {
         $(this).remove();
     }
