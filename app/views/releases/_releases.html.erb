@@ -9,11 +9,14 @@
   <tr>
     <td colspan="6">
       <input class="fuzzy-search" placeholder="Search"/>
+
       <div class="status_filter buttonset" title="Filter by status">
         <% available_release_statuses(game).each do |p| %>
             <label class="button"><input type="radio" name="release_status_filter" value="<%= p.second %>"><span><%= p.first %></span></label>
         <% end %>
       </div>
+
+      <%= collection_select '', 'platform_filter', predefined_tag_list('platforms'), :name, :name, {include_blank: 'All platforms'}, {class:'platform_filter'} %>
     </td>
   </tr>
   <tr class="header">

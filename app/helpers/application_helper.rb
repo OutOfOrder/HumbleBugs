@@ -22,8 +22,12 @@ module ApplicationHelper
     end
   end
 
+  def predefined_tag_list(context)
+    PredefinedTag.with_context(context).order(:name)
+  end
+
   def tag_select form, method, context
-    form.collection_select method, PredefinedTag.with_context(context).order(:name), :name, :name, {}, {multiple: true}
+    form.collection_select method, predefined_tag_list(context), :name, :name, {}, {multiple: true}
   end
 
   def label_for labels, value, options = {}

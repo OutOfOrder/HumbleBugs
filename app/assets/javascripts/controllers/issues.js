@@ -1,7 +1,8 @@
 $(function() {
     var filterState = {
         status: 'open',
-        priority: -1
+        priority: -1,
+        platform: ''
     };
     var filters = {
         status: function(item) {
@@ -27,6 +28,11 @@ $(function() {
             var priority = parseInt(item.values()['priority']);
 
             return priority >= filterState.priority && priority < max_priority;
+        },
+        platform: function(item) {
+            if (filterState.platform == '') return true;
+            var plats = item.values()['platforms'].split(/\s*,\s*/);
+            return (plats.indexOf(filterState.platform) != -1);
         }
     };
     function filterFunc(item) {
@@ -38,6 +44,7 @@ $(function() {
     }
 
     $('table.issues-table').each(function() {
+        var $this = $(this);
         var listjs = new List(this, {
             valueNames: ['game','updated','status','priority','platforms','summary','details'],
             searchColumns: ['game','summary','details'],
@@ -45,16 +52,23 @@ $(function() {
                 ListFuzzySearch()
             ]
         });
-        $(this).data('listjs', listjs);
-        listjs.filter(filterFunc);
+        $this.data('listjs', listjs);
 
-        $(this).find('.status_filter').on('change', 'input', function() {
+        $this.find('.status_filter').on('change', 'input', function() {
             filterState.status = $(this).val();
             listjs.filter(filterFunc);
         }).find('input[value="'+filterState.status+'"]').prop('checked', true);
-        $(this).find('.priority_filter').on('change', 'input', function() {
+        $this.find('.priority_filter').on('change', 'input', function() {
             filterState.priority = parseInt($(this).val());
             listjs.filter(filterFunc);
         }).find('input[value="'+filterState.priority+'"]').prop('checked', true);
+
+        $this.find('select.platform_filter').on('change', function() {
+            filterState.platform = $(this).select2('val');
+            listjs.filter(filterFunc);
+        });
+        filterState.platform = $this.find('select.platform_filter').val();
+
+        listjs.filter(filterFunc);
     });
 });
