@@ -1,1 +1,1 @@
-$('#comment_<%= @comment.id %>').replaceWith("<%= escape_javascript render(@comment) %>").find('time.timeago').timeago();
+Controls.Setup($('#comment_<%= @comment.id %>').replaceWith("<%= escape_javascript render(@comment) %>"));
