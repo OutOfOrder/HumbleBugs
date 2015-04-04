@@ -22,6 +22,7 @@ module Types
     ].freeze
 
     ALL_STATES = STATES.map { |m| m.second }.freeze
+    TESTER_STATUSES = [:testing, :complete]
   end
 
   module Port
@@ -68,6 +69,7 @@ module Types
     ].freeze
 
     ALL_STATUSES = STATUSES.map { |m| m.second }.freeze
+    TESTER_STATUSES = [:active, :obsolete]
   end
 
   module TestResult

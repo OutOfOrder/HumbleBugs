@@ -115,17 +115,17 @@ authorization do
     title 'Game tester'
     includes :user
     has_permission_on :games, :to => [:read, :read_testing] do
-      if_attribute :state => is_in { [ 'testing', 'completed' ] }
+      if_attribute :state => is_in { Types::Game::TESTER_STATUSES.map(&:to_s) }
     end
     has_permission_on :ports, :to => :read do
       if_permitted_to :read_testing, :game
     end
     has_permission_on :releases, :to => :read, :join_by => :and do
       if_permitted_to :read, :game
-      if_attribute :status => is_in { [ 'active', 'obsolete' ] }
+      if_attribute :status => is_in { Types::Release::TESTER_STATUSES.map(&:to_s) }
     end
     has_permission_on :developers, :to => :read do
-      if_attribute :games => { :state => is_in { ['testing', 'complete' ] } }
+      if_attribute :games => { :state => is_in { Types::Game::TESTER_STATUSES.map(&:to_s) } }
     end
     includes :base_test_results
   end
