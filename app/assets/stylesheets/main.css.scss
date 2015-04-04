@@ -87,7 +87,6 @@ label.button {
 }
 
 .buttonset {
-  margin-left: 1em;
   @include inline-block;
   a.button, button {
     margin-right: -.3em;
@@ -300,4 +299,10 @@ form {
 
 .list .hidden {
   display: none !important;
+}
+
+.filters {
+  > :not(:first-child) {
+    margin-left: 1em;
+  }
 }
