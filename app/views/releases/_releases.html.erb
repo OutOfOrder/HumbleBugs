@@ -1,4 +1,4 @@
-<table>
+<table class="releases-table">
   <colgroup>
     <col width="10%"/>
     <col width="15%"/>
@@ -7,6 +7,16 @@
   <col width="40%"/>
   <thead>
   <tr>
+    <td colspan="6">
+      <input class="fuzzy-search" placeholder="Search"/>
+      <div class="status_filter buttonset" title="Filter by status">
+        <% available_release_statuses(game).each do |p| %>
+            <label class="button"><input type="radio" name="release_status_filter" value="<%= p.second %>"><span><%= p.first %></span></label>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+  <tr class="header">
     <th>Version</th>
     <th>Results</th>
     <th>Platforms</th>
@@ -16,34 +26,36 @@
   </tr>
   </thead>
 
+  <tbody class="list">
   <% releases.each do |release| %>
-      <tr class="status_<%= release.status %>">
-        <td><%= release.version %></td>
-        <td>
-          <% if permitted_to? :read, release.test_results %>
-              <%= link_to "View results (#{release.test_results.count})", release_test_results_path(release), remote: true %>
-              <% if permitted_to? :create, release.test_results %>
-                  | <%= link_to 'New result', new_release_test_result_path(release), remote: true %>
-              <% end %>
-          <% end %>
-        </td>
-        <td rowspan="2" style="vertical-align: top;"><%= platform_list release.platforms %></td>
-        <td rowspan="2" style="vertical-align: top;"><%= release.notes %></td>
-        <td title="<%= release.owner.name %>"><%= timeago(release.created_at) %></td>
-      </tr>
-      <tr>
-        <td colspan="2"><%= link_to 'Download', download_release_path(release) if permitted_to? :download, release %>
-          &nbsp;
-        <%= pretty_checksum release.checksum %></td>
-        <td><%= link_to 'Edit', edit_release_path(release) if permitted_to? :edit, release %></td>
-      </tr>
-      <tr class="detail">
-        <td colspan="5">
-          <div id="release_<%= release.id %>_test_results" style="display: none;"></div>
-        </td>
-      </tr>
-      <tr class="spacer">
-        <td colspan="5"></td>
-      </tr>
+    <tr>
+      <td>
+        <span class="status hidden"><%= release.status %></span>
+        <span class="version"><%= release.version %></span>
+        <br/>
+        <span><%= link_to('Download', download_release_path(release), title: pretty_checksum(release.checksum)) if permitted_to? :download, release %></span>
+      </td>
+      <td>
+        <% if permitted_to? :read, release.test_results %>
+            <%= link_to "View results (#{release.test_results.count})", release_test_results_path(release), remote: true %>
+            <% if permitted_to? :create, release.test_results %>
+                | <%= link_to 'New result', new_release_test_result_path(release), remote: true %>
+            <% end %>
+        <% end %>
+      </td>
+      <td>
+        <span class="platforms"><%= platform_list release.platforms %></span>
+      </td>
+      <td>
+        <span class="notes"><%= release.notes %></span>
+      </td>
+      <td>
+        <span title="<%= release.owner.name %>"><%= timeago(release.created_at) %><span class="updated hidden"><%= release.updated_at.utc.iso8601 %></span></span>
+      </td>
+      <td>
+        <%= link_to 'Edit', edit_release_path(release) if permitted_to? :edit, release %>
+      </td>
+    </tr>
   <% end %>
+  </tbody>
 </table>

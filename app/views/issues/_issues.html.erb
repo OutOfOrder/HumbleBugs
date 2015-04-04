@@ -15,14 +15,14 @@
     <td colspan="6">
       <input class="fuzzy-search" placeholder="Search"/>
       <div class="status_filter buttonset" title="Filter by status">
-        <label class="button"><input type="radio" name="status_filter" value=""><span>All</span></label>
-        <label class="button"><input type="radio" name="status_filter" value="open"><span>Open</span></label>
-        <label class="button"><input type="radio" name="status_filter" value="closed"><span>Closed</span></label>
+        <label class="button"><input type="radio" name="issue_status_filter" value=""><span>All</span></label>
+        <label class="button"><input type="radio" name="issue_status_filter" value="open"><span>Open</span></label>
+        <label class="button"><input type="radio" name="issue_status_filter" value="closed"><span>Closed</span></label>
       </div>
       <div class="priority_filter buttonset" title="Filter by priority">
-        <label class="button"><input type="radio" name="priority_filter" value="-1"><span>All</span></label>
+        <label class="button"><input type="radio" name="issue_priority_filter" value="-1"><span>All</span></label>
         <% Types::Issue::PRIORITIES.each do |p| %>
-            <label class="button"><input type="radio" name="priority_filter" value="<%= p.second %>"><span><%= p.first %></span></label>
+            <label class="button"><input type="radio" name="issue_priority_filter" value="<%= p.second %>"><span><%= p.first %></span></label>
         <% end %>
       </div>
     </td>
