@@ -8,7 +8,7 @@ describe "issues/index" do
 
   it "renders a list of issues" do
     render
-    assert_select "tr>td.summary", :text => /#{@issues.first.summary}/, :count => 2
+    assert_select "tr>td>span.summary", :text => /#{@issues.first.summary}/, :count => 2
     assert_select "tr span.status", :text => @issues.first.status, :count => 2
   end
 end

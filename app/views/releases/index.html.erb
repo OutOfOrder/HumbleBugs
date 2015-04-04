@@ -1,6 +1,6 @@
 <h1>Listing releases</h1>
 
-<%= render :partial => 'releases', :locals => { :releases => @game.releases } %>
+<%= render :partial => 'releases', :locals => { game: @game, releases: @game.releases } %>
 
 <br />
 
