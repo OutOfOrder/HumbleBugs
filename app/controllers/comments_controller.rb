@@ -24,13 +24,13 @@ class CommentsController < ApplicationController
         @commentable.update_attributes(params[:commentable])
         @reload = true
       end
+      render
       if @commentable.is_a?(Issue)
         begin
           IssueMailer.new_comment(@comment).deliver
         rescue NoRecipientsException
         end
       end
-      render
     else
       render action: "error"
     end

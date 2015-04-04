@@ -1,5 +1,6 @@
 <% if @reload %>
-document.location = document.location;
+$('#comments_dialog').closest(':ui-dialog').dialog('close');
+document.location.reload();
 <% else %>
 $('#comments_dialog').closest(':ui-dialog').dialog('close');
 $('#comments').append("<%= escape_javascript render(@comment) %>").last('.comment').find('time.timeago').timeago();
