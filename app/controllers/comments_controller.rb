@@ -21,8 +21,8 @@ class CommentsController < ApplicationController
     if @comment.save
       @reload = false
       if params[:commentable]
-        @commentable.update_attributes(params[:commentable])
-        @reload = true
+        @commentable.assign_attributes(params[:commentable])
+        @reload = true if @commentable.changed? && @commentable.save
       end
       render
       if @commentable.is_a?(Issue)
