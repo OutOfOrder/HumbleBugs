@@ -48,7 +48,7 @@ module Types
     ].freeze
 
     ALL_STATUSES = STATUSES.map { |m| m.second }.freeze
-    OPEN_STATUSES = [:new, :feedback, :active].freeze
+    OPEN_STATUSES = [:new, :feedback, :active, :fixed].freeze
     CLOSED_STATUSES = (ALL_STATUSES - OPEN_STATUSES).freeze
 
     PRIORITIES = [
