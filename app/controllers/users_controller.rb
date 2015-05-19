@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.with_permissions_to.order('users.name ASC')
+    @users = User.with_permissions_to.order('users.name ASC').includes(:developer, :roles)
   end
 
   # GET /users/1
