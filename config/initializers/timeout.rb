@@ -1,3 +1,4 @@
 # config/initializers/timeout.rb
-Rack::Timeout.timeout = 20  # seconds
+# seconds
+Rack::Timeout.timeout = 20 if defined? Rack::Timeout
 

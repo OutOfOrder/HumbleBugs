@@ -40,6 +40,7 @@ gem 'gravatarify'
 
 # Use puma as the web server
 gem 'puma'
+gem 'puma_auto_tune'
 gem 'rack-timeout'
 
 group :test do
