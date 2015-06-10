@@ -7,6 +7,6 @@ FactoryGirl.define do
     association :game
     status 'active'
     url "http://www.example.com/awesomeGame.zip"
-    version { Faker::Product.letters(4) }
+    version { FFaker::Product.letters(4) }
   end
 end
