@@ -16,6 +16,8 @@ class IssuesController < ApplicationController
     if params[:platforms].present?
       @issues = @issues.tagged_with(params[:platforms].split(','), on: 'platforms', any: true)
     end
+
+    render 'index', layout: false if request.xhr?
   end
 
   # GET /games/1/issues/1

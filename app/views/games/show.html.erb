@@ -57,7 +57,7 @@
 <% permitted_to? :read, @game.issues do %>
     <fieldset id="game_issues">
       <legend>Issues</legend>
-      <%= render 'issues/issues', :issues => @game.issues.with_permissions_to %>
+      <%= render 'issues/issues', :issues => @game.issues.with_permissions_to, refresh_game: @game.id %>
       <%= link_to 'New issue', new_game_issue_path(@game), class: 'button' if permitted_to? :create, @game.issues %>
     </fieldset>
 <% end %>

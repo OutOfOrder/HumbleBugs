@@ -29,6 +29,9 @@
       </div>
 
       <%= collection_select '', 'platform_filter', predefined_tag_list('platforms'), :name, :name, {include_blank: 'All platforms'}, {class:'platform_filter'} %>
+      <% if defined?(refresh_game) %>
+        <button class="refresh_issues" data-game-id="<%= refresh_game %>">Refresh</button>
+      <% end %>
     </td>
   </tr>
   <tr>

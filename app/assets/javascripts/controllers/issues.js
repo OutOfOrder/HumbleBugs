@@ -70,5 +70,18 @@ $(function() {
         filterState.platform = $this.find('select.platform_filter').val();
 
         listjs.filter(filterFunc);
+
+        $this.on('click', '.refresh_issues', function() {
+            var gameID = $(this).data('gameId');
+            $.get('/games/' + gameID + '/issues').done(function(data) {
+                var $html = $(data);
+                var $contents = $html.find('.list');
+                $this.find('.list').replaceWith($contents);
+                Controls.Setup($this.find('.list'))
+                listjs.list = $this.find('.list').get(0);
+                listjs.reIndex();
+                listjs.filter(filterFunc);
+            });
+        });
     });
 });
