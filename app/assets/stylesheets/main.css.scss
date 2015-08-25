@@ -50,21 +50,29 @@ input[type="submit"], button
 }
 
 @mixin humblebugs-button-colors {
-  @include background-image(linear-gradient(#049cdb, #0064cd));
+  @include background-image(linear-gradient($secondary-button-highlight-color, $secondary-button-base-color));
   @include border-radius;
   @include box-shadow(inset 0 1px 0 rgba(255,55,255,0.2), 0 1px 2px rgba(0, 0, 0, 0.05));
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  border-color: #0064cd #0064cd #003f81;
+  border-color: $secondary-button-base-color $secondary-button-base-color $secondary-button-shadow-color;
   &:hover {
     color: white;
-    border-color: #0064cd #0064cd #003f81;
-    background: #0064cd;
+    border-color: $secondary-button-base-color $secondary-button-base-color $secondary-button-shadow-color;
+    background: $secondary-button-base-color;
   }
 }
 
 a.button, input[type="submit"], button {
   @include humblebugs-button-colors;
+  &.primary {
+    @include background-image(linear-gradient($primary-button-highlight-color, $primary-button-base-color));
+    border-color: $primary-button-base-color $primary-button-base-color $primary-button-shadow-color;
+    &:hover {
+      border-color: $primary-button-base-color $primary-button-base-color $primary-button-shadow-color;
+      background: $primary-button-base-color;
+    }
+  }
 }
 
 label.button {

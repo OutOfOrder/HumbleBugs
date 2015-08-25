@@ -9,6 +9,15 @@ $secondary-bg-color: hsl(90, 20%, 93%);
 $secondary-legend-color: adjust-lightness($secondary-bg-color, -15%);
 $secondary-form-color: adjust-lightness($secondary-bg-color, -10%);
 
+$primary-button-base-color: #007f11;
+$primary-button-highlight-color: lighten($primary-button-base-color, 15%);
+$primary-button-shadow-color: saturate($primary-button-base-color, 50%);
+
+$secondary-button-base-color: #0064cd;
+$secondary-button-highlight-color: #049cdb;
+$secondary-button-shadow-color: #003f81;
+
+
 $error-color: #cc0000;
 
 
