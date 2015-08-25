@@ -1,8 +1,8 @@
-<% if !defined? show_game then show_game = false end %>
+<% has_game = defined?(refresh_game) && !refresh_game.nil? %>
 <table class="issues-table">
   <colgroup>
     <col width="10%"/>
-    <% if show_game %>
+    <% unless has_game %>
         <col width="10%"/>
     <% end %>
     <col width="10%"/>
@@ -29,14 +29,14 @@
       </div>
 
       <%= collection_select '', 'platform_filter', predefined_tag_list('platforms'), :name, :name, {include_blank: 'All platforms'}, {class:'platform_filter'} %>
-      <% if defined?(refresh_game) %>
-        <button class="refresh_issues" data-game-id="<%= refresh_game %>">Refresh</button>
+      <% if has_game %>
+        <button class="refresh_issues" data-game-id="<%= refresh_game.id %>">Refresh</button>
       <% end %>
     </td>
   </tr>
   <tr>
     <th>ID</th>
-    <% if show_game %>
+    <% unless has_game %>
       <th>Game</th>
     <% end %>
     <th>Updated</th>
@@ -50,7 +50,7 @@
   <% issues.each do |issue| %>
     <tr class="issue">
       <td><%= link_to "View ##{issue.id}", [issue.game, issue] %></td>
-      <% if show_game %>
+      <% unless has_game %>
         <td class="game"><%= issue.game.name %></td>
       <% end %>
       <td><%= timeago issue.updated_at %><span class="updated hidden"><%= issue.updated_at.utc.iso8601 %></span></td>
