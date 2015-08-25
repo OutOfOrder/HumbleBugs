@@ -17,6 +17,8 @@
       </div>
 
       <%= collection_select '', 'platform_filter', predefined_tag_list('platforms'), :name, :name, {include_blank: 'All platforms'}, {class:'platform_filter'} %>
+
+      <%= link_to 'New release', new_game_release_path(game), class: 'button primary' if permitted_to? :create, game.releases %>
     </td>
   </tr>
   <tr class="header">
