@@ -31,7 +31,7 @@
 
       <%= collection_select '', 'platform_filter', predefined_tag_list('platforms'), :name, :name, {include_blank: 'All platforms'}, {class:'platform_filter'} %>
       <% if has_game %>
-        <button class="refresh_issues" data-game-id="<%= refresh_game.id %>">Refresh</button>
+        <button class="refresh_issues" data-disable-with="Refreshing..." data-game-id="<%= refresh_game.id %>">Refresh</button>
         <%= link_to 'New issue', new_game_issue_path(refresh_game), class: 'button primary' if permitted_to? :create, refresh_game.issues %>
       <% else %>
         <%= link_to 'New issue', new_issue_path, class: 'button primary' if permitted_to? :create, :issues %>

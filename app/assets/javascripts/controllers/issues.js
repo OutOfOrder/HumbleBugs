@@ -72,16 +72,20 @@ $(function() {
         listjs.filter(filterFunc);
 
         $this.on('click', '.refresh_issues', function() {
-            var gameID = $(this).data('gameId');
-            $.get('/games/' + gameID + '/issues').done(function(data) {
-                var $html = $(data);
-                var $contents = $html.find('.list');
-                $this.find('.list').replaceWith($contents);
-                Controls.Setup($this.find('.list'))
-                listjs.list = $this.find('.list').get(0);
-                listjs.reIndex();
-                listjs.filter(filterFunc);
-            });
+          var $self= $(this);
+          var gameID = $self.data('gameId');
+          $.rails.disableFormElement($self);
+          $.get('/games/' + gameID + '/issues').done(function(data) {
+              var $html = $(data);
+              var $contents = $html.find('.list');
+              $this.find('.list').replaceWith($contents);
+              Controls.Setup($this.find('.list'))
+              listjs.list = $this.find('.list').get(0);
+              listjs.reIndex();
+              listjs.filter(filterFunc);
+          }).always(function() {
+            $.rails.enableFormElement($self);
+          });
         });
     });
 });
