@@ -71,7 +71,7 @@ $(function() {
 
         listjs.filter(filterFunc);
 
-        $this.on('click', '.refresh_issues', function() {
+        $this.on('click', '.refresh_issues:not(:disabled)', function() {
           var $self= $(this);
           var gameID = $self.data('gameId');
           $.rails.disableFormElement($self);
