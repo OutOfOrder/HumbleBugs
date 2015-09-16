@@ -46,7 +46,7 @@ gem 'rack-timeout'
 group :test do
   gem 'database_cleaner'
   gem 'rspec-rails', :group => [:development, :test]
-  gem 'rspec_junit_formatter', :git => 'git@github.com:circleci/rspec_junit_formatter.git'
+  gem 'rspec_junit_formatter'
   gem 'factory_girl_rails'
   gem 'cucumber-rails', :require => false
   gem 'capybara'
